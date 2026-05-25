@@ -1,0 +1,78 @@
+cooper-ninve-site/
+│
+├── README.md
+├── codax-prompt.md
+├── site-structure.md
+├── seo-plan.md
+├── landing-pages.md
+├── content/
+│   ├── homepage.md
+│   ├── insurance-solutions.md
+│   ├── agents.md
+│   ├── business-insurance.md
+│   ├── about-us.md
+│   └── contact-us.md
+│
+├── products/
+│   ├── professional-liability.md
+│   ├── cyber-insurance.md
+│   ├── contractors-all-risks.md
+│   ├── medical-malpractice.md
+│   └── commercial-liability.md
+│
+├── landing-pages/
+│   ├── lp-professional-liability.md
+│   ├── lp-cyber-insurance.md
+│   └── lp-insurance-agents.md
+│
+├── seo/
+│   ├── meta-titles.md
+│   ├── faq-schema.md
+│   ├── keywords.md
+│   └── internal-links.md
+│
+└── assets/
+    ├── logo/
+    ├── images/
+    └── icons/
+
+---
+
+# Brand Assets & Existing Website Reference
+
+Use the existing Cooper Ninve website as the main visual reference:
+
+https://cooper-ninve.com/
+
+Also use the uploaded screenshots inside:
+
+/assets/reference-current-site/
+
+Use official Cooper Ninve logo files from:
+
+/assets/logo/
+
+Use approved partner / market logos from:
+
+/assets/logos/partners/
+
+The new website should feel like a modernized and improved version of the existing Cooper Ninve website.
+
+Keep:
+- Similar corporate insurance tone
+- Similar brand feeling
+- Similar color direction
+- Professional and conservative design
+- Strong trust-based presentation
+
+Improve:
+- SEO
+- Paid campaign landing pages
+- Mobile experience
+- Lead generation
+- Clearer navigation
+- Product-specific pages
+
+Do not create a completely different visual identity.
+Do not use flashy startup design.
+Do not use placeholder logos in production.
