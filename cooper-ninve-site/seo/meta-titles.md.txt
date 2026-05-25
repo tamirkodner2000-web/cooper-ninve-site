@@ -1,0 +1,272 @@
+# Meta Titles & Descriptions - Cooper Ninve
+
+## Goal
+Define SEO-friendly meta titles and descriptions for all core pages, product pages, landing pages, and future content pages.
+
+Rules:
+- Meta title should usually be up to 55–60 characters.
+- Meta description should usually be up to 150–160 characters.
+- Each page should have a unique title and description.
+- Primary keyword should appear naturally.
+- Hebrew should be clear, professional, and conversion-focused.
+
+---
+
+# Core Pages
+
+## Home Page
+URL: `/`
+
+Meta Title:
+קופר נינוה | פתרונות ביטוח לעסקים וסוכני ביטוח
+
+Meta Description:
+קופר נינוה מספקת פתרונות ביטוח מתקדמים לעסקים, סוכני ביטוח וסיכונים מורכבים בתחומי אחריות מקצועית, סייבר, קבלנים וחבויות.
+
+---
+
+## Insurance Solutions
+URL: `/insurance-solutions`
+
+Meta Title:
+פתרונות ביטוח לעסקים וסיכונים מורכבים | קופר נינוה
+
+Meta Description:
+פתרונות ביטוח מתקדמים בתחומי אחריות מקצועית, סייבר, עבודות קבלניות, רשלנות רפואית, חבויות וסיכונים מיוחדים.
+
+---
+
+## Insurance Agents
+URL: `/insurance-agents`
+
+Meta Title:
+פתרונות חיתום לסוכני ביטוח | קופר נינוה
+
+Meta Description:
+קופר נינוה מספקת לסוכני ביטוח פתרונות חיתום, הפקה ושירות בתחומי אחריות מקצועית, סייבר, קבלנים, חבויות וסיכונים מיוחדים.
+
+---
+
+## Business Insurance
+URL: `/business-insurance`
+
+Meta Title:
+ביטוח לעסקים וחברות | קופר נינוה
+
+Meta Description:
+פתרונות ביטוח לעסקים, חברות וסיכונים מורכבים בתחומי אחריות מקצועית, סייבר, עבודות קבלניות, חבויות ורשלנות רפואית.
+
+---
+
+## About Us
+URL: `/about-us`
+
+Meta Title:
+אודות קופר נינוה | MGA ופתרונות ביטוח מתקדמים
+
+Meta Description:
+קופר נינוה היא MGA ו־Coverholder הפועלת בישראל ומספקת פתרונות ביטוח מתקדמים לעסקים, סוכנים וסיכונים מורכבים.
+
+---
+
+## Contact Us
+URL: `/contact-us`
+
+Meta Title:
+צור קשר | קופר נינוה
+
+Meta Description:
+צרו קשר עם קופר נינוה לקבלת מידע, הצעת ביטוח או בדיקת התאמה בתחומי אחריות מקצועית, סייבר, קבלנים, חבויות וסיכונים מיוחדים.
+
+---
+
+## Knowledge Center
+URL: `/knowledge-center`
+
+Meta Title:
+מרכז ידע ביטוחי | קופר נינוה
+
+Meta Description:
+מאמרים ומידע מקצועי על ביטוח אחריות מקצועית, סייבר, עבודות קבלניות, חבויות, רשלנות רפואית וסיכונים מיוחדים.
+
+---
+
+# Product Pages
+
+## Professional Liability
+URL: `/professional-liability-insurance`
+
+Meta Title:
+ביטוח אחריות מקצועית לעסקים | קופר נינוה
+
+Meta Description:
+ביטוח אחריות מקצועית לעסקים, יועצים ובעלי מקצוע. פתרונות לתביעות רשלנות, מחדל, ייעוץ שגוי והוצאות משפט.
+
+---
+
+## Cyber Insurance
+URL: `/cyber-insurance`
+
+Meta Title:
+ביטוח סייבר לעסקים וחברות | קופר נינוה
+
+Meta Description:
+ביטוח סייבר לעסקים מפני מתקפות כופר, דליפות מידע, השבתת פעילות, הוצאות שחזור ותביעות צד שלישי.
+
+---
+
+## Contractors All Risks
+URL: `/contractors-all-risks-insurance`
+
+Meta Title:
+ביטוח עבודות קבלניות וקבלנים | קופר נינוה
+
+Meta Description:
+ביטוח עבודות קבלניות לקבלנים, יזמים ופרויקטים, כולל פתרונות לרכוש, צד שלישי, חבות מעבידים וסיכונים קבלניים.
+
+---
+
+## Medical Malpractice
+URL: `/medical-malpractice-insurance`
+
+Meta Title:
+ביטוח רשלנות רפואית לרופאים ומרפאות | קופר נינוה
+
+Meta Description:
+ביטוח רשלנות רפואית ואחריות מקצועית רפואית לרופאים, מרפאות, מטפלים וקליניקות, בכפוף לחיתום ותנאי פוליסה.
+
+---
+
+## Commercial Liability
+URL: `/liability-insurance`
+
+Meta Title:
+ביטוח צד שלישי וחבויות לעסקים | קופר נינוה
+
+Meta Description:
+ביטוח צד שלישי וחבויות לעסקים, חברות ונותני שירותים מפני תביעות בגין נזקי גוף, רכוש ואחריות עסקית.
+
+---
+
+# Paid Landing Pages
+
+## LP Professional Liability
+URL: `/lp/professional-liability`
+
+Meta Title:
+ביטוח אחריות מקצועית | קבלת הצעה מקופר נינוה
+
+Meta Description:
+מחפשים ביטוח אחריות מקצועית לעסק או לבעל מקצוע? השאירו פרטים וקופר נינוה תחזור אליכם לבדיקת התאמה ראשונית.
+
+---
+
+## LP Cyber Insurance
+URL: `/lp/cyber-insurance`
+
+Meta Title:
+ביטוח סייבר לעסקים | קבלת הצעה מקופר נינוה
+
+Meta Description:
+ביטוח סייבר לעסקים וחברות מפני מתקפות כופר, דליפות מידע, השבתת פעילות ואירועי אבטחת מידע. השאירו פרטים.
+
+---
+
+## LP Insurance Agents
+URL: `/lp/insurance-agents`
+
+Meta Title:
+פתרונות חיתום לסוכני ביטוח | קופר נינוה
+
+Meta Description:
+סוכן ביטוח? קופר נינוה מספקת פתרונות חיתום והפקה בתחומי אחריות מקצועית, סייבר, קבלנים, חבויות וסיכונים מורכבים.
+
+---
+
+# Future SEO Pages
+
+## Professional Liability for Consultants
+URL: `/professional-liability-consultants`
+
+Meta Title:
+ביטוח אחריות מקצועית ליועצים | קופר נינוה
+
+Meta Description:
+ביטוח אחריות מקצועית ליועצים ונותני שירותים מקצועיים מפני תביעות רשלנות, ייעוץ שגוי, מחדל והוצאות משפט.
+
+---
+
+## Professional Liability for Engineers
+URL: `/professional-liability-engineers`
+
+Meta Title:
+ביטוח אחריות מקצועית למהנדסים | קופר נינוה
+
+Meta Description:
+פתרונות ביטוח אחריות מקצועית למהנדסים, מתכננים ומנהלי פרויקטים, בכפוף לחיתום, גבולות אחריות ותנאי פוליסה.
+
+---
+
+## Professional Liability for Architects
+URL: `/professional-liability-architects`
+
+Meta Title:
+ביטוח אחריות מקצועית לאדריכלים | קופר נינוה
+
+Meta Description:
+ביטוח אחריות מקצועית לאדריכלים ומתכננים מפני תביעות בגין תכנון, פיקוח, מחדל מקצועי והוצאות משפט.
+
+---
+
+## Cyber Insurance for Small Business
+URL: `/cyber-insurance-small-business`
+
+Meta Title:
+ביטוח סייבר לעסק קטן | קופר נינוה
+
+Meta Description:
+ביטוח סייבר לעסקים קטנים מפני מתקפות כופר, דליפות מידע, הונאות דוא״ל, השבתת פעילות ותביעות צד שלישי.
+
+---
+
+## Cyber Insurance for Tech Companies
+URL: `/cyber-insurance-tech-companies`
+
+Meta Title:
+ביטוח סייבר לחברות טכנולוגיה | קופר נינוה
+
+Meta Description:
+פתרונות ביטוח סייבר לחברות טכנולוגיה, SaaS, תוכנה ו־IT, בכפוף לחיתום, שאלון סייבר ובקרות אבטחת מידע.
+
+---
+
+## Contractors Renovation
+URL: `/renovation-contractor-insurance`
+
+Meta Title:
+ביטוח קבלן שיפוצים | קופר נינוה
+
+Meta Description:
+ביטוח לקבלני שיפוצים ועבודות התאמה, כולל פתרונות לעבודות, צד שלישי, חבות מעבידים וסיכונים קבלניים.
+
+---
+
+## What Is MGA
+URL: `/knowledge-center/what-is-mga-insurance`
+
+Meta Title:
+מה זה MGA בביטוח? | קופר נינוה
+
+Meta Description:
+הסבר מקצועי על מודל MGA בביטוח, תפקידו מול סוכני ביטוח, חיתום, הפקה, שירות וגישה לשווקים בינלאומיים.
+
+---
+
+## What Is Lloyd’s Coverholder
+URL: `/knowledge-center/what-is-lloyds-coverholder`
+
+Meta Title:
+מה זה Lloyd’s Coverholder? | קופר נינוה
+
+Meta Description:
+הסבר על Coverholder של Lloyd’s, משמעות המודל, יכולות חיתום והפקה, והקשר לפתרונות ביטוח בינלאומיים.

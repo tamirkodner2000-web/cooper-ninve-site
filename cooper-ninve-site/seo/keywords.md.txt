@@ -1,0 +1,353 @@
+# SEO Keywords Plan - Cooper Ninve
+
+## Goal
+Define the main keyword strategy for Cooper Ninve’s new website, including product pages, audience pages, landing pages, and future blog content.
+
+The website should target:
+- Organic SEO traffic
+- Paid search campaigns
+- Insurance agents
+- Business clients
+- Professional and commercial insurance searches
+- Complex risk insurance searches
+
+---
+
+# Primary SEO Themes
+
+## 1. Brand Keywords
+
+These keywords are important for trust, navigational searches, and brand protection.
+
+- קופר נינוה
+- Cooper Ninve
+- קופר נינוה ביטוח
+- Cooper Ninve Insurance
+- קופר נינוה Lloyd’s
+- קופר נינוה סוכני ביטוח
+- קופר נינוה צור קשר
+- Cooper Ninve Israel
+
+Recommended pages:
+- Home page
+- About Us
+- Contact Us
+- Insurance Agents
+
+---
+
+## 2. MGA / Coverholder Keywords
+
+These keywords help position Cooper Ninve as more than a regular agency.
+
+- MGA ביטוח בישראל
+- MGA בישראל
+- Lloyd’s Coverholder Israel
+- Lloyd’s Coverholder בישראל
+- Coverholder Lloyd’s ביטוח
+- חיתום ביטוח בישראל
+- פתרונות חיתום לסוכני ביטוח
+- ביטוח באמצעות Lloyd’s
+- פתרונות ביטוח בינלאומיים
+
+Recommended pages:
+- About Us
+- Insurance Agents
+- Home page
+- Insurance Solutions
+
+---
+
+# Product Keyword Groups
+
+## 3. Professional Liability Insurance
+
+Primary keyword:
+- ביטוח אחריות מקצועית
+
+Secondary keywords:
+- ביטוח אחריות מקצועית לעסקים
+- ביטוח אחריות מקצועית ליועצים
+- ביטוח אחריות מקצועית לבעלי מקצוע
+- ביטוח אחריות מקצועית לחברות
+- ביטוח רשלנות מקצועית
+- ביטוח אחריות מקצועית למהנדסים
+- ביטוח אחריות מקצועית לאדריכלים
+- ביטוח אחריות מקצועית ליועץ בטיחות
+- ביטוח אחריות מקצועית לחברות טכנולוגיה
+- ביטוח אחריות מקצועית לנותני שירותים
+
+Recommended pages:
+- /professional-liability-insurance
+- /lp/professional-liability
+- Future blog/category pages by profession
+
+Future SEO pages:
+- ביטוח אחריות מקצועית ליועצים
+- ביטוח אחריות מקצועית למהנדסים
+- ביטוח אחריות מקצועית לאדריכלים
+- ביטוח אחריות מקצועית לחברות טכנולוגיה
+- ביטוח אחריות מקצועית ליועצי בטיחות
+- ביטוח אחריות מקצועית למטפלים
+- ביטוח אחריות מקצועית לנותני שירותים
+
+---
+
+## 4. Cyber Insurance
+
+Primary keyword:
+- ביטוח סייבר
+
+Secondary keywords:
+- ביטוח סייבר לעסקים
+- ביטוח סייבר לחברות
+- ביטוח סייבר לעסק קטן
+- ביטוח מתקפות כופר
+- ביטוח אבטחת מידע
+- ביטוח סייבר לחברות טכנולוגיה
+- ביטוח סייבר לחברות SaaS
+- ביטוח סייבר לעסקים דיגיטליים
+- ביטוח סייבר לארגונים
+- ביטוח דליפת מידע
+
+Recommended pages:
+- /cyber-insurance
+- /lp/cyber-insurance
+
+Future SEO pages:
+- ביטוח סייבר לעסק קטן
+- ביטוח סייבר לחברות טכנולוגיה
+- ביטוח סייבר לחברות SaaS
+- מה כולל ביטוח סייבר
+- האם עסק קטן צריך ביטוח סייבר
+- ביטוח מתקפת כופר לעסק
+
+---
+
+## 5. Contractors All Risks Insurance
+
+Primary keyword:
+- ביטוח עבודות קבלניות
+
+Secondary keywords:
+- ביטוח קבלנים
+- ביטוח עבודות קבלניות לקבלן
+- ביטוח פרויקט בנייה
+- ביטוח שיפוצים
+- ביטוח קבלני תשתיות
+- ביטוח צד שלישי לקבלנים
+- ביטוח קבלן שיפוצים
+- ביטוח יזם בנייה
+- ביטוח פרויקט תמ״א
+- ביטוח עבודות תשתית
+
+Recommended pages:
+- /contractors-all-risks-insurance
+
+Future SEO pages:
+- ביטוח קבלן שיפוצים
+- ביטוח עבודות תשתית
+- ביטוח פרויקט בנייה
+- ביטוח עבודות קבלניות ליזם
+- ביטוח עבודות קבלניות לקבלן משנה
+
+---
+
+## 6. Medical Malpractice Insurance
+
+Primary keyword:
+- ביטוח רשלנות רפואית
+
+Secondary keywords:
+- ביטוח אחריות מקצועית רפואית
+- ביטוח רשלנות רפואית לרופאים
+- ביטוח רשלנות רפואית למרפאות
+- ביטוח אחריות מקצועית למטפלים
+- ביטוח למקצועות הרפואה
+- ביטוח רשלנות רפואית לרופא פרטי
+- ביטוח אחריות מקצועית לרפואה משלימה
+- ביטוח אחריות מקצועית לפיזיותרפיסט
+- ביטוח אחריות מקצועית לקליניקה
+
+Recommended pages:
+- /medical-malpractice-insurance
+
+Future SEO pages:
+- ביטוח רשלנות רפואית לרופאים
+- ביטוח אחריות מקצועית למטפלים
+- ביטוח אחריות מקצועית לרפואה משלימה
+- ביטוח רשלנות רפואית לקליניקה
+- ביטוח אחריות מקצועית לפיזיותרפיסטים
+
+---
+
+## 7. Commercial Liability / Third Party Liability
+
+Primary keyword:
+- ביטוח צד שלישי לעסק
+
+Secondary keywords:
+- ביטוח צד ג לעסק
+- ביטוח חבויות לעסקים
+- ביטוח אחריות כלפי צד שלישי
+- ביטוח חבות מעבידים
+- ביטוח אחריות עסקית
+- ביטוח לעסקים
+- ביטוח צד שלישי לקבלנים
+- ביטוח צד שלישי למשרד
+- ביטוח צד שלישי לחברה
+- ביטוח חבויות מסחריות
+
+Recommended pages:
+- /liability-insurance
+- /business-insurance
+
+Future SEO pages:
+- ביטוח צד שלישי לעסק קטן
+- ביטוח חבות מעבידים לעסק
+- ביטוח צד שלישי לקבלנים
+- מה ההבדל בין צד שלישי לאחריות מקצועית
+
+---
+
+# Audience Keyword Groups
+
+## 8. Insurance Agents
+
+Primary keyword:
+- פתרונות חיתום לסוכני ביטוח
+
+Secondary keywords:
+- פתרונות ביטוח לסוכנים
+- ביטוח לסוכני ביטוח
+- חיתום לסיכונים מורכבים
+- פתרונות אחריות מקצועית לסוכנים
+- הגשת סיכון ביטוחי
+- MGA לסוכני ביטוח
+- פתרונות Lloyd’s לסוכנים
+- ביטוח סיכונים מורכבים לסוכנים
+
+Recommended pages:
+- /insurance-agents
+- /lp/insurance-agents
+
+Future SEO pages:
+- איך להגיש סיכון לחיתום
+- פתרונות ביטוח לסוכני ביטוח
+- איך לעבוד עם MGA
+- מה זה Coverholder
+- מה זה MGA בביטוח
+
+---
+
+## 9. Business Clients
+
+Primary keyword:
+- ביטוח לעסקים
+
+Secondary keywords:
+- ביטוח לחברות
+- ביטוח עסקי
+- ביטוח לעסקים מורכבים
+- ביטוח לעסק קטן
+- ביטוח אחריות מקצועית לעסק
+- ביטוח חבויות לעסק
+- ביטוח סייבר לעסק
+- ביטוח חברה
+- ביטוח עסק מול תביעות
+- ביטוח לעסק עם דרישות חוזיות
+
+Recommended pages:
+- /business-insurance
+- /insurance-solutions
+- Home page
+
+Future SEO pages:
+- איזה ביטוח עסק צריך
+- ביטוח לעסק קטן
+- ביטוח לחברות שירותים
+- ביטוח לעסק עם פעילות בינלאומית
+- ביטוח לעסקים עם סיכון מורכב
+
+---
+
+# Blog / Knowledge Center Keyword Ideas
+
+## Professional Liability Articles
+- מה זה ביטוח אחריות מקצועית
+- מה ההבדל בין אחריות מקצועית לצד שלישי
+- מתי צריך ביטוח אחריות מקצועית
+- איך בוחרים גבול אחריות בביטוח אחריות מקצועית
+- מה זה Claims Made בביטוח אחריות מקצועית
+- אילו מסמכים צריך לביטוח אחריות מקצועית
+
+## Cyber Articles
+- מה כולל ביטוח סייבר
+- האם עסק קטן צריך ביטוח סייבר
+- מה עושים אחרי מתקפת כופר
+- מה זה MFA ולמה הוא חשוב לביטוח סייבר
+- איזה מידע צריך לשאלון סייבר
+- ביטוח סייבר מול אבטחת מידע
+
+## Contractors Articles
+- מה כולל ביטוח עבודות קבלניות
+- מי צריך ביטוח עבודות קבלניות
+- ביטוח קבלן שיפוצים
+- ביטוח עבודות קבלניות לפרויקט שכבר התחיל
+- מה ההבדל בין ביטוח עבודות קבלניות לצד שלישי
+
+## Medical Malpractice Articles
+- מה זה ביטוח רשלנות רפואית
+- מי צריך ביטוח רשלנות רפואית
+- ביטוח אחריות מקצועית למטפלים
+- ביטוח רשלנות רפואית לרופאים פרטיים
+- איזה מידע צריך להצעת ביטוח רשלנות רפואית
+
+## Insurance Agents Articles
+- איך להגיש סיכון לחיתום בצורה נכונה
+- מה זה MGA בביטוח
+- מה זה Lloyd’s Coverholder
+- איך סוכן ביטוח יכול לעבוד מול קופר נינוה
+- אילו מסמכים כדאי לשלוח לחיתום
+
+---
+
+# Priority SEO Pages To Build First
+
+## Phase 1
+- /
+- /insurance-solutions
+- /professional-liability-insurance
+- /cyber-insurance
+- /contractors-all-risks-insurance
+- /medical-malpractice-insurance
+- /liability-insurance
+- /insurance-agents
+- /business-insurance
+- /about-us
+- /contact-us
+
+## Phase 2
+- /lp/professional-liability
+- /lp/cyber-insurance
+- /lp/insurance-agents
+
+## Phase 3
+- Professional liability by profession pages
+- Cyber by business type pages
+- Contractors by project type pages
+- Knowledge center articles
+
+---
+
+# Keyword Usage Rules
+
+- Use the primary keyword in the H1 when natural.
+- Use the primary keyword in the meta title.
+- Use the primary keyword in the first paragraph.
+- Use secondary keywords naturally across H2 and body content.
+- Do not overuse keywords.
+- Write for humans first and search engines second.
+- Each page should target one main search intent.
+- Avoid duplicate meta titles.
+- Add internal links from every product page to related products and contact page.

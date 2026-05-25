@@ -1,0 +1,197 @@
+Existing website reference:
+https://cooper-ninve.com/
+
+Use the current Cooper Ninve website as visual inspiration for the new design.
+Keep the same general brand feeling, colors, corporate insurance tone, and logo style, but modernize the layout, SEO structure, mobile experience and conversion flow.
+
+---
+
+# Existing Brand Style Requirement
+
+The new website should keep a similar visual direction to the existing Cooper Ninve website.
+
+The goal is not to create a completely different brand identity, but to modernize and improve the existing website for:
+- SEO
+- Paid campaigns
+- Better lead generation
+- Better mobile experience
+- Clearer user journeys
+- Stronger trust presentation
+
+## Design Direction Based on Existing Website
+
+Use the existing website as visual reference for:
+- General brand feeling
+- Corporate insurance tone
+- Conservative professional look
+- Color direction
+- Logo placement
+- Trust-based layout
+- Business / insurance atmosphere
+
+The new design should feel like an upgraded version of the current Cooper Ninve website, not a completely new unrelated brand.
+
+Avoid:
+- Too much animation
+- Startup-style flashy gradients
+- Overly casual design
+- Bright aggressive colors
+- Cartoon illustrations
+- Design that feels unrelated to the current brand
+
+Prefer:
+- Clean corporate layout
+- White and navy backgrounds
+- Professional cards
+- Strong but conservative typography
+- Clear sections
+- Trust badges
+- Partner logo strip
+- Insurance / business visual style
+
+---
+
+# Logo & Partner Logos
+
+## Cooper Ninve Logo
+
+The website must include the official Cooper Ninve logo.
+
+Logo placement:
+- Header, right side in RTL layout
+- Footer
+- Optional hero trust area
+- Favicon / browser icon if available
+
+Logo requirements:
+- Upload logo in SVG or PNG format
+- Use transparent background if possible
+- Keep correct proportions
+- Do not stretch or distort the logo
+- Make sure logo is readable on both light and dark backgrounds
+
+Suggested asset folder:
+
+`/assets/logo/`
+
+Suggested file names:
+- `cooper-ninve-logo.svg`
+- `cooper-ninve-logo.png`
+- `cooper-ninve-logo-white.svg`
+- `favicon.ico`
+
+---
+
+## Partner / Market Logos
+
+The website should include a partner / market logos section, only using logos that Cooper Ninve is allowed to display publicly.
+
+Possible section title:
+השותפים והשווקים שלנו
+
+Alternative titles:
+- שווקים ושותפים בינלאומיים
+- פתרונות באמצעות שווקים בינלאומיים
+- גישה לשווקים וחתמים מובילים
+
+Important:
+Do not imply that every logo is a direct insurer of every product.
+Use careful wording.
+
+Recommended wording:
+"קופר נינוה פועלת מול שווקים, חתמים וספקי ביטוח בינלאומיים לצורך התאמת פתרונות ביטוח לסיכונים מקצועיים ומסחריים."
+
+Avoid wording:
+- “All products are insured by these partners”
+- “Guaranteed Lloyd’s coverage”
+- “Official partner of every logo shown”
+- Any claim that is not legally approved
+
+Suggested asset folder:
+
+`/assets/logos/partners/`
+
+Suggested file names:
+- `lloyds-logo.svg`
+- `tokio-marine-kiln-logo.svg`
+- `qbe-logo.svg`
+- `beazley-logo.svg`
+- `cfc-logo.svg`
+- `other-partner-logo.svg`
+
+---
+
+# Partner Logos Display Rules
+
+## Homepage
+Add a partner / market logos strip under the hero section or after the trust indicators.
+
+Layout:
+- White or light grey background
+- Logos in one horizontal row on desktop
+- 2-column grid on mobile
+- Keep logos monochrome or muted if possible
+- Equal visual weight
+- Do not make one partner logo look like the main brand
+
+## About Page
+Add a more detailed trust section explaining Cooper Ninve’s access to international insurance markets.
+
+## Insurance Agents Page
+Add partner / market logos to strengthen credibility for agents.
+
+## Product Pages
+Use partner logos carefully and only where relevant. Do not overload product pages with logos.
+
+---
+
+# Asset Quality Requirements
+
+All logos should be:
+- High resolution
+- Transparent background if possible
+- SVG preferred
+- PNG acceptable
+- Consistent height in display
+- Optimized for web
+- Not pixelated
+- Not stretched
+
+Recommended display height:
+- Header logo: 48–70px depending on layout
+- Partner logos: 36–60px height
+- Footer logo: 60–90px
+
+---
+
+# Legal / Compliance Note For Logos
+
+Before publishing, Cooper Ninve should confirm that all third-party logos are approved for public website use.
+
+If approval is unclear, CODAX should create the section as a placeholder and allow logos to be added later.
+
+Placeholder text:
+"Partner logos to be uploaded after approval."
+
+---
+
+# Homepage Partner Logos Section
+
+Add this section to the homepage:
+
+## Section Title
+השותפים והשווקים שלנו
+
+## Section Text
+קופר נינוה פועלת מול שווקים, חתמים וספקי ביטוח בינלאומיים במטרה לספק פתרונות ביטוח מתקדמים לסוכני ביטוח, עסקים וסיכונים מורכבים.
+
+## Logos
+Display uploaded partner logos from:
+
+`/assets/logos/partners/`
+
+## CTA
+לפרטים נוספים על קופר נינוה
+
+CTA URL:
+`/about-us`

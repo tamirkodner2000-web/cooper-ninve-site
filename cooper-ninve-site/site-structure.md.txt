@@ -1,0 +1,140 @@
+# Cooper Ninve Site Structure
+
+## Main Goal
+Build a professional Hebrew RTL website optimized for:
+- Organic SEO
+- Paid campaigns
+- Lead generation
+- Trust and authority
+- Separate flows for insurance agents and business clients
+
+---
+
+## Main Navigation
+
+1. דף הבית
+2. פתרונות ביטוח
+3. לסוכני ביטוח
+4. לעסקים
+5. אודות
+6. מרכז ידע
+7. צור קשר
+
+Main CTAs:
+- לקבלת הצעה
+- פתרונות לסוכנים
+- דברו איתנו
+
+---
+
+## Core Pages
+
+### 1. Home Page
+URL: `/`
+
+Goal:
+Create trust, explain who Cooper Ninve is, and route users to the right flow.
+
+Main sections:
+- Hero section
+- Trust indicators
+- Audience split: agents / businesses / complex risks
+- Main insurance solutions
+- Why Cooper Ninve
+- Quote request CTA
+- Contact CTA
+
+---
+
+### 2. Insurance Solutions Overview
+URL: `/insurance-solutions`
+
+Goal:
+Present all main insurance products and link to product-specific SEO pages.
+
+Products:
+- Professional Liability
+- Cyber Insurance
+- Contractors All Risks
+- Medical Malpractice
+- Commercial Liability
+- Directors & Officers
+- Special Risks
+
+---
+
+### 3. Insurance Agents
+URL: `/insurance-agents`
+
+Goal:
+Generate leads from insurance agents and explain why agents should work with Cooper Ninve.
+
+Main sections:
+- Hero for agents
+- Why agents work with Cooper Ninve
+- What products can be submitted
+- How the process works
+- Agent cooperation form
+
+---
+
+### 4. Business Insurance
+URL: `/business-insurance`
+
+Goal:
+Speak directly to business clients looking for commercial insurance solutions.
+
+Main sections:
+- Business-focused hero
+- Main business risks
+- Insurance solutions by business type
+- How to get a quote
+- Lead form
+
+---
+
+### 5. About Us
+URL: `/about-us`
+
+Goal:
+Build trust and authority.
+
+Main sections:
+- Company background
+- MGA / Coverholder positioning
+- Lloyd’s and international market access
+- Local underwriting and service
+- Team / experience
+- Contact CTA
+
+---
+
+### 6. Knowledge Center
+URL: `/knowledge-center`
+
+Goal:
+Support organic SEO through articles and professional content.
+
+Categories:
+- Professional Liability
+- Cyber
+- Contractors
+- Medical Malpractice
+- Insurance Agents
+- Claims / Risk Management
+
+---
+
+### 7. Contact Us
+URL: `/contact-us`
+
+Goal:
+Allow users to contact Cooper Ninve easily.
+
+Main sections:
+- General contact form
+- Phone
+- Email
+- Office address
+- Business hours
+- Map
