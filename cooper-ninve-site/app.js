@@ -17,12 +17,13 @@ const products = [
 
 const pages = {
   "/": {
-    title: "קופר נינוה | פתרונות ביטוח לעסקים וסוכני ביטוח",
-    description: "קופר נינוה מספקת פתרונות ביטוח מתקדמים לעסקים, סוכני ביטוח וסיכונים מורכבים בתחומי אחריות מקצועית, סייבר, קבלנים וחבויות.",
+    title: "קופר נינוה | מרכז חיתום הבנוי לעתיד",
+    description: "קופר נינוה היא מרכז חיתום מתקדם ו־MGA המספק פתרונות חיתום, הפקה וניהול פוליסות לסוכני ביטוח, עסקים וסיכונים מקצועיים ומסחריים מורכבים.",
     eyebrow: "MGA ו-Coverholder בישראל",
-    h1: "פתרונות חיתום וביטוח מתקדמים לעסקים, סוכנים וסיכונים מורכבים",
-    lead: "קופר נינוה מספקת פתרונות חיתום, הפקה וניהול פוליסות בתחומי חבויות, אחריות מקצועית, סייבר, עבודות קבלניות, רשלנות רפואית וסיכונים מיוחדים — עם שירות מקומי וגישה לשווקים בינלאומיים.",
-    primary: ["לקבלת הצעה", "/contact-us"],
+    h1: "קודם כל יושרה.",
+    positioning: "קופר נינוה,\nמרכז חיתום הבנוי לעתיד.",
+    lead: "קופר נינוה מובילה תיקי ביטוח בתחומים מקצועיים ומסחריים בישראל, ומספקת פתרונות חיתום, הפקה וניהול פוליסות עבור סוכני ביטוח, עסקים וסיכונים מורכבים.",
+    primary: ["צור קשר", "/contact-us"],
     secondary: ["פתרונות לסוכני ביטוח", "/insurance-agents"],
     highlights: ["פעילות מול חתמי Lloyd’s ושווקים בינלאומיים", "פתרונות לסיכונים מורכבים", "חיתום ושירות מקומי בישראל", "עבודה מול סוכני ביטוח ועסקים", "פוליסות ושירות מותאמים לשוק הישראלי"],
     sections: "home",
@@ -261,6 +262,7 @@ function hero(page) {
         <div>
           <p class="eyebrow">${page.eyebrow || "קופר נינוה"}</p>
           <h1>${page.h1}</h1>
+          ${page.positioning ? `<p class="hero-positioning">${page.positioning.replace(/\n/g, "<br>")}</p>` : ""}
           <p class="lead">${page.lead}</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="${link(page.primary[1])}" data-track="click_quote_cta">${page.primary[0]}</a>
@@ -314,6 +316,7 @@ function sections(type, path) {
 
 function homeSections() {
   return `
+    ${mgaPositioningBlock()}
     <section class="section">
       <div class="container">
         <div class="center-title"><h2>איך נוכל לעזור?</h2><p>בחרו את המסלול הנכון עבורכם והגיעו מהר יותר לפתרון הביטוחי המתאים.</p></div>
@@ -330,6 +333,10 @@ function homeSections() {
     ${partnerLogosSection()}
     ${processBlock(["משאירים פרטים", "מעבירים מידע בסיסי", "בדיקת חיתום", "קבלת הצעה", "הפקה ושירות"])}
     ${homepageLeadForm()}`;
+}
+
+function mgaPositioningBlock() {
+  return `<section class="mga-block" aria-labelledby="mga-title"><div class="container mga-inner"><p class="mga-kicker">לא עוד סוכנות ביטוח — קראו לנו חברת חיתום.</p><h2 id="mga-title">קופר נינוה היא<br><span>M.G.A</span></h2><p>כלומר, גוף חיתומי המחזיק בסמכויות נרחבות לברוקינג, חיתום, ניהול תביעות מקומי ושירות לאורך חיי הפוליסה. קופר נינוה פועלת כמרכז חיתום המספק לסוכני ביטוח ולעסקים פתרונות מתקדמים לסיכונים מקצועיים, מסחריים ומורכבים.</p><strong>ONE STOP SHOP חיתומי לסוכני ביטוח ולעסקים המחפשים מענה מקצועי, מהיר ומבוקר.</strong><a class="btn btn-primary" href="/about-us">עוד על קופר נינוה</a></div></section>`;
 }
 
 function solutionsSections() {

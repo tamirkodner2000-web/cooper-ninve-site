@@ -178,6 +178,14 @@ button:disabled {
 }
 h1, h2, h3 { line-height: 1.18; margin: 0; }
 h1 { font-size: clamp(42px, 6vw, 82px); max-width: 920px; letter-spacing: 0; }
+.hero-positioning {
+  font-size: clamp(32px, 4.6vw, 64px);
+  line-height: 1.16;
+  max-width: 900px;
+  margin: 18px 0 0;
+  color: white;
+  font-weight: 900;
+}
 .hero p.lead {
   font-size: clamp(20px, 2vw, 28px);
   max-width: 820px;
@@ -209,6 +217,75 @@ h1 { font-size: clamp(42px, 6vw, 82px); max-width: 920px; letter-spacing: 0; }
 .section { padding: 78px 0; }
 .section-soft { background: var(--soft); }
 .section-navy { background: var(--navy); color: white; }
+.mga-block {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(rgba(7, 25, 54, .88), rgba(7, 25, 54, .9)), url("/assets/reference-current-site/services-page.png") center / cover;
+  color: white;
+  text-align: center;
+}
+.mga-block::before,
+.mga-block::after {
+  content: "";
+  position: absolute;
+  pointer-events: none;
+}
+.mga-block::before {
+  inset-inline-start: 8%;
+  inset-block-start: 18%;
+  width: 90px;
+  height: 90px;
+  background: rgba(255,255,255,.9);
+  transform: rotate(45deg);
+  box-shadow: 32px 32px 0 rgba(255,255,255,.34), 64px 64px 0 rgba(255,255,255,.18);
+}
+.mga-block::after {
+  inset-inline-end: 13%;
+  inset-block: 0;
+  width: 5px;
+  background: rgba(255,255,255,.13);
+  transform: skewX(-12deg);
+}
+.mga-inner {
+  position: relative;
+  z-index: 1;
+  min-height: 560px;
+  padding: 104px 0;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 22px;
+}
+.mga-kicker {
+  margin: 0;
+  color: var(--focus);
+  font-weight: 900;
+  font-size: clamp(18px, 2vw, 26px);
+  max-width: 860px;
+  overflow-wrap: anywhere;
+}
+.mga-block h2 {
+  font-size: clamp(46px, 7vw, 96px);
+  max-width: 940px;
+  overflow-wrap: anywhere;
+}
+.mga-block h2 span {
+  direction: ltr;
+  display: inline-block;
+  letter-spacing: .04em;
+}
+.mga-block p:not(.mga-kicker) {
+  max-width: 980px;
+  margin: 0;
+  color: rgba(255,255,255,.9);
+  font-size: clamp(19px, 2vw, 28px);
+}
+.mga-block strong {
+  max-width: 900px;
+  color: white;
+  font-size: clamp(20px, 2.2vw, 30px);
+  overflow-wrap: anywhere;
+}
 .section-header {
   display: flex;
   align-items: end;
@@ -535,12 +612,18 @@ details p { margin: 12px 0 0; color: var(--muted); }
     overflow-wrap: anywhere;
   }
   .hero-inner { text-align: center; padding: 52px 0 42px; }
+  .hero-positioning { font-size: 24px; max-width: 310px; margin-inline: auto; }
   .hero p.lead { font-size: 15px; max-width: 300px; margin-inline: auto; }
   .hero-actions { justify-content: center; }
   .btn { padding: 11px 16px; min-height: 44px; font-size: 14px; }
   .hero-card { width: min(100%, 300px); max-width: 100%; justify-self: center; padding: 22px 18px; text-align: right; }
   .hero-card h2 { font-size: 21px; }
   .hero::after { opacity: .22; inset-inline-end: 22px; }
+  .mga-inner { min-height: auto; padding: 72px 0; }
+  .mga-block::before { opacity: .26; inset-inline-start: -10px; }
+  .mga-kicker { max-width: 320px; font-size: 16px; }
+  .mga-block h2 { font-size: 30px; max-width: 330px; }
+  .mga-block p:not(.mga-kicker), .mga-block strong { font-size: 17px; }
   .section { padding: 54px 0; }
   .section-header { display: block; }
   .grid-2, .grid-3, .grid-4, .trust-strip, .form-grid, .footer-grid { grid-template-columns: minmax(0, 1fr); }
