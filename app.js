@@ -39,7 +39,7 @@ const pages = {
     hideEyebrow: true,
     h1: "קודם כל יושרה.",
     positioning: "קופר נינוה,\nמרכז חיתום הבנוי לעתיד.",
-    lead: "קופר נינוה מובילה תיקי ביטוח בתחומים מקצועיים ומסחריים בישראל, ומספקת פתרונות חיתום, הפקה וניהול פוליסות עבור סוכני ביטוח, עסקים וסיכונים מורכבים.",
+    lead: "קופר נינוה מנהלת תיקים בשם-5 מבטחי משנה בשוק בישראל, ומספקת שירות לקרוב ל-1,000 סוכני ביטוח.",
     primary: ["צור קשר", "/contact-us"],
     secondary: ["פתרונות לסוכני ביטוח", "/insurance-agents"],
     highlights: ["פעילות מול חתמי Lloyd’s ושווקים בינלאומיים", "פתרונות לסיכונים מורכבים", "חיתום ושירות מקומי בישראל", "עבודה מול סוכני ביטוח ועסקים", "פוליסות ושירות מותאמים לשוק הישראלי"],
@@ -370,7 +370,7 @@ function hero(page) {
   return `
     <section class="hero">
       <div class="container hero-inner">
-        <div>
+        <div class="hero-copy">
           ${page.hideEyebrow ? "" : `<p class="eyebrow">${page.eyebrow || "קופר נינוה"}</p>`}
           <h1>${page.h1}</h1>
           ${page.positioning ? `<p class="hero-positioning">${page.positioning.replace(/\n/g, "<br>")}</p>` : ""}
