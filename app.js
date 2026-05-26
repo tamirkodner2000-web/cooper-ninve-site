@@ -56,6 +56,15 @@ const pages = {
     secondary: ["לקבלת הצעה", "/contact-us"],
     sections: "business",
   },
+  "/claims": {
+    title: "תביעות ושירות | קופר נינוה",
+    description: "פנייה בנושא תביעה, שירות, מסמכים וניהול תהליכים לאורך חיי הפוליסה מול קופר נינוה.",
+    h1: "תביעות ושירות לאורך חיי הפוליסה",
+    lead: "קופר נינוה מלווה סוכנים ולקוחות גם לאחר ההפקה - בשירות, מסמכים, תביעות וניהול תהליכים מול הגורמים הרלוונטיים.",
+    primary: ["פנייה בנושא תביעה", "/contact-us"],
+    secondary: ["שירות ומסמכים", "/contact-us"],
+    sections: "claims",
+  },
   "/about-us": {
     title: "אודות קופר נינוה | MGA ופתרונות ביטוח מתקדמים",
     description: "קופר נינוה היא MGA ו-Coverholder הפועלת בישראל ומספקת פתרונות ביטוח מתקדמים לעסקים, סוכנים וסיכונים מורכבים.",
@@ -293,7 +302,7 @@ function cards(items, cols = 3) {
       <div class="icon-circle">${item.icon || "•"}</div>
       <h3>${item.title}</h3>
       <p>${item.text}</p>
-      ${item.url ? `<span class="card-cta">קרא עוד</span>` : ""}
+      ${item.url ? `<span class="card-cta">${item.cta || "קרא עוד"}</span>` : ""}
     ${item.url ? `</a>` : `</article>`}`).join("")}</div>`;
 }
 
@@ -308,6 +317,7 @@ function sections(type, path) {
     solutions: solutionsSections,
     agents: agentsSections,
     business: businessSections,
+    claims: claimsSections,
     about: aboutSections,
     contact: contactSections,
     knowledge: knowledgeSections,
@@ -320,19 +330,23 @@ function homeSections() {
     ${mgaPositioningBlock()}
     <section class="section">
       <div class="container">
-        <div class="center-title"><h2>איך נוכל לעזור?</h2><p>בחרו את המסלול הנכון עבורכם והגיעו מהר יותר לפתרון הביטוחי המתאים.</p></div>
+        <div class="center-title"><p class="section-slogan">חיתום שמתחיל ביושרה.</p><h2>למי מיועד המרכז?</h2><p>בחרו את המסלול הנכון עבורכם והגיעו מהר יותר לפתרון הביטוחי המתאים.</p></div>
         ${audienceRouting()}
       </div>
     </section>
+    ${agentJourneySection()}
     <section class="section section-navy">
       <div class="container">
-        <div class="section-header"><div><h2>פתרונות ביטוח מובילים</h2><p>התמחות בתחומי ביטוח מקצועיים, מסחריים ומורכבים, עם שירות מקומי וגישה לשווקים בינלאומיים.</p></div><a class="btn btn-primary" href="/insurance-solutions">לכל הפתרונות</a></div>
+        <div class="section-header"><div><p class="section-slogan">פתרונות לסיכונים שלא נכנסים לתבנית רגילה.</p><h2>פתרונות ביטוח מובילים</h2><p>התמחות בתחומי ביטוח מקצועיים, מסחריים ומורכבים, עם שירות מקומי וגישה לשווקים בינלאומיים.</p></div><a class="btn btn-primary" href="/insurance-solutions">לכל הפתרונות</a></div>
         ${productCards()}
       </div>
     </section>
     ${whyCooperSection()}
+    ${claimsServiceSection()}
+    ${insightsSection()}
     ${partnerLogosSection()}
     ${processBlock(["משאירים פרטים", "מעבירים מידע בסיסי", "בדיקת חיתום", "קבלת הצעה", "הפקה ושירות"])}
+    ${actionContactSection()}
     ${homepageLeadForm()}`;
 }
 
@@ -359,6 +373,7 @@ function solutionsSections() {
 
 function agentsSections() {
   return `
+    ${agentJourneySection()}
     <section class="section"><div class="container split-band"><div><h2>למה סוכני ביטוח עובדים עם קופר נינוה?</h2><p>קופר נינוה פועלת כ-MGA ו-Coverholder ומספקת לסוכני ביטוח מענה מקצועי לסיכונים שבהם נדרשת יכולת חיתומית, גישה לשווקים בינלאומיים והבנה של השוק הישראלי.</p></div><ul class="feature-list">${["פתרונות ביטוח מתקדמים", "ניסיון בסיכונים מורכבים", "תמיכה מקצועית בהגשת סיכונים", "חיתום ושירות מקומי", "עבודה מול סוכני ביטוח בפריסה רחבה"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
     <section class="section section-soft"><div class="container"><div class="center-title"><h2>אילו סיכונים ניתן להגיש?</h2></div>${productCards()}</div></section>
     ${processBlock(["פתיחת פנייה", "השלמת מידע חיתומי", "בדיקת חיתום", "קבלת הצעה", "הפקה ושירות"])}
@@ -383,11 +398,8 @@ function aboutSections() {
 
 function contactSections() {
   return `
-    <section class="section"><div class="container split-band"><div><h2>איך אפשר לפנות אלינו?</h2>${cards([
-      { title: "לקבלת הצעה", icon: "◎", text: "לעסקים, חברות ובעלי מקצוע המעוניינים לבדוק התאמה לפתרון ביטוחי." },
-      { title: "לסוכני ביטוח", icon: "◇", text: "לסוכנים המעוניינים להגיש סיכון, לפתוח פנייה או לבדוק שיתוף פעולה." },
-      { title: "פנייה כללית", icon: "◈", text: "לשאלות כלליות, שירות, מסמכים או פניות קיימות." },
-    ], 1)}</div>${form("form_submit_general", ["שם מלא", "טלפון", "אימייל", "חברה / סוכנות", "סוג הפנייה", "סוג ביטוח רלוונטי"])}</div></section>
+    ${actionContactSection()}
+    <section class="section"><div class="container split-band"><div><h2>השאירו פרטים</h2><p>בחרתם את סוג הפנייה? השאירו פרטים בסיסיים וצוות קופר נינוה ינתב את הפנייה לגורם המתאים.</p></div>${form("form_submit_general", ["שם מלא", "טלפון", "אימייל", "חברה / סוכנות", "סוג הפנייה", "סוג ביטוח רלוונטי"])}</div></section>
     <section class="section section-soft"><div class="container"><div class="center-title"><h2>פרטי התקשרות</h2></div>${cards([
       { title: "טלפון", icon: "☎", text: "077-9965453" },
       { title: "אימייל", icon: "✉", text: "info@cooper-ninve.com" },
@@ -407,7 +419,14 @@ function knowledgeSections() {
     ["איזה מידע צריך להצעת ביטוח אחריות מקצועית?", "רשימת נתונים ומסמכים שמסייעים לקדם בדיקת חיתום יעילה."],
     ["האם עסק קטן צריך ביטוח סייבר?", "מתי גם עסק קטן חשוף לאירועי סייבר, דליפות מידע והשבתת פעילות."],
   ];
-  return `<section class="section"><div class="container split-band"><div><h2>מאמרים ונושאים מתוכננים</h2><p>מרכז הידע מוכן להתרחבות SEO עתידית לפי קבוצות המילים שהוגדרו בפרויקט.</p></div><div class="knowledge-list">${articles.map(([t, p]) => `<article><h3>${t}</h3><p>${p}</p><a href="/contact-us">שאלה לצוות החיתום</a></article>`).join("")}</div></div></section>${finalCta("מחפשים תשובה מקצועית?", "השאירו פרטים ונחזור אליכם עם הכוונה ראשונית.")}`;
+  return `${insightsSection()}<section class="section"><div class="container split-band"><div><h2>מאמרים ונושאים מתוכננים</h2><p>מרכז הידע מוכן להתרחבות SEO עתידית לפי קבוצות המילים שהוגדרו בפרויקט.</p></div><div class="knowledge-list">${articles.map(([t, p]) => `<article><h3>${t}</h3><p>${p}</p><a href="/contact-us">שאלה לצוות החיתום</a></article>`).join("")}</div></div></section>${finalCta("מחפשים תשובה מקצועית?", "השאירו פרטים ונחזור אליכם עם הכוונה ראשונית.")}`;
+}
+
+function claimsSections() {
+  return `
+    ${claimsServiceSection()}
+    <section class="section section-soft"><div class="container split-band"><div><h2>מה כדאי לצרף לפנייה?</h2><p>מידע מלא מסייע לקדם טיפול מסודר מול הגורמים הרלוונטיים.</p></div><ul class="feature-list">${["מספר פוליסה או פרטי מבוטח", "תיאור האירוע והמועד", "מסמכים, תמונות או התכתבויות רלוונטיות", "פרטי סוכן הביטוח אם קיים", "פרטי התקשרות להמשך טיפול"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
+    ${actionContactSection()}`;
 }
 
 function productTemplate(page) {
@@ -422,14 +441,42 @@ function productTemplate(page) {
 
 function audienceRouting() {
   return `${cards([
-    { title: "אני סוכן ביטוח", icon: "◇", text: "להגשת סיכון, פתיחת שיתוף פעולה או בדיקת מוצר עבור לקוח.", url: "/insurance-agents" },
-    { title: "אני בעל עסק", icon: "◎", text: "לבדיקת פתרון ביטוחי לעסק, חברה או פעילות מסחרית.", url: "/business-insurance" },
-    { title: "יש לי סיכון מורכב", icon: "◈", text: "לסיכון לא סטנדרטי או דרישת ביטוח מיוחדת.", url: "/contact-us" },
-  ])}`;
+    { title: "לסוכני ביטוח", icon: "◇", text: "מרכז חיתום שמאפשר להגיש סיכונים, לקבל הכוונה מקצועית וללוות לקוחות בתהליך מסודר.", url: "/insurance-agents", cta: "מסלול לסוכנים" },
+    { title: "לעסקים", icon: "◎", text: "פתרונות ביטוח לעסקים, חברות ובעלי מקצוע שזקוקים להתאמה חיתומית ולא רק לפוליסה מדף.", url: "/business-insurance", cta: "בדיקת התאמה לעסק" },
+    { title: "תביעות", icon: "▧", text: "שירות, מסמכים וליווי תהליכים לאורך חיי הפוליסה, גם לאחר ההפקה.", url: "/claims", cta: "פנייה בנושא תביעה" },
+    { title: "סיכונים מורכבים", icon: "◈", text: "מענה לסיכונים מיוחדים, דרישות חוזיות או מצבים שלא נכנסים לתבנית ביטוח רגילה.", url: "/contact-us", cta: "בדיקת סיכון מורכב" },
+  ], 4)}`;
 }
 
 function whyCooperSection() {
-  return `<section class="section section-soft"><div class="container split-band"><div><h2>למה קופר נינוה?</h2><p>שילוב בין ידע מקצועי, ניסיון חיתומי, גישה לשווקים בינלאומיים והיכרות עמוקה עם הצרכים של סוכני ביטוח ועסקים בישראל.</p></div><ul class="feature-list">${["יכולת חיתום מקומית", "גישה לשווקים בינלאומיים", "התמחות בסיכונים מורכבים", "שירות לסוכני ביטוח", "פתרונות לעסקים"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>`;
+  return `<section class="section section-soft"><div class="container split-band"><div><p class="section-slogan">ידע, חיתום ושירות לאורך חיי הפוליסה.</p><h2>למה קופר נינוה?</h2><p>שילוב בין ידע מקצועי, ניסיון חיתומי, גישה לשווקים בינלאומיים והיכרות עמוקה עם הצרכים של סוכני ביטוח ועסקים בישראל.</p></div><ul class="feature-list">${["יכולת חיתום מקומית", "גישה לשווקים בינלאומיים", "התמחות בסיכונים מורכבים", "שירות לסוכני ביטוח", "פתרונות לעסקים"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>`;
+}
+
+function agentJourneySection() {
+  return `<section class="section section-soft"><div class="container split-band"><div><p class="section-slogan">מרכז חיתום לסוכנים ולעסקים שחושבים קדימה.</p><h2>מרכז חיתום לסוכני ביטוח</h2><p>קופר נינוה מספקת לסוכני ביטוח גישה לפתרונות חיתום, הפקה ושירות בתחומי אחריות מקצועית, סייבר, חבויות, עבודות קבלניות, רשלנות רפואית וסיכונים מיוחדים.</p><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">הגשת סיכון לבדיקה</a></div><ul class="feature-list">${["הכוונה לגבי מידע חיתומי חסר", "בדיקת התאמה לסיכונים מורכבים", "הפקה ושירות מקומי", "ליווי לאורך חיי הפוליסה"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>`;
+}
+
+function claimsServiceSection() {
+  return `<section class="section"><div class="container split-band"><div><p class="section-slogan">שירות לא מסתיים בהפקה.</p><h2>תביעות ושירות לאורך חיי הפוליסה</h2><p>קופר נינוה מלווה סוכנים ולקוחות גם לאחר ההפקה — בשירות, מסמכים, תביעות וניהול תהליכים מול הגורמים הרלוונטיים.</p><a class="btn btn-outline" href="/claims">פנייה בנושא תביעה</a></div>${cards([{ title: "דיווח תביעה", icon: "▧", text: "פתיחת פנייה מסודרת עם פרטי האירוע והמסמכים הרלוונטיים.", url: "/claims", cta: "לדיווח תביעה" }, { title: "שירות ומסמכים", icon: "◎", text: "בקשות שירות, אישורים, מסמכים והכוונה לאחר הפקת הפוליסה.", url: "/contact-us", cta: "פנייה לשירות" }], 2)}</div></section>`;
+}
+
+function insightsSection() {
+  return `<section class="section section-soft"><div class="container"><div class="section-header"><div><p class="section-slogan">ידע שמחזק החלטות חיתום.</p><h2>ידע שמחזק החלטות חיתום</h2><p>מאמרים, מדריכים ותובנות מקצועיות בתחומי חבויות, סייבר, אחריות מקצועית, תביעות וסיכונים מורכבים.</p></div><a class="btn btn-outline" href="/knowledge-center">למרכז הידע</a></div>${cards([
+    { title: "מה זה M.G.A בביטוח?", icon: "◇", text: "היכרות עם מודל חיתומי שמחבר בין סמכויות, שירות ויכולת מקצועית.", url: "/knowledge-center", cta: "לקריאה" },
+    { title: "מה חשוב לדעת לפני הגשת סיכון לחיתום?", icon: "◎", text: "המידע שמסייע לקדם בדיקה יעילה, מדויקת ומבוססת יותר.", url: "/knowledge-center", cta: "לקריאה" },
+    { title: "ביטוח סייבר לעסקים — אילו נתונים נדרשים?", icon: "◈", text: "נתוני פעילות, מערכות, בקרות וניסיון אירועים שכדאי להכין מראש.", url: "/knowledge-center", cta: "לקריאה" },
+    { title: "אחריות מקצועית מול צד שלישי — מה ההבדל?", icon: "▧", text: "הבחנה בסיסית שעוזרת להבין חשיפות מקצועיות ומסחריות.", url: "/knowledge-center", cta: "לקריאה" },
+  ], 4)}</div></section>`;
+}
+
+function actionContactSection() {
+  return `<section class="section"><div class="container"><div class="center-title"><h2>איך אפשר לעזור?</h2><p>בחרו את הפעולה המתאימה, וצוות קופר נינוה ינתב את הפנייה לגורם הרלוונטי.</p></div>${cards([
+    { title: "לדבר עם חתם", icon: "◇", text: "שיחה מקצועית על סיכון, מידע חסר או התאמה ראשונית.", url: "/contact-us", cta: "פתיחת פנייה" },
+    { title: "הגשת סיכון כסוכן", icon: "◎", text: "סוכני ביטוח יכולים להעביר פרטי סיכון לבדיקה חיתומית.", url: "/insurance-agents", cta: "הגשת סיכון" },
+    { title: "קבלת הצעה לעסק", icon: "◈", text: "בדיקת התאמה לעסק, חברה או בעל מקצוע.", url: "/business-insurance", cta: "בדיקה לעסק" },
+    { title: "דיווח תביעה", icon: "▧", text: "פתיחת פנייה בנושא תביעה או אירוע ביטוחי.", url: "/claims", cta: "דיווח תביעה" },
+    { title: "שירות ומסמכים", icon: "✚", text: "בקשות שירות, אישורים, מסמכים ושאלות לאחר הפקה.", url: "/contact-us", cta: "פנייה לשירות" },
+  ], 5)}</div></section>`;
 }
 
 function partnerLogosSection() {
