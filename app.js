@@ -37,8 +37,7 @@ const pages = {
     description: "קופר נינוה היא מרכז חיתום מתקדם ו־MGA המספק פתרונות חיתום, הפקה וניהול פוליסות לסוכני ביטוח, עסקים וסיכונים מקצועיים ומסחריים מורכבים.",
     eyebrow: "MGA ו-Coverholder בישראל",
     hideEyebrow: true,
-    h1: "קודם כל יושרה.",
-    positioning: "קופר נינוה,\nמרכז חיתום הבנוי לעתיד.",
+    h1: "קודם כל יושרה.<br>קופר נינוה,<br>מרכז חיתום הבנוי לעתיד.",
     lead: "קופר נינוה מנהלת תיקים בשם-5 מבטחי משנה בשוק בישראל, ומספקת שירות לקרוב ל-1,000 סוכני ביטוח.",
     primary: ["צור קשר", "/contact-us"],
     secondary: ["פתרונות לסוכני ביטוח", "/insurance-agents"],
@@ -367,11 +366,12 @@ function renderPartnerLogos() {
 }
 
 function hero(page) {
+  const isHomeHero = page.sections === "home";
   const heroTitle = page.positioning
     ? `<h1 class="hero-title"><span class="hero-title-line">${page.h1}</span><br><span class="hero-title-line">${page.positioning.replace(/\n/g, "</span><br><span class=\"hero-title-line\">")}</span></h1>`
     : `<h1 class="hero-title">${page.h1}</h1>`;
   return `
-    <section class="hero">
+    <section class="hero${isHomeHero ? " hero-home" : ""}">
       <div class="container hero-inner">
         <div class="hero-copy">
           ${page.hideEyebrow ? "" : `<p class="eyebrow">${page.eyebrow || "קופר נינוה"}</p>`}
@@ -382,7 +382,7 @@ function hero(page) {
             <a class="btn btn-secondary" href="${link(page.secondary[1])}">${page.secondary[0]}</a>
           </div>
         </div>
-        <aside class="hero-card">
+        <aside class="hero-card hero-why-card">
           <h2>למה קופר נינוה?</h2>
           <ul>${(page.highlights || ["חיתום ושירות מקומי", "גישה לשווקים בינלאומיים", "ניסיון בסיכונים מורכבים", "עבודה עם סוכנים ועסקים"]).map((x) => `<li>${x}</li>`).join("")}</ul>
         </aside>

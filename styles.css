@@ -206,6 +206,24 @@ button:disabled {
   justify-self: end;
   text-align: right;
 }
+.hero-home .hero-inner {
+  width: min(1240px, calc(100% - 40px));
+  grid-template-columns: 410px minmax(650px, 760px);
+  grid-template-areas: "why copy";
+  gap: clamp(56px, 7vw, 96px);
+  direction: ltr;
+  justify-content: center;
+}
+.hero-home .hero-copy {
+  grid-area: copy;
+  justify-self: end;
+  max-width: 760px;
+}
+.hero-home .hero-why-card {
+  grid-area: why;
+  justify-self: start;
+  width: 410px;
+}
 .eyebrow {
   color: #8fd0ff;
   font-weight: 800;
@@ -214,6 +232,11 @@ button:disabled {
 h1, h2, h3 { line-height: 1.18; margin: 0; }
 h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; letter-spacing: 0; }
 .hero-title-line { white-space: nowrap; }
+.hero-home h1 {
+  font-size: clamp(50px, 4.8vw, 72px);
+  line-height: 1.15;
+  max-width: 760px;
+}
 .hero-positioning {
   font-size: clamp(38px, 4.3vw, 64px);
   line-height: 1.14;
@@ -228,7 +251,13 @@ h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; l
   color: rgba(255,255,255,.92);
   margin: 30px 0 0;
 }
+.hero-home p.lead {
+  font-size: 24px;
+  line-height: 1.7;
+  max-width: 680px;
+}
 .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 34px; }
+.hero-home .hero-actions { justify-content: flex-start; }
 .hero-card {
   grid-area: why;
   direction: rtl;
@@ -767,6 +796,17 @@ details p { margin: 12px 0 0; color: var(--muted); }
   .hero-inner { grid-template-areas: "copy" "why"; min-height: auto; padding: 70px 0 62px; gap: 34px; }
   .hero-copy { grid-area: copy; justify-self: stretch; width: min(100%, 720px); min-width: 0; max-width: 720px; }
   .hero-card { grid-area: why; width: min(100%, 460px); max-width: 460px; justify-self: end; }
+  .hero-home .hero-inner {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "copy"
+      "why";
+    justify-content: stretch;
+  }
+  .hero-home .hero-copy,
+  .hero-home .hero-why-card {
+    justify-self: center;
+  }
   .trust-strip { transform: none; margin-top: 0; grid-template-columns: 1fr 1fr; }
   .grid-3, .grid-4, .grid-5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -795,9 +835,24 @@ details p { margin: 12px 0 0; color: var(--muted); }
   .hero-copy { text-align: center; }
   .hero-positioning { font-size: 25px; line-height: 1.16; max-width: 350px; margin-inline: auto; }
   .hero p.lead { font-size: 16px; max-width: 340px; margin-inline: auto; }
+  .hero-home .hero-copy { text-align: right; }
+  .hero-home h1 {
+    font-size: 30px;
+    max-width: 330px;
+    margin-inline: auto;
+  }
+  .hero-positioning { font-size: 24px; max-width: 310px; margin-inline: auto; }
+  .hero p.lead { font-size: 15px; max-width: 300px; margin-inline: auto; }
+  .hero-home p.lead {
+    font-size: 17px;
+    line-height: 1.65;
+    max-width: 330px;
+  }
   .hero-actions { justify-content: center; }
+  .hero-home .hero-actions { justify-content: flex-end; max-width: 330px; margin-inline: auto; }
   .btn { padding: 11px 16px; min-height: 44px; font-size: 14px; }
   .hero-card { width: min(100%, 300px); max-width: 100%; justify-self: center; padding: 22px 18px; text-align: right; }
+  .hero-home .hero-why-card { width: min(100%, 330px); }
   .hero-card h2 { font-size: 21px; }
   .hero::before { opacity: .58; inset-inline-start: -190px; }
   .hero::after { opacity: .2; inset-inline-start: 20px; }
