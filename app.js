@@ -375,7 +375,7 @@ function businessSections() {
 
 function aboutSections() {
   return `
-    <section class="section"><div class="container split-band"><div><h2>מי אנחנו?</h2><p>קופר נינוה מתמחה במתן פתרונות ביטוח לסיכונים עסקיים, מקצועיים ומורכבים, תוך שילוב בין ניסיון חיתומי, היכרות עם השוק הישראלי וגישה לשווקים בינלאומיים.</p></div><ul class="feature-list">${["חיתום מקומי", "הפקה ושירות בישראל", "גישה לשווקים בינלאומיים", "מומחיות בסיכונים מקצועיים ומסחריים"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
+    <section class="section"><div class="container split-band"><div><p class="section-slogan" lang="en">First of all, integrity.</p><h2>מי אנחנו?</h2><p>קופר נינוה מתמחה במתן פתרונות ביטוח לסיכונים עסקיים, מקצועיים ומורכבים, תוך שילוב בין ניסיון חיתומי, היכרות עם השוק הישראלי וגישה לשווקים בינלאומיים.</p></div><ul class="feature-list">${["חיתום מקומי", "הפקה ושירות בישראל", "גישה לשווקים בינלאומיים", "מומחיות בסיכונים מקצועיים ומסחריים"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
     <section class="section section-soft"><div class="container"><div class="center-title"><h2>במה אנחנו מתמחים?</h2></div>${productCards()}</div></section>
     <section class="section"><div class="container"><div class="center-title"><h2>הגישה שלנו</h2></div>${cards(["מקצועיות חיתומית", "שירות מקומי", "פתרונות מותאמים", "שקיפות בתהליך", "חדשנות ותהליכים דיגיטליים"].map((title) => ({ title, icon: "•", text: "תהליך עבודה מסודר שמתחיל בהבנת הסיכון וממשיך לבדיקת התאמה, הצעה, הפקה ושירות." })), 3)}</div></section>
     ${finalCta("רוצים לדעת איך קופר נינוה יכולה לעזור לכם?", "השאירו פרטים ונחזור אליכם לבדיקת התאמה ראשונית.")}`;
