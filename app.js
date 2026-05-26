@@ -431,12 +431,6 @@ function sections(type, path) {
 function homeSections() {
   return `
     ${mgaPositioningBlock()}
-    <section class="section">
-      <div class="container">
-        <div class="center-title"><p class="section-slogan">חיתום שמתחיל ביושרה.</p><h2>למי מיועד המרכז?</h2><p>בחרו את המסלול הנכון עבורכם והגיעו מהר יותר לפתרון הביטוחי המתאים.</p></div>
-        ${audienceRouting()}
-      </div>
-    </section>
     ${agentJourneySection()}
     <section class="section section-navy">
       <div class="container">
