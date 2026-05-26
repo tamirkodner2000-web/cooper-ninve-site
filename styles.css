@@ -193,7 +193,7 @@ button:disabled {
   z-index: 1;
   display: grid;
   grid-template-columns: minmax(360px, 430px) minmax(680px, 1fr);
-  grid-template-areas: "copy why";
+  grid-template-areas: "why copy";
   gap: clamp(56px, 8vw, 110px);
   align-items: center;
 }
