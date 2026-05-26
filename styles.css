@@ -191,7 +191,7 @@ button:disabled {
   z-index: 1;
   display: grid;
   grid-template-columns: minmax(330px, 410px) minmax(0, 1fr);
-  grid-template-areas: "card copy";
+  grid-template-areas: "copy card";
   gap: clamp(44px, 7vw, 96px);
   align-items: center;
 }
