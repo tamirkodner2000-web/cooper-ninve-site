@@ -1,10 +1,10 @@
 const partnerLogos = [
-  ["Tokio Marine Kiln", "/assets/logos/partners/tmk-logo.jpg"],
-  ["Ascot", "/assets/logos/partners/ascot-logo.png"],
-  ["Miller", "/assets/logos/partners/miller-logo.png"],
-  ["Beazley", "/assets/logos/partners/Beazley-logo.png"],
-  ["CFC", "/assets/logos/partners/CFC-logo.jpg"],
-  ["QBE", "/assets/logos/partners/qbe-logo.png"],
+  { alt: "Tokio Marine Kiln", src: "/assets/logos/partners/tmk-logo.jpg", width: 780, height: 300 },
+  { alt: "Ascot", src: "/assets/logos/partners/ascot-logo.png", width: 900, height: 550 },
+  { alt: "Miller", src: "/assets/logos/partners/miller-logo.png", width: 514, height: 183 },
+  { alt: "Beazley", src: "/assets/logos/partners/Beazley-logo.png", width: 1024, height: 323 },
+  { alt: "CFC", src: "/assets/logos/partners/CFC-logo.jpg", width: 623, height: 241 },
+  { alt: "QBE", src: "/assets/logos/partners/qbe-logo.png", width: 1249, height: 506 },
 ];
 
 const products = [
@@ -199,7 +199,7 @@ const app = document.querySelector("[data-app]");
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const mainNav = document.querySelector("[data-main-nav]");
 
-document.querySelector("[data-partner-logos]").innerHTML = partnerLogos.map(([alt, src]) => `<img src="${src}" alt="${alt}" loading="lazy">`).join("");
+document.querySelector("[data-partner-logos]").innerHTML = partnerLogos.map(({ alt, src, width, height }) => `<img src="${src}" alt="${alt}" width="${width}" height="${height}" decoding="async" style="--logo-ratio:${width} / ${height}">`).join("");
 
 menuToggle.addEventListener("click", () => {
   const open = mainNav.classList.toggle("open");
@@ -277,12 +277,12 @@ function standardTemplate(page, path) {
 
 function cards(items, cols = 3) {
   return `<div class="grid grid-${cols}">${items.map((item) => `
-    <article class="card">
+    ${item.url ? `<a class="card card-link" href="${link(item.url)}">` : `<article class="card">`}
       <div class="icon-circle">${item.icon || "•"}</div>
       <h3>${item.title}</h3>
       <p>${item.text}</p>
-      ${item.url ? `<a href="${link(item.url)}">קרא עוד</a>` : ""}
-    </article>`).join("")}</div>`;
+      ${item.url ? `<span class="card-cta">קרא עוד</span>` : ""}
+    ${item.url ? `</a>` : `</article>`}`).join("")}</div>`;
 }
 
 function productCards() {
