@@ -242,8 +242,8 @@ h1 { font-size: clamp(42px, 6vw, 82px); max-width: 920px; letter-spacing: 0; }
   overflow: hidden;
   background-color: #192D49;
   background:
-    linear-gradient(90deg, rgba(0, 0, 0, .24), rgba(0, 0, 0, .58) 62%, rgba(0, 0, 0, .66)),
-    url("/assets/backgrounds/lloyds-building.jpg.jpg") center center / cover no-repeat,
+    linear-gradient(90deg, rgba(0, 0, 0, .18), rgba(0, 0, 0, .48) 62%, rgba(0, 0, 0, .58)),
+    url("/assets/backgrounds/lloyds-building.jpg.webp") center center / cover no-repeat,
     linear-gradient(135deg, #192D49, #0f2239);
   color: white;
 }
