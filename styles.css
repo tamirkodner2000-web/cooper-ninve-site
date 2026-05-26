@@ -185,22 +185,25 @@ button:disabled {
   box-shadow: 28px 28px 0 rgba(255,255,255,.22), 56px 56px 0 rgba(255,255,255,.11);
 }
 .hero-inner {
-  width: min(1220px, calc(100% - 40px));
+  width: min(1240px, calc(100% - 40px));
   margin: 0 auto;
   min-height: 680px;
   padding: 88px 0 78px;
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(360px, 420px) minmax(560px, 1fr);
-  grid-template-areas: "copy card";
-  gap: clamp(56px, 8vw, 120px);
+  grid-template-columns: 420px minmax(720px, 1fr);
+  gap: 80px;
   align-items: center;
+  direction: ltr;
 }
 .hero-inner > * { min-width: 0; }
 .hero-copy {
-  grid-area: copy;
-  max-width: 720px;
+  grid-column: 2;
+  direction: rtl;
+  width: 100%;
+  min-width: 680px;
+  max-width: 780px;
   justify-self: end;
   text-align: right;
 }
@@ -210,7 +213,8 @@ button:disabled {
   margin: 0 0 12px;
 }
 h1, h2, h3 { line-height: 1.18; margin: 0; }
-h1 { font-size: clamp(3.8rem, 6vw, 5.2rem); line-height: 1.14; max-width: 760px; letter-spacing: 0; }
+h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; letter-spacing: 0; }
+.hero-title-line { white-space: nowrap; }
 .hero-positioning {
   font-size: clamp(38px, 4.3vw, 64px);
   line-height: 1.14;
@@ -221,13 +225,13 @@ h1 { font-size: clamp(3.8rem, 6vw, 5.2rem); line-height: 1.14; max-width: 760px;
 }
 .hero p.lead {
   font-size: clamp(22px, 1.75vw, 26px);
-  max-width: 720px;
+  max-width: 680px;
   color: rgba(255,255,255,.92);
   margin: 30px 0 0;
 }
 .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 34px; }
 .hero-card {
-  grid-area: card;
+  grid-column: 1;
   background: rgba(255,255,255,.97);
   color: var(--ink);
   border-radius: 12px;
@@ -236,8 +240,8 @@ h1 { font-size: clamp(3.8rem, 6vw, 5.2rem); line-height: 1.14; max-width: 760px;
   border: 1px solid rgba(255,255,255,.66);
   justify-self: start;
   align-self: center;
-  width: min(100%, 400px);
-  max-width: 400px;
+  width: 390px;
+  max-width: 390px;
 }
 .hero-card h2 { font-size: 25px; margin-bottom: 18px; }
 .hero-card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
@@ -251,6 +255,20 @@ h1 { font-size: clamp(3.8rem, 6vw, 5.2rem); line-height: 1.14; max-width: 760px;
   height: 10px;
   border-radius: 50%;
   background: var(--blue);
+}
+
+@media (max-width: 1260px) and (min-width: 901px) {
+  .hero-inner {
+    grid-template-columns: 390px minmax(680px, 1fr);
+    gap: clamp(42px, 4vw, 58px);
+  }
+  .hero-copy {
+    min-width: 680px;
+    max-width: 740px;
+  }
+  h1 {
+    font-size: clamp(52px, 5vw, 70px);
+  }
 }
 
 .section { padding: 78px 0; }
@@ -746,9 +764,9 @@ details p { margin: 12px 0 0; color: var(--muted); }
   .main-nav.open { display: flex; }
   .header-actions { display: none; }
   .hero-inner, .lp .hero-inner, .split-band { grid-template-columns: 1fr; }
-  .hero-inner { grid-template-areas: "copy" "card"; min-height: auto; padding: 70px 0 62px; gap: 34px; }
-  .hero-copy { justify-self: stretch; width: min(100%, 720px); max-width: 720px; }
-  .hero-card { max-width: 460px; justify-self: end; }
+  .hero-inner { direction: rtl; grid-template-areas: "copy" "card"; min-height: auto; padding: 70px 0 62px; gap: 34px; }
+  .hero-copy { grid-column: 1; justify-self: stretch; width: min(100%, 720px); min-width: 0; max-width: 720px; }
+  .hero-card { grid-column: 1; width: min(100%, 460px); max-width: 460px; justify-self: end; }
   .trust-strip { transform: none; margin-top: 0; grid-template-columns: 1fr 1fr; }
   .grid-3, .grid-4, .grid-5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -772,6 +790,7 @@ details p { margin: 12px 0 0; color: var(--muted); }
     white-space: normal;
     overflow-wrap: anywhere;
   }
+  .hero-title-line { white-space: normal; }
   .hero-inner { text-align: center; padding: 52px 0 42px; }
   .hero-copy { text-align: center; }
   .hero-positioning { font-size: 25px; line-height: 1.16; max-width: 350px; margin-inline: auto; }

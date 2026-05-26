@@ -367,13 +367,15 @@ function renderPartnerLogos() {
 }
 
 function hero(page) {
+  const heroTitle = page.positioning
+    ? `<h1 class="hero-title"><span class="hero-title-line">${page.h1}</span><br><span class="hero-title-line">${page.positioning.replace(/\n/g, "</span><br><span class=\"hero-title-line\">")}</span></h1>`
+    : `<h1 class="hero-title">${page.h1}</h1>`;
   return `
     <section class="hero">
       <div class="container hero-inner">
         <div class="hero-copy">
           ${page.hideEyebrow ? "" : `<p class="eyebrow">${page.eyebrow || "קופר נינוה"}</p>`}
-          <h1>${page.h1}</h1>
-          ${page.positioning ? `<p class="hero-positioning">${page.positioning.replace(/\n/g, "<br>")}</p>` : ""}
+          ${heroTitle}
           <p class="lead">${page.lead}</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="${link(page.primary[1])}" data-track="click_quote_cta">${page.primary[0]}</a>
