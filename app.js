@@ -439,7 +439,6 @@ function homeSections() {
         ${productCards()}
       </div>
     </section>
-    ${whyCooperSection()}
     ${claimsServiceSection()}
     ${insightsSection()}
     ${partnerLogosSection()}
