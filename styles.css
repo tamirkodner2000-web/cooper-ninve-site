@@ -192,11 +192,10 @@ button:disabled {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(360px, 420px) minmax(680px, 1fr);
-  grid-template-areas: "card copy";
-  gap: clamp(48px, 7vw, 96px);
+  grid-template-columns: minmax(360px, 430px) minmax(680px, 1fr);
+  grid-template-areas: "copy why";
+  gap: clamp(56px, 8vw, 110px);
   align-items: center;
-  direction: rtl;
 }
 .hero-inner > * { min-width: 0; }
 .hero-copy {
@@ -231,7 +230,7 @@ h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; l
 }
 .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 34px; }
 .hero-card {
-  grid-area: card;
+  grid-area: why;
   direction: rtl;
   text-align: right;
   background: rgba(255,255,255,.97);
@@ -765,9 +764,9 @@ details p { margin: 12px 0 0; color: var(--muted); }
   .main-nav.open { display: flex; }
   .header-actions { display: none; }
   .hero-inner, .lp .hero-inner, .split-band { grid-template-columns: 1fr; }
-  .hero-inner { direction: rtl; grid-template-areas: "copy" "card"; min-height: auto; padding: 70px 0 62px; gap: 34px; }
+  .hero-inner { grid-template-areas: "copy" "why"; min-height: auto; padding: 70px 0 62px; gap: 34px; }
   .hero-copy { grid-area: copy; justify-self: stretch; width: min(100%, 720px); min-width: 0; max-width: 720px; }
-  .hero-card { grid-area: card; width: min(100%, 460px); max-width: 460px; justify-self: end; }
+  .hero-card { grid-area: why; width: min(100%, 460px); max-width: 460px; justify-self: end; }
   .trust-strip { transform: none; margin-top: 0; grid-template-columns: 1fr 1fr; }
   .grid-3, .grid-4, .grid-5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
