@@ -20,6 +20,17 @@ const products = [
   { title: "סיכונים מיוחדים", url: "/special-risks-insurance", icon: "◌", text: "בדיקת פתרונות לסיכונים מורכבים, חריגים או לא סטנדרטיים שאינם נכנסים לתבנית רגילה." },
 ];
 
+const teamMembers = [
+  { name: "יהושע נתן", role: "יו״ר", bio: "מוביל את פעילות החברה והחזון האסטרטגי של קופר נינוה.", image: "/assets/team/yehoshua-natan.jpg.jpeg", initials: "ינ" },
+  { name: "נינה קודנר", role: "חתמת ראשית", bio: "מובילה את תחום החיתום המקצועי והמסחרי של החברה.", image: "/assets/team/nina-kodner.jpg.jpeg", initials: "נק" },
+  { name: "פריסילה יוסף", role: "סמנכ״לית תפעול", bio: "אחראית על ניהול תהליכי תפעול, שירות וממשקי עבודה בחברה.", image: "/assets/team/priscilla.jpg.jpeg", initials: "פי" },
+  { name: "אילן זיו", role: "מנכ״ל", bio: "מוביל את ניהול החברה, פיתוח עסקי וקשרי שוק.", image: "/assets/team/eylon-ziv.jpg.jpeg", initials: "אז" },
+  { name: "נטע אילני", role: "יועצת משפטית", bio: "אחראית על היבטים משפטיים, רגולציה וליווי מקצועי.", image: "/assets/team/neta-ilani.jpg.jpeg", initials: "נא" },
+  { name: "אורי קליין", role: "מנמ\"ר", bio: "מוביל את מערכות העסק.", image: "/assets/team/uri-klein.jpg.jpeg", initials: "אק" },
+  { name: "אבישי פרץ", role: "סמנכ״ל כספים", bio: "אחראי על תחום הכספים, בקרה, גבייה ותהליכים פיננסיים.", image: "/assets/team/avishai.jpg.jpg", initials: "אפ" },
+  { name: "ליעד לק", role: "חתם חבויות ראשי", bio: "עוסק בחיתום, בדיקת סיכונים וליווי מקצועי של תיקי ביטוח.", image: "/assets/team/liad-lek.jpg.jpg", initials: "לל" },
+];
+
 const pages = {
   "/": {
     title: "קופר נינוה | מרכז חיתום הבנוי לעתיד",
@@ -481,9 +492,14 @@ function businessSections() {
 function aboutSections() {
   return `
     <section class="section"><div class="container split-band"><div><p class="section-slogan" lang="en">First of all, integrity.</p><h2>מי אנחנו?</h2><p>קופר נינוה מתמחה במתן פתרונות ביטוח לסיכונים עסקיים, מקצועיים ומורכבים, תוך שילוב בין ניסיון חיתומי, היכרות עם השוק הישראלי וגישה לשווקים בינלאומיים.</p></div><ul class="feature-list">${["חיתום מקומי", "הפקה ושירות בישראל", "גישה לשווקים בינלאומיים", "מומחיות בסיכונים מקצועיים ומסחריים"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
+    ${teamSection()}
     <section class="section section-soft"><div class="container"><div class="center-title"><h2>במה אנחנו מתמחים?</h2></div>${productCards()}</div></section>
     <section class="section"><div class="container"><div class="center-title"><h2>הגישה שלנו</h2></div>${cards(["מקצועיות חיתומית", "שירות מקומי", "פתרונות מותאמים", "שקיפות בתהליך", "חדשנות ותהליכים דיגיטליים"].map((title) => ({ title, icon: "•", text: "תהליך עבודה מסודר שמתחיל בהבנת הסיכון וממשיך לבדיקת התאמה, הצעה, הפקה ושירות." })), 3)}</div></section>
     ${finalCta("רוצים לדעת איך קופר נינוה יכולה לעזור לכם?", "השאירו פרטים ונחזור אליכם לבדיקת התאמה ראשונית.")}`;
+}
+
+function teamSection() {
+  return `<section class="section team-section" aria-labelledby="team-title"><div class="container"><div class="center-title"><p class="section-slogan">ידע, חיתום ושירות לאורך חיי הפוליסה.</p><h2 id="team-title">הכירו את המומחים שלנו</h2><p>הצוות של קופר נינוה משלב ניסיון חיתומי, ניהולי, משפטי ותפעולי, במטרה לספק לסוכני ביטוח ולעסקים שירות מקצועי לאורך כל חיי הפוליסה.</p></div><div class="team-grid">${teamMembers.map((member) => `<article class="team-card"><div class="team-photo"><img src="${member.image}" alt="${member.name} - ${member.role}" loading="lazy" width="420" height="420" onerror="this.hidden=true; this.nextElementSibling.hidden=false;"><span class="team-initials" hidden>${member.initials}</span></div><div class="team-copy"><h3>${member.name}</h3><p class="team-role">${member.role}</p><p>${member.bio}</p></div></article>`).join("")}</div></div></section>`;
 }
 
 function contactSections() {
