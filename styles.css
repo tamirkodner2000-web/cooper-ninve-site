@@ -185,22 +185,22 @@ button:disabled {
   box-shadow: 28px 28px 0 rgba(255,255,255,.22), 56px 56px 0 rgba(255,255,255,.11);
 }
 .hero-inner {
-  width: min(1240px, calc(100% - 40px));
+  width: min(1220px, calc(100% - 40px));
+  margin: 0 auto;
   min-height: 680px;
   padding: 88px 0 78px;
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(340px, 400px) minmax(620px, 1fr);
+  grid-template-columns: minmax(360px, 420px) minmax(560px, 1fr);
   grid-template-areas: "copy card";
-  gap: clamp(34px, 4.5vw, 64px);
+  gap: clamp(56px, 8vw, 120px);
   align-items: center;
 }
 .hero-inner > * { min-width: 0; }
 .hero-copy {
   grid-area: copy;
-  width: min(100%, 760px);
-  max-width: 760px;
+  max-width: 720px;
   justify-self: end;
   text-align: right;
 }
@@ -210,7 +210,7 @@ button:disabled {
   margin: 0 0 12px;
 }
 h1, h2, h3 { line-height: 1.18; margin: 0; }
-h1 { font-size: clamp(54px, 5.5vw, 78px); line-height: 1.12; max-width: 760px; letter-spacing: 0; }
+h1 { font-size: clamp(3.8rem, 6vw, 5.2rem); line-height: 1.14; max-width: 760px; letter-spacing: 0; }
 .hero-positioning {
   font-size: clamp(38px, 4.3vw, 64px);
   line-height: 1.14;
@@ -237,6 +237,7 @@ h1 { font-size: clamp(54px, 5.5vw, 78px); line-height: 1.12; max-width: 760px; l
   justify-self: start;
   align-self: center;
   width: min(100%, 400px);
+  max-width: 400px;
 }
 .hero-card h2 { font-size: 25px; margin-bottom: 18px; }
 .hero-card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
