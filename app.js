@@ -1,10 +1,10 @@
 const partnerLogos = [
-  { alt: "Tokio Marine Kiln", src: "/assets/logos/partners/tmk-logo.jpg", width: 780, height: 300 },
-  { alt: "Ascot", src: "/assets/logos/partners/ascot-logo.png", width: 900, height: 550 },
-  { alt: "Miller", src: "/assets/logos/partners/miller-logo.png", width: 514, height: 183 },
+  { alt: "Tokio Marine Kiln", src: "/assets/logos/partners/tokio-marine-kiln-logo.jpg", width: 780, height: 300 },
+  { alt: "Ascot", src: "/assets/logos/partners/ascot-partner-logo.png", width: 900, height: 550 },
+  { alt: "Miller", src: "/assets/logos/partners/miller-partner-logo.png", width: 514, height: 183 },
   { alt: "Beazley", src: "/assets/logos/partners/beazley-logo.png", width: 1024, height: 323 },
   { alt: "CFC", src: "/assets/logos/partners/cfc-logo.jpg", width: 623, height: 241 },
-  { alt: "QBE", src: "/assets/logos/partners/qbe-logo.png", width: 1249, height: 506 },
+  { alt: "QBE", src: "/assets/logos/partners/qbe-partner-logo.png", width: 1249, height: 506 },
 ];
 
 const products = [
@@ -199,7 +199,11 @@ const app = document.querySelector("[data-app]");
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const mainNav = document.querySelector("[data-main-nav]");
 
-document.querySelector("[data-partner-logos]").innerHTML = partnerLogos.map(({ alt, src, width, height }) => `<img src="${src}" alt="${alt}" width="${width}" height="${height}" decoding="async" style="--logo-ratio:${width} / ${height}">`).join("");
+document.querySelector("[data-partner-logos]").innerHTML = partnerLogos.map(({ alt, src, width, height }) => `
+  <div class="partner-logo-card">
+    <img src="${src}" alt="${alt}" width="${width}" height="${height}" decoding="async" style="--logo-ratio:${width} / ${height}" onerror="this.hidden=true; this.nextElementSibling.hidden=false;">
+    <span class="partner-logo-fallback" hidden>${alt}</span>
+  </div>`).join("");
 
 menuToggle.addEventListener("click", () => {
   const open = mainNav.classList.toggle("open");
