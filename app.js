@@ -452,7 +452,7 @@ function homeSections() {
 }
 
 function mgaPositioningBlock() {
-  return `<section class="mga-block" aria-labelledby="mga-title"><div class="container mga-inner"><p class="mga-kicker">לא עוד סוכנות ביטוח — קראו לנו חברת חיתום.</p><h2 id="mga-title">קופר נינוה היא<br><span>M.G.A</span></h2><p>כלומר, גוף חיתומי המחזיק בסמכויות נרחבות לברוקינג, חיתום, ניהול תביעות מקומי ושירות לאורך חיי הפוליסה. קופר נינוה פועלת כמרכז חיתום המספק לסוכני ביטוח ולעסקים פתרונות מתקדמים לסיכונים מקצועיים, מסחריים ומורכבים.</p><strong>ONE STOP SHOP חיתומי לסוכני ביטוח ולעסקים המחפשים מענה מקצועי, מהיר ומבוקר.</strong><a class="btn btn-primary" href="/about-us">עוד על קופר נינוה</a></div></section>`;
+  return `<section class="mga-block" aria-labelledby="mga-title"><div class="mga-inner"><div class="mga-copy"><p class="mga-kicker">לא עוד סוכנות ביטוח, תקראו לנו חברת חיתום.</p><h2 id="mga-title">קופר נינוה היא <span>M.G.A</span></h2><p>קופר נינוה פועלת כמרכז חיתום עבור סוכני ביטוח ועסקים, ומעמידה פתרונות ביטוח מתקדמים בתחומי אחריות מקצועית, חבויות, קבלנים, סייבר, רשלנות רפואית וסיכונים מיוחדים.</p><strong>ONE STOP SHOP חיתומי לסוכני ביטוח ולעסקים המחפשים מענה מקצועי, מהיר ומדויק.</strong><a class="btn btn-primary" href="/about-us">עוד על קופר נינוה</a></div></div></section>`;
 }
 
 function solutionsSections() {
