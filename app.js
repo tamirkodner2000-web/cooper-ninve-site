@@ -20,8 +20,8 @@ const pages = {
     title: "קופר נינוה | פתרונות ביטוח לעסקים וסוכני ביטוח",
     description: "קופר נינוה מספקת פתרונות ביטוח מתקדמים לעסקים, סוכני ביטוח וסיכונים מורכבים בתחומי אחריות מקצועית, סייבר, קבלנים וחבויות.",
     eyebrow: "MGA ו-Coverholder בישראל",
-    h1: "פתרונות ביטוח מתקדמים לעסקים, סוכני ביטוח וסיכונים מורכבים",
-    lead: "קופר נינוה מספקת פתרונות חיתום, הפקה וניהול פוליסות בתחומי חבויות, אחריות מקצועית, סייבר, עבודות קבלניות, רשלנות רפואית וסיכונים מיוחדים.",
+    h1: "פתרונות חיתום וביטוח מתקדמים לעסקים, סוכנים וסיכונים מורכבים",
+    lead: "קופר נינוה מספקת פתרונות חיתום, הפקה וניהול פוליסות בתחומי חבויות, אחריות מקצועית, סייבר, עבודות קבלניות, רשלנות רפואית וסיכונים מיוחדים — עם שירות מקומי וגישה לשווקים בינלאומיים.",
     primary: ["לקבלת הצעה", "/contact-us"],
     secondary: ["פתרונות לסוכני ביטוח", "/insurance-agents"],
     highlights: ["פעילות מול חתמי Lloyd’s ושווקים בינלאומיים", "פתרונות לסיכונים מורכבים", "חיתום ושירות מקומי בישראל", "עבודה מול סוכני ביטוח ועסקים", "פוליסות ושירות מותאמים לשוק הישראלי"],
@@ -199,12 +199,6 @@ const app = document.querySelector("[data-app]");
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const mainNav = document.querySelector("[data-main-nav]");
 
-document.querySelector("[data-partner-logos]").innerHTML = partnerLogos.map(({ alt, src, width, height }) => `
-  <div class="partner-logo-card">
-    <img src="${src}" alt="${alt}" width="${width}" height="${height}" decoding="async" style="--logo-ratio:${width} / ${height}" onerror="this.hidden=true; this.nextElementSibling.hidden=false;">
-    <span class="partner-logo-fallback" hidden>${alt}</span>
-  </div>`).join("");
-
 menuToggle.addEventListener("click", () => {
   const open = mainNav.classList.toggle("open");
   menuToggle.setAttribute("aria-expanded", String(open));
@@ -245,8 +239,19 @@ function render() {
   mainNav.classList.remove("open");
   menuToggle.setAttribute("aria-expanded", "false");
   app.innerHTML = path.startsWith("/lp/") ? landingTemplate(page) : standardTemplate(page, path);
+  renderPartnerLogos();
   bindForms();
   window.scrollTo({ top: 0, behavior: "instant" });
+}
+
+function renderPartnerLogos() {
+  const logoGrid = document.querySelector("[data-partner-logos]");
+  if (!logoGrid) return;
+  logoGrid.innerHTML = partnerLogos.map(({ alt, src, width, height }) => `
+    <div class="partner-logo-card">
+      <img src="${src}" alt="${alt}" width="${width}" height="${height}" decoding="async" style="--logo-ratio:${width} / ${height}" onerror="this.hidden=true; this.nextElementSibling.hidden=false;">
+      <span class="partner-logo-fallback" hidden>${alt}</span>
+    </div>`).join("");
 }
 
 function hero(page) {
@@ -309,15 +314,10 @@ function sections(type, path) {
 
 function homeSections() {
   return `
-    <div class="container trust-strip">${pages["/"].highlights.map((x) => `<span>${x}</span>`).join("")}</div>
     <section class="section">
       <div class="container">
         <div class="center-title"><h2>איך נוכל לעזור?</h2><p>בחרו את המסלול הנכון עבורכם והגיעו מהר יותר לפתרון הביטוחי המתאים.</p></div>
-        ${cards([
-          { title: "סוכני ביטוח", icon: "◇", text: "פתרונות חיתום, הפקה ושירות לסוכנים המחפשים מענה מקצועי לסיכונים עסקיים ומורכבים.", url: "/insurance-agents" },
-          { title: "עסקים וחברות", icon: "◎", text: "ביטוחי אחריות מקצועית, סייבר, קבלנים, חבויות ורשלנות רפואית לעסקים ונותני שירותים.", url: "/business-insurance" },
-          { title: "סיכונים מיוחדים", icon: "◈", text: "בדיקה חיתומית לסיכונים שאינם מקבלים מענה פשוט בשוק המקומי.", url: "/contact-us" },
-        ])}
+        ${audienceRouting()}
       </div>
     </section>
     <section class="section section-navy">
@@ -326,7 +326,10 @@ function homeSections() {
         ${productCards()}
       </div>
     </section>
-    ${whyProcessCta()}`;
+    ${whyCooperSection()}
+    ${partnerLogosSection()}
+    ${processBlock(["משאירים פרטים", "מעבירים מידע בסיסי", "בדיקת חיתום", "קבלת הצעה", "הפקה ושירות"])}
+    ${homepageLeadForm()}`;
 }
 
 function solutionsSections() {
@@ -417,9 +420,17 @@ function audienceRouting() {
   ])}`;
 }
 
+function whyCooperSection() {
+  return `<section class="section section-soft"><div class="container split-band"><div><h2>למה קופר נינוה?</h2><p>שילוב בין ידע מקצועי, ניסיון חיתומי, גישה לשווקים בינלאומיים והיכרות עמוקה עם הצרכים של סוכני ביטוח ועסקים בישראל.</p></div><ul class="feature-list">${["יכולת חיתום מקומית", "גישה לשווקים בינלאומיים", "התמחות בסיכונים מורכבים", "שירות לסוכני ביטוח", "פתרונות לעסקים"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>`;
+}
+
+function partnerLogosSection() {
+  return `<section class="partner-band" aria-labelledby="home-partners-title"><div class="container"><h2 id="home-partners-title">שווקים ושותפים בינלאומיים</h2><p>קופר נינוה פועלת מול שווקים, חתמים וספקי ביטוח בינלאומיים לצורך התאמת פתרונות ביטוח לסיכונים מקצועיים ומסחריים.</p><div class="partner-logos" data-partner-logos></div></div></section>`;
+}
+
 function whyProcessCta() {
   return `
-    <section class="section section-soft"><div class="container split-band"><div><h2>למה קופר נינוה?</h2><p>שילוב בין ידע מקצועי, ניסיון חיתומי, גישה לשווקים בינלאומיים והיכרות עמוקה עם הצרכים של סוכני ביטוח ועסקים בישראל.</p></div><ul class="feature-list">${["יכולת חיתום מקומית", "גישה לשווקים בינלאומיים", "התמחות בסיכונים מורכבים", "שירות לסוכני ביטוח", "פתרונות לעסקים"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
+    ${whyCooperSection()}
     ${processBlock(["משאירים פרטים", "מעבירים מידע בסיסי", "בדיקת חיתום", "קבלת הצעה", "הפקה ושירות"])}
     ${faqBlock([
       ["מה קופר נינוה עושה?", "קופר נינוה מספקת פתרונות ביטוח מתקדמים לעסקים, סוכני ביטוח וסיכונים מורכבים בתחומי אחריות מקצועית, סייבר, עבודות קבלניות, חבויות ורשלנות רפואית."],
@@ -439,6 +450,22 @@ function faqBlock(faqs) {
 
 function finalCta(title, text) {
   return `<section class="section section-navy"><div class="container section-header"><div><h2>${title}</h2><p>${text}</p></div><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">לקבלת הצעה</a></div></section>`;
+}
+
+function homepageLeadForm() {
+  return `<section class="section section-soft"><div class="container split-band"><div><h2>השאירו פרטים לבדיקה ראשונית</h2><p>ספרו לנו מי אתם ואיזה פתרון ביטוחי נדרש, וצוות קופר נינוה יחזור אליכם להכוונה ראשונית.</p></div><form class="form-panel" data-form="form_submit_homepage_lead">
+    <h2>פנייה מהירה</h2>
+    <div class="form-grid">
+      <label><span>שם מלא</span><input name="name" placeholder="שם מלא" autocomplete="name"></label>
+      <label><span>טלפון</span><input name="phone" placeholder="טלפון" autocomplete="tel"></label>
+      <label><span>אימייל</span><input name="email" placeholder="אימייל" autocomplete="email"></label>
+      <label><span>אני</span><select name="audience"><option>סוכן ביטוח</option><option>בעל עסק</option><option>אחר</option></select></label>
+      <label class="full"><span>סוג ביטוח מבוקש</span><input name="insurance_type" placeholder="לדוגמה: סייבר, אחריות מקצועית, חבויות"></label>
+      <label class="full"><span>הודעה קצרה</span><textarea name="message" placeholder="כתבו בקצרה את הצורך או הסיכון"></textarea></label>
+    </div>
+    <p class="form-note">הפרטים ישמשו לצורך חזרה אליכם ובדיקת התאמה בלבד.</p>
+    <button class="btn btn-primary" type="submit" data-track="form_submit_homepage_lead">שליחת פנייה</button>
+  </form></div></section>`;
 }
 
 function form(eventName, fields) {

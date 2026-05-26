@@ -240,6 +240,7 @@ h1 { font-size: clamp(42px, 6vw, 82px); max-width: 920px; letter-spacing: 0; }
   border-radius: var(--radius);
   padding: 28px;
   min-height: 100%;
+  min-width: 0;
   box-shadow: 0 8px 24px rgba(7,25,54,.06);
   transition: border-color var(--ease), box-shadow var(--ease), transform var(--ease);
 }
@@ -251,6 +252,7 @@ h1 { font-size: clamp(42px, 6vw, 82px); max-width: 920px; letter-spacing: 0; }
 .section-navy .card { color: var(--ink); }
 .card h3 { font-size: 24px; margin-bottom: 12px; }
 .card p { color: var(--muted); margin: 0 0 18px; }
+.card h3, .card p { overflow-wrap: anywhere; }
 .card a, .card-cta { color: var(--blue-2); font-weight: 800; }
 .card-link { display: block; }
 .card-link:hover {
@@ -360,6 +362,7 @@ input, select, textarea {
   text-align: right;
   caret-color: var(--blue-2);
 }
+select { cursor: pointer; }
 label span {
   display: block;
   margin-bottom: 6px;
@@ -457,6 +460,23 @@ details p { margin: 12px 0 0; color: var(--muted); }
 .footer-contact p, .footer-contact li { color: #c8d8ea; }
 .footer-contact ul { list-style: none; margin: 0; padding: 0; }
 .footer-form form { display: grid; gap: 10px; }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,.12);
+  padding-top: 22px;
+  margin-top: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  color: #c8d8ea;
+  font-size: 14px;
+}
+.footer-bottom p { margin: 0; }
+.footer-bottom a {
+  color: white;
+  font-weight: 800;
+}
+.footer-bottom a:hover { color: var(--focus); }
 
 .lp .hero-inner {
   grid-template-columns: minmax(0, .95fr) minmax(320px, 440px);
@@ -523,11 +543,12 @@ details p { margin: 12px 0 0; color: var(--muted); }
   .hero::after { opacity: .22; inset-inline-end: 22px; }
   .section { padding: 54px 0; }
   .section-header { display: block; }
-  .grid-2, .grid-3, .grid-4, .trust-strip, .form-grid, .footer-grid { grid-template-columns: 1fr; }
+  .grid-2, .grid-3, .grid-4, .trust-strip, .form-grid, .footer-grid { grid-template-columns: minmax(0, 1fr); }
   .card { padding: 22px; }
   .partner-logos { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
   .partner-logo-card { min-height: 58px; padding: 12px; }
   .partner-logos img { height: 58px; }
+  .footer-bottom { display: grid; gap: 10px; text-align: center; }
   .footer-main { padding-bottom: 96px; }
   .mobile-sticky {
     position: fixed;
