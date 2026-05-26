@@ -192,17 +192,17 @@ button:disabled {
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 420px minmax(720px, 1fr);
-  gap: 80px;
+  grid-template-columns: minmax(360px, 420px) minmax(680px, 1fr);
+  grid-template-areas: "card copy";
+  gap: clamp(48px, 7vw, 96px);
   align-items: center;
-  direction: ltr;
+  direction: rtl;
 }
 .hero-inner > * { min-width: 0; }
 .hero-copy {
-  grid-column: 2;
+  grid-area: copy;
   direction: rtl;
   width: 100%;
-  min-width: 680px;
   max-width: 780px;
   justify-self: end;
   text-align: right;
@@ -231,7 +231,9 @@ h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; l
 }
 .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 34px; }
 .hero-card {
-  grid-column: 1;
+  grid-area: card;
+  direction: rtl;
+  text-align: right;
   background: rgba(255,255,255,.97);
   color: var(--ink);
   border-radius: 12px;
@@ -240,16 +242,16 @@ h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; l
   border: 1px solid rgba(255,255,255,.66);
   justify-self: start;
   align-self: center;
-  width: 390px;
-  max-width: 390px;
+  width: min(100%, 410px);
+  max-width: 410px;
 }
 .hero-card h2 { font-size: 25px; margin-bottom: 18px; }
-.hero-card ul { margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
-.hero-card li { padding-inline-start: 28px; position: relative; color: #4f5f70; font-weight: 700; }
+.hero-card ul { direction: rtl; text-align: right; margin: 0; padding: 0; list-style: none; display: grid; gap: 12px; }
+.hero-card li { direction: rtl; text-align: right; padding-inline-start: 0; padding-inline-end: 28px; position: relative; color: #4f5f70; font-weight: 700; }
 .hero-card li::before {
   content: "";
   position: absolute;
-  inset-inline-start: 0;
+  inset-inline-end: 0;
   top: .72em;
   width: 10px;
   height: 10px;
@@ -259,11 +261,10 @@ h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; l
 
 @media (max-width: 1260px) and (min-width: 901px) {
   .hero-inner {
-    grid-template-columns: 390px minmax(680px, 1fr);
+    grid-template-columns: minmax(340px, 390px) minmax(640px, 1fr);
     gap: clamp(42px, 4vw, 58px);
   }
   .hero-copy {
-    min-width: 680px;
     max-width: 740px;
   }
   h1 {
@@ -765,8 +766,8 @@ details p { margin: 12px 0 0; color: var(--muted); }
   .header-actions { display: none; }
   .hero-inner, .lp .hero-inner, .split-band { grid-template-columns: 1fr; }
   .hero-inner { direction: rtl; grid-template-areas: "copy" "card"; min-height: auto; padding: 70px 0 62px; gap: 34px; }
-  .hero-copy { grid-column: 1; justify-self: stretch; width: min(100%, 720px); min-width: 0; max-width: 720px; }
-  .hero-card { grid-column: 1; width: min(100%, 460px); max-width: 460px; justify-self: end; }
+  .hero-copy { grid-area: copy; justify-self: stretch; width: min(100%, 720px); min-width: 0; max-width: 720px; }
+  .hero-card { grid-area: card; width: min(100%, 460px); max-width: 460px; justify-self: end; }
   .trust-strip { transform: none; margin-top: 0; grid-template-columns: 1fr 1fr; }
   .grid-3, .grid-4, .grid-5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
