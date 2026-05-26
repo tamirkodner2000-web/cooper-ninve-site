@@ -1,0 +1,305 @@
+# Tracking & Conversion Plan - Cooper Ninve
+
+## Goal
+Define the tracking setup required for organic SEO, paid campaigns, lead generation, and performance optimization.
+
+The website should track:
+- Lead form submissions
+- Phone clicks
+- WhatsApp clicks
+- Email clicks
+- Agent portal clicks
+- Quote request clicks
+- Landing page conversions
+- Source / campaign performance
+
+---
+
+# Required Tools
+
+## 1. Google Tag Manager
+
+Google Tag Manager should be installed on every page of the website.
+
+Purpose:
+- Manage all tracking scripts in one place
+- Add Google Analytics 4
+- Add Google Ads conversion tracking
+- Add Meta Pixel
+- Add LinkedIn Insight Tag
+- Track button clicks and form submissions
+
+---
+
+## 2. Google Analytics 4
+
+GA4 should be connected through Google Tag Manager.
+
+Main goals:
+- Understand traffic sources
+- Measure page performance
+- Track user behavior
+- Measure conversions
+- Analyze paid vs organic traffic
+- Identify high-performing pages
+
+---
+
+## 3. Google Search Console
+
+Google Search Console should be connected for organic SEO monitoring.
+
+Main goals:
+- Check Google indexing
+- Submit sitemap
+- Monitor keyword impressions
+- Monitor clicks from Google
+- Detect SEO errors
+- Track page performance in organic search
+
+---
+
+## 4. Google Ads Conversion Tracking
+
+Required for paid Google campaigns.
+
+Primary conversions:
+- Form submission
+- Phone click
+- WhatsApp click
+
+Secondary conversions:
+- Email click
+- Agent portal click
+- Quote CTA click
+
+---
+
+## 5. Meta Pixel
+
+Required if running Facebook / Instagram campaigns.
+
+Track:
+- PageView
+- Lead
+- Contact
+- Click to WhatsApp
+- Form submission
+
+---
+
+## 6. LinkedIn Insight Tag
+
+Required if running campaigns for:
+- Insurance agents
+- Business owners
+- CFOs
+- CEOs
+- Professional service firms
+- Commercial insurance decision makers
+
+Track:
+- Page visits
+- Lead form submissions
+- Agent landing page visits
+- Agent form submissions
+
+---
+
+# Conversion Events
+
+## Event 1: General Form Submission
+
+Event name:
+`form_submit_general`
+
+Trigger:
+User submits the main contact form.
+
+Pages:
+- `/contact-us`
+- `/business-insurance`
+- `/insurance-solutions`
+- Home page
+
+Purpose:
+Track general lead generation.
+
+---
+
+## Event 2: Quote Request Form Submission
+
+Event name:
+`form_submit_quote_request`
+
+Trigger:
+User submits a quote request form.
+
+Pages:
+- `/professional-liability-insurance`
+- `/cyber-insurance`
+- `/contractors-all-risks-insurance`
+- `/medical-malpractice-insurance`
+- `/liability-insurance`
+- `/business-insurance`
+
+Purpose:
+Track commercial quote leads.
+
+---
+
+## Event 3: Agent Form Submission
+
+Event name:
+`form_submit_agent`
+
+Trigger:
+User submits an agent cooperation / agent risk submission form.
+
+Pages:
+- `/insurance-agents`
+- `/lp/insurance-agents`
+
+Purpose:
+Track insurance agent leads.
+
+---
+
+## Event 4: Professional Liability Landing Page Lead
+
+Event name:
+`lead_lp_professional_liability`
+
+Trigger:
+User submits the form on the professional liability landing page.
+
+Page:
+- `/lp/professional-liability`
+
+Purpose:
+Track paid campaign leads for professional liability.
+
+---
+
+## Event 5: Cyber Landing Page Lead
+
+Event name:
+`lead_lp_cyber`
+
+Trigger:
+User submits the form on the cyber landing page.
+
+Page:
+- `/lp/cyber-insurance`
+
+Purpose:
+Track paid campaign leads for cyber campaigns.
+
+---
+
+## Event 6: Phone Click
+
+Event name:
+`click_phone`
+
+Trigger:
+User clicks a phone number link.
+
+Tracking rule:
+Track all links beginning with:
+`tel:`
+
+Purpose:
+Measure call intent.
+
+---
+
+## Event 7: WhatsApp Click
+
+Event name:
+`click_whatsapp`
+
+Trigger:
+User clicks a WhatsApp link.
+
+Tracking rule:
+Track links containing:
+- `wa.me`
+- `api.whatsapp.com`
+- `whatsapp`
+
+Purpose:
+Measure WhatsApp contact intent.
+
+---
+
+## Event 8: Email Click
+
+Event name:
+`click_email`
+
+Trigger:
+User clicks an email link.
+
+Tracking rule:
+Track all links beginning with:
+`mailto:`
+
+Purpose:
+Measure email contact intent.
+
+---
+
+## Event 9: Agent Portal Click
+
+Event name:
+`click_agent_portal`
+
+Trigger:
+User clicks agent login / agent portal button.
+
+Pages:
+- Header
+- Footer
+- `/insurance-agents`
+- `/lp/insurance-agents`
+
+Purpose:
+Measure agent portal usage and agent intent.
+
+---
+
+## Event 10: CTA Click - Quote Request
+
+Event name:
+`click_quote_cta`
+
+Trigger:
+User clicks any major quote request CTA.
+
+CTA examples:
+- לקבלת הצעה
+- בדיקת התאמה
+- שליחת סיכון לבדיקה
+- דברו איתנו
+
+Purpose:
+Measure intent before form submission.
+
+---
+
+# Recommended Event Parameters
+
+Each event should include:
+
+```json
+{
+  "page_url": "{{Page URL}}",
+  "page_title": "{{Page Title}}",
+  "button_text": "{{Click Text}}",
+  "traffic_source": "{{utm_source}}",
+  "campaign": "{{utm_campaign}}",
+  "medium": "{{utm_medium}}",
+  "product": "{{product_type}}",
+  "audience": "{{audience_type}}"
+}
