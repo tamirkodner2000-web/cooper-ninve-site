@@ -361,6 +361,91 @@ h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; l
   font-size: clamp(19px, 1.9vw, 28px);
   overflow-wrap: anywhere;
 }
+.lloyds-advantages {
+  position: relative;
+  overflow: hidden;
+  direction: ltr;
+  background:
+    linear-gradient(135deg, rgba(21, 47, 80, .98), rgba(7, 25, 54, .96)),
+    repeating-linear-gradient(116deg, rgba(255,255,255,.04) 0 1px, transparent 1px 56px);
+  color: white;
+}
+.lloyds-advantages::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 7%;
+  inset-block-start: 56px;
+  width: 52px;
+  height: 52px;
+  border: 2px solid rgba(143,208,255,.62);
+  transform: rotate(45deg);
+}
+.lloyds-inner {
+  position: relative;
+  z-index: 1;
+  padding: 82px 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(340px, .9fr);
+  grid-template-areas: "list copy";
+  gap: clamp(42px, 6vw, 78px);
+  align-items: center;
+  direction: ltr;
+}
+.lloyds-copy {
+  grid-area: copy;
+  direction: rtl;
+  text-align: right;
+  justify-self: end;
+  max-width: 520px;
+  min-width: 0;
+}
+.lloyds-copy .section-slogan {
+  color: var(--focus);
+}
+.lloyds-copy h2 {
+  font-size: clamp(32px, 4vw, 48px);
+  overflow-wrap: anywhere;
+}
+.lloyds-copy p:not(.section-slogan) {
+  color: rgba(255,255,255,.82);
+  font-size: clamp(18px, 1.6vw, 22px);
+  margin: 18px 0 26px;
+  overflow-wrap: anywhere;
+}
+.lloyds-list {
+  grid-area: list;
+  direction: rtl;
+  text-align: right;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+.lloyds-list li {
+  position: relative;
+  min-height: 100%;
+  min-width: 0;
+  border: 1px solid rgba(143,208,255,.2);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,.07);
+  padding: 16px 40px 16px 18px;
+  color: rgba(255,255,255,.9);
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.lloyds-list li::before {
+  content: "";
+  position: absolute;
+  inset-inline-end: 18px;
+  top: 1.18em;
+  width: 9px;
+  height: 9px;
+  border: 2px solid var(--focus);
+  transform: rotate(45deg);
+}
 .section-header {
   display: flex;
   align-items: end;
@@ -807,6 +892,21 @@ details p { margin: 12px 0 0; color: var(--muted); }
   .hero-home .hero-why-card {
     justify-self: center;
   }
+  .lloyds-inner {
+    width: min(100%, calc(100vw - 40px));
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "copy"
+      "list";
+    padding: 64px 0;
+  }
+  .lloyds-copy {
+    justify-self: stretch;
+    max-width: 720px;
+  }
+  .lloyds-list {
+    grid-template-columns: minmax(0, 1fr);
+  }
   .trust-strip { transform: none; margin-top: 0; grid-template-columns: 1fr 1fr; }
   .grid-3, .grid-4, .grid-5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -862,6 +962,11 @@ details p { margin: 12px 0 0; color: var(--muted); }
   .mga-kicker { max-width: 320px; font-size: 16px; }
   .mga-block h2 { font-size: 34px; max-width: 330px; }
   .mga-block p:not(.mga-kicker), .mga-block strong { font-size: 17px; }
+  .lloyds-inner { width: min(100%, calc(100vw - 28px)); padding: 54px 0; }
+  .lloyds-copy h2 { font-size: 30px; }
+  .lloyds-copy p:not(.section-slogan) { font-size: 17px; }
+  .lloyds-copy .btn { max-width: 100%; white-space: normal; text-align: center; }
+  .lloyds-list li { padding: 15px 38px 15px 16px; font-size: 15px; }
   .section { padding: 54px 0; }
   .section-header { display: block; }
   .grid-2, .grid-3, .grid-4, .grid-5, .trust-strip, .form-grid, .footer-grid { grid-template-columns: minmax(0, 1fr); }

@@ -431,6 +431,7 @@ function sections(type, path) {
 function homeSections() {
   return `
     ${mgaPositioningBlock()}
+    ${lloydsAdvantagesSection()}
     ${agentJourneySection()}
     <section class="section section-navy">
       <div class="container">
@@ -449,6 +450,21 @@ function homeSections() {
 
 function mgaPositioningBlock() {
   return `<section class="mga-block" aria-labelledby="mga-title"><div class="mga-inner"><div class="mga-copy"><p class="mga-kicker">לא עוד סוכנות ביטוח, תקראו לנו חברת חיתום.</p><h2 id="mga-title">קופר נינוה היא <span>M.G.A</span></h2><p>קופר נינוה פועלת כמרכז חיתום עבור סוכני ביטוח ועסקים, ומעמידה פתרונות ביטוח מתקדמים בתחומי אחריות מקצועית, חבויות, קבלנים, סייבר, רשלנות רפואית וסיכונים מיוחדים.</p><strong>ONE STOP SHOP חיתומי לסוכני ביטוח ולעסקים המחפשים מענה מקצועי, מהיר ומדויק.</strong><a class="btn btn-primary" href="/about-us">עוד על קופר נינוה</a></div></div></section>`;
+}
+
+function lloydsAdvantagesSection() {
+  const advantages = [
+    "עבודה מול מספר סינדיקטים של Lloyd’s, לצד גישה לשווקים בינלאומיים מעבר לשוק המקומי.",
+    "חתמים בעלי ניסיון והיכרות מקצועית עם דרישות החיתום של שוק Lloyd’s בלונדון.",
+    "סמכויות ורישיונות המאפשרים חיתום והפקת פוליסות מקומיות בישראל בשם חתמי Lloyd’s.",
+    "יכולת התאמה לפי דרישות הלקוח, דרישות חוזיות ומפרטי ביטוח.",
+    "אפשרות לבחון שינויים, הרחבות ותוספות שאינן זמינות תמיד בשוק המקומי.",
+    "הפקת פוליסות בעברית, המותאמות לפעילות בישראל ולדרישות הרגולציה המקומית.",
+    "צוותים זמינים, מקצועיים ונגישים לאורך תהליך החיתום והשירות.",
+    "פתרונות ללקוחות בעלי פעילות עסקית מחוץ לגבולות ישראל.",
+    "יכולת לבנות פוליסות לא סטנדרטיות בהתאמה אישית, לפי מפרטי יועצי ביטוח ובהתאם לרגולציה בישראל.",
+  ];
+  return `<section class="lloyds-advantages" aria-labelledby="lloyds-advantages-title"><div class="container lloyds-inner"><div class="lloyds-copy"><p class="section-slogan">גישה לשוק בינלאומי, שירות מקומי.</p><h2 id="lloyds-advantages-title">ייחוד העבודה עם שוק הלוידס</h2><p>שוק Lloyd’s מאפשר גמישות חיתומית, גישה לידע מקצועי בינלאומי ויכולת לבנות פתרונות ביטוח שאינם תמיד זמינים במסגרת השוק המקומי. קופר נינוה מחברת בין היכולות האלה לבין חיתום, שירות והפקת פוליסות בישראל.</p><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">לדבר עם צוות החיתום</a></div><ul class="lloyds-list">${advantages.map((item) => `<li>${item}</li>`).join("")}</ul></div></section>`;
 }
 
 function solutionsSections() {
