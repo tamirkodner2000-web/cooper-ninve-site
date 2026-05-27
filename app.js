@@ -492,8 +492,7 @@ function agentsSections() {
 function businessSections() {
   return `
     <section class="section"><div class="container"><div class="center-title"><h2>איזה עסק צריך פתרון ביטוח מותאם?</h2><p>עסק טכנולוגי, משרד ייעוץ, קבלן, מרפאה או חברה מקצועית אינם צריכים את אותה פוליסה בדיוק.</p></div>${cards(["עסקים המספקים שירות מקצועי", "חברות טכנולוגיה ועסקים דיגיטליים", "קבלנים ופרויקטים", "מרפאות ומקצועות טיפוליים", "עסקים עם פעילות מול קהל"].map((title) => ({ title, icon: "◇", text: "התאמת הביטוח לאופי הפעילות, הלקוחות, החשיפה המשפטית והמידע החיתומי." })), 3)}</div></section>
-    <section class="section section-navy"><div class="container"><div class="section-header"><div><h2>פתרונות ביטוח מרכזיים לעסקים</h2><p>מענה עסקי בתחומי אחריות מקצועית, סייבר, קבלנים, רשלנות רפואית וחבויות.</p></div></div>${productCards()}</div></section>
-    ${processBlock(["משאירים פרטים", "מבינים את הצורך", "משלימים מידע", "בדיקת חיתום", "הצעה והפקה"])}
+    ${underwritingExamplesSection()}
     <section class="section section-soft"><div class="container split-band"><div><h2>בדיקת התאמה לביטוח עסקי</h2><p>ככל שהמידע הראשוני מלא וברור יותר, ניתן לקדם את בדיקת החיתום בצורה יעילה יותר.</p></div>${form("form_submit_quote_request", ["שם מלא", "טלפון", "אימייל", "שם העסק", "תחום פעילות", "סוג ביטוח מבוקש"])}</div></section>`;
 }
 
