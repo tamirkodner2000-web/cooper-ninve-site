@@ -443,6 +443,7 @@ function breadcrumb(path, current) {
 }
 
 function standardTemplate(page, path) {
+  if (path === "/insurance-solutions") return sections(page.sections, path);
   return `${breadcrumb(path, page.h1)}${hero(page)}${sections(page.sections, path)}`;
 }
 
@@ -513,7 +514,7 @@ function underwritingExamplesSection() {
 
 function solutionsSections() {
   return `
-    <section class="section">
+    <section class="section section-navy">
       <div class="container">
         <div class="center-title"><h2>פתרונות חיתום וביטוח</h2><p>קופר נינוה מספקת פתרונות חיתום, הפקה וניהול פוליסות במגוון תחומים מקצועיים ומסחריים — עבור סוכני ביטוח, עסקים וסיכונים מורכבים.</p></div>
         ${productCards()}
