@@ -445,6 +445,7 @@ function breadcrumb(path, current) {
 function standardTemplate(page, path) {
   if (path === "/insurance-solutions") return sections(page.sections, path);
   if (path === "/about-us") return `${breadcrumb(path, page.h1)}${sections(page.sections, path)}`;
+  if (path === "/contact-us") return sections(page.sections, path);
   return `${breadcrumb(path, page.h1)}${hero(page)}${sections(page.sections, path)}`;
 }
 
@@ -549,17 +550,7 @@ function teamSection() {
 
 function contactSections() {
   return `
-    <section class="section"><div class="container split-band"><div><h2>השאירו פרטים</h2><p>בחרתם את סוג הפנייה? השאירו פרטים בסיסיים וצוות קופר נינוה ינתב את הפנייה לגורם המתאים.</p></div>${form("form_submit_general", ["שם מלא", "טלפון", "אימייל", "חברה / סוכנות", "סוג הפנייה", "סוג ביטוח רלוונטי"])}</div></section>
-    <section class="section section-soft"><div class="container"><div class="center-title"><h2>פרטי התקשרות</h2></div>${cards([
-      { title: "טלפון", icon: "☎", text: "077-9965453" },
-      { title: "אימייל", icon: "✉", text: "info@cooper-ninve.com" },
-      { title: "כתובת", icon: "⌖", text: "רח׳ דיזנגוף 111, תל אביב" },
-    ])}</div></section>
-    ${faqBlock([
-      ["האם אפשר לפנות גם אם אני לא יודע איזה ביטוח אני צריך?", "כן. ניתן להשאיר פרטים בסיסיים על העסק או הסיכון, וצוות קופר נינוה יכוון את הפנייה לגורם המתאים."],
-      ["האם סוכן ביטוח יכול להגיש סיכון דרך האתר?", "כן. סוכני ביטוח יכולים להגיש פנייה דרך טופס האתר ולצרף מידע, שאלונים או מסמכים רלוונטיים."],
-      ["אילו מסמכים כדאי לצרף?", "כדאי לצרף שאלון הצעה, פוליסה קיימת, דרישות ביטוח חוזיות, ניסיון תביעות או כל מסמך שמתאר את הסיכון."]
-    ])}`;
+    <section class="section"><div class="container"><div class="center-title"><h2>צור קשר עם קופר נינוה</h2><p>השאירו פרטים בסיסיים וצוות קופר נינוה יחזור אליכם להכוונה ראשונית.</p></div><div class="split-band">${form("form_submit_general", ["שם מלא", "טלפון", "אימייל", "חברה / סוכנות", "סוג הפנייה", "סוג ביטוח רלוונטי"])}<div><h2>פרטי התקשרות</h2><p>ניתן לפנות אלינו גם ישירות בטלפון או במייל.</p><ul class="feature-list"><li>טלפון: 077-9965453</li><li>אימייל: info@cooper-ninve.com</li><li>כתובת: רח׳ דיזנגוף 111, תל אביב</li></ul></div></div></div></section>`;
 }
 
 function knowledgeSections() {
