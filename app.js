@@ -433,12 +433,7 @@ function homeSections() {
     ${mgaPositioningBlock()}
     ${lloydsAdvantagesSection()}
     ${agentJourneySection()}
-    <section class="section section-navy">
-      <div class="container">
-        <div class="section-header"><div><p class="section-slogan">פתרונות לסיכונים שלא נכנסים לתבנית רגילה.</p><h2>פתרונות חיתום וביטוח</h2><p>קופר נינוה מספקת פתרונות חיתום, הפקה וניהול פוליסות במגוון תחומים מקצועיים ומסחריים — עבור סוכני ביטוח, עסקים וסיכונים מורכבים.</p></div><a class="btn btn-primary" href="/insurance-solutions">לכל הפתרונות</a></div>
-        ${productCards()}
-      </div>
-    </section>
+    ${underwritingExamplesSection()}
     ${claimsServiceSection()}
     ${insightsSection()}
     ${partnerLogosSection()}
@@ -461,6 +456,16 @@ function lloydsAdvantagesSection() {
     "יכולת לבנות פוליסות לא סטנדרטיות בהתאמה אישית, לפי מפרטי יועצי ביטוח ובהתאם לרגולציה בישראל.",
   ];
   return `<section class="lloyds-advantages" aria-labelledby="lloyds-advantages-title"><div class="container lloyds-inner"><div class="lloyds-copy"><p class="section-slogan">גישה לשוק בינלאומי, שירות מקומי.</p><h2 id="lloyds-advantages-title">ייחוד העבודה עם שוק הלוידס</h2><p>שוק Lloyd’s מאפשר גמישות חיתומית, גישה לידע מקצועי בינלאומי ויכולת לבנות פתרונות ביטוח שאינם תמיד זמינים במסגרת השוק המקומי. קופר נינוה מחברת בין היכולות האלה לבין חיתום, שירות והפקת פוליסות בישראל.</p><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">לדבר עם צוות החיתום</a></div><ul class="lloyds-list">${advantages.map((item) => `<li>${item}</li>`).join("")}</ul></div></section>`;
+}
+
+function underwritingExamplesSection() {
+  const examples = [
+    { title: "פתרונות מותאמים אישית", icon: "◇", text: "כאשר מוצר מדף לא נותן מענה מספק, נבחן את הסיכון ונבנה פתרון בהתאם לאופי הפעילות, דרישות הלקוח ומפרט הביטוח." },
+    { title: "פעילות עסקית בחו״ל", icon: "◎", text: "מענה לעסקים ישראליים עם פעילות, לקוחות, חוזים או חשיפות מחוץ לגבולות ישראל." },
+    { title: "פרויקטים מורכבים", icon: "▧", text: "בחינת פתרונות ביטוח לפרויקטים, התקשרויות או פעילויות עם חשיפה מקצועית, מסחרית או חוזית מורכבת." },
+    { title: "צווארון לבן ואחריות מקצועית טהורה", icon: "◈", text: "פתרונות לבעלי מקצוע, יועצים, חברות שירותים וגורמים מקצועיים החשופים לתביעות בגין טעות, מחדל או רשלנות מקצועית." },
+  ];
+  return `<section class="section section-navy underwriting-examples"><div class="container"><div class="section-header"><div><p class="section-slogan">חיתום מקצועי לסיכונים שאינם תמיד סטנדרטיים.</p><h2>מה אנחנו עושים בפועל?</h2><p>קופר נינוה מספקת פתרונות חיתום וביטוח לסוכני ביטוח ולעסקים, בעיקר במקרים שבהם נדרש מענה מקצועי, גמיש או מורכב יותר ממוצר ביטוח סטנדרטי.</p><p>אנחנו בוחנים את אופי הפעילות, דרישות הלקוח, החשיפות המקצועיות והמסחריות, ומחברים בין הסיכון לבין פתרון ביטוחי מתאים — באמצעות חיתום מקצועי, ניסיון בשווקים בינלאומיים והיכרות עם צרכי השוק הישראלי.</p></div><div class="section-actions"><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">בדיקת פתרון מתאים</a><a class="btn btn-secondary" href="/insurance-solutions">לכל פתרונות הביטוח</a></div></div><h3>דוגמאות לסיכונים שאנחנו בוחנים</h3>${cards(examples, 4)}</div></section>`;
 }
 
 function solutionsSections() {

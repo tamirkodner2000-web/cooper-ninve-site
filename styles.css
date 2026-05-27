@@ -456,9 +456,23 @@ h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; l
   gap: 28px;
   margin-bottom: 34px;
 }
+.section-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: flex-start;
+}
 .section-header h2, .center-title h2 { font-size: clamp(30px, 4vw, 48px); }
 .section-header p, .center-title p { color: var(--muted); max-width: 740px; margin: 12px 0 0; }
 .section-navy .section-header p, .section-navy .center-title p { color: rgba(255,255,255,.76); }
+.underwriting-examples .section-header {
+  align-items: center;
+}
+.underwriting-examples h3 {
+  color: white;
+  font-size: clamp(24px, 2.8vw, 34px);
+  margin: 0 0 22px;
+}
 .center-title { text-align: center; max-width: 860px; margin: 0 auto 36px; }
 .section-slogan {
   margin: 0 0 10px;
@@ -1032,6 +1046,8 @@ details p { margin: 12px 0 0; color: var(--muted); }
   .lloyds-list li { padding: 15px 38px 15px 16px; font-size: 15px; }
   .section { padding: 54px 0; }
   .section-header { display: block; }
+  .section-actions { margin-top: 22px; justify-content: center; }
+  .underwriting-examples h3 { text-align: center; }
   .grid-2, .grid-3, .grid-4, .grid-5, .trust-strip, .form-grid, .footer-grid { grid-template-columns: minmax(0, 1fr); }
   .workflow-cards { grid-template-columns: minmax(0, 1fr); }
   .workflow-card { padding: 22px; }
