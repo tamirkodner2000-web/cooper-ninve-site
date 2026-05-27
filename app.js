@@ -432,13 +432,10 @@ function homeSections() {
   return `
     ${mgaPositioningBlock()}
     ${lloydsAdvantagesSection()}
-    ${agentJourneySection()}
+    ${homepageAgentJourneySection()}
     ${underwritingExamplesSection()}
-    ${claimsServiceSection()}
-    ${insightsSection()}
+    ${homepageInsightsSection()}
     ${partnerLogosSection()}
-    ${processBlock(["משאירים פרטים", "מעבירים מידע בסיסי", "בדיקת חיתום", "קבלת הצעה", "הפקה ושירות"])}
-    ${actionContactSection()}
     ${homepageLeadForm()}`;
 }
 
@@ -581,6 +578,15 @@ function agentJourneySection() {
   return `<section class="section section-soft agent-workflow"><div class="container"><div class="section-header"><div><p class="section-slogan">תהליך עבודה לסוכני ביטוח.</p><h2>איך מגישים סיכון לקופר נינוה?</h2><p>תהליך עבודה ברור לסוכני ביטוח — מהגשת הסיכון ועד קבלת הצעה והפקת פוליסה.</p></div><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">הגשת סיכון לבדיקה</a></div><div class="workflow-cards">${steps.map(([title, text], index) => `<article class="workflow-card"><span>${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div></div></section>`;
 }
 
+function homepageAgentJourneySection() {
+  const steps = [
+    ["שליחת פרטים ומסמכים", "מעבירים תיאור קצר של הסיכון, הכיסוי המבוקש והמסמכים הזמינים."],
+    ["בדיקה חיתומית ראשונית", "צוות קופר נינוה בוחן התאמה ראשונית מול יכולות החיתום והשווקים הרלוונטיים."],
+    ["התקדמות להצעה או השלמות", "אם נדרש מידע נוסף, מכוונים להשלמות. אם יש התאמה, מתקדמים להצעה."],
+  ];
+  return `<section class="section section-soft agent-workflow"><div class="container"><div class="section-header compact-section-header"><div><p class="section-slogan">תהליך קצר וברור לסוכני ביטוח.</p><h2>איך עובד תהליך הגשת הסיכון?</h2><p>שלושה שלבים שמרכזים את מה שחשוב לפתיחת בדיקה חיתומית מסודרת, בלי להפוך את דף הבית למדריך תפעולי.</p></div><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">הגשת סיכון לבדיקה</a></div><div class="workflow-cards workflow-cards-compact">${steps.map(([title, text], index) => `<article class="workflow-card"><span>${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div></div></section>`;
+}
+
 function claimsServiceSection() {
   return `<section class="section"><div class="container split-band"><div><p class="section-slogan">שירות לא מסתיים בהפקה.</p><h2>תביעות ושירות לאורך חיי הפוליסה</h2><p>קופר נינוה מלווה סוכנים ולקוחות גם לאחר ההפקה — בשירות, מסמכים, תביעות וניהול תהליכים מול הגורמים הרלוונטיים.</p><a class="btn btn-outline" href="/claims">פנייה בנושא תביעה</a></div>${cards([{ title: "דיווח תביעה", icon: "▧", text: "פתיחת פנייה מסודרת עם פרטי האירוע והמסמכים הרלוונטיים.", url: "/claims", cta: "לדיווח תביעה" }, { title: "שירות ומסמכים", icon: "◎", text: "בקשות שירות, אישורים, מסמכים והכוונה לאחר הפקת הפוליסה.", url: "/contact-us", cta: "פנייה לשירות" }], 2)}</div></section>`;
 }
@@ -594,6 +600,14 @@ function insightsSection() {
   ], 4)}</div></section>`;
 }
 
+function homepageInsightsSection() {
+  return `<section class="section section-soft"><div class="container"><div class="section-header compact-section-header"><div><p class="section-slogan">פרסומים ומרכז ידע.</p><h2>ידע שמחזק החלטות חיתום</h2><p>תוכן מקצועי שמסביר מושגים, תהליכי חיתום ומידע שכדאי להכין לפני הגשת סיכון לבדיקה.</p></div><a class="btn btn-outline" href="/knowledge-center">למרכז הידע</a></div>${cards([
+    { title: "M.G.A ו-Coverholder", icon: "◇", text: "הסבר פשוט על מודל חיתומי, סמכויות מקומיות והקשר לשווקים בינלאומיים.", url: "/knowledge-center", cta: "לקריאה" },
+    { title: "הגשת סיכון לחיתום", icon: "◎", text: "איזה מידע עוזר לקדם בדיקה יעילה ומתי נדרשות השלמות מקצועיות.", url: "/knowledge-center", cta: "לקריאה" },
+    { title: "סיכונים מקצועיים ומסחריים", icon: "◈", text: "תובנות על חבויות, סייבר, אחריות מקצועית וסיכונים שאינם תמיד סטנדרטיים.", url: "/knowledge-center", cta: "לקריאה" },
+  ], 3)}</div></section>`;
+}
+
 function actionContactSection() {
   return `<section class="section"><div class="container"><div class="center-title"><h2>איך אפשר לעזור?</h2><p>בחרו את הפעולה המתאימה, וצוות קופר נינוה ינתב את הפנייה לגורם הרלוונטי.</p></div>${cards([
     { title: "לדבר עם חתם", icon: "◇", text: "שיחה מקצועית על סיכון, מידע חסר או התאמה ראשונית.", url: "/contact-us", cta: "פתיחת פנייה" },
@@ -605,7 +619,8 @@ function actionContactSection() {
 }
 
 function partnerLogosSection() {
-  return `<section class="partner-band" aria-labelledby="home-partners-title"><div class="container"><h2 id="home-partners-title">שווקים ושותפים בינלאומיים</h2><p>קופר נינוה פועלת מול שווקים, חתמים וספקי ביטוח בינלאומיים לצורך התאמת פתרונות ביטוח לסיכונים מקצועיים ומסחריים.</p><div class="partner-logos" data-partner-logos></div></div></section>`;
+  const markets = ["גישה לשווקים בינלאומיים", "עבודה מול חתמים בחו״ל", "התאמה לשוק הישראלי"];
+  return `<section class="partner-band partner-band-compact" aria-labelledby="home-partners-title"><div class="container"><p class="section-slogan">גישה בינלאומית, חיתום מקומי.</p><h2 id="home-partners-title">שווקים ושותפים בינלאומיים</h2><p>קופר נינוה בוחנת פתרונות מול שווקים וחתמים בינלאומיים, בהתאם לאופי הסיכון, המידע החיתומי והדרישות בישראל.</p><div class="market-pills" aria-label="יכולות שוק בינלאומיות">${markets.map((item) => `<span>${item}</span>`).join("")}</div></div></section>`;
 }
 
 function whyProcessCta() {
