@@ -306,6 +306,7 @@ h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; l
 .mga-block {
   position: relative;
   overflow: hidden;
+  direction: ltr;
   background-color: #192D49;
   background:
     linear-gradient(90deg, rgba(0, 0, 0, .18), rgba(0, 0, 0, .48) 62%, rgba(0, 0, 0, .58)),
@@ -320,7 +321,7 @@ h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; l
   padding: 112px 8vw 104px 5vw;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: flex-end;
   text-align: right;
 }
 .mga-copy {
@@ -328,6 +329,8 @@ h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; l
   display: grid;
   justify-items: start;
   gap: 22px;
+  direction: rtl;
+  text-align: right;
 }
 .mga-kicker {
   margin: 0;
@@ -1017,8 +1020,8 @@ details p { margin: 12px 0 0; color: var(--muted); }
   .hero::before { opacity: .58; inset-inline-start: -190px; }
   .hero::after { opacity: .2; inset-inline-start: 20px; }
   .mga-block { background-position: center center; }
-  .mga-inner { min-height: auto; padding: 84px 24px; justify-content: center; text-align: center; }
-  .mga-copy { justify-items: center; }
+  .mga-inner { min-height: auto; padding: 84px 24px; justify-content: flex-end; text-align: right; }
+  .mga-copy { justify-items: start; }
   .mga-kicker { max-width: 320px; font-size: 16px; }
   .mga-block h2 { font-size: 34px; max-width: 330px; }
   .mga-block p:not(.mga-kicker), .mga-block strong { font-size: 17px; }
