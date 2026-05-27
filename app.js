@@ -486,8 +486,6 @@ function agentsSections() {
   return `
     ${agentJourneySection()}
     <section class="section"><div class="container split-band"><div><h2>למה סוכני ביטוח עובדים עם קופר נינוה?</h2><p>קופר נינוה פועלת כ-MGA ו-Coverholder ומספקת לסוכני ביטוח מענה מקצועי לסיכונים שבהם נדרשת יכולת חיתומית, גישה לשווקים בינלאומיים והבנה של השוק הישראלי.</p></div><ul class="feature-list">${["פתרונות ביטוח מתקדמים", "ניסיון בסיכונים מורכבים", "תמיכה מקצועית בהגשת סיכונים", "חיתום ושירות מקומי", "עבודה מול סוכני ביטוח בפריסה רחבה"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
-    <section class="section section-soft"><div class="container"><div class="center-title"><h2>אילו סיכונים ניתן להגיש?</h2></div>${productCards()}</div></section>
-    ${processBlock(["פתיחת פנייה", "השלמת מידע חיתומי", "בדיקת חיתום", "קבלת הצעה", "הפקה ושירות"])}
     <section class="section"><div class="container split-band"><div><h2>רוצים לעבוד איתנו כסוכנים?</h2><p>השאירו פרטים ונחזור אליכם לבדיקת שיתוף פעולה או הגשת סיכון ראשון.</p></div>${form("form_submit_agent", ["שם הסוכן", "שם הסוכנות", "טלפון", "אימייל", "תחומי פעילות עיקריים", "סוגי סיכונים שמעניינים אותך"])}</div></section>`;
 }
 
