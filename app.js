@@ -1165,10 +1165,12 @@ function translateTextNodes(root) {
 function initAnimations() {
   if (revealObserver) revealObserver.disconnect();
 
-  const animatedItems = [
-    ...app.querySelectorAll(".hero .eyebrow, .hero-title, .hero .lead, .hero-actions .btn, .hero-card, .hero-card li"),
+  const heroItems = [...app.querySelectorAll(".hero .eyebrow, .hero-title, .hero .lead, .hero-actions .btn, .hero-card")];
+  const heroCardItems = [...app.querySelectorAll(".hero-card li")];
+  const scrollItems = [
     ...app.querySelectorAll(".card, .workflow-card, .feature-list li, .step, .partner-logo-card"),
   ];
+  const animatedItems = [...heroItems, ...heroCardItems, ...scrollItems];
 
   if (!animatedItems.length) return;
 
@@ -1179,12 +1181,16 @@ function initAnimations() {
 
   animatedItems.forEach((item) => item.classList.add("reveal-item"));
 
-  const heroItems = app.querySelectorAll(".hero .eyebrow, .hero-title, .hero .lead, .hero-actions .btn, .hero-card, .hero-card li");
   heroItems.forEach((item, index) => {
-    item.style.setProperty("--reveal-delay", `${Math.min(index * 80, 560)}ms`);
+    item.style.setProperty("--reveal-delay", `${Math.min(index * 110, 520)}ms`);
+  });
+  heroCardItems.forEach((item, index) => {
+    item.style.setProperty("--reveal-delay", `${560 + Math.min(index * 70, 280)}ms`);
   });
   requestAnimationFrame(() => {
-    heroItems.forEach((item) => item.classList.add("is-visible"));
+    requestAnimationFrame(() => {
+      [...heroItems, ...heroCardItems].forEach((item) => item.classList.add("is-visible"));
+    });
   });
 
   revealObserver = new IntersectionObserver((entries) => {
@@ -1193,11 +1199,14 @@ function initAnimations() {
       entry.target.classList.add("is-visible");
       revealObserver.unobserve(entry.target);
     });
-  }, { rootMargin: "0px 0px -12% 0px", threshold: 0.14 });
+  }, { rootMargin: "0px 0px -10% 0px", threshold: 0.12 });
 
   app.querySelectorAll(".grid, .workflow-cards, .feature-list, .steps, .partner-logos").forEach((group) => {
     group.querySelectorAll(".card, .workflow-card, li, .step, .partner-logo-card").forEach((item, index) => {
-      item.style.setProperty("--reveal-delay", `${Math.min(index * 85, 425)}ms`);
+      const isPartnerLogo = item.classList.contains("partner-logo-card");
+      const stagger = isPartnerLogo ? 105 : 90;
+      const maxDelay = isPartnerLogo ? 630 : 450;
+      item.style.setProperty("--reveal-delay", `${Math.min(index * stagger, maxDelay)}ms`);
     });
   });
 
