@@ -1133,6 +1133,83 @@ details p { margin: 12px 0 0; color: var(--muted); }
 
 .mobile-sticky { display: none; }
 
+.language-switcher {
+  color: white;
+  border: 1px solid rgba(255,255,255,.36);
+  border-radius: 999px;
+  padding: 8px 13px;
+  font-family: "Montserrat", "Heebo", Arial, sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  line-height: 1;
+}
+.language-switcher:hover {
+  background: white;
+  color: var(--navy);
+}
+.nav-language-switcher {
+  display: none;
+}
+
+body.lang-en {
+  direction: ltr;
+  font-family: "Heebo", Arial, "Helvetica Neue", sans-serif;
+}
+body.lang-en .hero-copy,
+body.lang-en .hero-card,
+body.lang-en .hero-card ul,
+body.lang-en .hero-card li,
+body.lang-en .mga-copy,
+body.lang-en .lloyds-copy,
+body.lang-en .lloyds-list,
+body.lang-en .underwriting-copy,
+body.lang-en .example-chips,
+body.lang-en .agent-workflow .container,
+body.lang-en .agent-workflow .section-header,
+body.lang-en .workflow-cards,
+body.lang-en .workflow-card {
+  direction: ltr;
+  text-align: left;
+}
+body.lang-en .hero-copy,
+body.lang-en .hero-home .hero-copy,
+body.lang-en .underwriting-copy,
+body.lang-en .lloyds-copy {
+  justify-self: start;
+}
+body.lang-en .hero-actions,
+body.lang-en .hero-home .hero-actions,
+body.lang-en .section-actions {
+  justify-content: flex-start;
+}
+body.lang-en .hero-card li {
+  padding-inline-start: 28px;
+  padding-inline-end: 0;
+}
+body.lang-en .hero-card li::before {
+  inset-inline-start: 0;
+  inset-inline-end: auto;
+}
+body.lang-en .lloyds-list li {
+  padding: 16px 18px 16px 40px;
+}
+body.lang-en .lloyds-list li::before {
+  inset-inline-start: 18px;
+  inset-inline-end: auto;
+}
+body.lang-en .example-chip::before {
+  margin-inline-start: 0;
+  margin-inline-end: 10px;
+}
+body.lang-en input,
+body.lang-en select,
+body.lang-en textarea {
+  text-align: left;
+}
+body.lang-en .footer-grid a:hover {
+  transform: translateX(2px);
+}
+
 @media (max-width: 980px) {
   .header-inner { grid-template-columns: 190px auto auto; min-height: 78px; }
   .brand img { width: 180px; }
@@ -1148,6 +1225,8 @@ details p { margin: 12px 0 0; color: var(--muted); }
   }
   .main-nav a { padding: 12px 8px; }
   .main-nav.open { display: flex; }
+  .nav-language-switcher { display: inline-flex; width: max-content; margin-top: 6px; }
+  .header-language-switcher { display: none; }
   .header-actions { display: none; }
   .hero-inner, .lp .hero-inner, .split-band { grid-template-columns: 1fr; }
   .hero-inner { grid-template-areas: "copy" "why"; min-height: auto; padding: 70px 0 62px; gap: 34px; }
@@ -1289,4 +1368,22 @@ details p { margin: 12px 0 0; color: var(--muted); }
   }
   .mobile-sticky a + a { background: var(--navy-2); }
   .mobile-sticky a:hover { filter: brightness(.9); }
+  body.lang-en .brand { justify-self: start; }
+  body.lang-en .menu-toggle { justify-self: end; }
+  body.lang-en .hero-copy,
+  body.lang-en .hero-home .hero-copy,
+  body.lang-en .hero-card,
+  body.lang-en .mga-inner,
+  body.lang-en .mga-copy,
+  body.lang-en .lloyds-copy,
+  body.lang-en .underwriting-copy {
+    text-align: left;
+  }
+  body.lang-en h1,
+  body.lang-en .hero-positioning,
+  body.lang-en .hero p.lead,
+  body.lang-en .hero-home p.lead,
+  body.lang-en .hero-home .hero-actions {
+    margin-inline: 0;
+  }
 }

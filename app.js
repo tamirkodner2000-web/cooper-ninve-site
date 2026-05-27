@@ -306,6 +306,626 @@ const landingPages = {
 
 Object.assign(pages, productPages, landingPages);
 
+const englishPrefix = "/en";
+
+const englishMeta = {
+  "/": {
+    title: "Cooper Ninve | An Underwriting Center Built for the Future",
+    description: "Cooper Ninve is an advanced underwriting center and MGA providing underwriting, policy issuance and policy management solutions for insurance agents, businesses and complex professional and commercial risks.",
+  },
+  "/insurance-solutions": {
+    title: "Insurance Solutions for Businesses and Complex Risks | Cooper Ninve",
+    description: "Advanced insurance solutions in professional liability, cyber, contractors all risks, medical malpractice, liabilities and special risks.",
+  },
+  "/insurance-agents": {
+    title: "Underwriting Solutions for Insurance Agents | Cooper Ninve",
+    description: "Cooper Ninve provides insurance agents with underwriting, issuance and service solutions in professional liability, cyber, contractors, liabilities and special risks.",
+  },
+  "/business-insurance": {
+    title: "Business and Corporate Insurance | Cooper Ninve",
+    description: "Insurance solutions for businesses, companies and complex risks in professional liability, cyber, contractors all risks, liabilities and medical malpractice.",
+  },
+  "/claims": {
+    title: "Claims and Service | Cooper Ninve",
+    description: "Contact Cooper Ninve regarding claims, service, documents and processes throughout the policy lifecycle.",
+  },
+  "/about-us": {
+    title: "About Cooper Ninve | MGA and Advanced Insurance Solutions",
+    description: "Cooper Ninve is an MGA and Coverholder operating in Israel and providing advanced insurance solutions for businesses, agents and complex risks.",
+  },
+  "/contact-us": {
+    title: "Contact Us | Cooper Ninve",
+    description: "Contact Cooper Ninve for information, an insurance quote or an initial suitability review in professional liability, cyber, contractors, liabilities and special risks.",
+  },
+  "/knowledge-center": {
+    title: "Insurance Knowledge Center | Cooper Ninve",
+    description: "Professional articles and information about professional liability insurance, cyber, contractors all risks, liabilities, medical malpractice and special risks.",
+  },
+  "/professional-liability-insurance": {
+    title: "Professional Liability Insurance for Businesses and Professionals | Cooper Ninve",
+    description: "Professional liability insurance for businesses, consultants, service providers and professionals. Solutions for professional risks, negligence claims and legal expenses.",
+  },
+  "/cyber-insurance": {
+    title: "Cyber Insurance for Businesses and Companies | Cooper Ninve",
+    description: "Cyber insurance for businesses against ransomware attacks, data leaks, business interruption, recovery costs and third-party claims.",
+  },
+  "/contractors-all-risks-insurance": {
+    title: "Contractors All Risks Insurance | Cooper Ninve",
+    description: "Contractors all risks insurance for contractors, developers and projects, including solutions for property, third party, employers liability and construction risks.",
+  },
+  "/medical-malpractice-insurance": {
+    title: "Medical Malpractice Insurance for Physicians and Clinics | Cooper Ninve",
+    description: "Medical malpractice and medical professional liability insurance for physicians, clinics, therapists and healthcare practices, subject to underwriting and policy terms.",
+  },
+  "/liability-insurance": {
+    title: "Third-Party Liability and Liability Insurance for Businesses | Cooper Ninve",
+    description: "Third-party liability and liability insurance for businesses, companies and service providers against bodily injury, property damage and business liability claims.",
+  },
+  "/employers-liability-insurance": {
+    title: "Employers Liability Insurance | Cooper Ninve",
+    description: "Employers liability solutions for businesses, contractors and companies, subject to policy terms and underwriting approval.",
+  },
+  "/product-liability-insurance": {
+    title: "Product Liability Insurance | Cooper Ninve",
+    description: "Product liability solutions for manufacturers, importers, marketers and companies exposed to product-related claims.",
+  },
+  "/directors-and-officers-insurance": {
+    title: "Directors and Officers Insurance | Cooper Ninve",
+    description: "Directors and officers liability solutions for companies, management teams and boards of directors.",
+  },
+  "/media-production-insurance": {
+    title: "Media and Film Production Insurance | Cooper Ninve",
+    description: "Insurance solutions for media productions, films, crews, equipment and locations.",
+  },
+  "/special-risks-insurance": {
+    title: "Special Risks Insurance | Cooper Ninve",
+    description: "Review of underwriting and insurance solutions for special, complex and non-standard risks.",
+  },
+  "/lp/professional-liability": {
+    title: "Professional Liability Insurance | Get a Quote from Cooper Ninve",
+    description: "Professional liability insurance suitability review from Cooper Ninve.",
+  },
+  "/lp/cyber-insurance": {
+    title: "Cyber Insurance for Businesses | Get a Quote from Cooper Ninve",
+    description: "Cyber insurance suitability review from Cooper Ninve.",
+  },
+  "/lp/insurance-agents": {
+    title: "Underwriting Solutions for Insurance Agents | Cooper Ninve",
+    description: "Underwriting and issuance solutions for insurance agents from Cooper Ninve.",
+  },
+};
+
+const enText = {
+  "קופר נינוה": "Cooper Ninve",
+  "דף הבית": "Home",
+  "לסוכני ביטוח": "For Insurance Agents",
+  "לעסקים": "For Businesses",
+  "פתרונות ביטוח": "Insurance Solutions",
+  "תביעות": "Claims",
+  "מרכז ידע": "Knowledge Center",
+  "אודות": "About",
+  "צור קשר": "Contact Us",
+  "הגשת סיכון": "Submit a Risk",
+  "לקבלת הצעה": "Get a Quote",
+  "שיחה": "Call",
+  "דלג לתוכן": "Skip to content",
+  "קופר נינוה - דף הבית": "Cooper Ninve - Home",
+  "ניווט ראשי": "Main navigation",
+  "פתרונות ביטוח מתקדמים לעסקים, סוכני ביטוח וסיכונים מורכבים.": "Advanced insurance solutions for businesses, insurance agents and complex risks.",
+  "רח׳ דיזנגוף 111, תל אביב": "111 Dizengoff St., Tel Aviv",
+  "קודם כל יושרה": "First of All, Integrity",
+  "אחריות מקצועית": "Professional Liability",
+  "סייבר": "Cyber",
+  "עבודות קבלניות": "Contractors All Risks",
+  "רשלנות רפואית": "Medical Malpractice",
+  "חבויות וצד שלישי": "Liabilities and Third Party",
+  "הגשת סיכון לבדיקה": "Submit a Risk for Review",
+  "תחומי חיתום": "Underwriting Areas",
+  "שירות ותביעות": "Service and Claims",
+  "שירות ומסמכים": "Service and Documents",
+  "דיווח תביעה": "Report a Claim",
+  "מאמרים ותובנות": "Articles and Insights",
+  "M.G.A בביטוח": "M.G.A in Insurance",
+  "הגשת סיכון לחיתום": "Submitting a Risk for Underwriting",
+  "יצירת קשר": "Contact",
+  "© 2026 Cooper Ninve. כל הזכויות שמורות.": "© 2026 Cooper Ninve. All rights reserved.",
+  "מדיניות פרטיות": "Privacy Policy",
+  "תנאי שימוש": "Terms of Use",
+  "גילוי נאות": "Disclosure",
+  "תלונות הציבור": "Public Complaints",
+  "הכיסוי הביטוחי כפוף לתנאי הפוליסה, חריגים, גבולות אחריות ואישור חיתום.": "Insurance coverage is subject to the policy terms, exclusions, limits of liability and underwriting approval.",
+  "קודם כל יושרה.<br>קופר נינוה,<br>מרכז חיתום הבנוי לעתיד.": "First of all, integrity.<br>Cooper Ninve,<br>an underwriting center built for the future.",
+  "קופר נינוה מנהלת תיקים בשם-5 מבטחי משנה בשוק בישראל, ומספקת שירות לקרוב ל-1,000 סוכני ביטוח.": "Cooper Ninve manages portfolios on behalf of 5 reinsurers in the Israeli market and provides service to nearly 1,000 insurance agents.",
+  "פעילות מול חתמי Lloyd’s ושווקים בינלאומיים": "Work with Lloyd's underwriters and international markets",
+  "פתרונות לסיכונים מורכבים": "Solutions for complex risks",
+  "חיתום ושירות מקומי בישראל": "Local underwriting and service in Israel",
+  "עבודה מול סוכני ביטוח ועסקים": "Work with insurance agents and businesses",
+  "פוליסות ושירות מותאמים לשוק הישראלי": "Policies and service adapted to the Israeli market",
+  "למה קופר נינוה?": "Why Cooper Ninve?",
+  "חיתום ושירות מקומי": "Local underwriting and service",
+  "גישה לשווקים בינלאומיים": "Access to international markets",
+  "ניסיון בסיכונים מורכבים": "Experience with complex risks",
+  "עבודה עם סוכנים ועסקים": "Work with agents and businesses",
+  "לא עוד סוכנות ביטוח, תקראו לנו חברת חיתום.": "Not just another insurance agency. Call us an underwriting company.",
+  "קופר נינוה היא <span>M.G.A</span>": "Cooper Ninve is an <span>M.G.A</span>",
+  "גוף המאגר תחתיו מספר חתמים ממעבר לים אשר נתנו לו סמכויות חיתום נרחבות.": "An entity under which several overseas underwriters have granted broad underwriting authorities.",
+  "כלומר, גוף המחזיק סמכויות נרחבות לרבות:תמחור, חיתום ויישוב תביעות מקומי בשם החתמים מעבר לים. M.G.A הוא ONE STOP SHOP המבצע ניהול בחינה והכוונת תיקים בהתאם לתחומי המומחיות של המבטחים העומדים מאחוריו.": "In other words, an entity holding broad authorities, including pricing, underwriting and local claims settlement on behalf of overseas underwriters. An M.G.A is a ONE STOP SHOP that manages, reviews and directs portfolios according to the areas of expertise of the insurers behind it.",
+  "עוד על קופר נינוה": "More About Cooper Ninve",
+  "גישה לשוק בינלאומי, שירות מקומי.": "International market access, local service.",
+  "ייחוד העבודה עם שוק הלוידס": "What Makes Working with the Lloyd's Market Unique",
+  "שוק Lloyd’s מאפשר גמישות חיתומית, גישה לידע מקצועי בינלאומי ויכולת לבנות פתרונות ביטוח שאינם תמיד זמינים במסגרת השוק המקומי. קופר נינוה מחברת בין היכולות האלה לבין חיתום, שירות והפקת פוליסות בישראל.": "The Lloyd's market enables underwriting flexibility, access to international professional knowledge and the ability to build insurance solutions that are not always available in the local market. Cooper Ninve connects these capabilities with underwriting, service and policy issuance in Israel.",
+  "לדבר עם צוות החיתום": "Speak with the Underwriting Team",
+  "עבודה מול מספר סינדיקטים של Lloyd’s, לצד גישה לשווקים בינלאומיים מעבר לשוק המקומי.": "Work with several Lloyd's syndicates, alongside access to international markets beyond the local market.",
+  "חתמים בעלי ניסיון והיכרות מקצועית עם דרישות החיתום של שוק Lloyd’s בלונדון.": "Underwriters with experience and professional familiarity with the underwriting requirements of the Lloyd's market in London.",
+  "אפשרות לבחון שינויים, הרחבות ותוספות שאינן זמינות תמיד בשוק המקומי.": "The ability to review changes, extensions and additions that are not always available in the local market.",
+  "הפקת פוליסות בעברית, המותאמות לפעילות בישראל ולדרישות הרגולציה המקומית.": "Issuance of policies in Hebrew, adapted to activity in Israel and local regulatory requirements.",
+  "פתרונות ללקוחות בעלי פעילות עסקית מחוץ לגבולות ישראל.": "Solutions for clients with business activity outside Israel.",
+  "יכולת לבנות פוליסות לא סטנדרטיות בהתאמה אישית, לפי מפרטי יועצי ביטוח ובהתאם לרגולציה בישראל.": "The ability to build non-standard, customized policies according to insurance consultant specifications and Israeli regulation.",
+  "תהליך עבודה לסוכני ביטוח.": "Workflow for insurance agents.",
+  "איך מגישים סיכון לקופר נינוה?": "How Do You Submit a Risk to Cooper Ninve?",
+  "תהליך עבודה ברור לסוכני ביטוח — מהגשת הסיכון ועד קבלת הצעה והפקת פוליסה.": "A clear workflow for insurance agents, from risk submission to receiving a quote and issuing a policy.",
+  "שולחים פרטי סיכון": "Send Risk Details",
+  "הסוכן מעביר מידע ראשוני על הלקוח, תחום הפעילות והכיסוי המבוקש.": "The agent sends initial information about the client, field of activity and requested coverage.",
+  "משלימים מידע חיתומי": "Complete Underwriting Information",
+  "צוות קופר נינוה מכוון לשאלונים, מסמכים ונתונים נדרשים.": "The Cooper Ninve team guides the process around required questionnaires, documents and data.",
+  "בדיקת התאמה": "Suitability Review",
+  "הסיכון נבחן מול יכולות החיתום, השווקים והפתרונות הרלוונטיים.": "The risk is reviewed against the relevant underwriting capabilities, markets and solutions.",
+  "הצעה, הפקה ושירות": "Quote, Issuance and Service",
+  "במקרה של התאמה, מתקבלת הצעה ומתקדם תהליך הפקת הפוליסה ושירות.": "If suitable, a quote is provided and the policy issuance and service process moves forward.",
+  "ידע שמחזק החלטות חיתום.": "Knowledge that strengthens underwriting decisions.",
+  "ידע שמחזק החלטות חיתום": "Knowledge that Strengthens Underwriting Decisions",
+  "מאמרים, מדריכים ותובנות מקצועיות בתחומי חבויות, סייבר, אחריות מקצועית, תביעות וסיכונים מורכבים.": "Articles, guides and professional insights in liabilities, cyber, professional liability, claims and complex risks.",
+  "למרכז הידע": "To the Knowledge Center",
+  "מה זה M.G.A בביטוח?": "What Is M.G.A in Insurance?",
+  "היכרות עם מודל חיתומי שמחבר בין סמכויות, שירות ויכולת מקצועית.": "An introduction to an underwriting model that connects authority, service and professional capability.",
+  "מה חשוב לדעת לפני הגשת סיכון לחיתום?": "What Should You Know Before Submitting a Risk for Underwriting?",
+  "המידע שמסייע לקדם בדיקה יעילה, מדויקת ומבוססת יותר.": "The information that helps promote a more efficient, accurate and well-founded review.",
+  "ביטוח סייבר לעסקים — אילו נתונים נדרשים?": "Cyber Insurance for Businesses: What Data Is Required?",
+  "נתוני פעילות, מערכות, בקרות וניסיון אירועים שכדאי להכין מראש.": "Operational data, systems, controls and incident history worth preparing in advance.",
+  "אחריות מקצועית מול צד שלישי — מה ההבדל?": "Professional Liability vs. Third Party: What Is the Difference?",
+  "הבחנה בסיסית שעוזרת להבין חשיפות מקצועיות ומסחריות.": "A basic distinction that helps clarify professional and commercial exposures.",
+  "לקריאה": "Read More",
+  "שווקים ושותפים בינלאומיים": "International Markets and Partners",
+  "קופר נינוה פועלת מול שווקים, חתמים וספקי ביטוח בינלאומיים לצורך התאמת פתרונות ביטוח לסיכונים מקצועיים ומסחריים.": "Cooper Ninve works with international markets, underwriters and insurance providers to adapt insurance solutions for professional and commercial risks.",
+  "השאירו פרטים לבדיקה ראשונית": "Leave Details for an Initial Review",
+  "ספרו לנו מי אתם ואיזה פתרון ביטוחי נדרש, וצוות קופר נינוה יחזור אליכם להכוונה ראשונית.": "Tell us who you are and what insurance solution is required, and the Cooper Ninve team will get back to you with initial guidance.",
+  "פנייה מהירה": "Quick Inquiry",
+  "שם מלא": "Full Name",
+  "טלפון": "Phone",
+  "אימייל": "Email",
+  "אני": "I am",
+  "סוכן ביטוח": "Insurance Agent",
+  "בעל עסק": "Business Owner",
+  "אחר": "Other",
+  "סוג ביטוח מבוקש": "Requested Insurance Type",
+  "לדוגמה: סייבר, אחריות מקצועית, חבויות": "For example: cyber, professional liability, liabilities",
+  "הודעה קצרה": "Short Message",
+  "כתבו בקצרה את הצורך או הסיכון": "Briefly describe the need or risk",
+  "הפרטים ישמשו לצורך חזרה אליכם ובדיקת התאמה בלבד.": "The details will be used only to contact you and review suitability.",
+  "שליחת פנייה": "Send Inquiry",
+  "הפנייה נקלטה": "Inquiry Received",
+  "פתרונות ביטוח לעסקים, סוכני ביטוח וסיכונים מורכבים": "Insurance Solutions for Businesses, Insurance Agents and Complex Risks",
+  "לא כל עסק, פרויקט או בעל מקצוע חשופים לאותם סיכונים. פתרון ביטוחי נכון מתחיל בהבנת תחום הפעילות, דרישות חוזיות, ניסיון תביעות ורמת המורכבות.": "Not every business, project or professional is exposed to the same risks. The right insurance solution starts with understanding the field of activity, contractual requirements, claims experience and level of complexity.",
+  "פתרונות חיתום וביטוח": "Underwriting and Insurance Solutions",
+  "קופר נינוה מספקת פתרונות חיתום, הפקה וניהול פוליסות במגוון תחומים מקצועיים ומסחריים — עבור סוכני ביטוח, עסקים וסיכונים מורכבים.": "Cooper Ninve provides underwriting, issuance and policy management solutions across a range of professional and commercial fields, for insurance agents, businesses and complex risks.",
+  "פתרונות חיתום והפקה לסוכני ביטוח": "Underwriting and Issuance Solutions for Insurance Agents",
+  "גישה לפתרונות ביטוח מתקדמים בתחומי אחריות מקצועית, סייבר, עבודות קבלניות, חבויות, רשלנות רפואית וסיכונים מיוחדים, עם יכולת חיתום ושירות מקומי.": "Access to advanced insurance solutions in professional liability, cyber, contractors all risks, liabilities, medical malpractice and special risks, with local underwriting and service capabilities.",
+  "הצטרפות כסוכן / פתיחת פנייה": "Join as an Agent / Open an Inquiry",
+  "למה סוכני ביטוח עובדים עם קופר נינוה?": "Why Do Insurance Agents Work with Cooper Ninve?",
+  "קופר נינוה פועלת כ-MGA ו-Coverholder ומספקת לסוכני ביטוח מענה מקצועי לסיכונים שבהם נדרשת יכולת חיתומית, גישה לשווקים בינלאומיים והבנה של השוק הישראלי.": "Cooper Ninve operates as an MGA and Coverholder and provides insurance agents with a professional response for risks that require underwriting capability, access to international markets and an understanding of the Israeli market.",
+  "פתרונות ביטוח מתקדמים": "Advanced Insurance Solutions",
+  "תמיכה מקצועית בהגשת סיכונים": "Professional Support in Risk Submission",
+  "עבודה מול סוכני ביטוח בפריסה רחבה": "Work with a Broad Network of Insurance Agents",
+  "רוצים לעבוד איתנו כסוכנים?": "Want to Work with Us as Agents?",
+  "השאירו פרטים ונחזור אליכם לבדיקת שיתוף פעולה או הגשת סיכון ראשון.": "Leave your details and we will get back to you regarding cooperation or submitting a first risk.",
+  "שם הסוכן": "Agent Name",
+  "שם הסוכנות": "Agency Name",
+  "תחומי פעילות עיקריים": "Main Areas of Activity",
+  "סוגי סיכונים שמעניינים אותך": "Types of Risks of Interest",
+  "פתרונות ביטוח לעסקים, חברות וסיכונים מורכבים": "Insurance Solutions for Businesses, Companies and Complex Risks",
+  "פתרונות ביטוח מתקדמים לעסקים וחברות תוך התאמה לאופי הפעילות, החשיפות, דרישות החוזה והצרכים המסחריים של העסק.": "Advanced insurance solutions for businesses and companies, adapted to the nature of the activity, exposures, contract requirements and commercial needs of the business.",
+  "בדיקת התאמה לעסק": "Business Suitability Review",
+  "איזה עסק צריך פתרון ביטוח מותאם?": "Which Business Needs a Tailored Insurance Solution?",
+  "עסק טכנולוגי, משרד ייעוץ, קבלן, מרפאה או חברה מקצועית אינם צריכים את אותה פוליסה בדיוק.": "A technology business, consulting firm, contractor, clinic or professional company do not need exactly the same policy.",
+  "עסקים המספקים שירות מקצועי": "Businesses Providing Professional Services",
+  "חברות טכנולוגיה ועסקים דיגיטליים": "Technology Companies and Digital Businesses",
+  "קבלנים ופרויקטים": "Contractors and Projects",
+  "מרפאות ומקצועות טיפוליים": "Clinics and Therapeutic Professions",
+  "עסקים עם פעילות מול קהל": "Businesses with Public-Facing Activity",
+  "התאמת הביטוח לאופי הפעילות, הלקוחות, החשיפה המשפטית והמידע החיתומי.": "Adapting the insurance to the activity, clients, legal exposure and underwriting information.",
+  "חיתום מקצועי לסיכונים שאינם תמיד סטנדרטיים.": "Professional underwriting for risks that are not always standard.",
+  "מה אנחנו עושים בפועל?": "What Do We Do in Practice?",
+  "קופר נינוה בוחנת סיכונים שאינם תמיד נכנסים לתבנית ביטוח רגילה, ומחברת בין צרכי הלקוח לבין פתרון חיתומי מתאים — באמצעות חיתום מקצועי, ניסיון בשווקים בינלאומיים והיכרות עם השוק הישראלי.": "Cooper Ninve reviews risks that do not always fit a standard insurance template and connects client needs with a suitable underwriting solution, through professional underwriting, experience in international markets and familiarity with the Israeli market.",
+  "בדיקת פתרון מתאים": "Review a Suitable Solution",
+  "לכל פתרונות הביטוח": "All Insurance Solutions",
+  "דוגמאות לסיכונים שאנחנו בוחנים": "Examples of Risks We Review",
+  "פתרונות מותאמים אישית": "Customized Solutions",
+  "פעילות עסקית בחו״ל": "Business Activity Abroad",
+  "פרויקטים מורכבים": "Complex Projects",
+  "צווארון לבן ואחריות מקצועית טהורה": "White-Collar and Pure Professional Liability",
+  "בדיקת התאמה לביטוח עסקי": "Business Insurance Suitability Review",
+  "ככל שהמידע הראשוני מלא וברור יותר, ניתן לקדם את בדיקת החיתום בצורה יעילה יותר.": "The more complete and clear the initial information is, the more efficiently the underwriting review can move forward.",
+  "שם העסק": "Business Name",
+  "תחום פעילות": "Field of Activity",
+  "אודות קופר נינוה": "About Cooper Ninve",
+  "קופר נינוה היא MGA ו-Coverholder הפועלת בישראל ומספקת פתרונות ביטוח מתקדמים לסוכני ביטוח, עסקים וחברות בתחומי חבויות, אחריות מקצועית, סייבר וסיכונים מיוחדים.": "Cooper Ninve is an MGA and Coverholder operating in Israel and providing advanced insurance solutions for insurance agents, businesses and companies in liabilities, professional liability, cyber and special risks.",
+  "דברו איתנו": "Talk to Us",
+  "פתרונות הביטוח שלנו": "Our Insurance Solutions",
+  "ידע, חיתום ושירות לאורך חיי הפוליסה.": "Knowledge, underwriting and service throughout the policy lifecycle.",
+  "הכירו את המומחים שלנו": "Meet Our Experts",
+  "צוות קופר נינוה משלב ניסיון חיתומי, ניהולי, משפטי ותפעולי — במטרה לספק לסוכני ביטוח ולעסקים שירות מקצועי לאורך כל חיי הפוליסה.": "The Cooper Ninve team combines underwriting, management, legal and operational experience to provide insurance agents and businesses with professional service throughout the policy lifecycle.",
+  "הגישה שלנו": "Our Approach",
+  "מקצועיות חיתומית": "Underwriting Professionalism",
+  "שירות מקומי": "Local Service",
+  "פתרונות מותאמים": "Tailored Solutions",
+  "שקיפות בתהליך": "Process Transparency",
+  "חדשנות ותהליכים דיגיטליים": "Innovation and Digital Processes",
+  "תהליך עבודה מסודר שמתחיל בהבנת הסיכון וממשיך לבדיקת התאמה, הצעה, הפקה ושירות.": "An orderly work process that starts with understanding the risk and continues through suitability review, quote, issuance and service.",
+  "צור קשר עם קופר נינוה": "Contact Cooper Ninve",
+  "רוצים לקבל הצעה, להגיש סיכון לבדיקה או להבין איזה פתרון ביטוחי מתאים לכם? השאירו פרטים וצוות קופר נינוה יחזור אליכם.": "Want to receive a quote, submit a risk for review or understand which insurance solution is right for you? Leave your details and the Cooper Ninve team will get back to you.",
+  "השארת פרטים": "Leave Details",
+  "הגשת סיכון כסוכן": "Submit a Risk as an Agent",
+  "השאירו פרטים בסיסיים וצוות קופר נינוה יחזור אליכם להכוונה ראשונית.": "Leave basic details and the Cooper Ninve team will get back to you with initial guidance.",
+  "השאירו פרטים ונחזור אליכם": "Leave Details and We Will Get Back to You",
+  "חברה / סוכנות": "Company / Agency",
+  "סוג הפנייה": "Inquiry Type",
+  "סוג ביטוח רלוונטי": "Relevant Insurance Type",
+  "הודעה": "Message",
+  "פרטי התקשרות": "Contact Details",
+  "ניתן לפנות אלינו גם ישירות בטלפון או במייל.": "You can also contact us directly by phone or email.",
+  "טלפון: 077-9965453": "Phone: 077-9965453",
+  "אימייל: info@cooper-ninve.com": "Email: info@cooper-ninve.com",
+  "כתובת: רח׳ דיזנגוף 111, תל אביב": "Address: 111 Dizengoff St., Tel Aviv",
+  "מרכז ידע ביטוחי": "Insurance Knowledge Center",
+  "תוכן מקצועי לסוכני ביטוח, עסקים ובעלי מקצוע על סיכונים, חיתום, מסמכים נדרשים ותהליכי בדיקת התאמה.": "Professional content for insurance agents, businesses and professionals about risks, underwriting, required documents and suitability review processes.",
+  "שיחה עם צוות החיתום": "Call the Underwriting Team",
+  "מאמרים ונושאים מתוכננים": "Planned Articles and Topics",
+  "מרכז הידע מוכן להתרחבות SEO עתידית לפי קבוצות המילים שהוגדרו בפרויקט.": "The knowledge center is ready for future SEO expansion according to the keyword groups defined for the project.",
+  "מה זה MGA בביטוח?": "What Is MGA in Insurance?",
+  "הסבר מקצועי על מודל MGA, תפקידו מול סוכני ביטוח, חיתום, הפקה ושירות.": "A professional explanation of the MGA model and its role with insurance agents, underwriting, issuance and service.",
+  "מה זה Lloyd’s Coverholder?": "What Is a Lloyd's Coverholder?",
+  "משמעות מודל Coverholder והקשר לפתרונות ביטוח בינלאומיים.": "The meaning of the Coverholder model and its connection to international insurance solutions.",
+  "איזה מידע צריך להצעת ביטוח אחריות מקצועית?": "What Information Is Needed for a Professional Liability Insurance Quote?",
+  "רשימת נתונים ומסמכים שמסייעים לקדם בדיקת חיתום יעילה.": "A list of data and documents that help promote an efficient underwriting review.",
+  "האם עסק קטן צריך ביטוח סייבר?": "Does a Small Business Need Cyber Insurance?",
+  "מתי גם עסק קטן חשוף לאירועי סייבר, דליפות מידע והשבתת פעילות.": "When even a small business is exposed to cyber incidents, data leaks and business interruption.",
+  "שאלה לצוות החיתום": "Question for the Underwriting Team",
+  "מחפשים תשובה מקצועית?": "Looking for a Professional Answer?",
+  "השאירו פרטים ונחזור אליכם עם הכוונה ראשונית.": "Leave your details and we will get back to you with initial guidance.",
+  "תביעות ושירות לאורך חיי הפוליסה": "Claims and Service Throughout the Policy Lifecycle",
+  "קופר נינוה מלווה סוכנים ולקוחות גם לאחר ההפקה - בשירות, מסמכים, תביעות וניהול תהליכים מול הגורמים הרלוונטיים.": "Cooper Ninve accompanies agents and clients after issuance as well, with service, documents, claims and process management with the relevant parties.",
+  "קופר נינוה מלווה סוכנים ולקוחות גם לאחר ההפקה — בשירות, מסמכים, תביעות וניהול תהליכים מול הגורמים הרלוונטיים.": "Cooper Ninve accompanies agents and clients after issuance as well, with service, documents, claims and process management with the relevant parties.",
+  "פנייה בנושא תביעה": "Claims Inquiry",
+  "שירות לא מסתיים בהפקה.": "Service does not end at issuance.",
+  "פתיחת פנייה מסודרת עם פרטי האירוע והמסמכים הרלוונטיים.": "Opening an orderly inquiry with event details and relevant documents.",
+  "לדיווח תביעה": "Report a Claim",
+  "בקשות שירות, אישורים, מסמכים והכוונה לאחר הפקת הפוליסה.": "Service requests, certificates, documents and guidance after policy issuance.",
+  "פנייה לשירות": "Service Inquiry",
+  "מה כדאי לצרף לפנייה?": "What Should Be Attached to an Inquiry?",
+  "מידע מלא מסייע לקדם טיפול מסודר מול הגורמים הרלוונטיים.": "Complete information helps promote orderly handling with the relevant parties.",
+  "מספר פוליסה או פרטי מבוטח": "Policy Number or Insured Details",
+  "תיאור האירוע והמועד": "Description and Date of the Event",
+  "מסמכים, תמונות או התכתבויות רלוונטיות": "Relevant Documents, Photos or Correspondence",
+  "פרטי סוכן הביטוח אם קיים": "Insurance Agent Details, if Applicable",
+  "פרטי התקשרות להמשך טיפול": "Contact Details for Follow-Up",
+  "איך אפשר לעזור?": "How Can We Help?",
+  "בחרו את הפעולה המתאימה, וצוות קופר נינוה ינתב את הפנייה לגורם הרלוונטי.": "Choose the relevant action, and the Cooper Ninve team will route the inquiry to the appropriate party.",
+  "לדבר עם חתם": "Speak with an Underwriter",
+  "שיחה מקצועית על סיכון, מידע חסר או התאמה ראשונית.": "A professional conversation about a risk, missing information or initial suitability.",
+  "פתיחת פנייה": "Open an Inquiry",
+  "סוכני ביטוח יכולים להעביר פרטי סיכון לבדיקה חיתומית.": "Insurance agents can submit risk details for underwriting review.",
+  "הגשת סיכון": "Submit a Risk",
+  "קבלת הצעה לעסק": "Get a Business Quote",
+  "בדיקת התאמה לעסק, חברה או בעל מקצוע.": "Suitability review for a business, company or professional.",
+  "בדיקה לעסק": "Business Review",
+  "פתיחת פנייה בנושא תביעה או אירוע ביטוחי.": "Opening an inquiry regarding a claim or insurance event.",
+  "בקשות שירות, אישורים, מסמכים ושאלות לאחר הפקה.": "Service requests, certificates, documents and questions after issuance.",
+  "למי זה מתאים?": "Who Is It For?",
+  "מתאים לבדיקה חיתומית בהתאם לאופי הפעילות, היקף הסיכון ותנאי הפוליסה.": "Suitable for underwriting review according to the nature of the activity, risk scope and policy terms.",
+  "מה הכיסוי יכול לכלול?": "What Can the Coverage Include?",
+  "הכיסוי המדויק כפוף לתנאי הפוליסה, אישור חיתום, גבולות אחריות, חריגים, השתתפויות עצמיות והפעילות הספציפית.": "The exact coverage is subject to the policy terms, underwriting approval, limits of liability, exclusions, deductibles and the specific activity.",
+  "איזה מידע נדרש לקבלת הצעה?": "What Information Is Required to Receive a Quote?",
+  "מידע מלא וברור מאפשר בדיקת התאמה יעילה יותר.": "Complete and clear information enables a more efficient suitability review.",
+  "שלחו פרטים לבדיקה ראשונית": "Send Details for an Initial Review",
+  "פתרון מתאים גם לסוכני ביטוח": "A Solution Also Suitable for Insurance Agents",
+  "סוכנים יכולים להגיש סיכונים, לקבל הכוונה לגבי מידע חסר וללוות את הלקוח בתהליך ההצעה וההפקה.": "Agents can submit risks, receive guidance regarding missing information and accompany the client through the quote and issuance process.",
+  "הגשת סיכון על ידי סוכן": "Risk Submission by an Agent",
+  "שאלות נפוצות": "Frequently Asked Questions",
+  "רוצים לבדוק התאמה?": "Want to Check Suitability?",
+  "השאירו פרטים וצוות קופר נינוה יחזור אליכם לבדיקת התאמה ראשונית.": "Leave your details and the Cooper Ninve team will get back to you for an initial suitability review.",
+  "קרא עוד": "Read More",
+};
+
+Object.assign(enText, {
+  "אחריות מקצועית": "Professional Liability",
+  "הגנה מפני תביעות הנובעות מטעות מקצועית, רשלנות, ייעוץ שגוי או מחדל במסגרת מתן שירות מקצועי.": "Protection against claims arising from a professional error, negligence, incorrect advice or omission in the provision of professional services.",
+  "כיסוי לאירועי סייבר, מתקפות כופר, דליפות מידע, השבתת פעילות, הוצאות שחזור ותביעות צד שלישי.": "Coverage for cyber incidents, ransomware attacks, data leaks, business interruption, recovery costs and third-party claims.",
+  "צד שלישי": "Third Party",
+  "כיסוי לעסקים מפני תביעות צד שלישי בגין נזקי גוף, רכוש או אחריות הנובעת מהפעילות העסקית.": "Coverage for businesses against third-party claims for bodily injury, property damage or liability arising from business activity.",
+  "חבות מעבידים": "Employers Liability",
+  "פתרונות לחבות מעבידים והגנה מפני תביעות עובדים, בכפוף לתנאי הפוליסה ואישור חיתום.": "Employers liability solutions and protection against employee claims, subject to policy terms and underwriting approval.",
+  "חבות המוצר": "Product Liability",
+  "כיסוי ליצרנים, יבואנים ומשווקים החשופים לתביעות הנובעות ממוצר, פגם או נזק לצד שלישי.": "Coverage for manufacturers, importers and marketers exposed to claims arising from a product, defect or third-party damage.",
+  "פתרונות ביטוח לפרויקטים, קבלנים, יזמים ועבודות תשתית, כולל רכוש, צד שלישי וחבות מעבידים.": "Insurance solutions for projects, contractors, developers and infrastructure works, including property, third party and employers liability.",
+  "פתרונות לרופאים, מטפלים, מרפאות וגורמים רפואיים החשופים לתביעות בגין רשלנות מקצועית.": "Solutions for physicians, therapists, clinics and medical providers exposed to claims for professional negligence.",
+  "דירקטורים ונושאי משרה": "Directors and Officers",
+  "פתרונות אחריות נושאי משרה לחברות, הנהלות ודירקטוריונים מול חשיפות ניהוליות ומשפטיות.": "Directors and officers liability solutions for companies, management teams and boards facing managerial and legal exposures.",
+  "הפקות מדיה וסרטים": "Media and Film Productions",
+  "מענה ביטוחי להפקות, צוותים, ציוד, לוקיישנים ופעילות מדיה הדורשת התאמה חיתומית.": "Insurance response for productions, crews, equipment, locations and media activity requiring underwriting adaptation.",
+  "סיכונים מיוחדים": "Special Risks",
+  "בדיקת פתרונות לסיכונים מורכבים, חריגים או לא סטנדרטיים שאינם נכנסים לתבנית רגילה.": "Review of solutions for complex, unusual or non-standard risks that do not fit a regular template.",
+});
+
+Object.assign(enText, {
+  "קודם כל יושרה.": "First of all, integrity.",
+  "קופר נינוה,": "Cooper Ninve,",
+  "מרכז חיתום הבנוי לעתיד.": "an underwriting center built for the future.",
+  "פתרונות לסוכני ביטוח": "Solutions for Insurance Agents",
+  "סוכני ביטוח": "Insurance Agents",
+  "קופר נינוה היא": "Cooper Ninve is an",
+  "ביטוח אחריות מקצועית לעסקים, יועצים ובעלי מקצוע": "Professional Liability Insurance for Businesses, Consultants and Professionals",
+  "הגנה מפני תביעות הנובעות מטעות מקצועית, רשלנות, מחדל, ייעוץ שגוי או נזק כספי שנגרם לצד שלישי במסגרת השירות המקצועי.": "Protection against claims arising from a professional error, negligence, omission, incorrect advice or financial loss caused to a third party in the course of professional services.",
+  "לקבלת הצעה לביטוח אחריות מקצועית": "Get a Professional Liability Insurance Quote",
+  "התייעצות עם צוות החיתום": "Consult with the Underwriting Team",
+  "יועצים ונותני שירותים": "Consultants and Service Providers",
+  "מהנדסים ואדריכלים": "Engineers and Architects",
+  "חברות שירותים": "Service Companies",
+  "מקצועות טיפוליים ובריאותיים": "Therapeutic and Healthcare Professions",
+  "חברות טכנולוגיה ושירותים דיגיטליים": "Technology and Digital Services Companies",
+  "תביעות בגין רשלנות מקצועית": "Professional Negligence Claims",
+  "טעות או מחדל במסגרת השירות": "Error or Omission in the Service",
+  "ייעוץ שגוי או המלצה מקצועית שגרמה לנזק": "Incorrect Advice or Professional Recommendation That Caused Damage",
+  "נזק כספי ללקוח או לצד שלישי": "Financial Loss to a Client or Third Party",
+  "הוצאות משפט והגנה משפטית": "Legal Expenses and Legal Defense",
+  "תחום פעילות מדויק": "Exact Field of Activity",
+  "תיאור השירותים": "Description of Services",
+  "מחזור הכנסות שנתי": "Annual Revenue",
+  "גבול אחריות מבוקש": "Requested Limit of Liability",
+  "ניסיון תביעות קודם": "Prior Claims Experience",
+  "חוזים או דרישות ביטוח מיוחדות": "Contracts or Special Insurance Requirements",
+  "מה זה ביטוח אחריות מקצועית?": "What Is Professional Liability Insurance?",
+  "ביטוח אחריות מקצועית נועד להגן על בעל מקצוע או עסק מפני תביעות הנובעות מטעות מקצועית, רשלנות, מחדל או ייעוץ שגוי במסגרת מתן שירות מקצועי.": "Professional liability insurance is intended to protect a professional or business against claims arising from a professional error, negligence, omission or incorrect advice in the provision of professional services.",
+  "מה ההבדל בין אחריות מקצועית לצד שלישי?": "What Is the Difference Between Professional Liability and Third Party?",
+  "ביטוח צד שלישי מתייחס לרוב לנזקי גוף או רכוש, בעוד שביטוח אחריות מקצועית מתייחס לנזק שנגרם כתוצאה מטעות מקצועית או שירות מקצועי לקוי.": "Third-party insurance usually relates to bodily injury or property damage, while professional liability insurance relates to damage caused by a professional error or deficient professional service.",
+  "האם סוכן ביטוח יכול להגיש בקשה עבור לקוח?": "Can an Insurance Agent Submit a Request for a Client?",
+  "כן. סוכני ביטוח יכולים להעביר מידע על הסיכון לצורך בדיקת התאמה וקבלת הצעה.": "Yes. Insurance agents can send information about the risk for suitability review and quote preparation.",
+  "ביטוח סייבר לעסקים, חברות וארגונים": "Cyber Insurance for Businesses, Companies and Organizations",
+  "הגנה ביטוחית לעסקים וחברות מפני אירועי אבטחת מידע, מתקפות כופר, דליפות מידע, השבתת פעילות, פגיעה במערכות מידע ותביעות צד שלישי.": "Insurance protection for businesses and companies against information security incidents, ransomware attacks, data leaks, business interruption, damage to information systems and third-party claims.",
+  "לקבלת הצעה לביטוח סייבר": "Get a Cyber Insurance Quote",
+  "בדיקת התאמה ראשונית": "Initial Suitability Review",
+  "חברות טכנולוגיה": "Technology Companies",
+  "עסקים המחזיקים מידע אישי": "Businesses Holding Personal Data",
+  "חנויות אונליין ועסקים דיגיטליים": "Online Stores and Digital Businesses",
+  "משרדי שירותים מקצועיים": "Professional Services Firms",
+  "ארגונים עם תלות במערכות מידע": "Organizations Dependent on Information Systems",
+  "תגובה ראשונית לאירוע סייבר": "Initial Response to a Cyber Incident",
+  "הוצאות מומחי סייבר ו-IT": "Cyber and IT Expert Costs",
+  "שחזור מידע ומערכות": "Data and Systems Recovery",
+  "אירועי כופר וסחיטה דיגיטלית": "Ransomware and Digital Extortion Events",
+  "דליפת מידע ופגיעה בפרטיות": "Data Leakage and Privacy Breach",
+  "תביעות צד שלישי": "Third-Party Claims",
+  "סוגי מידע שהעסק מחזיק": "Types of Data Held by the Business",
+  "פעילות אונליין או סליקה": "Online Activity or Payment Processing",
+  "גיבויים ו-MFA": "Backups and MFA",
+  "ניסיון אירועי סייבר בעבר": "Prior Cyber Incident Experience",
+  "מה זה ביטוח סייבר?": "What Is Cyber Insurance?",
+  "ביטוח סייבר נועד לספק הגנה ביטוחית מפני אירועי אבטחת מידע, מתקפות כופר, דליפות מידע, השבתת מערכות ותביעות צד שלישי.": "Cyber insurance is intended to provide insurance protection against information security incidents, ransomware attacks, data leaks, system outages and third-party claims.",
+  "האם ביטוח סייבר מתאים גם לעסק קטן?": "Is Cyber Insurance Suitable for a Small Business Too?",
+  "כן. גם עסקים קטנים עלולים להיות חשופים לאירועי סייבר, במיוחד אם הם מחזיקים מידע או תלויים במערכות דיגיטליות.": "Yes. Small businesses may also be exposed to cyber incidents, especially if they hold data or depend on digital systems.",
+  "האם צריך למלא שאלון סייבר?": "Is a Cyber Questionnaire Required?",
+  "ברוב המקרים כן. שאלון סייבר מסייע להבין את רמת החשיפה, בקרות אבטחת המידע והסיכון העסקי.": "In most cases, yes. A cyber questionnaire helps understand the exposure level, information security controls and business risk.",
+});
+
+Object.assign(enText, {
+  "ביטוח עבודות קבלניות לקבלנים, יזמים ופרויקטים": "Contractors All Risks Insurance for Contractors, Developers and Projects",
+  "הגנה ביטוחית לפרויקטים בתחום הבנייה, השיפוצים והתשתיות, לרבות נזקים לעבודות, חומרים, צד שלישי, חבות מעבידים וסיכונים נוספים.": "Insurance protection for construction, renovation and infrastructure projects, including damage to the works, materials, third party, employers liability and additional risks.",
+  "לקבלת הצעה לביטוח עבודות קבלניות": "Get a Contractors All Risks Insurance Quote",
+  "בדיקת התאמה לפרויקט": "Project Suitability Review",
+  "קבלנים": "Contractors",
+  "יזמים ובעלי פרויקטים": "Developers and Project Owners",
+  "עבודות שיפוץ והתאמה": "Renovation and Fit-Out Works",
+  "עבודות תשתית": "Infrastructure Works",
+  "נזק לעבודות הפרויקט": "Damage to Project Works",
+  "נזק לחומרים באתר": "Damage to Materials on Site",
+  "אחריות כלפי צד שלישי": "Liability Toward Third Parties",
+  "תקופת תחזוקה אם אושרה": "Maintenance Period if Approved",
+  "הרחבות לפי צורכי הפרויקט": "Extensions According to Project Needs",
+  "תיאור הפרויקט": "Project Description",
+  "מיקום ושווי העבודות": "Location and Value of the Works",
+  "תקופת ביצוע": "Execution Period",
+  "סוג העבודות": "Type of Works",
+  "קבלני משנה": "Subcontractors",
+  "חוזה עבודה או כתב כמויות": "Work Contract or Bill of Quantities",
+  "מה זה ביטוח עבודות קבלניות?": "What Is Contractors All Risks Insurance?",
+  "ביטוח עבודות קבלניות מיועד להגן על פרויקטים בתחום הבנייה, השיפוצים והתשתיות מפני נזקים לעבודות, חשיפות צד שלישי וסיכונים נוספים.": "Contractors all risks insurance is intended to protect construction, renovation and infrastructure projects against damage to works, third-party exposures and additional risks.",
+  "האם הביטוח כולל צד שלישי?": "Does the Insurance Include Third Party?",
+  "ביטוח עבודות קבלניות עשוי לכלול פרק צד שלישי, בכפוף לתנאי הפוליסה, גבולות האחריות, החריגים ואישורי החיתום.": "Contractors all risks insurance may include a third-party section, subject to policy terms, limits of liability, exclusions and underwriting approvals.",
+  "האם ניתן לבטח פרויקט שכבר התחיל?": "Can a Project That Has Already Started Be Insured?",
+  "האפשרות תלויה בנסיבות, בשלב הפרויקט, בהיעדר נזקים ידועים ובאישור החיתום.": "The option depends on the circumstances, project stage, absence of known damage and underwriting approval.",
+  "ביטוח רשלנות רפואית ואחריות מקצועית רפואית": "Medical Malpractice and Medical Professional Liability Insurance",
+  "פתרונות ביטוח לרופאים, מרפאות, מטפלים ואנשי מקצוע בתחום הבריאות החשופים לתביעות בגין טעות מקצועית, טיפול לקוי, אבחון שגוי או מחדל.": "Insurance solutions for physicians, clinics, therapists and healthcare professionals exposed to claims for professional error, deficient treatment, incorrect diagnosis or omission.",
+  "לקבלת הצעה לביטוח רשלנות רפואית": "Get a Medical Malpractice Insurance Quote",
+  "רופאים": "Physicians",
+  "מרפאות וקליניקות": "Clinics and Practices",
+  "מטפלים": "Therapists",
+  "מקצועות פרא-רפואיים": "Paramedical Professions",
+  "תחומי רפואה משלימה בכפוף לחיתום": "Complementary Medicine Fields Subject to Underwriting",
+  "תביעות בגין טעות מקצועית": "Claims for Professional Error",
+  "אבחון שגוי או טיפול לקוי": "Incorrect Diagnosis or Deficient Treatment",
+  "הוצאות הגנה משפטית": "Legal Defense Costs",
+  "אחריות מקצועית רפואית": "Medical Professional Liability",
+  "כיסוי לפי תחום עיסוק ותנאי חיתום": "Coverage According to Practice Area and Underwriting Terms",
+  "תחום עיסוק והתמחות": "Occupation and Specialty",
+  "רישיון או הכשרה": "License or Training",
+  "סוג טיפולים": "Types of Treatments",
+  "מחזור ומספר מטופלים": "Revenue and Number of Patients",
+  "גבול אחריות": "Limit of Liability",
+  "ניסיון תביעות": "Claims Experience",
+  "מה זה ביטוח רשלנות רפואית?": "What Is Medical Malpractice Insurance?",
+  "ביטוח רשלנות רפואית נועד להגן על רופאים, מטפלים ומרפאות מפני תביעות הנובעות מטעות מקצועית, טיפול לקוי או מחדל.": "Medical malpractice insurance is intended to protect physicians, therapists and clinics against claims arising from professional error, deficient treatment or omission.",
+  "האם הביטוח מתאים גם למטפלים שאינם רופאים?": "Is the Insurance Also Suitable for Therapists Who Are Not Physicians?",
+  "ניתן לבחון פתרונות גם למקצועות פרא-רפואיים, מטפלים ותחומי רפואה משלימה, בכפוף לחיתום ולסוג הפעילות.": "Solutions can also be reviewed for paramedical professions, therapists and complementary medicine fields, subject to underwriting and type of activity.",
+  "האם נדרש שאלון הצעה?": "Is a Proposal Form Required?",
+  "בדרך כלל כן. השאלון מאפשר להבין את תחום הפעילות, היקף הפעילות, הכשרה מקצועית וניסיון תביעות.": "Usually yes. The questionnaire makes it possible to understand the field of activity, scope of activity, professional training and claims experience.",
+  "ביטוח צד שלישי וחבויות לעסקים": "Third-Party Liability and Liability Insurance for Businesses",
+  "הגנה על עסקים, חברות ונותני שירותים מפני תביעות הנובעות מנזקי גוף, נזקי רכוש או אחריות כלפי צדדים שלישיים במסגרת הפעילות העסקית.": "Protection for businesses, companies and service providers against claims arising from bodily injury, property damage or liability toward third parties in the course of business activity.",
+  "לקבלת הצעה לביטוח חבויות": "Get a Liability Insurance Quote",
+  "עסקים ונותני שירותים": "Businesses and Service Providers",
+  "חברות ומשרדים": "Companies and Offices",
+  "קבלנים וספקים": "Contractors and Suppliers",
+  "פעילות מסחרית מול קהל": "Commercial Activity with the Public",
+  "תביעות בגין נזק גוף לצד שלישי": "Claims for Third-Party Bodily Injury",
+  "תביעות בגין נזק רכוש": "Claims for Property Damage",
+  "אחריות הנובעת מפעילות העסק": "Liability Arising from Business Activity",
+  "הוצאות משפט": "Legal Expenses",
+  "חבות מעבידים אם נכללת": "Employers Liability if Included",
+  "דרישות ביטוח חוזיות": "Contractual Insurance Requirements",
+  "תיאור הפעילות העסקית": "Description of Business Activity",
+  "כתובת או אזורי פעילות": "Address or Areas of Activity",
+  "מחזור הכנסות": "Revenue",
+  "קבלת קהל או עבודה באתרי לקוחות": "Public Reception or Work at Client Sites",
+  "מה זה ביטוח צד שלישי לעסק?": "What Is Third-Party Insurance for a Business?",
+  "ביטוח צד שלישי לעסק נועד להגן על העסק מפני תביעות של צדדים שלישיים בגין נזקי גוף או רכוש שנגרמו במסגרת הפעילות העסקית.": "Third-party insurance for a business is intended to protect the business against third-party claims for bodily injury or property damage caused in the course of business activity.",
+  "האם חבות מעבידים נכללת?": "Is Employers Liability Included?",
+  "לא תמיד. חבות מעבידים יכולה להיכלל או להירכש ככיסוי נפרד, בהתאם למבנה הפוליסה ואישור החיתום.": "Not always. Employers liability may be included or purchased as separate coverage, depending on the policy structure and underwriting approval.",
+  "האם ניתן להתאים את גבול האחריות לדרישות חוזה?": "Can the Limit of Liability Be Adapted to Contract Requirements?",
+  "כן. ניתן לבחון גבולות אחריות בהתאם לדרישות חוזיות, אופי הפעילות, רמת הסיכון ואישור החיתום.": "Yes. Limits of liability can be reviewed according to contractual requirements, the nature of the activity, risk level and underwriting approval.",
+});
+
+Object.assign(enText, {
+  "ביטוח חבות מעבידים": "Employers Liability Insurance",
+  "פתרונות ביטוח לחבות מעבידים עבור עסקים, חברות וקבלנים החשופים לתביעות עובדים, תאונות עבודה ונזקי גוף במסגרת העבודה.": "Employers liability insurance solutions for businesses, companies and contractors exposed to employee claims, workplace accidents and bodily injury in the course of work.",
+  "לקבלת הצעה לחבות מעבידים": "Get an Employers Liability Quote",
+  "עסקים עם עובדים": "Businesses with Employees",
+  "פעילות באתרי לקוחות": "Activity at Client Sites",
+  "תביעות עובדים בגין נזק גוף": "Employee Bodily Injury Claims",
+  "חשיפות הנובעות מתאונות עבודה": "Exposures Arising from Workplace Accidents",
+  "דרישות חוזיות לחבות מעבידים": "Contractual Requirements for Employers Liability",
+  "התאמת גבולות אחריות לפי צורך": "Adapting Limits of Liability as Needed",
+  "מספר עובדים": "Number of Employees",
+  "אופי העבודה": "Nature of the Work",
+  "דרישות חוזיות": "Contractual Requirements",
+  "למי מתאים ביטוח חבות מעבידים?": "Who Is Employers Liability Insurance Suitable For?",
+  "לעסקים וחברות המעסיקים עובדים או נדרשים להציג כיסוי חבות מעבידים במסגרת פעילותם.": "For businesses and companies that employ workers or are required to present employers liability coverage as part of their activity.",
+  "האם הכיסוי אוטומטי?": "Is the Coverage Automatic?",
+  "לא. הכיסוי כפוף לתנאי הפוליסה, גבולות האחריות, החריגים ואישור החיתום.": "No. Coverage is subject to the policy terms, limits of liability, exclusions and underwriting approval.",
+  "האם סוכן יכול להגיש בקשה?": "Can an Agent Submit a Request?",
+  "כן. סוכני ביטוח יכולים להעביר פרטי סיכון לבדיקה חיתומית.": "Yes. Insurance agents can send risk details for underwriting review.",
+  "ביטוח חבות המוצר": "Product Liability Insurance",
+  "כיסוי ליצרנים, יבואנים, משווקים וחברות החשופים לתביעות צד שלישי הנובעות ממוצר, פגם, שימוש או נזק שנגרם בעקבות מוצר.": "Coverage for manufacturers, importers, marketers and companies exposed to third-party claims arising from a product, defect, use or damage caused by a product.",
+  "לקבלת הצעה לחבות המוצר": "Get a Product Liability Quote",
+  "יצרנים": "Manufacturers",
+  "יבואנים": "Importers",
+  "משווקים": "Marketers",
+  "חברות טכנולוגיה וחומרה": "Technology and Hardware Companies",
+  "עסקים עם מוצרים פיזיים": "Businesses with Physical Products",
+  "תביעות צד שלישי בגין מוצר": "Third-Party Product Claims",
+  "נזק גוף או רכוש": "Bodily Injury or Property Damage",
+  "חשיפות יבוא ושיווק": "Import and Marketing Exposures",
+  "הוצאות משפט והגנה": "Legal Expenses and Defense",
+  "סוג המוצר": "Product Type",
+  "מדינות ייצור ושיווק": "Countries of Manufacture and Marketing",
+  "מחזור מכירות": "Sales Turnover",
+  "תקני איכות": "Quality Standards",
+  "מה זה ביטוח חבות מוצר?": "What Is Product Liability Insurance?",
+  "ביטוח חבות מוצר נועד להגן מפני תביעות צד שלישי הנובעות ממוצר או שימוש בו.": "Product liability insurance is intended to protect against third-party claims arising from a product or its use.",
+  "האם הכיסוי מתאים גם ליבואנים?": "Is the Coverage Also Suitable for Importers?",
+  "ניתן לבחון פתרונות ליבואנים ומשווקים בהתאם לסוג המוצר, מדינות הפעילות ואישור חיתום.": "Solutions for importers and marketers can be reviewed according to product type, countries of activity and underwriting approval.",
+  "איזה מידע נדרש?": "What Information Is Required?",
+  "בדרך כלל נדרש מידע על המוצר, מחזור המכירות, אזורי פעילות, תקנים וניסיון תביעות.": "Usually, information is required about the product, sales turnover, activity areas, standards and claims experience.",
+  "ביטוח דירקטורים ונושאי משרה": "Directors and Officers Insurance",
+  "פתרונות אחריות נושאי משרה לחברות, הנהלות ודירקטוריונים מול חשיפות ניהוליות, משפטיות ורגולטוריות.": "Directors and officers liability solutions for companies, management teams and boards facing managerial, legal and regulatory exposures.",
+  "לקבלת הצעה ל-D&O": "Get a D&O Quote",
+  "בדיקת התאמה לחברה": "Company Suitability Review",
+  "חברות פרטיות": "Private Companies",
+  "חברות בצמיחה": "Growth Companies",
+  "דירקטוריונים": "Boards of Directors",
+  "נושאי משרה": "Officers",
+  "תביעות נגד נושאי משרה": "Claims Against Officers",
+  "חשיפות ניהוליות": "Managerial Exposures",
+  "דרישות משקיעים או חוזים": "Investor or Contract Requirements",
+  "כיסוי לפי תנאי פוליסה": "Coverage According to Policy Terms",
+  "מבנה החברה": "Company Structure",
+  "מספר נושאי משרה": "Number of Officers",
+  "דרישות מיוחדות": "Special Requirements",
+  "מהו ביטוח דירקטורים ונושאי משרה?": "What Is Directors and Officers Insurance?",
+  "כיסוי שנועד להגן על נושאי משרה מפני תביעות הקשורות להחלטות וניהול החברה.": "Coverage intended to protect officers against claims related to company decisions and management.",
+  "האם הכיסוי מתאים לחברה פרטית?": "Is the Coverage Suitable for a Private Company?",
+  "כן, ניתן לבחון פתרונות גם לחברות פרטיות בהתאם לפעילות, מבנה החברה ואישור החיתום.": "Yes, solutions can also be reviewed for private companies according to activity, company structure and underwriting approval.",
+  "האם נדרש מידע פיננסי?": "Is Financial Information Required?",
+  "ברוב המקרים נדרש מידע בסיסי על החברה, פעילותה, מבנה הבעלות והיקף הפעילות.": "In most cases, basic information is required about the company, its activity, ownership structure and scope of activity.",
+  "ביטוח הפקות מדיה וסרטים": "Media and Film Production Insurance",
+  "מענה ביטוחי להפקות, צוותי צילום, ציוד, לוקיישנים ופעילות מדיה הדורשת התאמה חיתומית לפי אופי ההפקה.": "Insurance response for productions, film crews, equipment, locations and media activity requiring underwriting adaptation according to the nature of the production.",
+  "לקבלת הצעה להפקה": "Get a Production Quote",
+  "בדיקת התאמה להפקה": "Production Suitability Review",
+  "חברות הפקה": "Production Companies",
+  "מפיקים": "Producers",
+  "צוותי צילום": "Film Crews",
+  "הפקות מסחריות": "Commercial Productions",
+  "ציוד הפקה": "Production Equipment",
+  "לוקיישנים": "Locations",
+  "צוותים וספקים": "Crews and Suppliers",
+  "סוג ההפקה": "Production Type",
+  "מועדי צילום": "Shooting Dates",
+  "ציוד ושווי משוער": "Equipment and Estimated Value",
+  "מספר אנשי צוות": "Number of Crew Members",
+  "למי מתאים ביטוח הפקות?": "Who Is Production Insurance Suitable For?",
+  "לחברות הפקה, מפיקים וצוותים הזקוקים לכיסוי מותאם לפעילות צילום או מדיה.": "For production companies, producers and crews that need coverage adapted to filming or media activity.",
+  "האם אפשר לבטח הפקה קצרה?": "Can a Short Production Be Insured?",
+  "ניתן לבחון פתרונות בהתאם למשך ההפקה, המיקום, הציוד והסיכונים המעורבים.": "Solutions can be reviewed according to production duration, location, equipment and the risks involved.",
+  "איזה מידע כדאי לשלוח?": "What Information Should Be Sent?",
+  "מומלץ לשלוח תיאור הפקה, מועדים, לוקיישנים, ציוד, צוות ודרישות חוזיות.": "It is recommended to send a production description, dates, locations, equipment, crew and contractual requirements.",
+  "ביטוח סיכונים מיוחדים": "Special Risks Insurance",
+  "בדיקת פתרונות לסיכונים מורכבים, חריגים או לא סטנדרטיים שאינם נכנסים לתבנית ביטוח רגילה.": "Review of solutions for complex, unusual or non-standard risks that do not fit a regular insurance template.",
+  "בדיקת סיכון מיוחד": "Special Risk Review",
+  "סיכונים לא סטנדרטיים": "Non-Standard Risks",
+  "עסקים עם דרישות מיוחדות": "Businesses with Special Requirements",
+  "חברות עם חשיפות ייחודיות": "Companies with Unique Exposures",
+  "בדיקת התאמה חיתומית": "Underwriting Suitability Review",
+  "פתרונות לפי אופי הסיכון": "Solutions According to Risk Characteristics",
+  "דרישות חוזיות מיוחדות": "Special Contractual Requirements",
+  "גישה לשווקים רלוונטיים": "Access to Relevant Markets",
+  "ליווי בהשלמת מידע": "Support in Completing Information",
+  "תיאור הסיכון": "Risk Description",
+  "דרישות ביטוח": "Insurance Requirements",
+  "מסמכים תומכים": "Supporting Documents",
+  "לוחות זמנים": "Timelines",
+  "מה נחשב סיכון מיוחד?": "What Is Considered a Special Risk?",
+  "סיכון שאינו נכנס בקלות למוצר ביטוח רגיל או דורש בדיקה חיתומית מותאמת.": "A risk that does not easily fit a standard insurance product or requires a tailored underwriting review.",
+  "האם ניתן להבטיח פתרון?": "Can a Solution Be Guaranteed?",
+  "לא. כל פתרון כפוף לאפשרויות השוק, חיתום, תנאי פוליסה ואישור מתאים.": "No. Every solution is subject to market availability, underwriting, policy terms and appropriate approval.",
+  "איך מתחילים?": "How Do You Start?",
+  "מעבירים תיאור ברור של הסיכון, דרישות הביטוח וכל מסמך רלוונטי לבדיקה ראשונית.": "Send a clear description of the risk, insurance requirements and any relevant document for initial review.",
+});
+
+Object.assign(enText, {
+  "יהושע נתן": "Yehoshua Natan",
+  "יו״ר": "Chairman",
+  "מוביל את פעילות החברה והחזון האסטרטגי של קופר נינוה.": "Leads the company's activity and Cooper Ninve's strategic vision.",
+  "נינה קודנר": "Nina Kodner",
+  "חתמת ראשית": "Chief Underwriter",
+  "מובילה את תחום החיתום המקצועי והמסחרי של החברה.": "Leads the company's professional and commercial underwriting activity.",
+  "פריסילה יוסף": "Priscilla Yosef",
+  "סמנכ״לית תפעול": "VP Operations",
+  "אחראית על ניהול תהליכי תפעול, שירות וממשקי עבודה בחברה.": "Responsible for managing operations, service and work interfaces in the company.",
+  "אילן זיו": "Ilan Ziv",
+  "מנכ״ל": "CEO",
+  "מוביל את ניהול החברה, פיתוח עסקי וקשרי שוק.": "Leads company management, business development and market relationships.",
+  "נטע אילני": "Neta Ilani",
+  "יועצת משפטית": "Legal Counsel",
+  "אחראית על היבטים משפטיים, רגולציה וליווי מקצועי.": "Responsible for legal aspects, regulation and professional guidance.",
+  "אורי קליין": "Uri Klein",
+  "מנמ\"ר": "CIO",
+  "מנמ": "CIO",
+  "מוביל את מערכות העסק.": "Leads the business systems.",
+  "אבישי פרץ": "Avishai Peretz",
+  "סמנכ״ל כספים": "CFO",
+  "אחראי על תחום הכספים, בקרה, גבייה ותהליכים פיננסיים.": "Responsible for finance, control, collection and financial processes.",
+  "ליעד לק": "Liad Lek",
+  "חתם חבויות ראשי": "Chief Liability Underwriter",
+  "עוסק בחיתום, בדיקת סיכונים וליווי מקצועי של תיקי ביטוח.": "Handles underwriting, risk review and professional support for insurance portfolios.",
+});
+
 const app = document.querySelector("[data-app]");
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const mainNav = document.querySelector("[data-main-nav]");
@@ -328,34 +948,218 @@ document.addEventListener("click", (event) => {
 });
 
 function pathFromLocation() {
-  return pages[location.pathname] ? location.pathname : "/";
+  const { basePath } = routeState();
+  return pages[basePath] ? basePath : "/";
 }
 
 function link(url) {
-  return url;
+  if (!isEnglish() || !url || !url.startsWith("/") || url.startsWith("//")) return url;
+  if (url === "/") return englishPrefix;
+  if (url.startsWith(`${englishPrefix}/`) || url === englishPrefix) return url;
+  return `${englishPrefix}${url}`;
 }
 
-function setMeta(page) {
-  document.title = page.title;
+function setMeta(page, path) {
+  const meta = isEnglish() ? englishMeta[path] : null;
+  document.title = meta?.title || page.title;
   const description = document.querySelector('meta[name="description"]');
-  if (description) description.setAttribute("content", page.description || page.lead || "");
+  if (description) description.setAttribute("content", meta?.description || page.description || page.lead || "");
+  document.documentElement.lang = isEnglish() ? "en" : "he";
+  document.documentElement.dir = isEnglish() ? "ltr" : "rtl";
+  setAlternateLinks(path);
 }
 
 function render() {
   const path = pathFromLocation();
   const page = pages[path] || pages["/"];
-  setMeta(page);
+  setMeta(page, path);
+  renderChrome(path);
   document.body.classList.toggle("lp", path.startsWith("/lp/"));
+  document.body.classList.toggle("lang-en", isEnglish());
+  document.body.classList.toggle("lang-he", !isEnglish());
   document.querySelectorAll(".main-nav a").forEach((a) => {
-    a.classList.toggle("active", a.getAttribute("href") === path);
+    a.classList.toggle("active", normalizeRoute(a.getAttribute("href")) === path);
   });
   mainNav.classList.remove("open");
   menuToggle.setAttribute("aria-expanded", "false");
   app.innerHTML = path.startsWith("/lp/") ? landingTemplate(page) : standardTemplate(page, path);
+  if (isEnglish()) translateApp();
   renderPartnerLogos();
   bindForms();
   initAnimations();
   window.scrollTo({ top: 0, behavior: "instant" });
+}
+
+function routeState() {
+  const pathname = location.pathname.replace(/\/$/, "") || "/";
+  const english = pathname === englishPrefix || pathname.startsWith(`${englishPrefix}/`);
+  const withoutPrefix = english ? pathname.slice(englishPrefix.length) || "/" : pathname;
+  return { english, basePath: withoutPrefix || "/" };
+}
+
+function isEnglish() {
+  return routeState().english;
+}
+
+function normalizeRoute(url) {
+  if (!url) return "/";
+  if (url === englishPrefix) return "/";
+  return url.startsWith(`${englishPrefix}/`) ? url.slice(englishPrefix.length) : url;
+}
+
+function translate(value) {
+  if (!isEnglish()) return value;
+  return enText[value] || value;
+}
+
+function translatedUrl(path, toEnglish) {
+  const normalized = normalizeRoute(path);
+  if (toEnglish) return normalized === "/" ? englishPrefix : `${englishPrefix}${normalized}`;
+  return normalized;
+}
+
+function matchingLanguagePath(path, toEnglish) {
+  const normalized = normalizeRoute(path);
+  return pages[normalized] ? translatedUrl(normalized, toEnglish) : (toEnglish ? englishPrefix : "/");
+}
+
+function setAlternateLinks(path) {
+  document.querySelectorAll("link[data-hreflang]").forEach((linkEl) => linkEl.remove());
+  const canonical = document.createElement("link");
+  canonical.rel = "alternate";
+  canonical.hreflang = "he";
+  canonical.href = location.origin + matchingLanguagePath(path, false);
+  canonical.dataset.hreflang = "true";
+  const english = document.createElement("link");
+  english.rel = "alternate";
+  english.hreflang = "en";
+  english.href = location.origin + matchingLanguagePath(path, true);
+  english.dataset.hreflang = "true";
+  document.head.append(canonical, english);
+}
+
+function renderChrome(path) {
+  const english = isEnglish();
+  const navItems = [
+    ["/", english ? "Home" : "דף הבית"],
+    ["/insurance-agents", english ? "For Insurance Agents" : "לסוכני ביטוח"],
+    ["/business-insurance", english ? "For Businesses" : "לעסקים"],
+    ["/insurance-solutions", english ? "Insurance Solutions" : "פתרונות ביטוח"],
+    ["/claims", english ? "Claims" : "תביעות"],
+    ["/knowledge-center", english ? "Knowledge Center" : "מרכז ידע"],
+    ["/about-us", english ? "About" : "אודות"],
+    ["/contact-us", english ? "Contact Us" : "צור קשר"],
+  ];
+  mainNav.setAttribute("aria-label", english ? "Main navigation" : "ניווט ראשי");
+  mainNav.innerHTML = `${navItems.map(([href, label]) => `<a href="${link(href)}">${label}</a>`).join("")}<a class="language-switcher nav-language-switcher" href="${matchingLanguagePath(path, !english)}">${english ? "עברית / HE" : "EN"}</a>`;
+
+  const brand = document.querySelector(".brand");
+  if (brand) {
+    brand.href = link("/");
+    brand.setAttribute("aria-label", english ? "Cooper Ninve - Home" : "קופר נינוה - דף הבית");
+  }
+
+  const skipLink = document.querySelector(".skip-link");
+  if (skipLink) skipLink.textContent = english ? "Skip to content" : "דלג לתוכן";
+
+  const headerActions = document.querySelector(".header-actions");
+  if (headerActions) {
+    headerActions.innerHTML = `
+      <a class="header-cta" href="${link("/contact-us")}" data-track="click_quote_cta">${english ? "Submit a Risk" : "הגשת סיכון"}</a>
+      <a class="header-link" href="${link("/contact-us")}">${english ? "Contact Us" : "צור קשר"}</a>
+      <a class="language-switcher header-language-switcher" href="${matchingLanguagePath(path, !english)}">${english ? "עברית / HE" : "EN"}</a>`;
+  }
+
+  const footer = document.querySelector(".site-footer");
+  if (footer) footer.innerHTML = footerHtml(english);
+
+  const mobileSticky = document.querySelector(".mobile-sticky");
+  if (mobileSticky) {
+    mobileSticky.innerHTML = `<a href="${link("/contact-us")}" data-track="click_quote_cta">${english ? "Get a Quote" : "לקבלת הצעה"}</a><a href="tel:0779965453" data-track="click_phone">${english ? "Call" : "שיחה"}</a>`;
+  }
+}
+
+function footerHtml(english) {
+  const footerGroups = english ? [
+    ["Cooper Ninve", [["About", "/about-us"], ["First of All, Integrity", "/"], ["Knowledge Center", "/knowledge-center"]]],
+    ["Insurance Solutions", [["Professional Liability", "/professional-liability-insurance"], ["Cyber", "/cyber-insurance"], ["Contractors All Risks", "/contractors-all-risks-insurance"], ["Medical Malpractice", "/medical-malpractice-insurance"], ["Liabilities and Third Party", "/liability-insurance"]]],
+    ["For Insurance Agents", [["For Insurance Agents", "/insurance-agents"], ["Submit a Risk for Review", "/contact-us"], ["Underwriting Areas", "/insurance-solutions"]]],
+    ["Service and Claims", [["Claims", "/claims"], ["Service and Documents", "/contact-us"], ["Report a Claim", "/contact-us"]]],
+    ["Knowledge Center", [["Articles and Insights", "/knowledge-center"], ["M.G.A in Insurance", "/knowledge-center"], ["Submitting a Risk for Underwriting", "/knowledge-center"]]],
+    ["Contact", [["Contact Us", "/contact-us"], ["077-9965453", "tel:0779965453"], ["info@cooper-ninve.com", "mailto:info@cooper-ninve.com"]]],
+  ] : [
+    ["קופר נינוה", [["אודות", "/about-us"], ["קודם כל יושרה", "/"], ["מרכז ידע", "/knowledge-center"]]],
+    ["פתרונות ביטוח", [["אחריות מקצועית", "/professional-liability-insurance"], ["סייבר", "/cyber-insurance"], ["עבודות קבלניות", "/contractors-all-risks-insurance"], ["רשלנות רפואית", "/medical-malpractice-insurance"], ["חבויות וצד שלישי", "/liability-insurance"]]],
+    ["לסוכני ביטוח", [["לסוכני ביטוח", "/insurance-agents"], ["הגשת סיכון לבדיקה", "/contact-us"], ["תחומי חיתום", "/insurance-solutions"]]],
+    ["שירות ותביעות", [["תביעות", "/claims"], ["שירות ומסמכים", "/contact-us"], ["דיווח תביעה", "/contact-us"]]],
+    ["מרכז ידע", [["מאמרים ותובנות", "/knowledge-center"], ["M.G.A בביטוח", "/knowledge-center"], ["הגשת סיכון לחיתום", "/knowledge-center"]]],
+    ["יצירת קשר", [["צור קשר", "/contact-us"], ["077-9965453", "tel:0779965453"], ["info@cooper-ninve.com", "mailto:info@cooper-ninve.com"]]],
+  ];
+  const contactText = english ? "Advanced insurance solutions for businesses, insurance agents and complex risks." : "פתרונות ביטוח מתקדמים לעסקים, סוכני ביטוח וסיכונים מורכבים.";
+  const address = english ? "111 Dizengoff St., Tel Aviv" : "רח׳ דיזנגוף 111, תל אביב";
+  const rights = english ? "© 2026 Cooper Ninve. All rights reserved." : "© 2026 Cooper Ninve. כל הזכויות שמורות.";
+  const legal = english ? [["Privacy Policy", "/privacy-policy"], ["Terms of Use", "/terms-of-use"], ["Disclosure", "/disclosure"], ["Public Complaints", "/public-complaints"]] : [["מדיניות פרטיות", "/privacy-policy"], ["תנאי שימוש", "/terms-of-use"], ["גילוי נאות", "/disclosure"], ["תלונות הציבור", "/public-complaints"]];
+  const note = english ? "Insurance coverage is subject to the policy terms, exclusions, limits of liability and underwriting approval." : "הכיסוי הביטוחי כפוף לתנאי הפוליסה, חריגים, גבולות אחריות ואישור חיתום.";
+  return `<div class="footer-main">
+    <div class="container footer-grid footer-grid-wide">
+      <section class="footer-contact">
+        <img src="/assets/logo/cooper-ninve-logo-white.png" alt="Cooper Ninve" width="768" height="283" loading="lazy" decoding="async" />
+        <p class="footer-slogan" lang="en">First of all, integrity.</p>
+        <p>${contactText}</p>
+        <ul>
+          <li><a href="tel:0779965453" data-track="click_phone">077-9965453</a></li>
+          <li><a href="mailto:info@cooper-ninve.com" data-track="click_email">info@cooper-ninve.com</a></li>
+          <li>${address}</li>
+        </ul>
+      </section>
+      ${footerGroups.map(([title, links]) => `<section><h3>${title}</h3>${links.map(([label, href]) => `<a href="${href.startsWith("/") ? link(href) : href}">${label}</a>`).join("")}</section>`).join("")}
+    </div>
+    <div class="container footer-bottom">
+      <p>${rights}</p>
+      <nav class="footer-legal" aria-label="${english ? "Legal links" : "קישורים משפטיים"}">${legal.map(([label, href]) => `<a href="${link(href)}">${label}</a>`).join("")}</nav>
+      <p>${note}</p>
+    </div>
+  </div>`;
+}
+
+function translateApp() {
+  translateTextNodes(app);
+  app.querySelectorAll("input[placeholder], textarea[placeholder]").forEach((field) => {
+    field.placeholder = translate(field.placeholder);
+  });
+  app.querySelectorAll("img[alt]").forEach((image) => {
+    image.alt = translateAlt(image.alt);
+  });
+  app.querySelectorAll("[aria-label]").forEach((element) => {
+    element.setAttribute("aria-label", translate(element.getAttribute("aria-label")));
+  });
+  app.querySelectorAll(".team-fallback").forEach((fallback) => {
+    fallback.textContent = "";
+  });
+  app.querySelectorAll("a[href^='/']").forEach((anchor) => {
+    anchor.href = link(normalizeRoute(anchor.getAttribute("href")));
+  });
+}
+
+function translateAlt(value) {
+  if (enText[value]) return enText[value];
+  if (value.includes(" - ")) {
+    return value.split(" - ").map((part) => translate(part)).join(" - ");
+  }
+  return value;
+}
+
+function translateTextNodes(root) {
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+  const nodes = [];
+  while (walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach((node) => {
+    const text = node.nodeValue;
+    const trimmed = text.trim();
+    if (!trimmed) return;
+    const translated = translate(trimmed);
+    if (translated !== trimmed) node.nodeValue = text.replace(trimmed, translated);
+  });
 }
 
 function initAnimations() {
@@ -439,7 +1243,7 @@ function hero(page) {
 
 function breadcrumb(path, current) {
   if (path === "/") return "";
-  return `<div class="breadcrumb"><div class="container"><a href="/">דף הבית</a> / ${current}</div></div>`;
+  return `<div class="breadcrumb"><div class="container"><a href="${link("/")}">${translate("דף הבית")}</a> / ${translate(current)}</div></div>`;
 }
 
 function standardTemplate(page, path) {
@@ -710,7 +1514,7 @@ function bindForms() {
     formEl.addEventListener("submit", (event) => {
       event.preventDefault();
       const btn = formEl.querySelector("button[type='submit']");
-      btn.textContent = "הפנייה נקלטה";
+      btn.textContent = isEnglish() ? "Inquiry Received" : "הפנייה נקלטה";
       btn.disabled = true;
       window.dataLayer = window.dataLayer || [];
       window.dataLayer.push({ event: formEl.dataset.form || "form_submit_general", page_url: location.href, page_title: document.title });
