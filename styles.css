@@ -667,6 +667,65 @@ h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; l
 }
 .section-navy .feature-list li { background: rgba(255,255,255,.06); border-color: rgba(255,255,255,.14); }
 
+.agent-workflow {
+  direction: ltr;
+}
+.agent-workflow .container,
+.agent-workflow .section-header {
+  direction: rtl;
+}
+.agent-workflow .section-header {
+  align-items: center;
+}
+.workflow-cards {
+  counter-reset: workflow;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+  direction: rtl;
+}
+.workflow-card {
+  direction: rtl;
+  text-align: right;
+  min-width: 0;
+  min-height: 100%;
+  position: relative;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 26px 24px 24px;
+  box-shadow: 0 10px 28px rgba(7,25,54,.07);
+  transition: border-color var(--ease), box-shadow var(--ease), transform var(--ease);
+}
+.workflow-card:hover {
+  border-color: rgba(47, 135, 193, .28);
+  box-shadow: 0 16px 34px rgba(7,25,54,.1);
+  transform: translateY(-2px);
+}
+.workflow-card span {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #eaf3ff;
+  color: var(--blue-2);
+  font-weight: 900;
+  margin-bottom: 18px;
+}
+.workflow-card h3 {
+  font-size: 22px;
+  margin-bottom: 10px;
+}
+.workflow-card p {
+  margin: 0;
+  color: var(--muted);
+}
+.workflow-card h3,
+.workflow-card p {
+  overflow-wrap: anywhere;
+}
+
 .steps { counter-reset: step; display: grid; gap: 18px; }
 .step {
   counter-increment: step;
@@ -909,6 +968,7 @@ details p { margin: 12px 0 0; color: var(--muted); }
   }
   .trust-strip { transform: none; margin-top: 0; grid-template-columns: 1fr 1fr; }
   .grid-3, .grid-4, .grid-5 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .workflow-cards { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .team-photo { height: 220px; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
@@ -970,6 +1030,8 @@ details p { margin: 12px 0 0; color: var(--muted); }
   .section { padding: 54px 0; }
   .section-header { display: block; }
   .grid-2, .grid-3, .grid-4, .grid-5, .trust-strip, .form-grid, .footer-grid { grid-template-columns: minmax(0, 1fr); }
+  .workflow-cards { grid-template-columns: minmax(0, 1fr); }
+  .workflow-card { padding: 22px; }
   .team-grid { grid-template-columns: minmax(0, 1fr); }
   .team-photo { height: 230px; }
   .card { padding: 22px; }

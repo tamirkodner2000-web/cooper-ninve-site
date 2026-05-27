@@ -567,7 +567,13 @@ function whyCooperSection() {
 }
 
 function agentJourneySection() {
-  return `<section class="section section-soft"><div class="container split-band"><div><p class="section-slogan">מרכז חיתום לסוכנים ולעסקים שחושבים קדימה.</p><h2>מרכז חיתום לסוכני ביטוח</h2><p>קופר נינוה מספקת לסוכני ביטוח גישה לפתרונות חיתום, הפקה ושירות בתחומי אחריות מקצועית, סייבר, חבויות, עבודות קבלניות, רשלנות רפואית וסיכונים מיוחדים.</p><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">הגשת סיכון לבדיקה</a></div><ul class="feature-list">${["הכוונה לגבי מידע חיתומי חסר", "בדיקת התאמה לסיכונים מורכבים", "הפקה ושירות מקומי", "ליווי לאורך חיי הפוליסה"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>`;
+  const steps = [
+    ["שולחים פרטי סיכון", "הסוכן מעביר מידע ראשוני על הלקוח, תחום הפעילות והכיסוי המבוקש."],
+    ["משלימים מידע חיתומי", "צוות קופר נינוה מכוון לשאלונים, מסמכים ונתונים נדרשים."],
+    ["בדיקת התאמה", "הסיכון נבחן מול יכולות החיתום, השווקים והפתרונות הרלוונטיים."],
+    ["הצעה, הפקה ושירות", "במקרה של התאמה, מתקבלת הצעה ומתקדם תהליך הפקת הפוליסה ושירות."],
+  ];
+  return `<section class="section section-soft agent-workflow"><div class="container"><div class="section-header"><div><p class="section-slogan">תהליך עבודה לסוכני ביטוח.</p><h2>איך מגישים סיכון לקופר נינוה?</h2><p>תהליך עבודה ברור לסוכני ביטוח — מהגשת הסיכון ועד קבלת הצעה והפקת פוליסה.</p></div><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">הגשת סיכון לבדיקה</a></div><div class="workflow-cards">${steps.map(([title, text], index) => `<article class="workflow-card"><span>${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div></div></section>`;
 }
 
 function claimsServiceSection() {
