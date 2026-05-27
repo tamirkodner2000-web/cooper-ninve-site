@@ -309,6 +309,8 @@ Object.assign(pages, productPages, landingPages);
 const app = document.querySelector("[data-app]");
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const mainNav = document.querySelector("[data-main-nav]");
+const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+let revealObserver;
 
 menuToggle.addEventListener("click", () => {
   const open = mainNav.classList.toggle("open");
@@ -352,7 +354,52 @@ function render() {
   app.innerHTML = path.startsWith("/lp/") ? landingTemplate(page) : standardTemplate(page, path);
   renderPartnerLogos();
   bindForms();
+  initAnimations();
   window.scrollTo({ top: 0, behavior: "instant" });
+}
+
+function initAnimations() {
+  if (revealObserver) revealObserver.disconnect();
+
+  const animatedItems = [
+    ...app.querySelectorAll(".hero .eyebrow, .hero-title, .hero .lead, .hero-actions .btn, .hero-card, .hero-card li"),
+    ...app.querySelectorAll(".card, .workflow-card, .feature-list li, .step, .partner-logo-card"),
+  ];
+
+  if (!animatedItems.length) return;
+
+  if (motionQuery.matches || !("IntersectionObserver" in window)) {
+    animatedItems.forEach((item) => item.classList.add("is-visible"));
+    return;
+  }
+
+  animatedItems.forEach((item) => item.classList.add("reveal-item"));
+
+  const heroItems = app.querySelectorAll(".hero .eyebrow, .hero-title, .hero .lead, .hero-actions .btn, .hero-card, .hero-card li");
+  heroItems.forEach((item, index) => {
+    item.style.setProperty("--reveal-delay", `${Math.min(index * 80, 560)}ms`);
+  });
+  requestAnimationFrame(() => {
+    heroItems.forEach((item) => item.classList.add("is-visible"));
+  });
+
+  revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      entry.target.classList.add("is-visible");
+      revealObserver.unobserve(entry.target);
+    });
+  }, { rootMargin: "0px 0px -12% 0px", threshold: 0.14 });
+
+  app.querySelectorAll(".grid, .workflow-cards, .feature-list, .steps, .partner-logos").forEach((group) => {
+    group.querySelectorAll(".card, .workflow-card, li, .step, .partner-logo-card").forEach((item, index) => {
+      item.style.setProperty("--reveal-delay", `${Math.min(index * 85, 425)}ms`);
+    });
+  });
+
+  animatedItems.forEach((item) => {
+    if (!item.classList.contains("is-visible")) revealObserver.observe(item);
+  });
 }
 
 function renderPartnerLogos() {
