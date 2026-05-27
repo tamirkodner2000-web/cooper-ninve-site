@@ -465,13 +465,75 @@ h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; l
 .section-header h2, .center-title h2 { font-size: clamp(30px, 4vw, 48px); }
 .section-header p, .center-title p { color: var(--muted); max-width: 740px; margin: 12px 0 0; }
 .section-navy .section-header p, .section-navy .center-title p { color: rgba(255,255,255,.76); }
-.underwriting-examples .section-header {
-  align-items: center;
+.underwriting-examples {
+  direction: ltr;
 }
-.underwriting-examples h3 {
+.underwriting-inner {
+  display: grid;
+  grid-template-columns: minmax(420px, .95fr) minmax(0, 1.05fr);
+  grid-template-areas: "panel copy";
+  gap: clamp(48px, 6vw, 86px);
+  align-items: center;
+  direction: ltr;
+}
+.underwriting-copy {
+  grid-area: copy;
+  direction: rtl;
+  text-align: right;
+  max-width: 680px;
+  justify-self: end;
+}
+.underwriting-copy h2 {
+  font-size: clamp(34px, 4.4vw, 54px);
+}
+.underwriting-copy p:not(.section-slogan) {
+  color: rgba(255,255,255,.8);
+  max-width: 680px;
+  margin: 14px 0 0;
+}
+.underwriting-copy .section-actions {
+  margin-top: 28px;
+}
+.use-case-panel {
+  grid-area: panel;
+  direction: rtl;
+  text-align: right;
+  border-block: 1px solid rgba(255,255,255,.16);
+  background: linear-gradient(135deg, rgba(255,255,255,.055), rgba(255,255,255,.025));
+  box-shadow: 0 24px 52px rgba(3,14,31,.18);
+}
+.use-case-row {
+  display: grid;
+  grid-template-columns: 58px minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+  padding: 22px 0;
+  border-block-end: 1px solid rgba(255,255,255,.14);
+}
+.use-case-row:last-child {
+  border-block-end: 0;
+}
+.use-case-row span {
+  color: var(--focus);
+  font-family: "Montserrat", "Heebo", Arial, sans-serif;
+  font-weight: 900;
+  font-size: 16px;
+  line-height: 1.2;
+  padding-top: 3px;
+}
+.use-case-row h3 {
   color: white;
-  font-size: clamp(24px, 2.8vw, 34px);
-  margin: 0 0 22px;
+  font-size: 22px;
+  margin-bottom: 7px;
+}
+.use-case-row p {
+  margin: 0;
+  color: rgba(255,255,255,.72);
+  line-height: 1.7;
+}
+.use-case-row h3,
+.use-case-row p {
+  overflow-wrap: anywhere;
 }
 .center-title { text-align: center; max-width: 860px; margin: 0 auto 36px; }
 .section-slogan {
@@ -968,6 +1030,17 @@ details p { margin: 12px 0 0; color: var(--muted); }
   .hero-home .hero-why-card {
     justify-self: center;
   }
+  .underwriting-inner {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "copy"
+      "panel";
+    gap: 36px;
+  }
+  .underwriting-copy {
+    max-width: 720px;
+    justify-self: stretch;
+  }
   .lloyds-inner {
     width: min(100%, calc(100vw - 40px));
     grid-template-columns: minmax(0, 1fr);
@@ -1047,7 +1120,16 @@ details p { margin: 12px 0 0; color: var(--muted); }
   .section { padding: 54px 0; }
   .section-header { display: block; }
   .section-actions { margin-top: 22px; justify-content: center; }
-  .underwriting-examples h3 { text-align: center; }
+  .underwriting-copy h2 { font-size: 32px; }
+  .underwriting-copy p:not(.section-slogan) { font-size: 16px; }
+  .use-case-panel { box-shadow: none; }
+  .use-case-row {
+    grid-template-columns: 44px minmax(0, 1fr);
+    gap: 14px;
+    padding: 18px 0;
+  }
+  .use-case-row h3 { font-size: 20px; }
+  .use-case-row p { font-size: 15px; }
   .grid-2, .grid-3, .grid-4, .grid-5, .trust-strip, .form-grid, .footer-grid { grid-template-columns: minmax(0, 1fr); }
   .workflow-cards { grid-template-columns: minmax(0, 1fr); }
   .workflow-card { padding: 22px; }
