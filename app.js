@@ -549,7 +549,6 @@ function teamSection() {
 
 function contactSections() {
   return `
-    ${actionContactSection()}
     <section class="section"><div class="container split-band"><div><h2>השאירו פרטים</h2><p>בחרתם את סוג הפנייה? השאירו פרטים בסיסיים וצוות קופר נינוה ינתב את הפנייה לגורם המתאים.</p></div>${form("form_submit_general", ["שם מלא", "טלפון", "אימייל", "חברה / סוכנות", "סוג הפנייה", "סוג ביטוח רלוונטי"])}</div></section>
     <section class="section section-soft"><div class="container"><div class="center-title"><h2>פרטי התקשרות</h2></div>${cards([
       { title: "טלפון", icon: "☎", text: "077-9965453" },
