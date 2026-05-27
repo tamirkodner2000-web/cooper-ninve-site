@@ -434,11 +434,8 @@ function homeSections() {
     ${lloydsAdvantagesSection()}
     ${agentJourneySection()}
     ${underwritingExamplesSection()}
-    ${claimsServiceSection()}
     ${insightsSection()}
     ${partnerLogosSection()}
-    ${processBlock(["משאירים פרטים", "מעבירים מידע בסיסי", "בדיקת חיתום", "קבלת הצעה", "הפקה ושירות"])}
-    ${actionContactSection()}
     ${homepageLeadForm()}`;
 }
 
