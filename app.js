@@ -433,7 +433,6 @@ function homeSections() {
     ${mgaPositioningBlock()}
     ${lloydsAdvantagesSection()}
     ${agentJourneySection()}
-    ${underwritingExamplesSection()}
     ${insightsSection()}
     ${partnerLogosSection()}
     ${homepageLeadForm()}`;
