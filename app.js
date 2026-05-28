@@ -1042,13 +1042,13 @@ function renderChrome(path) {
   const english = isEnglish();
   const navItems = [
     ["/", english ? "Home" : "דף הבית"],
-    ["/insurance-agents", english ? "For Insurance Agents" : "לסוכני ביטוח"],
-    ["/business-insurance", english ? "For Businesses" : "לעסקים"],
-    ["/insurance-solutions", english ? "Insurance Solutions" : "פתרונות ביטוח"],
+    ["/insurance-agents", english ? "Agents" : "לסוכני ביטוח"],
+    ["/business-insurance", english ? "Businesses" : "לעסקים"],
+    ["/insurance-solutions", english ? "Solutions" : "פתרונות ביטוח"],
     ["/claims", english ? "Claims" : "תביעות"],
-    ["/knowledge-center", english ? "Knowledge Center" : "מרכז ידע"],
+    ["/knowledge-center", english ? "Knowledge" : "מרכז ידע"],
     ["/about-us", english ? "About" : "אודות"],
-    ["/contact-us", english ? "Contact Us" : "צור קשר"],
+    ["/contact-us", english ? "Contact" : "צור קשר"],
   ];
   mainNav.setAttribute("aria-label", english ? "Main navigation" : "ניווט ראשי");
   mainNav.innerHTML = `${navItems.map(([href, label]) => `<a href="${link(href)}">${label}</a>`).join("")}<a class="language-switcher nav-language-switcher" href="${matchingLanguagePath(path, !english)}">${english ? "עברית / HE" : "EN"}</a>`;
@@ -1065,8 +1065,8 @@ function renderChrome(path) {
   const headerActions = document.querySelector(".header-actions");
   if (headerActions) {
     headerActions.innerHTML = `
-      <a class="header-cta" href="${link("/contact-us")}" data-track="click_quote_cta">${english ? "Submit a Risk" : "הגשת סיכון"}</a>
-      <a class="header-link" href="${link("/contact-us")}">${english ? "Contact Us" : "צור קשר"}</a>
+      <a class="header-cta" href="${link("/contact-us")}" data-track="click_quote_cta">${english ? "Submit Risk" : "הגשת סיכון"}</a>
+      <a class="header-link" href="${link("/contact-us")}">${english ? "Contact" : "צור קשר"}</a>
       <a class="language-switcher header-language-switcher" href="${matchingLanguagePath(path, !english)}">${english ? "עברית / HE" : "EN"}</a>`;
   }
 
