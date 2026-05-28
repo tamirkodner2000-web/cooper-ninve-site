@@ -310,8 +310,8 @@ const englishPrefix = "/en";
 
 const englishMeta = {
   "/": {
-    title: "Cooper Ninve | An Underwriting Center Built for the Future",
-    description: "Cooper Ninve is an advanced underwriting center and MGA providing underwriting, policy issuance and policy management solutions for insurance agents, businesses and complex professional and commercial risks.",
+    title: "Cooper Ninve | Israel-Market Underwriting Partner",
+    description: "Cooper Ninve supports insurers, syndicates, MGAs and capacity providers with local underwriting insight, distribution access, policy servicing and claims coordination in Israel.",
   },
   "/insurance-solutions": {
     title: "Insurance Solutions for Businesses and Complex Risks | Cooper Ninve",
@@ -1042,13 +1042,13 @@ function renderChrome(path) {
   const english = isEnglish();
   const navItems = [
     ["/", english ? "Home" : "דף הבית"],
-    ["/insurance-agents", english ? "Agents" : "לסוכני ביטוח"],
-    ["/business-insurance", english ? "Businesses" : "לעסקים"],
-    ["/insurance-solutions", english ? "Solutions" : "פתרונות ביטוח"],
-    ["/claims", english ? "Claims" : "תביעות"],
-    ["/knowledge-center", english ? "Knowledge" : "מרכז ידע"],
+    ["/insurance-agents", english ? "Distribution" : "לסוכני ביטוח"],
+    ["/business-insurance", english ? "Market Focus" : "לעסקים"],
+    ["/insurance-solutions", english ? "Underwriting Lines" : "פתרונות ביטוח"],
+    ["/claims", english ? "Servicing" : "תביעות"],
+    ["/knowledge-center", english ? "Insights" : "מרכז ידע"],
     ["/about-us", english ? "About" : "אודות"],
-    ["/contact-us", english ? "Contact" : "צור קשר"],
+    ["/contact-us", english ? "Partner With Us" : "צור קשר"],
   ];
   mainNav.setAttribute("aria-label", english ? "Main navigation" : "ניווט ראשי");
   mainNav.innerHTML = `${navItems.map(([href, label]) => `<a href="${link(href)}">${label}</a>`).join("")}<a class="language-switcher nav-language-switcher" href="${matchingLanguagePath(path, !english)}">${english ? "עברית / HE" : "EN"}</a>`;
@@ -1065,8 +1065,8 @@ function renderChrome(path) {
   const headerActions = document.querySelector(".header-actions");
   if (headerActions) {
     headerActions.innerHTML = `
-      <a class="header-cta" href="${link("/contact-us")}" data-track="click_quote_cta">${english ? "Submit Risk" : "הגשת סיכון"}</a>
-      <a class="header-link" href="${link("/contact-us")}">${english ? "Contact" : "צור קשר"}</a>
+      <a class="header-cta" href="${link("/contact-us")}" data-track="click_quote_cta">${english ? "Partner With Us" : "הגשת סיכון"}</a>
+      <a class="header-link" href="${link("/contact-us")}">${english ? "Contact Us" : "צור קשר"}</a>
       <a class="language-switcher header-language-switcher" href="${matchingLanguagePath(path, !english)}">${english ? "עברית / HE" : "EN"}</a>`;
   }
 
@@ -1075,7 +1075,7 @@ function renderChrome(path) {
 
   const mobileSticky = document.querySelector(".mobile-sticky");
   if (mobileSticky) {
-    mobileSticky.innerHTML = `<a href="${link("/contact-us")}" data-track="click_quote_cta">${english ? "Get a Quote" : "לקבלת הצעה"}</a><a href="tel:0779965453" data-track="click_phone">${english ? "Call" : "שיחה"}</a>`;
+    mobileSticky.innerHTML = `<a href="${link("/contact-us")}" data-track="click_quote_cta">${english ? "Partner With Us" : "לקבלת הצעה"}</a><a href="tel:0779965453" data-track="click_phone">${english ? "Call" : "שיחה"}</a>`;
   }
 }
 
@@ -1256,10 +1256,97 @@ function breadcrumb(path, current) {
 }
 
 function standardTemplate(page, path) {
+  if (isEnglish() && path === "/") return englishHomeTemplate();
   if (path === "/insurance-solutions") return sections(page.sections, path);
   if (path === "/about-us") return `${breadcrumb(path, page.h1)}${sections(page.sections, path)}`;
   if (path === "/contact-us") return sections(page.sections, path);
   return `${breadcrumb(path, page.h1)}${hero(page)}${sections(page.sections, path)}`;
+}
+
+function englishHomeTemplate() {
+  return `
+    <section class="hero hero-home">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <h1 class="hero-title">Israel-Market Underwriting Partner for International Insurance Markets</h1>
+          <p class="lead">Cooper Ninve supports insurers, syndicates, MGAs and capacity providers with local underwriting insight, distribution access, policy servicing and claims coordination in Israel.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Partner With Us</a>
+            <a class="btn btn-secondary" href="${link("/insurance-solutions")}">Explore Underwriting Lines</a>
+          </div>
+        </div>
+        <aside class="hero-card hero-why-card">
+          <h2>Partner capabilities</h2>
+          <ul>
+            <li>Local Israeli market knowledge</li>
+            <li>Specialty underwriting discipline</li>
+            <li>Access to local distribution</li>
+            <li>Policy administration and servicing</li>
+            <li>Claims coordination support</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+    ${englishUnderwritingExecutionSection()}
+    ${englishInternationalMarketsSection()}
+    ${englishPartnerWorkflowSection()}
+    ${englishUnderwritingLinesPreview()}
+    ${partnerLogosSection()}
+    ${englishPartnerInquirySection()}`;
+}
+
+function englishUnderwritingExecutionSection() {
+  return `<section class="mga-block" aria-labelledby="mga-title"><div class="mga-inner"><div class="mga-copy"><p class="mga-kicker">Specialty underwriting capability with local execution.</p><h2 id="mga-title">Local underwriting execution in Israel</h2><strong>Cooper Ninve combines Israeli market knowledge, underwriting discipline and operational servicing.</strong><p>We help international insurance markets evaluate and support selected specialty risks in Israel, subject to underwriting authority, appetite, policy terms and market approval.</p><a class="btn btn-primary" href="${link("/about-us")}">About Cooper Ninve</a></div></div></section>`;
+}
+
+function englishInternationalMarketsSection() {
+  const advantages = [
+    "A local interface for international markets seeking disciplined underwriting review in Israel.",
+    "Documentation, policy administration and servicing support for selected specialty risks.",
+    "Familiarity with local distribution, business practices and Israeli market requirements.",
+    "Coordination with relevant insurers, syndicates, MGAs or capacity partners where appropriate.",
+    "Transparent communication throughout underwriting, issuance, servicing and claims coordination.",
+  ];
+  return `<section class="lloyds-advantages" aria-labelledby="lloyds-advantages-title"><div class="container lloyds-inner"><div class="lloyds-copy"><p class="section-slogan">International market access, local execution.</p><h2 id="lloyds-advantages-title">A local platform for international insurance partners</h2><p>Cooper Ninve provides a local interface for international markets seeking disciplined underwriting review, documentation, policy administration and servicing support in Israel.</p><a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Discuss Partnership</a></div><ul class="lloyds-list">${advantages.map((item) => `<li>${item}</li>`).join("")}</ul></div></section>`;
+}
+
+function englishPartnerWorkflowSection() {
+  const steps = [
+    ["Local Risk Intake", "We collect and organize local risk information from Israeli distribution and business sources."],
+    ["Underwriting Review", "We assess exposures, documentation and suitability against agreed appetite and underwriting standards."],
+    ["Market Coordination", "We coordinate with relevant insurers, syndicates, MGAs or capacity partners where appropriate."],
+    ["Policy Servicing", "We support policy administration, documentation and local communication throughout the policy lifecycle."],
+    ["Claims Coordination", "We assist with local claims intake, supporting documents and communication with the relevant market."],
+  ];
+  return `<section class="section section-soft agent-workflow"><div class="container"><div class="section-header"><div><p class="section-slogan">Operational support for international markets.</p><h2>How we support international partners</h2><p>Our role is to help international insurance partners work with Israeli risks through a structured local underwriting and servicing process.</p></div><a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Partner With Us</a></div><div class="workflow-cards">${steps.map(([title, text], index) => `<article class="workflow-card"><span>${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div></div></section>`;
+}
+
+function englishUnderwritingLinesPreview() {
+  const lines = [
+    { title: "Professional Liability", icon: "◎", text: "Specialty professional risks reviewed against appetite, authority and policy terms.", url: "/insurance-solutions", cta: "View lines" },
+    { title: "Cyber", icon: "◈", text: "Cyber submissions supported by local information gathering and underwriting review.", url: "/insurance-solutions", cta: "View lines" },
+    { title: "Construction and CAR", icon: "▧", text: "Local project context for contractors all risks and related construction exposures.", url: "/insurance-solutions", cta: "View lines" },
+    { title: "Liability Lines", icon: "◇", text: "Commercial liability exposures reviewed with Israeli market and servicing context.", url: "/insurance-solutions", cta: "View lines" },
+    { title: "Specialty Risks", icon: "◌", text: "Selected non-standard risks considered where appetite and market approval allow.", url: "/insurance-solutions", cta: "View lines" },
+  ];
+  return `<section class="section section-navy"><div class="container"><div class="center-title"><h2>Underwriting appetite and product lines</h2><p>Cooper Ninve supports selected specialty lines in Israel, subject to underwriting authority, appetite, policy terms and market approval.</p></div>${cards(lines, 5)}<div class="section-actions"><a class="btn btn-primary" href="${link("/insurance-solutions")}">View Underwriting Lines</a></div></div></section>`;
+}
+
+function englishPartnerInquirySection() {
+  return `<section class="section section-soft"><div class="container split-band"><div><h2>Partner with Cooper Ninve in Israel</h2><p>International insurers, syndicates, MGAs and capacity providers can contact us to discuss underwriting appetite, local distribution, servicing and Israel-market execution.</p></div>${englishPartnerInquiryForm()}</div></section>`;
+}
+
+function englishPartnerInquiryForm() {
+  const fields = ["Full Name", "Phone", "Email", "Company / Market", "Partnership Interest"];
+  return `<form class="form-panel" data-form="form_submit_homepage_lead">
+    <h2>Partner inquiry</h2>
+    <div class="form-grid">
+      ${fields.map((field) => `<label><span>${field}</span><input name="${field}" placeholder="${field}"></label>`).join("")}
+      <label class="full"><span>Message</span><textarea name="message" placeholder="Briefly describe the opportunity, appetite or partnership question"></textarea></label>
+    </div>
+    <p class="form-note">Details are used only to respond to your inquiry and assess potential fit.</p>
+    <button class="btn btn-primary" type="submit" data-track="form_submit_homepage_lead">Send Partner Inquiry</button>
+  </form>`;
 }
 
 function cards(items, cols = 3) {
