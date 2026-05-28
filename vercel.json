@@ -3,7 +3,7 @@
   "trailingSlash": false,
   "rewrites": [
     {
-      "source": "/((?!assets/|app.js|styles.css|.*\\..*).*)",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ],
