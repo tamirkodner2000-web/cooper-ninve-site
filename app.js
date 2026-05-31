@@ -931,6 +931,7 @@ const menuToggle = document.querySelector("[data-menu-toggle]");
 const mainNav = document.querySelector("[data-main-nav]");
 const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 let revealObserver;
+let counterObserver;
 
 menuToggle.addEventListener("click", () => {
   const open = mainNav.classList.toggle("open");
@@ -987,6 +988,7 @@ function render() {
   renderPartnerLogos();
   bindForms();
   initAnimations();
+  initDistributionCounters();
   window.scrollTo({ top: 0, behavior: "instant" });
 }
 
@@ -1223,6 +1225,65 @@ function initAnimations() {
   });
 }
 
+function initDistributionCounters() {
+  if (counterObserver) counterObserver.disconnect();
+
+  const counters = [...app.querySelectorAll("[data-count-to]")];
+  if (!counters.length) return;
+
+  const formatCounter = (value) => `${Math.min(value, 1000).toLocaleString("en-US")}${value >= 1000 ? "+" : ""}`;
+  const animateCounter = (counter) => {
+    if (counter.dataset.counted === "true") return;
+    counter.dataset.counted = "true";
+
+    if (motionQuery.matches) {
+      counter.textContent = "1,000+";
+      return;
+    }
+
+    const duration = 2500;
+    const start = performance.now();
+    const finishTimer = window.setTimeout(() => {
+      counter.textContent = "1,000+";
+    }, duration + 120);
+    counter.textContent = "1";
+
+    const tick = (now) => {
+      const t = Math.min((now - start) / duration, 1);
+      let value;
+
+      if (t < 0.18) {
+        value = Math.max(1, Math.floor(1 + (t / 0.18) * 2));
+      } else {
+        const progress = (t - 0.18) / 0.82;
+        const eased = 1 - Math.pow(1 - progress, 3);
+        value = Math.round(3 + eased * 997);
+      }
+
+      counter.textContent = t >= 1 ? "1,000+" : formatCounter(value);
+      if (t >= 1) window.clearTimeout(finishTimer);
+      if (t < 1) requestAnimationFrame(tick);
+    };
+
+    requestAnimationFrame(tick);
+  };
+
+  if (!("IntersectionObserver" in window)) {
+    counters.forEach(animateCounter);
+    return;
+  }
+
+  counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (!entry.isIntersecting) return;
+      animateCounter(entry.target);
+      counterObserver.unobserve(entry.target);
+    });
+  }, { rootMargin: "0px 0px -14% 0px", threshold: 0.25 });
+
+  counters.forEach((counter) => counterObserver.observe(counter));
+}
+
 function renderPartnerLogos() {
   const logoGrid = document.querySelector("[data-partner-logos]");
   if (!logoGrid) return;
@@ -1418,7 +1479,7 @@ function englishDistributionTemplate() {
 }
 
 function englishDistributionWorkflowSection() {
-  return `<section class="section section-soft"><div class="container split-band" style="align-items:center;"><div><h2 style="font-size:clamp(76px, 12vw, 148px);line-height:.9;color:var(--navy);letter-spacing:0;">1,000+</h2><p class="section-slogan" style="margin-top:18px;">Insurance Agencies Across Israel</p><p style="max-width:680px;color:var(--muted);font-size:clamp(19px, 2vw, 24px);line-height:1.65;margin:18px 0 0;">Cooper Ninve gives international insurance markets access to broad local distribution, backed by specialist liability underwriting review and market coordination.</p></div><ul class="feature-list">${["Deep understanding of the Israeli and international insurance markets", "Product-building capability for complex liability risks", "Local claims coordination and market communication"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>`;
+  return `<section class="section section-soft"><div class="container split-band" style="align-items:center;"><div><h2 data-count-to="1000" style="font-size:clamp(76px, 12vw, 148px);line-height:.9;color:var(--navy);letter-spacing:0;">1,000+</h2><p class="section-slogan" style="margin-top:22px;font-size:clamp(23px, 3vw, 34px);line-height:1.2;color:var(--navy);">Insurance Agencies Across Israel</p><p style="max-width:680px;color:var(--muted);font-size:clamp(19px, 2vw, 24px);line-height:1.65;margin:20px 0 0;">Cooper Ninve gives international insurance markets access to broad local distribution, backed by specialist liability underwriting review and market coordination.</p></div><ul class="feature-list">${["Deep understanding of the Israeli and international insurance markets", "Product-building capability for complex liability risks", "Local claims coordination and market communication"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>`;
 }
 
 function englishDistributionBenefitsSection() {
