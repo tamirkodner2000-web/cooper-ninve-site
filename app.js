@@ -1482,7 +1482,7 @@ function englishDistributionBenefitsSection() {
     ["Israeli & International Market Context", "Local Israeli knowledge combined with an understanding of international underwriting expectations."],
     ["Policy and Claims Coordination", "Support across documentation, policy servicing and local claims communication."],
   ];
-  return `<section class="section"><div class="container split-band"><div><h2>What International Markets Need in Israel</h2><p>International insurers, syndicates and MGAs need more than local access. They need structured underwriting information, liability expertise and reliable policy servicing on the ground.</p></div><div class="grid grid-2">${benefits.map(([title, text]) => `<article class="card"><h3>${title}</h3><p>${text}</p></article>`).join("")}</div></div></section>`;
+  return `<section class="section"><div class="container"><div class="center-title"><h2>What International Markets Need in Israel</h2><p>International insurers, syndicates and MGAs need more than local access. They need structured underwriting information, liability expertise and reliable policy servicing on the ground.</p></div><div class="grid grid-2">${benefits.map(([title, text]) => `<article class="card"><h3>${title}</h3><p>${text}</p></article>`).join("")}</div></div></section>`;
 }
 
 function englishDistributionAreasSection() {
