@@ -1418,14 +1418,7 @@ function englishDistributionTemplate() {
 }
 
 function englishDistributionWorkflowSection() {
-  const steps = [
-    ["Local Distribution Intake", "We receive and organize risk opportunities from local Israeli distribution channels and market participants."],
-    ["Risk Information Collection", "We help gather the underwriting information, documentation and local context needed for review."],
-    ["Underwriting Review", "Risks are assessed against relevant appetite, underwriting standards, policy terms and market approval requirements."],
-    ["Market Coordination", "Where appropriate, we coordinate information and next steps with insurers, syndicates, MGAs or capacity partners."],
-    ["Policy Administration Support", "We support documentation, policy administration and local communication throughout the policy lifecycle."],
-  ];
-  return `<section class="section section-soft agent-workflow"><div class="container"><div class="section-header"><div><p class="section-slogan">Organized local risk flow.</p><h2>How local risk flow is organized</h2><p>Cooper Ninve helps international partners work with Israeli opportunities through a structured local process, from intake through servicing support.</p></div><a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Discuss Distribution Access</a></div><div class="workflow-cards">${steps.map(([title, text], index) => `<article class="workflow-card"><span>${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div></div></section>`;
+  return `<section class="section section-soft"><div class="container split-band" style="align-items:center;"><div><h2 style="font-size:clamp(76px, 12vw, 148px);line-height:.9;color:var(--navy);letter-spacing:0;">1,000+</h2><p class="section-slogan" style="margin-top:18px;">Insurance Agencies Across Israel</p><p style="max-width:680px;color:var(--muted);font-size:clamp(19px, 2vw, 24px);line-height:1.65;margin:18px 0 0;">Cooper Ninve gives international insurance markets access to broad local distribution, backed by specialist liability underwriting review and market coordination.</p></div><ul class="feature-list">${["Deep understanding of the Israeli and international insurance markets", "Product-building capability for complex liability risks", "Local claims coordination and market communication"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>`;
 }
 
 function englishDistributionBenefitsSection() {
