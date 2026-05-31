@@ -334,8 +334,8 @@ const englishMeta = {
     description: "Cooper Ninve is an MGA and Coverholder operating in Israel and providing advanced insurance solutions for businesses, agents and complex risks.",
   },
   "/contact-us": {
-    title: "Contact Us | Cooper Ninve",
-    description: "Contact Cooper Ninve for information, an insurance quote or an initial suitability review in professional liability, cyber, contractors, liabilities and special risks.",
+    title: "Partner with Cooper Ninve in Israel | Cooper Ninve",
+    description: "International insurers, syndicates, MGAs and capacity providers can contact Cooper Ninve to discuss Israel-market underwriting appetite, local distribution, policy servicing and claims coordination.",
   },
   "/knowledge-center": {
     title: "Insurance Knowledge Center | Cooper Ninve",
@@ -1071,7 +1071,7 @@ function renderChrome(path) {
   }
 
   const footer = document.querySelector(".site-footer");
-  if (footer) footer.innerHTML = footerHtml(english);
+  if (footer) footer.innerHTML = footerHtml(english, path);
 
   const mobileSticky = document.querySelector(".mobile-sticky");
   if (mobileSticky) {
@@ -1079,8 +1079,14 @@ function renderChrome(path) {
   }
 }
 
-function footerHtml(english) {
-  const footerGroups = english ? [
+function footerHtml(english, path = "/") {
+  const englishPartnerFooter = english && path === "/contact-us";
+  const footerGroups = englishPartnerFooter ? [
+    ["Cooper Ninve", [["About", "/about-us"], ["Home", "/"], ["Insights", "/knowledge-center"]]],
+    ["For Partners", [["Partner With Us", "/contact-us"], ["Underwriting Lines", "/insurance-solutions"], ["Servicing", "/claims"]]],
+    ["Market Interface", [["Distribution", "/insurance-agents"], ["Market Focus", "/business-insurance"], ["Underwriting Lines", "/insurance-solutions"]]],
+    ["Contact", [["Partner With Us", "/contact-us"], ["077-9965453", "tel:0779965453"], ["info@cooper-ninve.com", "mailto:info@cooper-ninve.com"]]],
+  ] : english ? [
     ["Cooper Ninve", [["About", "/about-us"], ["First of All, Integrity", "/"], ["Knowledge Center", "/knowledge-center"]]],
     ["Insurance Solutions", [["Professional Liability", "/professional-liability-insurance"], ["Cyber", "/cyber-insurance"], ["Contractors’ All Risks", "/contractors-all-risks-insurance"], ["Medical Malpractice", "/medical-malpractice-insurance"], ["Liability and Third-Party Coverage", "/liability-insurance"]]],
     ["For Insurance Agents", [["For Insurance Agents", "/insurance-agents"], ["Submit a Risk for Review", "/contact-us"], ["Underwriting Areas", "/insurance-solutions"]]],
@@ -1095,7 +1101,7 @@ function footerHtml(english) {
     ["מרכז ידע", [["מאמרים ותובנות", "/knowledge-center"], ["M.G.A בביטוח", "/knowledge-center"], ["הגשת סיכון לחיתום", "/knowledge-center"]]],
     ["יצירת קשר", [["צור קשר", "/contact-us"], ["077-9965453", "tel:0779965453"], ["info@cooper-ninve.com", "mailto:info@cooper-ninve.com"]]],
   ];
-  const contactText = english ? "Advanced insurance solutions for businesses, insurance agents and complex risks." : "פתרונות ביטוח מתקדמים לעסקים, סוכני ביטוח וסיכונים מורכבים.";
+  const contactText = englishPartnerFooter ? "Israel-market underwriting execution, distribution access, policy servicing and claims coordination support for international insurance partners." : english ? "Advanced insurance solutions for businesses, insurance agents and complex risks." : "פתרונות ביטוח מתקדמים לעסקים, סוכני ביטוח וסיכונים מורכבים.";
   const address = english ? "111 Dizengoff St., Tel Aviv" : "רח׳ דיזנגוף 111, תל אביב";
   const rights = english ? "© 2026 Cooper Ninve. All rights reserved." : "© 2026 Cooper Ninve. כל הזכויות שמורות.";
   const legal = english ? [["Privacy Policy", "/privacy-policy"], ["Terms of Use", "/terms-of-use"], ["Disclosure", "/disclosure"], ["Public Complaints", "/public-complaints"]] : [["מדיניות פרטיות", "/privacy-policy"], ["תנאי שימוש", "/terms-of-use"], ["גילוי נאות", "/disclosure"], ["תלונות הציבור", "/public-complaints"]];
@@ -1257,6 +1263,7 @@ function breadcrumb(path, current) {
 
 function standardTemplate(page, path) {
   if (isEnglish() && path === "/") return englishHomeTemplate();
+  if (isEnglish() && path === "/contact-us") return englishContactTemplate();
   if (path === "/insurance-solutions") return sections(page.sections, path);
   if (path === "/about-us") return `${breadcrumb(path, page.h1)}${sections(page.sections, path)}`;
   if (path === "/contact-us") return sections(page.sections, path);
@@ -1346,6 +1353,43 @@ function englishPartnerInquiryForm() {
     </div>
     <p class="form-note">Details are used only to respond to your inquiry and assess potential fit.</p>
     <button class="btn btn-primary" type="submit" data-track="form_submit_homepage_lead">Send Partner Inquiry</button>
+  </form>`;
+}
+
+function englishContactTemplate() {
+  return `
+    <section class="section">
+      <div class="container">
+        <div class="center-title">
+          <h1>Partner with Cooper Ninve in Israel</h1>
+          <p>International insurers, syndicates, MGAs and capacity providers can contact Cooper Ninve to discuss Israel-market underwriting appetite, local distribution, policy servicing and claims coordination.</p>
+        </div>
+        <div class="split-band">
+          ${englishPartnerContactForm()}
+          <div>
+            <h2>Contact Details</h2>
+            <p>Reach Cooper Ninve directly to discuss potential partnership fit, market appetite or Israel-market execution.</p>
+            <ul class="feature-list">
+              <li>Phone: 077-9965453</li>
+              <li>Email: info@cooper-ninve.com</li>
+              <li>Address: 111 Dizengoff St., Tel Aviv</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>`;
+}
+
+function englishPartnerContactForm() {
+  const fields = ["Name", "Company", "Role", "Email", "Phone"];
+  return `<form class="form-panel" data-form="form_submit_general">
+    <h2>Partnership / Market Inquiry</h2>
+    <div class="form-grid">
+      ${fields.map((field) => `<label><span>${field}</span><input name="${field}" placeholder="${field}"></label>`).join("")}
+      <label class="full"><span>Message</span><textarea name="message" placeholder="Tell us about the partnership opportunity"></textarea></label>
+    </div>
+    <p class="form-note">Details are used only to respond to your inquiry and assess potential fit.</p>
+    <button class="btn btn-primary" type="submit" data-track="form_submit_general">Send Partner Inquiry</button>
   </form>`;
 }
 
