@@ -1476,7 +1476,7 @@ function englishDistributionWorkflowSection() {
 }
 
 function englishDistributionBenefitsSection() {
-  return `<section class="section"><div class="container split-band"><div><h2>Why international markets work with Cooper Ninve for local distribution access</h2><p>Distribution access is useful only when it is paired with disciplined information gathering, local context and operational follow-through.</p></div><ul class="feature-list">${["Established local market relationships", "Structured submissions and documentation", "Local language and market context", "Underwriting discipline", "Operational follow-through"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>`;
+  return `<section class="section"><div class="container split-band"><div><h2>Why International Markets Work With Cooper Ninve in Israel</h2><p>International markets need more than access to local leads. They need a local partner that understands liability risks, organizes underwriting information and knows how to match complex submissions with the right market.</p></div><ul class="feature-list">${["Specialist Liability Focus", "Product-Building Capability", "Structured Underwriting Submissions", "Israeli and International Market Understanding", "Operational and Claims Coordination"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>`;
 }
 
 function englishDistributionAreasSection() {
