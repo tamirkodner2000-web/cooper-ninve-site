@@ -1400,9 +1400,8 @@ function englishPartnerContactForm() {
 function englishDistributionTemplate() {
   return `
     <section class="hero">
-      <div class="container hero-inner">
+      <div class="container hero-inner" style="grid-template-columns:minmax(0, 780px);grid-template-areas:'copy';justify-content:center;">
         <div class="hero-copy">
-          <p class="eyebrow">Distribution</p>
           <h1 class="hero-title">Complex Liability Risks Are Our Starting Point</h1>
           <p class="lead">Cooper Ninve is Israel’s specialist liability underwriting agency, built to support risks that standard local-market solutions do not properly address.</p>
           <div class="hero-actions">
@@ -1410,15 +1409,6 @@ function englishDistributionTemplate() {
             <a class="btn btn-secondary" href="${link("/insurance-solutions")}">View Lines of Business</a>
           </div>
         </div>
-        <aside class="hero-card hero-why-card">
-          <h2>Distribution value</h2>
-          <ul>
-            <li>Specialist liability insurance focus</li>
-            <li>Structured underwriting review</li>
-            <li>Local market context</li>
-            <li>Coordination with international markets</li>
-          </ul>
-        </aside>
       </div>
     </section>
     ${englishDistributionWorkflowSection()}
