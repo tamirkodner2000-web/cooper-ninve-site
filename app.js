@@ -318,8 +318,8 @@ const englishMeta = {
     description: "Cooper Ninve supports selected specialty and commercial lines in Israel through local underwriting insight, risk information gathering, policy administration and market coordination, subject to appetite, authority and underwriting approval.",
   },
   "/insurance-agents": {
-    title: "Underwriting Solutions for Insurance Agents | Cooper Ninve",
-    description: "Cooper Ninve provides insurance agents with underwriting, issuance and service solutions in professional liability, cyber, contractors, liabilities and special risks.",
+    title: "Access to Israeli Insurance Distribution | Cooper Ninve",
+    description: "Cooper Ninve works with Israeli insurance distribution channels and market participants to help international partners access organized local risk flow, underwriting information and market coordination.",
   },
   "/business-insurance": {
     title: "Business and Corporate Insurance | Cooper Ninve",
@@ -1266,6 +1266,7 @@ function breadcrumb(path, current) {
 function standardTemplate(page, path) {
   if (isEnglish() && path === "/") return englishHomeTemplate();
   if (isEnglish() && path === "/insurance-solutions") return englishUnderwritingLinesTemplate();
+  if (isEnglish() && path === "/insurance-agents") return englishDistributionTemplate();
   if (isEnglish() && path === "/contact-us") return englishContactTemplate();
   if (path === "/insurance-solutions") return sections(page.sections, path);
   if (path === "/about-us") return `${breadcrumb(path, page.h1)}${sections(page.sections, path)}`;
@@ -1394,6 +1395,65 @@ function englishPartnerContactForm() {
     <p class="form-note">Details are used only to respond to your inquiry and assess potential fit.</p>
     <button class="btn btn-primary" type="submit" data-track="form_submit_general">Send Partner Inquiry</button>
   </form>`;
+}
+
+function englishDistributionTemplate() {
+  return `
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Distribution</p>
+          <h1 class="hero-title">Access to Israeli Insurance Distribution</h1>
+          <p class="lead">Cooper Ninve works with Israeli insurance distribution channels and market participants to help international partners access organized local risk flow, underwriting information and market coordination.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Discuss Distribution Access</a>
+            <a class="btn btn-secondary" href="${link("/insurance-solutions")}">View Lines of Business</a>
+          </div>
+        </div>
+        <aside class="hero-card hero-why-card">
+          <h2>Distribution value</h2>
+          <ul>
+            <li>Local Israeli distribution relationships</li>
+            <li>Structured risk intake and documentation</li>
+            <li>Underwriting information in local context</li>
+            <li>Coordination with international markets</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+    ${englishDistributionWorkflowSection()}
+    ${englishDistributionBenefitsSection()}
+    ${englishDistributionAreasSection()}
+    ${englishDistributionCtaSection()}`;
+}
+
+function englishDistributionWorkflowSection() {
+  const steps = [
+    ["Local Distribution Intake", "We receive and organize risk opportunities from local Israeli distribution channels and market participants."],
+    ["Risk Information Collection", "We help gather the underwriting information, documentation and local context needed for review."],
+    ["Underwriting Review", "Risks are assessed against relevant appetite, underwriting standards, policy terms and market approval requirements."],
+    ["Market Coordination", "Where appropriate, we coordinate information and next steps with insurers, syndicates, MGAs or capacity partners."],
+    ["Policy Administration Support", "We support documentation, policy administration and local communication throughout the policy lifecycle."],
+  ];
+  return `<section class="section section-soft agent-workflow"><div class="container"><div class="section-header"><div><p class="section-slogan">Organized local risk flow.</p><h2>How local risk flow is organized</h2><p>Cooper Ninve helps international partners work with Israeli opportunities through a structured local process, from intake through servicing support.</p></div><a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Discuss Distribution Access</a></div><div class="workflow-cards">${steps.map(([title, text], index) => `<article class="workflow-card"><span>${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div></div></section>`;
+}
+
+function englishDistributionBenefitsSection() {
+  return `<section class="section"><div class="container split-band"><div><h2>Why international markets work with Cooper Ninve for local distribution access</h2><p>Distribution access is useful only when it is paired with disciplined information gathering, local context and operational follow-through.</p></div><ul class="feature-list">${["Established local market relationships", "Structured submissions and documentation", "Local language and market context", "Underwriting discipline", "Operational follow-through"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>`;
+}
+
+function englishDistributionAreasSection() {
+  const areas = [
+    { title: "Specialty Commercial Risks", icon: "◇", text: "Local opportunities that require underwriting review, documentation and market coordination." },
+    { title: "Professional and Technology Risks", icon: "◎", text: "Submissions where local business context and professional exposure information matter." },
+    { title: "Construction and Project Risks", icon: "▧", text: "Project-related opportunities requiring organized local documentation and risk information." },
+    { title: "Liability and Specialty Lines", icon: "◌", text: "Selected liability and specialty risks considered subject to appetite, terms and approval." },
+  ];
+  return `<section class="section section-navy"><div class="container"><div class="center-title"><h2>Examples of local distribution areas</h2><p>This page is focused on distribution access. Detailed appetite and line information remains on the Lines of Business page.</p></div>${cards(areas, 4)}<div class="section-actions"><a class="btn btn-primary" href="${link("/insurance-solutions")}">View Lines of Business</a></div></div></section>`;
+}
+
+function englishDistributionCtaSection() {
+  return `<section class="section section-soft"><div class="container section-header"><div><h2>Discuss distribution access in Israel</h2><p>International insurers, syndicates, MGAs and capacity providers can contact Cooper Ninve to discuss local distribution, risk flow, underwriting information and market coordination in Israel.</p></div><a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Partner With Us</a></div></section>`;
 }
 
 function englishUnderwritingLinesTemplate() {
