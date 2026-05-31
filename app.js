@@ -1467,7 +1467,6 @@ function englishDistributionTemplate() {
     </section>
     ${englishDistributionWorkflowSection()}
     ${englishDistributionBenefitsSection()}
-    ${englishDistributionAreasSection()}
     ${englishDistributionCtaSection()}`;
 }
 
@@ -1483,16 +1482,6 @@ function englishDistributionBenefitsSection() {
     ["Policy and Claims Coordination", "Support across documentation, policy servicing and local claims communication."],
   ];
   return `<section class="section"><div class="container"><div class="center-title"><h2>What International Markets Need in Israel</h2><p>International insurers, syndicates and MGAs need more than local access. They need structured underwriting information, liability expertise and reliable policy servicing on the ground.</p></div><div class="grid grid-2">${benefits.map(([title, text]) => `<article class="card"><h3>${title}</h3><p>${text}</p></article>`).join("")}</div></div></section>`;
-}
-
-function englishDistributionAreasSection() {
-  const areas = [
-    { title: "Specialty Commercial Risks", icon: "◇", text: "Local opportunities that require underwriting review, documentation and market coordination." },
-    { title: "Professional and Technology Risks", icon: "◎", text: "Submissions where local business context and professional exposure information matter." },
-    { title: "Construction and Project Risks", icon: "▧", text: "Project-related opportunities requiring organized local documentation and risk information." },
-    { title: "Liability and Specialty Lines", icon: "◌", text: "Selected liability and specialty risks considered subject to appetite, terms and approval." },
-  ];
-  return `<section class="section section-navy"><div class="container"><div class="center-title"><h2>Examples of local distribution areas</h2><p>This page is focused on distribution access. Detailed appetite and line information remains on the Lines of Business page.</p></div>${cards(areas, 4)}<div class="section-actions"><a class="btn btn-primary" href="${link("/insurance-solutions")}">View Lines of Business</a></div></div></section>`;
 }
 
 function englishDistributionCtaSection() {
