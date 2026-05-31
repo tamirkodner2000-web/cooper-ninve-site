@@ -1476,7 +1476,13 @@ function englishDistributionWorkflowSection() {
 }
 
 function englishDistributionBenefitsSection() {
-  return `<section class="section"><div class="container split-band"><div><h2>Why International Markets Work With Cooper Ninve in Israel</h2><p>International markets need more than access to local leads. They need a local partner that understands liability risks, organizes underwriting information and knows how to match complex submissions with the right market.</p></div><ul class="feature-list">${["Specialist Liability Focus", "Product-Building Capability", "Structured Underwriting Submissions", "Israeli and International Market Understanding", "Operational and Claims Coordination"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>`;
+  const benefits = [
+    ["Specialist Liability Focus", "Focused on liability and complex commercial risks that require specialist underwriting review."],
+    ["Structured Underwriting Submissions", "We organize local risk information, documentation and exposure details into market-ready submissions."],
+    ["Israeli & International Market Context", "Local Israeli knowledge combined with an understanding of international underwriting expectations."],
+    ["Policy and Claims Coordination", "Support across documentation, policy servicing and local claims communication."],
+  ];
+  return `<section class="section"><div class="container split-band"><div><h2>What International Markets Need in Israel</h2><p>International insurers, syndicates and MGAs need more than local access. They need structured underwriting information, liability expertise and reliable policy servicing on the ground.</p></div><div class="grid grid-2">${benefits.map(([title, text]) => `<article class="card"><h3>${title}</h3><p>${text}</p></article>`).join("")}</div></div></section>`;
 }
 
 function englishDistributionAreasSection() {
