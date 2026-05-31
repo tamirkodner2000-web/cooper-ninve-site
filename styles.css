@@ -94,6 +94,15 @@ button:disabled {
     opacity: 1;
     transform: none;
   }
+  .mga-sketch,
+  .mga-block.is-sketch-visible .mga-sketch {
+    opacity: .72;
+    transform: none;
+  }
+  .mga-sketch-line {
+    stroke-dashoffset: 0;
+    transition: none;
+  }
 }
 .container { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
 .skip-link {
@@ -370,14 +379,47 @@ h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; l
   direction: ltr;
   background-color: #192D49;
   background:
-    linear-gradient(90deg, rgba(0, 0, 0, .18), rgba(0, 0, 0, .48) 62%, rgba(0, 0, 0, .58)),
-    url("/assets/backgrounds/lloyds-building-new.jpg.webp") center center / cover no-repeat,
+    radial-gradient(circle at 22% 20%, rgba(143,208,255,.16), transparent 34%),
+    linear-gradient(90deg, rgba(10, 25, 43, .1), rgba(10, 25, 43, .48) 58%, rgba(10, 25, 43, .68)),
     linear-gradient(135deg, #192D49, #0f2239);
   color: white;
 }
+.mga-sketch {
+  position: absolute;
+  inset-block: 7%;
+  inset-inline-start: 0;
+  width: min(58vw, 780px);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(-3%) translateY(14px);
+  transition: opacity 700ms var(--ease-premium), transform 900ms var(--ease-premium);
+}
+.mga-sketch svg {
+  width: 100%;
+  height: 100%;
+  min-height: 560px;
+  display: block;
+  overflow: visible;
+}
+.mga-sketch-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset var(--draw-duration, 1700ms) var(--ease-premium);
+  transition-delay: var(--line-delay, 0ms);
+}
+.mga-sketch-detail {
+  transition-duration: var(--draw-duration, 2100ms);
+}
+.mga-block.is-sketch-visible .mga-sketch {
+  opacity: .82;
+  transform: translateX(0) translateY(0);
+}
+.mga-block.is-sketch-visible .mga-sketch-line {
+  stroke-dashoffset: 0;
+}
 .mga-inner {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   min-height: 680px;
   padding: 112px 8vw 104px 5vw;
   display: flex;
@@ -1423,7 +1465,9 @@ body.lang-en .footer-grid a:hover {
   .hero-card h2 { font-size: 21px; }
   .hero::before { opacity: .58; inset-inline-start: -190px; }
   .hero::after { opacity: .2; inset-inline-start: 20px; }
-  .mga-block { background-position: center center; }
+  .mga-sketch { inset-block: 5% auto; width: 116vw; height: 470px; opacity: .2; }
+  .mga-sketch svg { min-height: 430px; transform: translateX(-22%); }
+  .mga-block.is-sketch-visible .mga-sketch { opacity: .24; }
   .mga-inner { min-height: auto; padding: 84px 24px; justify-content: flex-end; text-align: right; }
   .mga-copy { justify-items: start; }
   .mga-kicker { max-width: 320px; font-size: 16px; }
