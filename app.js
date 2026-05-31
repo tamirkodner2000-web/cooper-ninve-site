@@ -1048,7 +1048,7 @@ function renderChrome(path) {
     ["/claims", english ? "Servicing" : "תביעות"],
     ["/knowledge-center", english ? "Insights" : "מרכז ידע"],
     ["/about-us", english ? "About" : "אודות"],
-    ["/contact-us", english ? "Partner With Us" : "צור קשר"],
+    ...(!english ? [["/contact-us", "צור קשר"]] : []),
   ];
   mainNav.setAttribute("aria-label", english ? "Main navigation" : "ניווט ראשי");
   mainNav.innerHTML = `${navItems.map(([href, label]) => `<a href="${link(href)}">${label}</a>`).join("")}<a class="language-switcher nav-language-switcher" href="${matchingLanguagePath(path, !english)}">${english ? "עברית / HE" : "EN"}</a>`;
@@ -1064,10 +1064,12 @@ function renderChrome(path) {
 
   const headerActions = document.querySelector(".header-actions");
   if (headerActions) {
-    headerActions.innerHTML = `
-      <a class="header-cta" href="${link("/contact-us")}" data-track="click_quote_cta">${english ? "Partner With Us" : "הגשת סיכון"}</a>
-      <a class="header-link" href="${link("/contact-us")}">${english ? "Contact Us" : "צור קשר"}</a>
-      <a class="language-switcher header-language-switcher" href="${matchingLanguagePath(path, !english)}">${english ? "עברית / HE" : "EN"}</a>`;
+    headerActions.innerHTML = english
+      ? `<a class="header-cta" href="${link("/contact-us")}" data-track="click_quote_cta">Partner With Us</a>
+      <a class="language-switcher header-language-switcher" href="${matchingLanguagePath(path, false)}">עברית / HE</a>`
+      : `<a class="header-cta" href="${link("/contact-us")}" data-track="click_quote_cta">הגשת סיכון</a>
+      <a class="header-link" href="${link("/contact-us")}">צור קשר</a>
+      <a class="language-switcher header-language-switcher" href="${matchingLanguagePath(path, true)}">EN</a>`;
   }
 
   const footer = document.querySelector(".site-footer");
