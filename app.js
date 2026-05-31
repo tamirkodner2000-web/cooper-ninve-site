@@ -1403,8 +1403,8 @@ function englishDistributionTemplate() {
       <div class="container hero-inner">
         <div class="hero-copy">
           <p class="eyebrow">Distribution</p>
-          <h1 class="hero-title">Access to Israeli Insurance Distribution</h1>
-          <p class="lead">Cooper Ninve works with Israeli insurance distribution channels and market participants to help international partners access organized local risk flow, underwriting information and market coordination.</p>
+          <h1 class="hero-title">Complex Liability Risks Are Our Starting Point</h1>
+          <p class="lead">Cooper Ninve is Israel’s specialist liability underwriting agency, built to support risks that standard local-market solutions do not properly address.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Discuss Distribution Access</a>
             <a class="btn btn-secondary" href="${link("/insurance-solutions")}">View Lines of Business</a>
@@ -1413,9 +1413,9 @@ function englishDistributionTemplate() {
         <aside class="hero-card hero-why-card">
           <h2>Distribution value</h2>
           <ul>
-            <li>Local Israeli distribution relationships</li>
-            <li>Structured risk intake and documentation</li>
-            <li>Underwriting information in local context</li>
+            <li>Specialist liability insurance focus</li>
+            <li>Structured underwriting review</li>
+            <li>Local market context</li>
             <li>Coordination with international markets</li>
           </ul>
         </aside>
