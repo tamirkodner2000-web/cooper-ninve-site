@@ -1241,24 +1241,17 @@ function initDistributionCounters() {
       return;
     }
 
-    const duration = 2500;
+    const duration = 1800;
     const start = performance.now();
     const finishTimer = window.setTimeout(() => {
       counter.textContent = "1,000+";
     }, duration + 120);
-    counter.textContent = "1";
+    counter.textContent = "0";
 
     const tick = (now) => {
       const t = Math.min((now - start) / duration, 1);
-      let value;
-
-      if (t < 0.18) {
-        value = Math.max(1, Math.floor(1 + (t / 0.18) * 2));
-      } else {
-        const progress = (t - 0.18) / 0.82;
-        const eased = 1 - Math.pow(1 - progress, 3);
-        value = Math.round(3 + eased * 997);
-      }
+      const eased = 1 - Math.pow(1 - t, 2.2);
+      const value = Math.round(eased * 1000);
 
       counter.textContent = t >= 1 ? "1,000+" : formatCounter(value);
       if (t >= 1) window.clearTimeout(finishTimer);
