@@ -314,8 +314,8 @@ const englishMeta = {
     description: "Cooper Ninve supports insurers, syndicates, MGAs and capacity providers with local underwriting insight, distribution access, policy servicing and claims coordination in Israel.",
   },
   "/insurance-solutions": {
-    title: "Insurance Solutions for Businesses and Complex Risks | Cooper Ninve",
-    description: "Advanced insurance solutions in professional liability, cyber, contractors all risks, medical malpractice, liabilities and special risks.",
+    title: "Underwriting Lines in Israel | Cooper Ninve",
+    description: "Cooper Ninve supports selected specialty and commercial lines in Israel through local underwriting insight, risk information gathering, policy administration and market coordination, subject to appetite, authority and underwriting approval.",
   },
   "/insurance-agents": {
     title: "Underwriting Solutions for Insurance Agents | Cooper Ninve",
@@ -1080,7 +1080,7 @@ function renderChrome(path) {
 }
 
 function footerHtml(english, path = "/") {
-  const englishPartnerFooter = english && path === "/contact-us";
+  const englishPartnerFooter = english && (path === "/contact-us" || path === "/insurance-solutions");
   const footerGroups = englishPartnerFooter ? [
     ["Cooper Ninve", [["About", "/about-us"], ["Home", "/"], ["Insights", "/knowledge-center"]]],
     ["For Partners", [["Partner With Us", "/contact-us"], ["Underwriting Lines", "/insurance-solutions"], ["Servicing", "/claims"]]],
@@ -1263,6 +1263,7 @@ function breadcrumb(path, current) {
 
 function standardTemplate(page, path) {
   if (isEnglish() && path === "/") return englishHomeTemplate();
+  if (isEnglish() && path === "/insurance-solutions") return englishUnderwritingLinesTemplate();
   if (isEnglish() && path === "/contact-us") return englishContactTemplate();
   if (path === "/insurance-solutions") return sections(page.sections, path);
   if (path === "/about-us") return `${breadcrumb(path, page.h1)}${sections(page.sections, path)}`;
@@ -1391,6 +1392,34 @@ function englishPartnerContactForm() {
     <p class="form-note">Details are used only to respond to your inquiry and assess potential fit.</p>
     <button class="btn btn-primary" type="submit" data-track="form_submit_general">Send Partner Inquiry</button>
   </form>`;
+}
+
+function englishUnderwritingLinesTemplate() {
+  const lines = [
+    { title: "Professional Liability", icon: "◎", text: "Specialty professional exposures reviewed with local risk information, policy terms and agreed underwriting appetite.", url: "/professional-liability-insurance", cta: "View Line" },
+    { title: "Cyber", icon: "◈", text: "Cyber submissions supported by Israeli market context, documentation review and coordination with relevant markets.", url: "/cyber-insurance", cta: "View Line" },
+    { title: "Third-Party Liability", icon: "◇", text: "Commercial liability exposures considered with local operating, contractual and servicing context.", url: "/liability-insurance", cta: "View Line" },
+    { title: "Employers’ Liability", icon: "▥", text: "Employers’ liability opportunities reviewed subject to appetite, policy terms and underwriting approval.", url: "/employers-liability-insurance", cta: "View Line" },
+    { title: "Product Liability", icon: "▣", text: "Product-related exposures for manufacturers, importers and distributors assessed with Israeli market information.", url: "/product-liability-insurance", cta: "View Line" },
+    { title: "Contractors’ All Risks", icon: "▧", text: "Construction and project risks supported through local project context, documentation and market coordination.", url: "/contractors-all-risks-insurance", cta: "View Line" },
+    { title: "Medical Malpractice", icon: "✚", text: "Healthcare and professional medical exposures reviewed according to underwriting appetite and policy terms.", url: "/medical-malpractice-insurance", cta: "View Line" },
+    { title: "Directors’ and Officers’ Liability (D&O)", icon: "◉", text: "Management liability exposures considered with local corporate, governance and risk information.", url: "/directors-and-officers-insurance", cta: "View Line" },
+    { title: "Media and Film Production", icon: "▤", text: "Selected production risks reviewed where local documentation and market appetite support further consideration.", url: "/media-production-insurance", cta: "View Line" },
+    { title: "Special Risks", icon: "◌", text: "Non-standard and complex risks reviewed where appetite, authority and market approval allow.", url: "/special-risks-insurance", cta: "View Line" },
+  ];
+  return `
+    <section class="section section-navy">
+      <div class="container">
+        <div class="center-title">
+          <h1>Underwriting Lines in Israel</h1>
+          <p>Cooper Ninve supports selected specialty and commercial lines in Israel through local underwriting insight, risk information gathering, policy administration and market coordination, subject to appetite, authority and underwriting approval.</p>
+        </div>
+        ${cards(lines, 5)}
+        <div class="section-actions">
+          <a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Discuss Underwriting Appetite</a>
+        </div>
+      </div>
+    </section>`;
 }
 
 function cards(items, cols = 3) {
