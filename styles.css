@@ -103,10 +103,6 @@ button:disabled {
     stroke-dashoffset: 0;
     transition: none;
   }
-  .mga-sketch.is-sketch-reveal {
-    clip-path: inset(0 0 0 0);
-    filter: none;
-  }
 }
 .container { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
 .skip-link {
@@ -396,7 +392,7 @@ h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; l
   opacity: 0;
   pointer-events: none;
   transform: translateX(-3%) translateY(14px);
-  transition: opacity 700ms var(--ease-premium), transform 900ms var(--ease-premium), clip-path 1900ms var(--ease-premium), filter 1500ms var(--ease-premium);
+  transition: opacity 700ms var(--ease-premium), transform 900ms var(--ease-premium);
 }
 .mga-sketch svg {
   width: 100%;
@@ -414,20 +410,12 @@ h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; l
 .mga-sketch-detail {
   transition-duration: var(--draw-duration, 2100ms);
 }
-.mga-sketch.is-sketch-reveal {
-  clip-path: inset(0 100% 0 0);
-  filter: contrast(1.06) brightness(1.02);
-}
 .mga-block.is-sketch-visible .mga-sketch {
   opacity: .82;
   transform: translateX(0) translateY(0);
 }
 .mga-block.is-sketch-visible .mga-sketch-line {
   stroke-dashoffset: 0;
-}
-.mga-block.is-sketch-visible .mga-sketch.is-sketch-reveal {
-  clip-path: inset(0 0 0 0);
-  filter: contrast(1) brightness(1);
 }
 .mga-inner {
   position: relative;
