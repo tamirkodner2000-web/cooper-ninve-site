@@ -290,6 +290,32 @@ button:disabled {
   justify-self: start;
   width: 410px;
 }
+body.lang-he .hero-home .hero-inner {
+  width: min(1120px, calc(100% - 40px));
+  min-height: 640px;
+  grid-template-columns: minmax(0, 760px);
+  grid-template-areas: "copy";
+  direction: ltr;
+  justify-content: end;
+  gap: 0;
+  padding: 104px 0 92px;
+}
+body.lang-he .hero-home .hero-copy {
+  justify-self: end;
+  max-width: 760px;
+  padding-inline-start: clamp(0px, 6vw, 72px);
+}
+body.lang-he .hero-home h1 {
+  max-width: 720px;
+}
+body.lang-he .hero-home p.lead {
+  max-width: 620px;
+  margin-top: 28px;
+}
+body.lang-he .hero-home .hero-actions {
+  justify-content: flex-start;
+  margin-top: 36px;
+}
 .eyebrow {
   color: #8fd0ff;
   font-weight: 800;
@@ -1411,6 +1437,21 @@ body.lang-en .footer-grid a:hover {
   .hero-home .hero-why-card {
     justify-self: center;
   }
+  body.lang-he .hero-home .hero-inner {
+    width: min(100%, calc(100vw - 40px));
+    min-height: auto;
+    grid-template-areas: "copy";
+    justify-content: center;
+    padding: 76px 0 66px;
+  }
+  body.lang-he .hero-home .hero-copy {
+    justify-self: center;
+    max-width: 720px;
+    padding-inline-start: 0;
+  }
+  body.lang-he .hero-home p.lead {
+    max-width: 600px;
+  }
   .underwriting-bridge {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
@@ -1481,6 +1522,21 @@ body.lang-en .footer-grid a:hover {
   }
   .hero-actions { justify-content: center; }
   .hero-home .hero-actions { justify-content: flex-end; max-width: 330px; margin-inline: auto; }
+  body.lang-he .hero-home .hero-inner {
+    width: calc(100vw - 28px);
+    padding: 58px 0 48px;
+  }
+  body.lang-he .hero-home .hero-copy {
+    max-width: 350px;
+  }
+  body.lang-he .hero-home p.lead {
+    max-width: 330px;
+  }
+  body.lang-he .hero-home .hero-actions {
+    max-width: 330px;
+    margin-inline: auto;
+    margin-top: 28px;
+  }
   .btn { padding: 11px 16px; min-height: 44px; font-size: 14px; }
   .hero-card { width: min(100%, 300px); max-width: 100%; justify-self: center; padding: 22px 18px; text-align: right; }
   .hero-home .hero-why-card { width: min(100%, 330px); }

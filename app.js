@@ -1344,6 +1344,7 @@ function renderPartnerLogos() {
 
 function hero(page) {
   const isHomeHero = page.sections === "home";
+  const showHeroCard = !(isHomeHero && !isEnglish());
   const heroTitle = page.positioning
     ? `<h1 class="hero-title"><span class="hero-title-line">${page.h1}</span><br><span class="hero-title-line">${page.positioning.replace(/\n/g, "</span><br><span class=\"hero-title-line\">")}</span></h1>`
     : `<h1 class="hero-title">${page.h1}</h1>`;
@@ -1359,10 +1360,10 @@ function hero(page) {
             <a class="btn btn-secondary" href="${link(page.secondary[1])}">${page.secondary[0]}</a>
           </div>
         </div>
-        <aside class="hero-card hero-why-card">
+        ${showHeroCard ? `<aside class="hero-card hero-why-card">
           <h2>למה קופר נינוה?</h2>
           <ul>${(page.highlights || ["חיתום ושירות מקומי", "גישה לשווקים בינלאומיים", "ניסיון בסיכונים מורכבים", "עבודה עם סוכנים ועסקים"]).map((x) => `<li>${x}</li>`).join("")}</ul>
-        </aside>
+        </aside>` : ""}
       </div>
     </section>`;
 }
