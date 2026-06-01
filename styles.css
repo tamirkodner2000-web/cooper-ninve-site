@@ -422,11 +422,11 @@ h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; l
 .mga-sketch-line {
   stroke-dasharray: 1;
   stroke-dashoffset: 1;
-  transition: stroke-dashoffset var(--draw-duration, 1700ms) var(--ease-premium);
+  transition: stroke-dashoffset var(--draw-duration, 2200ms) var(--ease-premium);
   transition-delay: var(--line-delay, 0ms);
 }
 .mga-sketch-detail {
-  transition-duration: var(--draw-duration, 2100ms);
+  transition-duration: var(--draw-duration, 2600ms);
 }
 .mga-block.is-sketch-visible .mga-sketch {
   opacity: .82;
