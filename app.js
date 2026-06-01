@@ -1290,6 +1290,25 @@ function initSketchVisuals() {
       const response = await fetch(src, { cache: "force-cache" });
       if (!response.ok) throw new Error(`Sketch asset failed: ${response.status}`);
       block.innerHTML = await response.text();
+      const svg = block.querySelector("svg");
+      const drawableItems = svg ? [...svg.querySelectorAll("path, line, polyline, polygon, rect, circle, ellipse")] : [];
+      const fillItems = drawableItems.filter((item) => {
+        const fill = item.getAttribute("fill");
+        return fill && fill !== "none" && fill !== "transparent";
+      });
+      const strokeItems = drawableItems.filter((item) => item.getAttribute("stroke") && item.getAttribute("stroke") !== "none");
+      const useStrokeDraw = strokeItems.length > 0 && fillItems.length <= strokeItems.length * 0.25;
+
+      if (useStrokeDraw) {
+        strokeItems.forEach((item, index) => {
+          item.classList.add("mga-sketch-line");
+          item.setAttribute("pathLength", "1");
+          item.style.setProperty("--line-delay", `${Math.min(index * 24, 760)}ms`);
+        });
+      } else {
+        block.classList.add("is-sketch-reveal");
+      }
+
       block.classList.add("is-sketch-ready");
 
       if (motionQuery.matches || !("IntersectionObserver" in window)) {
@@ -1591,7 +1610,7 @@ function homeSections() {
 }
 
 function mgaPositioningBlock() {
-  return `<section class="mga-block" aria-labelledby="mga-title"><div class="mga-sketch" data-sketch-src="/assets/lloyds-building-sketch.svg" aria-hidden="true"></div><div class="mga-inner"><div class="mga-copy"><p class="mga-kicker">לא עוד סוכנות ביטוח, תקראו לנו חברת חיתום.</p><h2 id="mga-title">קופר נינוה היא <span>M.G.A</span></h2><strong>גוף המאגר תחתיו מספר חתמים ממעבר לים אשר נתנו לו סמכויות חיתום נרחבות.</strong><p>כלומר, גוף המחזיק סמכויות נרחבות לרבות:תמחור, חיתום ויישוב תביעות מקומי בשם החתמים מעבר לים. M.G.A הוא ONE STOP SHOP המבצע ניהול בחינה והכוונת תיקים בהתאם לתחומי המומחיות של המבטחים העומדים מאחוריו.</p><a class="btn btn-primary" href="/about-us">עוד על קופר נינוה</a></div></div></section>`;
+  return `<section class="mga-block" aria-labelledby="mga-title"><div class="mga-sketch" data-sketch-src="/assets/backgrounds/lloyds-building-sketch.svg" aria-hidden="true"></div><div class="mga-inner"><div class="mga-copy"><p class="mga-kicker">לא עוד סוכנות ביטוח, תקראו לנו חברת חיתום.</p><h2 id="mga-title">קופר נינוה היא <span>M.G.A</span></h2><strong>גוף המאגר תחתיו מספר חתמים ממעבר לים אשר נתנו לו סמכויות חיתום נרחבות.</strong><p>כלומר, גוף המחזיק סמכויות נרחבות לרבות:תמחור, חיתום ויישוב תביעות מקומי בשם החתמים מעבר לים. M.G.A הוא ONE STOP SHOP המבצע ניהול בחינה והכוונת תיקים בהתאם לתחומי המומחיות של המבטחים העומדים מאחוריו.</p><a class="btn btn-primary" href="/about-us">עוד על קופר נינוה</a></div></div></section>`;
 }
 
 function lloydsAdvantagesSection() {
