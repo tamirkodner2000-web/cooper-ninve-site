@@ -99,6 +99,12 @@ button:disabled {
     opacity: .72;
     transform: none;
   }
+  .mga-sketch.is-sketch-enhanced,
+  .mga-sketch.is-sketch-reveal,
+  .mga-block.is-sketch-visible .mga-sketch.is-sketch-reveal {
+    clip-path: none;
+    filter: none;
+  }
   .mga-sketch-line {
     stroke-dashoffset: 0;
     transition: none;
@@ -389,17 +395,29 @@ h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; l
   inset-block: 7%;
   inset-inline-start: 0;
   width: min(58vw, 780px);
-  opacity: 0;
+  opacity: .82;
   pointer-events: none;
-  transform: translateX(-3%) translateY(14px);
-  transition: opacity 700ms var(--ease-premium), transform 900ms var(--ease-premium);
+  transform: translateX(0) translateY(0);
+  transition: opacity 700ms var(--ease-premium), transform 900ms var(--ease-premium), clip-path 2100ms var(--ease-premium), filter 1600ms var(--ease-premium);
 }
-.mga-sketch svg {
+.mga-sketch svg,
+.mga-sketch img {
   width: 100%;
   height: 100%;
   min-height: 560px;
   display: block;
   overflow: visible;
+}
+.mga-sketch img {
+  object-fit: contain;
+}
+.mga-sketch.is-sketch-enhanced {
+  opacity: 0;
+  transform: translateX(-3%) translateY(14px);
+}
+.mga-sketch.is-sketch-reveal {
+  clip-path: polygon(0 0, 9% 0, 0 100%, 0 100%);
+  filter: contrast(1.08) brightness(1.04);
 }
 .mga-sketch-line {
   stroke-dasharray: 1;
@@ -416,6 +434,10 @@ h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; l
 }
 .mga-block.is-sketch-visible .mga-sketch-line {
   stroke-dashoffset: 0;
+}
+.mga-block.is-sketch-visible .mga-sketch.is-sketch-reveal {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  filter: contrast(1) brightness(1);
 }
 .mga-inner {
   position: relative;
