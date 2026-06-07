@@ -290,10 +290,11 @@ button:disabled {
   justify-self: start;
   width: 410px;
 }
-body.lang-he .hero-home .hero-inner {
+body.lang-he .hero-home .hero-inner,
+body.lang-he .hero-home .hero-split-layout {
   width: min(1180px, calc(100% - 40px));
   min-height: 610px;
-  grid-template-columns: minmax(300px, 380px) minmax(0, 690px);
+  grid-template-columns: minmax(320px, .38fr) minmax(0, .58fr);
   grid-template-areas: "trust copy";
   direction: ltr;
   justify-content: center;
@@ -379,8 +380,8 @@ h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; l
   direction: rtl;
   align-self: center;
   justify-self: start;
-  width: min(100%, 380px);
-  padding: 30px 32px 28px;
+  width: min(100%, 410px);
+  padding: 28px 30px 26px;
   border: 1px solid rgba(255,255,255,.18);
   border-radius: 12px;
   background:
@@ -389,8 +390,38 @@ h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; l
   box-shadow: 0 24px 58px rgba(0,0,0,.18);
   backdrop-filter: blur(12px);
 }
-.hero-trust-card p {
-  margin: 18px 0 0;
+.hero-trust-card-title {
+  margin: 0 0 20px;
+  color: rgba(255,255,255,.86);
+  font-size: 18px;
+  font-weight: 900;
+}
+.hero-trust-card-inner {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+}
+.hero-trust-card .hero-trust-metric {
+  display: grid;
+  justify-content: stretch;
+  align-items: start;
+  gap: 8px;
+  padding: 4px 22px 6px;
+}
+.hero-trust-card .hero-trust-metric + .hero-trust-metric {
+  border-block-start: 0;
+  border-inline-end: 1px solid rgba(255,255,255,.16);
+}
+.hero-trust-card .hero-trust-metric strong {
+  min-width: 0;
+  font-size: clamp(46px, 4.6vw, 62px);
+}
+.hero-trust-card .hero-trust-metric span {
+  color: rgba(255,255,255,.72);
+  font-size: 15px;
+}
+.hero-trust-card-note {
+  margin: 22px 0 0;
   padding-top: 18px;
   border-block-start: 1px solid rgba(255,255,255,.12);
   color: rgba(255,255,255,.78);
@@ -1528,7 +1559,8 @@ body.lang-en .footer-grid a:hover {
   .hero-home .hero-why-card {
     justify-self: center;
   }
-  body.lang-he .hero-home .hero-inner {
+  body.lang-he .hero-home .hero-inner,
+  body.lang-he .hero-home .hero-split-layout {
     width: min(100%, calc(100vw - 40px));
     min-height: auto;
     grid-template-columns: minmax(0, 1fr);
@@ -1641,7 +1673,8 @@ body.lang-en .footer-grid a:hover {
   }
   .hero-actions { justify-content: center; }
   .hero-home .hero-actions { justify-content: flex-end; max-width: 330px; margin-inline: auto; }
-  body.lang-he .hero-home .hero-inner {
+  body.lang-he .hero-home .hero-inner,
+  body.lang-he .hero-home .hero-split-layout {
     width: calc(100vw - 28px);
     gap: 24px;
     padding: 46px 0 40px;
@@ -1664,7 +1697,17 @@ body.lang-en .footer-grid a:hover {
     width: min(100%, 330px);
     padding: 21px 22px 20px;
   }
-  body.lang-he .hero-home .hero-trust-card p {
+  body.lang-he .hero-home .hero-trust-card-title {
+    margin-bottom: 14px;
+    font-size: 16px;
+  }
+  body.lang-he .hero-home .hero-trust-card .hero-trust-metric {
+    padding: 2px 14px 4px;
+  }
+  body.lang-he .hero-home .hero-trust-card .hero-trust-metric strong {
+    font-size: 34px;
+  }
+  body.lang-he .hero-home .hero-trust-card-note {
     margin-top: 12px;
     padding-top: 13px;
     font-size: 14px;

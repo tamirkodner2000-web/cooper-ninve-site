@@ -44,7 +44,7 @@ const pages = {
       ["5", "מבטחי משנה"],
       ["1,000+", "סוכני ביטוח"],
     ],
-    primary: ["צור קשר", "/contact-us"],
+    primary: ["הגשת סיכון", "/contact-us"],
     secondary: ["פתרונות לסוכני ביטוח", "/insurance-agents"],
     highlights: ["פעילות מול חתמי Lloyd’s ושווקים בינלאומיים", "פתרונות לסיכונים מורכבים", "חיתום ושירות מקומי בישראל", "עבודה מול סוכני ביטוח ועסקים", "פוליסות ושירות מותאמים לשוק הישראלי"],
     sections: "home",
@@ -1362,26 +1362,36 @@ function hero(page) {
     const suffix = value.includes("+") ? "+" : "";
     return `<div class="hero-trust-metric"><strong data-count-to="${countTo}" data-count-suffix="${suffix}" data-count-final="${value}" data-count-duration="1600">${value}</strong><span>${label}</span></div>`;
   };
-  const hebrewHomeTitle = isHebrewHomeHero ? `
-          <h1 class="hero-title">${page.h1}</h1>
-          <p class="hero-positioning">${page.positioning}</p>
-          <p class="lead">${page.lead}</p>`
-    : "";
-  const hebrewHomeTrustCard = isHebrewHomeHero ? `
+  if (isHebrewHomeHero) {
+    return `
+    <section class="hero hero-home">
+      <div class="container hero-inner hero-split-layout">
         <aside class="hero-trust-card" aria-label="נתוני אמון">
+          <p class="hero-trust-card-title">אמון שמגובה במספרים</p>
           <div class="hero-trust-card-inner">
             ${page.trustMetrics.map(heroMetric).join("")}
           </div>
-          <p>גישה לשווקים בינלאומיים</p>
-        </aside>`
-    : "";
+          <p class="hero-trust-card-note">גישה לשווקים בינלאומיים</p>
+        </aside>
+        <div class="hero-copy">
+          <h1 class="hero-title">${page.h1}</h1>
+          <p class="hero-positioning">${page.positioning}</p>
+          <p class="lead">${page.lead}</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="${link(page.primary[1])}" data-track="click_quote_cta">${page.primary[0]}</a>
+            <a class="btn btn-secondary" href="${link(page.secondary[1])}">${page.secondary[0]}</a>
+          </div>
+        </div>
+      </div>
+    </section>`;
+  }
   return `
     <section class="hero${isHomeHero ? " hero-home" : ""}">
       <div class="container hero-inner">
         <div class="hero-copy">
           ${page.hideEyebrow ? "" : `<p class="eyebrow">${page.eyebrow || "קופר נינוה"}</p>`}
-          ${isHebrewHomeHero ? hebrewHomeTitle : heroTitle}
-          ${isHebrewHomeHero ? "" : `<p class="lead">${page.lead}</p>`}
+          ${heroTitle}
+          <p class="lead">${page.lead}</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="${link(page.primary[1])}" data-track="click_quote_cta">${page.primary[0]}</a>
             <a class="btn btn-secondary" href="${link(page.secondary[1])}">${page.secondary[0]}</a>
@@ -1390,7 +1400,7 @@ function hero(page) {
         ${showHeroCard ? `<aside class="hero-card hero-why-card">
           <h2>למה קופר נינוה?</h2>
           <ul>${(page.highlights || ["חיתום ושירות מקומי", "גישה לשווקים בינלאומיים", "ניסיון בסיכונים מורכבים", "עבודה עם סוכנים ועסקים"]).map((x) => `<li>${x}</li>`).join("")}</ul>
-        </aside>` : hebrewHomeTrustCard}
+        </aside>` : ""}
       </div>
     </section>`;
 }
