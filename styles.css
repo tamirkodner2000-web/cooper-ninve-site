@@ -337,6 +337,36 @@ h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; l
   color: white;
   font-weight: 900;
 }
+.hero-trust-metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 28px;
+}
+.hero-trust-metric {
+  min-width: 132px;
+  padding: 16px 20px 17px;
+  border: 1px solid rgba(255,255,255,.24);
+  border-radius: var(--radius);
+  background: rgba(255,255,255,.08);
+  box-shadow: 0 18px 42px rgba(0,0,0,.14);
+  backdrop-filter: blur(10px);
+}
+.hero-trust-metric strong {
+  display: block;
+  color: white;
+  font-family: "Montserrat", "Heebo", Arial, sans-serif;
+  font-size: clamp(38px, 4.2vw, 56px);
+  font-weight: 900;
+  line-height: .96;
+}
+.hero-trust-metric span {
+  display: block;
+  margin-top: 8px;
+  color: rgba(255,255,255,.84);
+  font-weight: 800;
+  line-height: 1.25;
+}
 .hero p.lead {
   font-size: clamp(22px, 1.75vw, 26px);
   max-width: 680px;
@@ -1452,6 +1482,9 @@ body.lang-en .footer-grid a:hover {
   body.lang-he .hero-home p.lead {
     max-width: 600px;
   }
+  body.lang-he .hero-home .hero-trust-metrics {
+    max-width: 600px;
+  }
   .underwriting-bridge {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
@@ -1514,6 +1547,24 @@ body.lang-en .footer-grid a:hover {
     margin-inline: auto;
   }
   .hero-positioning { font-size: 24px; max-width: 310px; margin-inline: auto; }
+  .hero-trust-metrics {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    max-width: 330px;
+    margin: 22px auto 0;
+  }
+  .hero-trust-metric {
+    min-width: 0;
+    padding: 13px 12px 14px;
+  }
+  .hero-trust-metric strong {
+    font-size: 32px;
+  }
+  .hero-trust-metric span {
+    margin-top: 6px;
+    font-size: 14px;
+  }
   .hero p.lead { font-size: 15px; max-width: 300px; margin-inline: auto; }
   .hero-home p.lead {
     font-size: 17px;

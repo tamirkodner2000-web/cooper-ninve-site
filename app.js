@@ -37,8 +37,13 @@ const pages = {
     description: "קופר נינוה היא מרכז חיתום מתקדם ו־MGA המספק פתרונות חיתום, הפקה וניהול פוליסות לסוכני ביטוח, עסקים וסיכונים מקצועיים ומסחריים מורכבים.",
     eyebrow: "MGA ו-Coverholder בישראל",
     hideEyebrow: true,
-    h1: "קודם כל יושרה.<br>קופר נינוה,<br>מרכז חיתום הבנוי לעתיד.",
-    lead: "קופר נינוה מנהלת תיקים בשם-5 מבטחי משנה בשוק בישראל, ומספקת שירות לקרוב ל-1,000 סוכני ביטוח.",
+    h1: "קודם כל יושרה",
+    positioning: "מרכז חיתום הבנוי לעתיד",
+    lead: "קופר נינוה מנהלת תיקים בשם מבטחי משנה בשוק בישראל, ומספקת שירות לרשת רחבה של סוכני ביטוח.",
+    trustMetrics: [
+      ["5", "מבטחי משנה"],
+      ["1,000+", "סוכני ביטוח"],
+    ],
     primary: ["צור קשר", "/contact-us"],
     secondary: ["פתרונות לסוכני ביטוח", "/insurance-agents"],
     highlights: ["פעילות מול חתמי Lloyd’s ושווקים בינלאומיים", "פתרונות לסיכונים מורכבים", "חיתום ושירות מקומי בישראל", "עבודה מול סוכני ביטוח ועסקים", "פוליסות ושירות מותאמים לשוק הישראלי"],
@@ -1345,15 +1350,23 @@ function renderPartnerLogos() {
 function hero(page) {
   const isHomeHero = page.sections === "home";
   const showHeroCard = !(isHomeHero && !isEnglish());
+  const isHebrewHomeHero = isHomeHero && !isEnglish();
   const heroTitle = page.positioning
     ? `<h1 class="hero-title"><span class="hero-title-line">${page.h1}</span><br><span class="hero-title-line">${page.positioning.replace(/\n/g, "</span><br><span class=\"hero-title-line\">")}</span></h1>`
     : `<h1 class="hero-title">${page.h1}</h1>`;
+  const hebrewHomeTitle = isHebrewHomeHero ? `
+          <h1 class="hero-title">${page.h1}</h1>
+          <p class="hero-positioning">${page.positioning}</p>
+          <div class="hero-trust-metrics" aria-label="נתוני אמון">
+            ${page.trustMetrics.map(([value, label]) => `<div class="hero-trust-metric"><strong>${value}</strong><span>${label}</span></div>`).join("")}
+          </div>`
+    : "";
   return `
     <section class="hero${isHomeHero ? " hero-home" : ""}">
       <div class="container hero-inner">
         <div class="hero-copy">
           ${page.hideEyebrow ? "" : `<p class="eyebrow">${page.eyebrow || "קופר נינוה"}</p>`}
-          ${heroTitle}
+          ${isHebrewHomeHero ? hebrewHomeTitle : heroTitle}
           <p class="lead">${page.lead}</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="${link(page.primary[1])}" data-track="click_quote_cta">${page.primary[0]}</a>
