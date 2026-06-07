@@ -291,26 +291,28 @@ button:disabled {
   width: 410px;
 }
 body.lang-he .hero-home .hero-inner {
-  width: min(1120px, calc(100% - 40px));
-  min-height: 590px;
-  grid-template-columns: minmax(0, 820px);
+  width: min(1040px, calc(100% - 40px));
+  min-height: 560px;
+  grid-template-columns: minmax(0, 780px);
   grid-template-areas: "copy";
   direction: ltr;
-  justify-content: end;
+  justify-content: center;
   gap: 0;
-  padding: 88px 0 78px;
+  padding: 76px 0 66px;
 }
 body.lang-he .hero-home .hero-copy {
-  justify-self: end;
-  max-width: 820px;
-  padding-inline-start: clamp(0px, 4vw, 48px);
+  justify-self: center;
+  max-width: 780px;
+  padding-inline: clamp(0px, 2vw, 22px);
 }
 body.lang-he .hero-home h1 {
-  max-width: 760px;
+  max-width: 720px;
+  font-size: clamp(46px, 4.2vw, 64px);
+  line-height: 1.12;
 }
 body.lang-he .hero-home p.lead {
-  max-width: 680px;
-  margin-top: 22px;
+  max-width: 640px;
+  margin-top: 20px;
   color: rgba(255,255,255,.78);
   font-size: clamp(18px, 1.55vw, 22px);
   line-height: 1.72;
@@ -318,7 +320,7 @@ body.lang-he .hero-home p.lead {
 }
 body.lang-he .hero-home .hero-actions {
   justify-content: flex-start;
-  margin-top: 30px;
+  margin-top: 26px;
 }
 .eyebrow {
   color: #8fd0ff;
@@ -334,7 +336,7 @@ h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; l
   max-width: 760px;
 }
 .hero-positioning {
-  font-size: clamp(34px, 3.6vw, 54px);
+  font-size: clamp(32px, 3.35vw, 50px);
   line-height: 1.14;
   max-width: 760px;
   margin: 12px 0 0;
@@ -343,37 +345,36 @@ h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; l
 }
 .hero-trust-metrics {
   display: flex;
-  align-items: stretch;
-  width: min(100%, 650px);
-  margin-top: 24px;
-  border-block: 1px solid rgba(255,255,255,.2);
-  background: linear-gradient(90deg, rgba(255,255,255,.11), rgba(255,255,255,.045));
-  box-shadow: 0 18px 42px rgba(0,0,0,.12);
-  backdrop-filter: blur(10px);
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0;
+  width: fit-content;
+  max-width: 100%;
+  margin-top: 22px;
 }
 .hero-trust-metric {
-  flex: 1 1 0;
   min-width: 0;
   display: flex;
   align-items: baseline;
-  gap: 12px;
-  padding: 18px 22px 17px;
+  gap: 10px;
+  padding: 0 24px;
 }
 .hero-trust-metric + .hero-trust-metric {
-  border-inline-end: 1px solid rgba(255,255,255,.18);
+  border-inline-end: 1px solid rgba(255,255,255,.24);
 }
 .hero-trust-metric strong {
   display: block;
   color: white;
   font-family: "Montserrat", "Heebo", Arial, sans-serif;
-  font-size: clamp(38px, 4vw, 54px);
+  font-size: clamp(40px, 4.1vw, 56px);
   font-weight: 900;
   line-height: .96;
-  min-width: 1.9em;
+  min-width: 1.75em;
 }
 .hero-trust-metric span {
   display: block;
-  color: rgba(255,255,255,.82);
+  color: rgba(255,255,255,.72);
+  font-size: 15px;
   font-weight: 800;
   line-height: 1.25;
 }
@@ -1510,7 +1511,7 @@ body.lang-en .footer-grid a:hover {
     min-height: auto;
     grid-template-areas: "copy";
     justify-content: center;
-    padding: 68px 0 58px;
+    padding: 62px 0 52px;
   }
   body.lang-he .hero-home .hero-copy {
     justify-self: center;
@@ -1518,10 +1519,10 @@ body.lang-en .footer-grid a:hover {
     padding-inline-start: 0;
   }
   body.lang-he .hero-home p.lead {
-    max-width: 620px;
+    max-width: 610px;
   }
   body.lang-he .hero-home .hero-trust-metrics {
-    max-width: 620px;
+    max-width: 610px;
   }
   .underwriting-bridge {
     grid-template-columns: minmax(0, 1fr);
@@ -1586,24 +1587,23 @@ body.lang-en .footer-grid a:hover {
   }
   .hero-positioning { font-size: 24px; max-width: 310px; margin-inline: auto; }
   .hero-trust-metrics {
-    gap: 10px;
     max-width: 330px;
-    margin: 20px auto 0;
+    margin: 18px auto 0;
   }
   .hero-trust-metric {
     display: grid;
-    gap: 5px;
-    padding: 12px 13px 13px;
+    gap: 4px;
+    padding: 0 14px;
   }
   .hero-trust-metric + .hero-trust-metric {
-    border-inline-end: 1px solid rgba(255,255,255,.18);
+    border-inline-end: 1px solid rgba(255,255,255,.22);
   }
   .hero-trust-metric strong {
     min-width: 0;
-    font-size: 30px;
+    font-size: 31px;
   }
   .hero-trust-metric span {
-    font-size: 14px;
+    font-size: 13px;
   }
   .hero p.lead { font-size: 15px; max-width: 300px; margin-inline: auto; }
   .hero-home p.lead {
@@ -1615,7 +1615,7 @@ body.lang-en .footer-grid a:hover {
   .hero-home .hero-actions { justify-content: flex-end; max-width: 330px; margin-inline: auto; }
   body.lang-he .hero-home .hero-inner {
     width: calc(100vw - 28px);
-    padding: 50px 0 42px;
+    padding: 46px 0 38px;
   }
   body.lang-he .hero-home .hero-copy {
     max-width: 350px;
