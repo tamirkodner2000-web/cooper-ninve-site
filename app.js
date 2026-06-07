@@ -1181,10 +1181,10 @@ function translateTextNodes(root) {
 function initAnimations() {
   if (revealObserver) revealObserver.disconnect();
 
-  const heroItems = [...app.querySelectorAll(".hero .eyebrow, .hero-title, .hero-positioning, .hero .lead, .hero-trust-card, .hero-actions .btn, .hero-card")];
+  const heroItems = [...app.querySelectorAll(".hero .eyebrow, .hero-title, .hero-positioning, .hero .lead, .hero-actions .btn, .hero-card")];
   const heroCardItems = [...app.querySelectorAll(".hero-card li")];
   const scrollItems = [
-    ...app.querySelectorAll(".card, .workflow-card, .feature-list li, .step, .partner-logo-card"),
+    ...app.querySelectorAll(".card, .workflow-card, .feature-list li, .step, .partner-logo-card, .home-counter-card"),
   ];
   const animatedItems = [...heroItems, ...heroCardItems, ...scrollItems];
 
@@ -1275,15 +1275,22 @@ function initDistributionCounters() {
     return;
   }
 
+  const homeCounterBlocks = [...app.querySelectorAll(".home-counters")];
+  const standaloneCounters = counters.filter((counter) => !counter.closest(".home-counters"));
+
   counterObserver = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (!entry.isIntersecting) return;
-      animateCounter(entry.target);
+      const blockCounters = entry.target.matches(".home-counters")
+        ? [...entry.target.querySelectorAll("[data-count-to]")]
+        : [entry.target];
+      blockCounters.forEach(animateCounter);
       counterObserver.unobserve(entry.target);
     });
   }, { rootMargin: "0px 0px -14% 0px", threshold: 0.25 });
 
-  counters.forEach((counter) => counterObserver.observe(counter));
+  homeCounterBlocks.forEach((block) => counterObserver.observe(block));
+  standaloneCounters.forEach((counter) => counterObserver.observe(counter));
 }
 
 function initSketchVisuals() {
@@ -1357,22 +1364,10 @@ function hero(page) {
   const heroTitle = page.positioning
     ? `<h1 class="hero-title"><span class="hero-title-line">${page.h1}</span><br><span class="hero-title-line">${page.positioning.replace(/\n/g, "</span><br><span class=\"hero-title-line\">")}</span></h1>`
     : `<h1 class="hero-title">${page.h1}</h1>`;
-  const heroMetric = ([value, label]) => {
-    const countTo = value.replace(/[^\d]/g, "");
-    const suffix = value.includes("+") ? "+" : "";
-    return `<div class="hero-trust-metric"><strong data-count-to="${countTo}" data-count-suffix="${suffix}" data-count-final="${value}" data-count-duration="1600">${value}</strong><span>${label}</span></div>`;
-  };
   if (isHebrewHomeHero) {
     return `
     <section class="hero hero-home">
-      <div class="container hero-inner hero-split-layout">
-        <aside class="hero-trust-card" aria-label="נתוני אמון">
-          <p class="hero-trust-card-title">אמון שמגובה במספרים</p>
-          <div class="hero-trust-card-inner">
-            ${page.trustMetrics.map(heroMetric).join("")}
-          </div>
-          <p class="hero-trust-card-note">גישה לשווקים בינלאומיים</p>
-        </aside>
+      <div class="container hero-inner">
         <div class="hero-copy">
           <h1 class="hero-title">${page.h1}</h1>
           <p class="hero-positioning">${page.positioning}</p>
@@ -1640,12 +1635,30 @@ function sections(type, path) {
 
 function homeSections() {
   return `
+    ${homeCountersBlock()}
     ${mgaPositioningBlock()}
     ${lloydsAdvantagesSection()}
     ${agentJourneySection()}
     ${insightsSection()}
     ${partnerLogosSection()}
     ${homepageLeadForm()}`;
+}
+
+function homeCountersBlock() {
+  const counters = [
+    ["5", "מבטחי משנה"],
+    ["1,000+", "סוכנויות ביטוח"],
+    ["10,000+", "לקוחות מרוצים"],
+  ];
+  return `<section class="home-counters" aria-label="נתוני אמון">
+    <div class="container home-counters-inner">
+      ${counters.map(([value, label]) => {
+        const countTo = value.replace(/[^\d]/g, "");
+        const suffix = value.includes("+") ? "+" : "";
+        return `<article class="home-counter-card"><strong data-count-to="${countTo}" data-count-suffix="${suffix}" data-count-final="${value}" data-count-duration="1700">${value}</strong><span>${label}</span></article>`;
+      }).join("")}
+    </div>
+  </section>`;
 }
 
 function mgaPositioningBlock() {
