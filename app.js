@@ -1181,7 +1181,7 @@ function translateTextNodes(root) {
 function initAnimations() {
   if (revealObserver) revealObserver.disconnect();
 
-  const heroItems = [...app.querySelectorAll(".hero .eyebrow, .hero-title, .hero-positioning, .hero .lead, .hero-trust-metrics, .hero-actions .btn, .hero-card")];
+  const heroItems = [...app.querySelectorAll(".hero .eyebrow, .hero-title, .hero-positioning, .hero .lead, .hero-trust-card, .hero-actions .btn, .hero-card")];
   const heroCardItems = [...app.querySelectorAll(".hero-card li")];
   const scrollItems = [
     ...app.querySelectorAll(".card, .workflow-card, .feature-list li, .step, .partner-logo-card"),
@@ -1365,10 +1365,15 @@ function hero(page) {
   const hebrewHomeTitle = isHebrewHomeHero ? `
           <h1 class="hero-title">${page.h1}</h1>
           <p class="hero-positioning">${page.positioning}</p>
-          <p class="lead">${page.lead}</p>
-          <div class="hero-trust-metrics" aria-label="נתוני אמון">
+          <p class="lead">${page.lead}</p>`
+    : "";
+  const hebrewHomeTrustCard = isHebrewHomeHero ? `
+        <aside class="hero-trust-card" aria-label="נתוני אמון">
+          <div class="hero-trust-card-inner">
             ${page.trustMetrics.map(heroMetric).join("")}
-          </div>`
+          </div>
+          <p>גישה לשווקים בינלאומיים</p>
+        </aside>`
     : "";
   return `
     <section class="hero${isHomeHero ? " hero-home" : ""}">
@@ -1385,7 +1390,7 @@ function hero(page) {
         ${showHeroCard ? `<aside class="hero-card hero-why-card">
           <h2>למה קופר נינוה?</h2>
           <ul>${(page.highlights || ["חיתום ושירות מקומי", "גישה לשווקים בינלאומיים", "ניסיון בסיכונים מורכבים", "עבודה עם סוכנים ועסקים"]).map((x) => `<li>${x}</li>`).join("")}</ul>
-        </aside>` : ""}
+        </aside>` : hebrewHomeTrustCard}
       </div>
     </section>`;
 }
