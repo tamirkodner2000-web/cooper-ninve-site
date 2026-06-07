@@ -39,7 +39,7 @@ const pages = {
     hideEyebrow: true,
     h1: "קודם כל יושרה",
     positioning: "מרכז חיתום הבנוי לעתיד",
-    lead: "קופר נינוה מנהלת תיקים בשם מבטחי משנה בשוק בישראל, ומספקת שירות לרשת רחבה של סוכני ביטוח.",
+    lead: "קופר נינוה מנהלת תיקים בשם מבטחי משנה בשוק בישראל ומספקת שירות לרשת רחבה של סוכני ביטוח.",
     trustMetrics: [
       ["5", "מבטחי משנה"],
       ["1,000+", "סוכני ביטוח"],
@@ -1181,7 +1181,7 @@ function translateTextNodes(root) {
 function initAnimations() {
   if (revealObserver) revealObserver.disconnect();
 
-  const heroItems = [...app.querySelectorAll(".hero .eyebrow, .hero-title, .hero .lead, .hero-actions .btn, .hero-card")];
+  const heroItems = [...app.querySelectorAll(".hero .eyebrow, .hero-title, .hero-positioning, .hero .lead, .hero-trust-metrics, .hero-actions .btn, .hero-card")];
   const heroCardItems = [...app.querySelectorAll(".hero-card li")];
   const scrollItems = [
     ...app.querySelectorAll(".card, .workflow-card, .feature-list li, .step, .partner-logo-card"),
@@ -1237,29 +1237,32 @@ function initDistributionCounters() {
   const counters = [...app.querySelectorAll("[data-count-to]")];
   if (!counters.length) return;
 
-  const formatCounter = (value) => `${Math.min(value, 1000).toLocaleString("en-US")}${value >= 1000 ? "+" : ""}`;
+  const formatCounter = (value, suffix = "") => `${value.toLocaleString("en-US")}${suffix}`;
   const animateCounter = (counter) => {
     if (counter.dataset.counted === "true") return;
     counter.dataset.counted = "true";
+    const target = Number(counter.dataset.countTo || 0);
+    const suffix = counter.dataset.countSuffix || (target >= 1000 ? "+" : "");
+    const finalValue = counter.dataset.countFinal || formatCounter(target, suffix);
 
     if (motionQuery.matches) {
-      counter.textContent = "1,000+";
+      counter.textContent = finalValue;
       return;
     }
 
-    const duration = 1800;
+    const duration = Number(counter.dataset.countDuration || 1800);
     const start = performance.now();
     const finishTimer = window.setTimeout(() => {
-      counter.textContent = "1,000+";
+      counter.textContent = finalValue;
     }, duration + 120);
     counter.textContent = "0";
 
     const tick = (now) => {
       const t = Math.min((now - start) / duration, 1);
       const eased = 1 - Math.pow(1 - t, 2.2);
-      const value = Math.round(eased * 1000);
+      const value = Math.round(eased * target);
 
-      counter.textContent = t >= 1 ? "1,000+" : formatCounter(value);
+      counter.textContent = t >= 1 ? finalValue : formatCounter(value, suffix);
       if (t >= 1) window.clearTimeout(finishTimer);
       if (t < 1) requestAnimationFrame(tick);
     };
@@ -1354,11 +1357,17 @@ function hero(page) {
   const heroTitle = page.positioning
     ? `<h1 class="hero-title"><span class="hero-title-line">${page.h1}</span><br><span class="hero-title-line">${page.positioning.replace(/\n/g, "</span><br><span class=\"hero-title-line\">")}</span></h1>`
     : `<h1 class="hero-title">${page.h1}</h1>`;
+  const heroMetric = ([value, label]) => {
+    const countTo = value.replace(/[^\d]/g, "");
+    const suffix = value.includes("+") ? "+" : "";
+    return `<div class="hero-trust-metric"><strong data-count-to="${countTo}" data-count-suffix="${suffix}" data-count-final="${value}" data-count-duration="1600">${value}</strong><span>${label}</span></div>`;
+  };
   const hebrewHomeTitle = isHebrewHomeHero ? `
           <h1 class="hero-title">${page.h1}</h1>
           <p class="hero-positioning">${page.positioning}</p>
+          <p class="lead">${page.lead}</p>
           <div class="hero-trust-metrics" aria-label="נתוני אמון">
-            ${page.trustMetrics.map(([value, label]) => `<div class="hero-trust-metric"><strong>${value}</strong><span>${label}</span></div>`).join("")}
+            ${page.trustMetrics.map(heroMetric).join("")}
           </div>`
     : "";
   return `
@@ -1367,7 +1376,7 @@ function hero(page) {
         <div class="hero-copy">
           ${page.hideEyebrow ? "" : `<p class="eyebrow">${page.eyebrow || "קופר נינוה"}</p>`}
           ${isHebrewHomeHero ? hebrewHomeTitle : heroTitle}
-          <p class="lead">${page.lead}</p>
+          ${isHebrewHomeHero ? "" : `<p class="lead">${page.lead}</p>`}
           <div class="hero-actions">
             <a class="btn btn-primary" href="${link(page.primary[1])}" data-track="click_quote_cta">${page.primary[0]}</a>
             <a class="btn btn-secondary" href="${link(page.secondary[1])}">${page.secondary[0]}</a>
