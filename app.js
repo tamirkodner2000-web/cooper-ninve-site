@@ -1651,6 +1651,9 @@ function homeCountersBlock() {
     ["10,000+", "לקוחות מרוצים"],
   ];
   return `<section class="home-counters" aria-label="נתוני אמון">
+    <div class="container home-counters-heading">
+      <h2>כמה סיבות טובות לעבוד עם קופר נינוה</h2>
+    </div>
     <div class="container home-counters-inner">
       ${counters.map(([value, label]) => {
         const countTo = value.replace(/[^\d]/g, "");
