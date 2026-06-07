@@ -433,9 +433,6 @@ h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; l
   padding: 30px 28px 28px;
   text-align: center;
 }
-.home-counter-card + .home-counter-card {
-  border-inline-end: 1px solid rgba(220,229,238,.9);
-}
 .home-counter-card strong {
   display: block;
   color: var(--navy);
@@ -1664,10 +1661,6 @@ body.lang-en .footer-grid a:hover {
   }
   .home-counter-card {
     padding: 22px 20px 20px;
-  }
-  .home-counter-card + .home-counter-card {
-    border-inline-end: 0;
-    border-block-start: 1px solid rgba(220,229,238,.9);
   }
   .home-counter-card strong {
     font-size: 42px;
