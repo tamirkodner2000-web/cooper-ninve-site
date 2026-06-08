@@ -562,7 +562,6 @@ const enText = {
   "קופר נינוה פועלת מול שווקים, חתמים וספקי ביטוח בינלאומיים לצורך התאמת פתרונות ביטוח לסיכונים מקצועיים ומסחריים.": "Cooper Ninve works with international markets, underwriters and insurance providers to adapt insurance solutions for professional and commercial risks.",
   "השאירו פרטים לבדיקה ראשונית": "Leave Details for an Initial Review",
   "ספרו לנו מי אתם ואיזה פתרון ביטוחי נדרש, וצוות קופר נינוה יחזור אליכם להכוונה ראשונית.": "Tell us who you are and what insurance solution is required, and the Cooper Ninve team will get back to you with initial guidance.",
-  "פנייה מהירה": "Quick Inquiry",
   "שם מלא": "Full Name",
   "טלפון": "Phone",
   "אימייל": "Email",
@@ -1846,24 +1845,11 @@ function legalSections(page, path) {
 function homeSections() {
   return `
     ${homeCountersBlock()}
-    ${howCooperWorksSection()}
     ${mgaPositioningBlock()}
     ${lloydsAdvantagesSection()}
     ${agentJourneySection()}
     ${insightsSection()}
-    ${partnerLogosSection()}
-    ${homepageLeadForm()}`;
-}
-
-function howCooperWorksSection() {
-  const steps = [
-    ["קבלת סיכון", "סוכן ביטוח, עסק או שותף שוק מעביר מידע ראשוני על הסיכון, תחום הפעילות והכיסוי המבוקש."],
-    ["בחינת חיתום", "צוות קופר נינוה בוחן את החשיפה, המסמכים, ניסיון התביעות, גבולות האחריות והמידע החיתומי הנדרש."],
-    ["התאמה לשוק רלוונטי", "הסיכון נבחן מול סמכויות חיתום, תיאבון סיכון, שווקים מקומיים או בינלאומיים ואישורים נדרשים."],
-    ["הפקה ושירות", "במקרה של התאמה ואישור, מתקדם תהליך הפקה, מסמכים ושירות לאורך חיי הפוליסה."],
-    ["תביעות וליווי שוטף", "קופר נינוה מספקת ליווי תביעות, תקשורת תפעולית וניהול תהליך מול הגורמים הרלוונטיים, בכפוף לתנאי הפוליסה."],
-  ];
-  return `<section class="section"><div class="container"><div class="center-title"><p class="section-slogan">מודל עבודה חיתומי ברור.</p><h2>איך קופר נינוה עובדת</h2><p>הפעילות של קופר נינוה מחברת בין סיכונים בישראל, סוכני ביטוח, עסקים ושווקים בינלאומיים באמצעות תהליך מסודר של חיתום, הפקה, שירות ותביעות.</p></div><div class="workflow-cards">${steps.map(([title, text], index) => `<article class="workflow-card"><span>${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div></div></section>`;
+    ${partnerLogosSection()}`;
 }
 
 function homeCountersBlock() {
@@ -2060,22 +2046,6 @@ function finalCta(title, text) {
   return `<section class="section section-navy"><div class="container section-header"><div><h2>${title}</h2><p>${text}</p></div><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">${isEnglish() ? "Discuss Partnership" : "הגשת פנייה לחיתום"}</a></div></section>`;
 }
 
-function homepageLeadForm() {
-  return `<section class="section section-soft"><div class="container split-band"><div><h2>השאירו פרטים לבחינת סיכון ראשונית</h2><p>ספרו לנו מי אתם, מה אופי הסיכון ואיזה תחום חיתום רלוונטי, וצוות קופר נינוה יחזור אליכם להכוונה ראשונית.</p></div><form class="form-panel" data-form="form_submit_homepage_lead">
-    <h2>פנייה מהירה</h2>
-    <div class="form-grid">
-      <label><span>שם מלא</span><input name="name" placeholder="שם מלא" autocomplete="name"></label>
-      <label><span>טלפון</span><input name="phone" placeholder="טלפון" autocomplete="tel"></label>
-      <label><span>אימייל</span><input name="email" placeholder="אימייל" autocomplete="email"></label>
-      <label><span>אני</span><select name="audience"><option>סוכן ביטוח</option><option>בעל עסק</option><option>אחר</option></select></label>
-      <label class="full"><span>תחום חיתום / סוג סיכון</span><input name="insurance_type" placeholder="לדוגמה: סייבר, אחריות מקצועית, חבויות"></label>
-      <label class="full"><span>הודעה קצרה</span><textarea name="message" placeholder="כתבו בקצרה את הצורך או הסיכון"></textarea></label>
-    </div>
-    <p class="form-note">הפרטים ישמשו לצורך חזרה אליכם ובדיקת התאמה בלבד.</p>
-    <button class="btn btn-primary" type="submit" data-track="form_submit_homepage_lead">שליחת פנייה לחיתום</button>
-  </form></div></section>`;
-}
-
 function form(eventName, fields) {
   return `<form class="form-panel" data-form="${eventName}">
     <h2>השאירו פרטים ונחזור אליכם</h2>
@@ -2103,7 +2073,7 @@ function landingTemplate(page) {
       </div>
     </section>
     <section class="section"><div class="container"><div class="center-title"><h2>למי זה מתאים?</h2></div>${cards(page.bullets.map((title) => ({ title, icon: "◇", text: "בדיקת התאמה ראשונית בהתאם לאופי הפעילות, המידע החיתומי והצרכים הביטוחיים." })), 4)}</div></section>
-    <section class="section section-soft"><div class="container split-band"><div><h2>למה קופר נינוה?</h2><p>ניסיון בסיכונים מורכבים, גישה לשווקים בינלאומיים, חיתום ושירות מקומי ועבודה מסודרת מול סוכנים ועסקים.</p></div><ul class="feature-list">${["הגשת פנייה מהירה", "בדיקת חיתום מקצועית", "הכוונה לגבי מידע חסר", "תהליך מותאם לשוק הישראלי"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
+    <section class="section section-soft"><div class="container split-band"><div><h2>למה קופר נינוה?</h2><p>ניסיון בסיכונים מורכבים, גישה לשווקים בינלאומיים, חיתום ושירות מקומי ועבודה מסודרת מול סוכנים ועסקים.</p></div><ul class="feature-list">${["הגשת מידע ראשוני", "בדיקת חיתום מקצועית", "הכוונה לגבי מידע חסר", "תהליך מותאם לשוק הישראלי"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
     ${faqBlock([
       ["האם אפשר לפנות ישירות או דרך סוכן?", "ניתן לפנות לבדיקה ראשונית. בהתאם לסוג הפנייה, ייתכן שהתהליך יתבצע יחד עם סוכן ביטוח או באמצעותו."],
       ["כמה זמן לוקח לקבל הצעה?", "משך הזמן תלוי במורכבות הסיכון ובשלמות המידע שהועבר."],
