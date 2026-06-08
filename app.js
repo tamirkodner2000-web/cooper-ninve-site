@@ -33,55 +33,55 @@ const teamMembers = [
 
 const pages = {
   "/": {
-    title: "קופר נינוה | מרכז חיתום הבנוי לעתיד",
-    description: "קופר נינוה היא מרכז חיתום מתקדם ו־MGA המספק פתרונות חיתום, הפקה וניהול פוליסות לסוכני ביטוח, עסקים וסיכונים מקצועיים ומסחריים מורכבים.",
+    title: "קופר נינוה | ישראל - מרכז חיתום הבנוי לעתיד",
+    description: "קופר נינוה היא מרכז חיתום ישראלי, MGA ו-Coverholder המחבר בין סוכני ביטוח, עסקים ושווקי ביטוח בינלאומיים באמצעות חיתום, הפקה, שירות ותביעות.",
     eyebrow: "MGA ו-Coverholder בישראל",
     hideEyebrow: true,
-    h1: "קודם כל יושרה",
-    positioning: "מרכז חיתום הבנוי לעתיד",
-    lead: "קופר נינוה מנהלת תיקים בשם מבטחי משנה בשוק בישראל ומספקת שירות לרשת רחבה של סוכני ביטוח.",
+    h1: "קופר נינוה - מרכז חיתום ישראלי הבנוי לעתיד",
+    positioning: "חיתום, שווקים בינלאומיים ושירות מקומי לאורך חיי הפוליסה",
+    lead: "קופר נינוה מחברת בין סוכני ביטוח, עסקים ושווקי ביטוח בינלאומיים באמצעות יכולות חיתום, הפקה, שירות, תביעות וניהול תיקים בישראל, בכפוף לסמכויות חיתום, תיאבון סיכון ותנאי הפוליסה.",
     trustMetrics: [
       ["5", "מבטחי משנה"],
       ["1,000+", "סוכני ביטוח"],
     ],
-    primary: ["הגשת סיכון", "/contact-us"],
-    secondary: ["פתרונות לסוכני ביטוח", "/insurance-agents"],
-    highlights: ["פעילות מול חתמי Lloyd’s ושווקים בינלאומיים", "פתרונות לסיכונים מורכבים", "חיתום ושירות מקומי בישראל", "עבודה מול סוכני ביטוח ועסקים", "פוליסות ושירות מותאמים לשוק הישראלי"],
+    primary: ["הגשת סיכון לחיתום", "/contact-us"],
+    secondary: ["עבודה עם סוכני ביטוח", "/insurance-agents"],
+    highlights: ["MGA ו-Coverholder בישראל", "בחינת סיכונים וחיתום מקצועי", "גישה לשווקים ושותפים בינלאומיים", "הפקה, שירות ותביעות בישראל", "ניהול תיקים לאורך חיי הפוליסה"],
     sections: "home",
   },
   "/insurance-solutions": {
-    title: "פתרונות ביטוח לעסקים וסיכונים מורכבים | קופר נינוה",
-    description: "פתרונות ביטוח מתקדמים בתחומי אחריות מקצועית, סייבר, עבודות קבלניות, רשלנות רפואית, חבויות וסיכונים מיוחדים.",
-    h1: "פתרונות ביטוח לעסקים, סוכני ביטוח וסיכונים מורכבים",
-    lead: "לא כל עסק, פרויקט או בעל מקצוע חשופים לאותם סיכונים. פתרון ביטוחי נכון מתחיל בהבנת תחום הפעילות, דרישות חוזיות, ניסיון תביעות ורמת המורכבות.",
-    primary: ["לקבלת הצעה", "/contact-us"],
-    secondary: ["פתרונות לסוכני ביטוח", "/insurance-agents"],
+    title: "תחומי חיתום וסיכונים מורכבים | קופר נינוה",
+    description: "תחומי חיתום ובחינת סיכונים בתחומי אחריות מקצועית, סייבר, עבודות קבלניות, רשלנות רפואית, חבויות וסיכונים מיוחדים.",
+    h1: "תחומי חיתום ובחינת סיכונים",
+    lead: "לא כל עסק, פרויקט או בעל מקצוע חשופים לאותם סיכונים. תהליך חיתום נכון מתחיל בהבנת תחום הפעילות, דרישות חוזיות, ניסיון תביעות, גבולות אחריות ורמת המורכבות.",
+    primary: ["הגשת סיכון לחיתום", "/contact-us"],
+    secondary: ["עבודה עם סוכני ביטוח", "/insurance-agents"],
     sections: "solutions",
   },
   "/insurance-agents": {
     title: "פתרונות חיתום לסוכני ביטוח | קופר נינוה",
-    description: "קופר נינוה מספקת לסוכני ביטוח פתרונות חיתום, הפקה ושירות בתחומי אחריות מקצועית, סייבר, קבלנים, חבויות וסיכונים מיוחדים.",
+    description: "קופר נינוה מספקת לסוכני ביטוח תהליך חיתום, הפקה, שירות וליווי סיכונים בתחומי אחריות מקצועית, סייבר, קבלנים, חבויות וסיכונים מיוחדים.",
     h1: "פתרונות חיתום והפקה לסוכני ביטוח",
-    lead: "גישה לפתרונות ביטוח מתקדמים בתחומי אחריות מקצועית, סייבר, עבודות קבלניות, חבויות, רשלנות רפואית וסיכונים מיוחדים, עם יכולת חיתום ושירות מקומי.",
-    primary: ["הצטרפות כסוכן / פתיחת פנייה", "/contact-us"],
-    secondary: ["הגשת סיכון לבדיקה", "/contact-us"],
+    lead: "קופר נינוה היא שותף מקצועי לסוכני ביטוח בהגשת סיכונים, בחינת חיתום, גישה לשווקים בינלאומיים, הפקה, שירות וניהול לאורך חיי הפוליסה.",
+    primary: ["הגשת סיכון לחיתום", "/contact-us"],
+    secondary: ["תחומי חיתום", "/insurance-solutions"],
     sections: "agents",
   },
   "/business-insurance": {
-    title: "ביטוח לעסקים וחברות | קופר נינוה",
-    description: "פתרונות ביטוח לעסקים, חברות וסיכונים מורכבים בתחומי אחריות מקצועית, סייבר, עבודות קבלניות, חבויות ורשלנות רפואית.",
-    h1: "פתרונות ביטוח לעסקים, חברות וסיכונים מורכבים",
-    lead: "פתרונות ביטוח מתקדמים לעסקים וחברות תוך התאמה לאופי הפעילות, החשיפות, דרישות החוזה והצרכים המסחריים של העסק.",
-    primary: ["בדיקת התאמה לעסק", "/contact-us"],
-    secondary: ["לקבלת הצעה", "/contact-us"],
+    title: "בחינת סיכונים לעסקים וחברות | קופר נינוה",
+    description: "בחינת סיכונים ותהליך חיתום לעסקים, חברות וסיכונים מורכבים בתחומי אחריות מקצועית, סייבר, עבודות קבלניות, חבויות ורשלנות רפואית.",
+    h1: "בחינת סיכונים לעסקים, חברות וסיכונים מורכבים",
+    lead: "קופר נינוה בוחנת חשיפות עסקיות ומסחריות לפי אופי הפעילות, דרישות חוזיות, ניסיון תביעות וצרכי הכיסוי, ומקדמת תהליך חיתום מקצועי מול השווקים הרלוונטיים.",
+    primary: ["בדיקת סיכון עסקי", "/contact-us"],
+    secondary: ["תחומי חיתום", "/insurance-solutions"],
     sections: "business",
   },
   "/claims": {
-    title: "תביעות ושירות | קופר נינוה",
-    description: "פנייה בנושא תביעה, שירות, מסמכים וניהול תהליכים לאורך חיי הפוליסה מול קופר נינוה.",
-    h1: "תביעות ושירות לאורך חיי הפוליסה",
-    lead: "קופר נינוה מלווה סוכנים ולקוחות גם לאחר ההפקה - בשירות, מסמכים, תביעות וניהול תהליכים מול הגורמים הרלוונטיים.",
-    primary: ["פנייה בנושא תביעה", "/contact-us"],
+    title: "תביעות, שירות ותפעול מקומי | קופר נינוה",
+    description: "ליווי תביעות, שירות, מסמכים ותפעול מקומי בישראל לאורך חיי הפוליסה מול סוכנים, מבוטחים וגורמי שוק רלוונטיים.",
+    h1: "תביעות, שירות ותפעול מקומי לאורך חיי הפוליסה",
+    lead: "קופר נינוה מספקת ליווי וניהול תהליך תביעות בישראל, תוך תקשורת מול מבוטחים, סוכנים, שמאים וגורמי שוק רלוונטיים, בהתאם לתנאי הפוליסה והסמכויות הרלוונטיות.",
+    primary: ["פתיחת פנייה בנושא תביעה", "/contact-us"],
     secondary: ["שירות ומסמכים", "/contact-us"],
     sections: "claims",
   },
@@ -95,13 +95,57 @@ const pages = {
     sections: "about",
   },
   "/contact-us": {
-    title: "צור קשר | קופר נינוה",
-    description: "צרו קשר עם קופר נינוה לקבלת מידע, הצעת ביטוח או בדיקת התאמה בתחומי אחריות מקצועית, סייבר, קבלנים, חבויות וסיכונים מיוחדים.",
+    title: "צור קשר | הגשת סיכון לחיתום | קופר נינוה",
+    description: "צרו קשר עם קופר נינוה להגשת סיכון לחיתום, פנייה כסוכן ביטוח, בדיקת סיכון עסקי או שיחה עם צוות החיתום והשירות.",
     h1: "צור קשר עם קופר נינוה",
-    lead: "רוצים לקבל הצעה, להגיש סיכון לבדיקה או להבין איזה פתרון ביטוחי מתאים לכם? השאירו פרטים וצוות קופר נינוה יחזור אליכם.",
-    primary: ["השארת פרטים", "/contact-us"],
+    lead: "רוצים להגיש סיכון לחיתום, לפתוח פנייה כסוכן או להבין איזה מידע נדרש לבדיקת חשיפה עסקית? השאירו פרטים וצוות קופר נינוה יחזור אליכם.",
+    primary: ["הגשת פנייה", "/contact-us"],
     secondary: ["הגשת סיכון כסוכן", "/insurance-agents"],
     sections: "contact",
+  },
+  "/israel-market-partner": {
+    title: "Israel Market Partner | Cooper Ninve",
+    description: "Cooper Ninve is a local underwriting, claims coordination and portfolio management support partner in Israel for international insurance markets.",
+    h1: "Israel Market Partner",
+    lead: "A trusted local underwriting, claims and portfolio management partner in Israel for Lloyd's syndicates, international insurers, reinsurers, MGAs and capacity providers.",
+    primary: ["Discuss Partnership", "/contact-us"],
+    secondary: ["Underwriting Capabilities", "/insurance-solutions"],
+    sections: "international",
+  },
+  "/privacy-policy": {
+    title: "מדיניות פרטיות | קופר נינוה",
+    description: "מדיניות פרטיות כללית לאתר קופר נינוה.",
+    h1: "מדיניות פרטיות",
+    lead: "עמוד זה מרכז מידע כללי על פרטיות ושימוש במידע באתר. הנוסח הסופי כפוף לאישור משפטי.",
+    sections: "privacy",
+  },
+  "/terms-of-use": {
+    title: "תנאי שימוש | קופר נינוה",
+    description: "תנאי שימוש כלליים באתר קופר נינוה.",
+    h1: "תנאי שימוש",
+    lead: "תנאי השימוש באתר מוצגים כעמוד בסיסי עד לאישור נוסח משפטי מלא.",
+    sections: "terms",
+  },
+  "/disclosure": {
+    title: "גילוי נאות ומעמד רגולטורי | קופר נינוה",
+    description: "מידע כללי על גילוי נאות, מעמד רגולטורי ותנאי כיסוי באתר קופר נינוה.",
+    h1: "גילוי נאות ומעמד רגולטורי",
+    lead: "מידע זה נועד להבהיר את אופי המידע באתר ואת כפיפות הכיסוי לתנאי פוליסה, חיתום ואישורים רלוונטיים.",
+    sections: "disclosure",
+  },
+  "/public-complaints": {
+    title: "תלונות הציבור | קופר נינוה",
+    description: "מידע כללי על פניות ותלונות הציבור באתר קופר נינוה.",
+    h1: "תלונות הציבור",
+    lead: "עמוד זה מרכז מידע בסיסי להגשת פניות או תלונות. הנוהל הסופי כפוף לאישור החברה והיועצים הרלוונטיים.",
+    sections: "complaints",
+  },
+  "/accessibility-statement": {
+    title: "הצהרת נגישות | קופר נינוה",
+    description: "הצהרת נגישות כללית לאתר קופר נינוה.",
+    h1: "הצהרת נגישות",
+    lead: "קופר נינוה שואפת להנגיש את האתר לקהל רחב ככל האפשר. עמוד זה הוא בסיס להצהרת נגישות מלאה.",
+    sections: "accessibility",
   },
   "/knowledge-center": {
     title: "מרכז ידע ביטוחי | קופר נינוה",
@@ -315,15 +359,19 @@ const englishPrefix = "/en";
 
 const englishMeta = {
   "/": {
-    title: "Cooper Ninve | Israel-Market Underwriting Partner",
-    description: "Cooper Ninve supports insurers, syndicates, MGAs and capacity providers with local underwriting insight, distribution access, policy servicing and claims coordination in Israel.",
+    title: "Cooper Ninve | Israel Market Partner",
+    description: "A trusted local underwriting, claims and portfolio management partner in Israel for Lloyd's syndicates, international insurers, reinsurers, MGAs and capacity providers.",
+  },
+  "/israel-market-partner": {
+    title: "Israel Market Partner | Cooper Ninve",
+    description: "Cooper Ninve supports international insurance markets in Israel with local underwriting support, claims coordination, portfolio management support, distribution access and operational execution.",
   },
   "/insurance-solutions": {
-    title: "Underwriting Lines in Israel | Cooper Ninve",
+    title: "Underwriting Capabilities in Israel | Cooper Ninve",
     description: "Cooper Ninve supports selected specialty and commercial lines in Israel through local underwriting insight, risk information gathering, policy administration and market coordination, subject to appetite, authority and underwriting approval.",
   },
   "/insurance-agents": {
-    title: "Access to Israeli Insurance Distribution | Cooper Ninve",
+    title: "Distribution Access in Israel | Cooper Ninve",
     description: "Cooper Ninve works with Israeli insurance distribution channels and market participants to help international partners access organized local risk flow, underwriting information and market coordination.",
   },
   "/business-insurance": {
@@ -331,8 +379,8 @@ const englishMeta = {
     description: "Insurance solutions for businesses, companies and complex risks in professional liability, cyber, contractors all risks, liabilities and medical malpractice.",
   },
   "/claims": {
-    title: "Claims and Service | Cooper Ninve",
-    description: "Contact Cooper Ninve regarding claims, service, documents and processes throughout the policy lifecycle.",
+    title: "Claims and Operations in Israel | Cooper Ninve",
+    description: "Local claims coordination, servicing and operational communication support in Israel, subject to policy terms, authority and market approval.",
   },
   "/about-us": {
     title: "About Cooper Ninve | MGA and Advanced Insurance Solutions",
@@ -341,6 +389,26 @@ const englishMeta = {
   "/contact-us": {
     title: "Partner with Cooper Ninve in Israel | Cooper Ninve",
     description: "International insurers, syndicates, MGAs and capacity providers can contact Cooper Ninve to discuss Israel-market underwriting appetite, local distribution, policy servicing and claims coordination.",
+  },
+  "/privacy-policy": {
+    title: "Privacy Policy | Cooper Ninve",
+    description: "General privacy information for Cooper Ninve website users.",
+  },
+  "/terms-of-use": {
+    title: "Terms of Use | Cooper Ninve",
+    description: "General terms of use for the Cooper Ninve website.",
+  },
+  "/disclosure": {
+    title: "Disclosure and Regulatory Status | Cooper Ninve",
+    description: "General disclosure and regulatory status information for Cooper Ninve.",
+  },
+  "/public-complaints": {
+    title: "Public Complaints Procedure | Cooper Ninve",
+    description: "General public complaints and contact procedure information for Cooper Ninve.",
+  },
+  "/accessibility-statement": {
+    title: "Accessibility Statement | Cooper Ninve",
+    description: "General accessibility statement for the Cooper Ninve website.",
   },
   "/knowledge-center": {
     title: "Insurance Knowledge Center | Cooper Ninve",
@@ -931,6 +999,32 @@ Object.assign(enText, {
   "עוסק בחיתום, בדיקת סיכונים וליווי מקצועי של תיקי ביטוח.": "Handles underwriting, risk review and professional support for insurance portfolios.",
 });
 
+Object.assign(enText, {
+  "למי הסיכון מתאים לבחינה?": "Which Risks Are Suitable for Review?",
+  "כל פנייה נבחנת לפי אופי הפעילות, המידע החיתומי, תיאבון הסיכון ותנאי הפוליסה הרלוונטיים.": "Each inquiry is reviewed according to the activity, underwriting information, risk appetite and applicable policy terms.",
+  "מתאים לבדיקת חיתום בהתאם לאופי הפעילות, היקף הסיכון, המסמכים והאישורים הרלוונטיים.": "Suitable for underwriting review according to the activity, risk scope, documentation and relevant approvals.",
+  "מה יכול להיבחן במסגרת החיתום?": "What May Be Reviewed in Underwriting?",
+  "הכיסוי המדויק כפוף לתנאי הפוליסה, סמכויות החיתום, אישור השוק הרלוונטי, גבולות אחריות, חריגים, השתתפויות עצמיות והפעילות הספציפית.": "Exact coverage is subject to policy terms, underwriting authority, relevant market approval, limits, exclusions, deductibles and the specific activity.",
+  "איזה מידע חיתומי נדרש?": "What Underwriting Information Is Required?",
+  "מידע מלא וברור מאפשר לבחון את הסיכון בצורה מקצועית ולזהות האם קיימת התאמה לתיאבון הסיכון ולשווקים הרלוונטיים.": "Complete and clear information supports professional risk review and helps identify fit with risk appetite and relevant markets.",
+  "שליחת פרטים לבחינת חיתום": "Submit Details for Underwriting Review",
+  "מה משפיע על החלטת החיתום?": "What Affects the Underwriting Decision?",
+  "החלטה חיתומית אינה מבוססת רק על שם המוצר. היא נשענת על פרופיל הסיכון, המסמכים, ניסיון התביעות, דרישות השוק והסמכויות הרלוונטיות.": "An underwriting decision is not based only on the product name. It depends on the risk profile, documents, claims experience, market requirements and relevant authority.",
+  "תחום פעילות ואופי החשיפה": "Activity and Exposure Profile",
+  "מחזור, היקף פעילות וגבולות אחריות": "Turnover, Activity Scope and Limits",
+  "ניסיון תביעות קודם": "Prior Claims Experience",
+  "דרישות חוזיות או אישורי ביטוח": "Contractual or Certificate Requirements",
+  "מידע מקצועי, שאלונים ומסמכים תומכים": "Professional Information, Questionnaires and Supporting Documents",
+  "תיאבון סיכון, סמכויות חיתום ואישור השוק הרלוונטי": "Risk Appetite, Underwriting Authority and Relevant Market Approval",
+  "תמיכה לסוכנים ולעסקים בתהליך החיתום": "Support for Agents and Businesses in the Underwriting Process",
+  "קופר נינוה מסייעת באיסוף מידע, הבנת החשיפה, הכוונה למסמכים נדרשים, בחינת התאמה מול שווקים רלוונטיים והמשך שירות לאורך חיי הפוליסה.": "Cooper Ninve supports information gathering, exposure review, document guidance, suitability review with relevant markets and ongoing servicing throughout the policy lifecycle.",
+  "רוצים לבחון סיכון?": "Want to Review a Risk?",
+  "השאירו פרטים וצוות קופר נינוה יחזור אליכם לבדיקת חיתום ראשונית, בכפוף למידע שיימסר ולסמכויות הרלוונטיות.": "Leave your details and the Cooper Ninve team will respond for an initial underwriting review, subject to provided information and relevant authority.",
+  "הגשת פנייה לחיתום": "Submit an Underwriting Inquiry",
+  "שווקים ושותפים בינלאומיים": "International Markets and Partners",
+  "קופר נינוה פועלת מול שווקים ושותפים בינלאומיים נבחרים, בכפוף לסמכויות חיתום, תיאבון סיכון, אישור השוק ותנאי הפוליסה הרלוונטיים. הצגת לוגו אינה מלמדת שכל שותף תומך בכל מוצר או סיכון.": "Cooper Nineveh works with selected international insurance markets and partners, subject to underwriting authority, product appetite, market approval and applicable policy terms. Displayed logos do not imply that every partner supports every product or risk.",
+});
+
 const app = document.querySelector("[data-app]");
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const mainNav = document.querySelector("[data-main-nav]");
@@ -1048,15 +1142,20 @@ function setAlternateLinks(path) {
 
 function renderChrome(path) {
   const english = isEnglish();
-  const navItems = [
-    ["/", english ? "Home" : "דף הבית"],
-    ["/insurance-agents", english ? "Distribution" : "לסוכני ביטוח"],
-    ["/business-insurance", english ? "Market Focus" : "לעסקים"],
-    ["/insurance-solutions", english ? "Underwriting Lines" : "פתרונות ביטוח"],
-    ["/claims", english ? "Servicing" : "תביעות"],
-    ["/knowledge-center", english ? "Insights" : "מרכז ידע"],
-    ["/about-us", english ? "About" : "אודות"],
-    ...(!english ? [["/contact-us", "צור קשר"]] : []),
+  const navItems = english ? [
+    ["/israel-market-partner", "Israel Market Partner"],
+    ["/insurance-solutions", "Underwriting Capabilities"],
+    ["/claims", "Claims & Operations"],
+    ["/insurance-agents", "Distribution Access"],
+    ["/about-us", "About"],
+    ["/contact-us", "Contact"],
+  ] : [
+    ["/insurance-agents", "לסוכני ביטוח"],
+    ["/business-insurance", "לעסקים"],
+    ["/insurance-solutions", "תחומי חיתום"],
+    ["/claims", "תביעות ושירות"],
+    ["/about-us", "אודות"],
+    ["/contact-us", "צור קשר"],
   ];
   mainNav.setAttribute("aria-label", english ? "Main navigation" : "ניווט ראשי");
   mainNav.innerHTML = `${navItems.map(([href, label]) => `<a href="${link(href)}">${label}</a>`).join("")}<a class="language-switcher nav-language-switcher" href="${matchingLanguagePath(path, !english)}">${english ? "עברית / HE" : "EN"}</a>`;
@@ -1075,7 +1174,7 @@ function renderChrome(path) {
     headerActions.innerHTML = english
       ? `<a class="header-cta" href="${link("/contact-us")}" data-track="click_quote_cta">Partner With Us</a>
       <a class="language-switcher header-language-switcher" href="${matchingLanguagePath(path, false)}">עברית / HE</a>`
-      : `<a class="header-cta" href="${link("/contact-us")}" data-track="click_quote_cta">הגשת סיכון</a>
+      : `<a class="header-cta" href="${link("/contact-us")}" data-track="click_quote_cta">הגשת סיכון לחיתום</a>
       <a class="header-link" href="${link("/contact-us")}">צור קשר</a>
       <a class="language-switcher header-language-switcher" href="${matchingLanguagePath(path, true)}">EN</a>`;
   }
@@ -1085,36 +1184,36 @@ function renderChrome(path) {
 
   const mobileSticky = document.querySelector(".mobile-sticky");
   if (mobileSticky) {
-    mobileSticky.innerHTML = `<a href="${link("/contact-us")}" data-track="click_quote_cta">${english ? "Partner With Us" : "לקבלת הצעה"}</a><a href="tel:0779965453" data-track="click_phone">${english ? "Call" : "שיחה"}</a>`;
+    mobileSticky.innerHTML = `<a href="${link("/contact-us")}" data-track="click_quote_cta">${english ? "Partner With Us" : "הגשת סיכון"}</a><a href="tel:0779965453" data-track="click_phone">${english ? "Call" : "שיחה"}</a>`;
   }
 }
 
 function footerHtml(english, path = "/") {
   const englishPartnerFooter = english && (path === "/contact-us" || path === "/insurance-solutions");
   const footerGroups = englishPartnerFooter ? [
-    ["Cooper Ninve", [["About", "/about-us"], ["Home", "/"], ["Insights", "/knowledge-center"]]],
-    ["For Partners", [["Partner With Us", "/contact-us"], ["Underwriting Lines", "/insurance-solutions"], ["Servicing", "/claims"]]],
-    ["Market Interface", [["Distribution", "/insurance-agents"], ["Market Focus", "/business-insurance"], ["Underwriting Lines", "/insurance-solutions"]]],
+    ["Cooper Ninve", [["Israel Market Partner", "/israel-market-partner"], ["About", "/about-us"], ["Insights", "/knowledge-center"]]],
+    ["For Partners", [["Partner With Us", "/contact-us"], ["Underwriting Capabilities", "/insurance-solutions"], ["Claims & Operations", "/claims"]]],
+    ["Market Interface", [["Distribution Access", "/insurance-agents"], ["Israeli Market Knowledge", "/business-insurance"], ["Underwriting Capabilities", "/insurance-solutions"]]],
     ["Contact", [["Partner With Us", "/contact-us"], ["077-9965453", "tel:0779965453"], ["info@cooper-ninve.com", "mailto:info@cooper-ninve.com"]]],
   ] : english ? [
-    ["Cooper Ninve", [["About", "/about-us"], ["First of All, Integrity", "/"], ["Knowledge Center", "/knowledge-center"]]],
-    ["Insurance Solutions", [["Professional Liability", "/professional-liability-insurance"], ["Cyber", "/cyber-insurance"], ["Contractors’ All Risks", "/contractors-all-risks-insurance"], ["Medical Malpractice", "/medical-malpractice-insurance"], ["Liability and Third-Party Coverage", "/liability-insurance"]]],
-    ["For Insurance Agents", [["For Insurance Agents", "/insurance-agents"], ["Submit a Risk for Review", "/contact-us"], ["Underwriting Areas", "/insurance-solutions"]]],
-    ["Service and Claims", [["Claims", "/claims"], ["Service and Documents", "/contact-us"], ["Report a Claim", "/contact-us"]]],
+    ["Cooper Ninve", [["Israel Market Partner", "/israel-market-partner"], ["About", "/about-us"], ["Knowledge Center", "/knowledge-center"]]],
+    ["Underwriting Capabilities", [["Professional Liability", "/professional-liability-insurance"], ["Cyber", "/cyber-insurance"], ["Contractors’ All Risks", "/contractors-all-risks-insurance"], ["Medical Malpractice", "/medical-malpractice-insurance"], ["Liability and Third-Party Coverage", "/liability-insurance"]]],
+    ["Distribution Access", [["Distribution Access", "/insurance-agents"], ["Submit a Risk for Review", "/contact-us"], ["Underwriting Capabilities", "/insurance-solutions"]]],
+    ["Claims & Operations", [["Claims & Operations", "/claims"], ["Service and Documents", "/contact-us"], ["Report a Claim", "/contact-us"]]],
     ["Knowledge Center", [["Articles and Insights", "/knowledge-center"], ["M.G.A in Insurance", "/knowledge-center"], ["Submitting a Risk for Underwriting", "/knowledge-center"]]],
     ["Contact", [["Contact Us", "/contact-us"], ["077-9965453", "tel:0779965453"], ["info@cooper-ninve.com", "mailto:info@cooper-ninve.com"]]],
   ] : [
-    ["קופר נינוה", [["אודות", "/about-us"], ["קודם כל יושרה", "/"], ["מרכז ידע", "/knowledge-center"]]],
-    ["פתרונות ביטוח", [["אחריות מקצועית", "/professional-liability-insurance"], ["סייבר", "/cyber-insurance"], ["עבודות קבלניות", "/contractors-all-risks-insurance"], ["רשלנות רפואית", "/medical-malpractice-insurance"], ["חבויות וצד שלישי", "/liability-insurance"]]],
+    ["קופר נינוה", [["אודות", "/about-us"], ["מרכז חיתום ישראלי", "/"], ["מרכז ידע", "/knowledge-center"]]],
+    ["תחומי חיתום", [["אחריות מקצועית", "/professional-liability-insurance"], ["סייבר", "/cyber-insurance"], ["עבודות קבלניות", "/contractors-all-risks-insurance"], ["רשלנות רפואית", "/medical-malpractice-insurance"], ["חבויות וצד שלישי", "/liability-insurance"]]],
     ["לסוכני ביטוח", [["לסוכני ביטוח", "/insurance-agents"], ["הגשת סיכון לבדיקה", "/contact-us"], ["תחומי חיתום", "/insurance-solutions"]]],
-    ["שירות ותביעות", [["תביעות", "/claims"], ["שירות ומסמכים", "/contact-us"], ["דיווח תביעה", "/contact-us"]]],
+    ["תביעות ושירות", [["תביעות ושירות", "/claims"], ["שירות ומסמכים", "/contact-us"], ["דיווח תביעה", "/contact-us"]]],
     ["מרכז ידע", [["מאמרים ותובנות", "/knowledge-center"], ["M.G.A בביטוח", "/knowledge-center"], ["הגשת סיכון לחיתום", "/knowledge-center"]]],
     ["יצירת קשר", [["צור קשר", "/contact-us"], ["077-9965453", "tel:0779965453"], ["info@cooper-ninve.com", "mailto:info@cooper-ninve.com"]]],
   ];
-  const contactText = englishPartnerFooter ? "Israel-market underwriting execution, distribution access, policy servicing and claims coordination support for international insurance partners." : english ? "Advanced insurance solutions for businesses, insurance agents and complex risks." : "פתרונות ביטוח מתקדמים לעסקים, סוכני ביטוח וסיכונים מורכבים.";
+  const contactText = englishPartnerFooter ? "Israel-market underwriting execution, distribution access, policy servicing and claims coordination support for international insurance partners." : english ? "A trusted local underwriting, claims and portfolio management partner in Israel." : "מרכז חיתום ישראלי המחבר בין סוכנים, עסקים ושווקי ביטוח בינלאומיים.";
   const address = english ? "111 Dizengoff St., Tel Aviv" : "רח׳ דיזנגוף 111, תל אביב";
   const rights = english ? "© 2026 Cooper Ninve. All rights reserved." : "© 2026 Cooper Ninve. כל הזכויות שמורות.";
-  const legal = english ? [["Privacy Policy", "/privacy-policy"], ["Terms of Use", "/terms-of-use"], ["Disclosure", "/disclosure"], ["Public Complaints", "/public-complaints"]] : [["מדיניות פרטיות", "/privacy-policy"], ["תנאי שימוש", "/terms-of-use"], ["גילוי נאות", "/disclosure"], ["תלונות הציבור", "/public-complaints"]];
+  const legal = english ? [["Privacy Policy", "/privacy-policy"], ["Terms of Use", "/terms-of-use"], ["Disclosure", "/disclosure"], ["Public Complaints", "/public-complaints"], ["Accessibility", "/accessibility-statement"]] : [["מדיניות פרטיות", "/privacy-policy"], ["תנאי שימוש", "/terms-of-use"], ["גילוי נאות", "/disclosure"], ["תלונות הציבור", "/public-complaints"], ["הצהרת נגישות", "/accessibility-statement"]];
   const note = english ? "Insurance coverage is subject to the policy terms, exclusions, limits of liability and underwriting approval." : "הכיסוי הביטוחי כפוף לתנאי הפוליסה, חריגים, גבולות אחריות ואישור חיתום.";
   return `<div class="footer-main">
     <div class="container footer-grid footer-grid-wide">
@@ -1407,9 +1506,13 @@ function breadcrumb(path, current) {
 
 function standardTemplate(page, path) {
   if (isEnglish() && path === "/") return englishHomeTemplate();
+  if (isEnglish() && path === "/israel-market-partner") return englishIsraelMarketPartnerTemplate();
   if (isEnglish() && path === "/insurance-solutions") return englishUnderwritingLinesTemplate();
   if (isEnglish() && path === "/insurance-agents") return englishDistributionTemplate();
+  if (isEnglish() && path === "/claims") return englishClaimsOperationsTemplate();
   if (isEnglish() && path === "/contact-us") return englishContactTemplate();
+  if (path === "/israel-market-partner") return `${breadcrumb(path, page.h1)}${internationalPartnerSections()}`;
+  if (["/privacy-policy", "/terms-of-use", "/disclosure", "/public-complaints", "/accessibility-statement"].includes(path)) return `${breadcrumb(path, page.h1)}${legalSections(page, path)}`;
   if (path === "/insurance-solutions") return sections(page.sections, path);
   if (path === "/about-us") return `${breadcrumb(path, page.h1)}${sections(page.sections, path)}`;
   if (path === "/contact-us") return sections(page.sections, path);
@@ -1421,21 +1524,21 @@ function englishHomeTemplate() {
     <section class="hero hero-home">
       <div class="container hero-inner">
         <div class="hero-copy">
-          <h1 class="hero-title">Israel-Market Underwriting Partner for International Insurance Markets</h1>
-          <p class="lead">Cooper Ninve supports insurers, syndicates, MGAs and capacity providers with local underwriting insight, distribution access, policy servicing and claims coordination in Israel.</p>
+          <h1 class="hero-title">A trusted local underwriting, claims and portfolio management partner in Israel</h1>
+          <p class="lead">Cooper Ninve supports Lloyd's syndicates, international insurers, reinsurers, MGAs and capacity providers with local underwriting support, distribution access, policy servicing, claims coordination and portfolio management support in Israel.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Partner With Us</a>
-            <a class="btn btn-secondary" href="${link("/insurance-solutions")}">Explore Underwriting Lines</a>
+            <a class="btn btn-secondary" href="${link("/israel-market-partner")}">Israel Market Partner</a>
           </div>
         </div>
         <aside class="hero-card hero-why-card">
           <h2>Partner capabilities</h2>
           <ul>
             <li>Local Israeli market knowledge</li>
-            <li>Specialty underwriting discipline</li>
+            <li>Local underwriting support</li>
             <li>Access to local distribution</li>
-            <li>Policy administration and servicing</li>
-            <li>Claims coordination support</li>
+            <li>Claims coordination and servicing</li>
+            <li>Portfolio management support</li>
           </ul>
         </aside>
       </div>
@@ -1445,6 +1548,74 @@ function englishHomeTemplate() {
     ${englishPartnerWorkflowSection()}
     ${englishUnderwritingLinesPreview()}
     ${partnerLogosSection()}
+    ${englishPartnerInquirySection()}`;
+}
+
+function englishIsraelMarketPartnerTemplate() {
+  return `
+    <section class="hero hero-home">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <p class="eyebrow">Israel Market Partner</p>
+          <h1 class="hero-title">Local underwriting, claims and portfolio management support in Israel</h1>
+          <p class="lead">Cooper Ninve provides a local operating interface in Israel for Lloyd's syndicates, international insurers, reinsurers, MGAs and capacity providers, subject to agreed authority, appetite, market approval and policy terms.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Discuss Partnership</a>
+            <a class="btn btn-secondary" href="${link("/insurance-solutions")}">Underwriting Capabilities</a>
+          </div>
+        </div>
+        <aside class="hero-card hero-why-card">
+          <h2>Local operating role</h2>
+          <ul>
+            <li>Underwriting information and review support</li>
+            <li>Claims coordination and local servicing</li>
+            <li>Portfolio management support and communication</li>
+            <li>Israeli distribution access</li>
+            <li>Regulatory and local market knowledge</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+    ${englishInternationalPartnerCapabilities()}
+    ${englishPartnerWorkflowSection()}
+    ${englishClaimsOperationsBlock()}
+    ${englishPortfolioSupportBlock()}
+    ${partnerLogosSection()}
+    ${englishPartnerInquirySection()}`;
+}
+
+function englishInternationalPartnerCapabilities() {
+  const capabilities = [
+    ["Local Underwriting Support", "Collection, organization and review of local risk information for selected specialty and commercial submissions."],
+    ["Claims Coordination and Servicing", "Local language, documentation and communication support for insured events in Israel, subject to policy terms and authority."],
+    ["Portfolio Management Support", "Operational communication and portfolio-level support for selected programs or portfolios where agreed with the relevant market."],
+    ["Israeli Market Knowledge", "Understanding of local business practices, distribution behavior, documentation, claims context and regulatory expectations."],
+    ["Distribution Access", "Connection to an active Israeli insurance-agent network and local risk flow across relevant specialty lines."],
+    ["Operational Execution", "Local servicing, document coordination and communication throughout underwriting, issuance, servicing and claims stages."],
+  ];
+  return `<section class="section"><div class="container"><div class="center-title"><h2>Why international markets work with a local Israeli partner</h2><p>International markets need more than introductions. They need structured local underwriting information, disciplined communication, claims coordination and reliable servicing on the ground.</p></div>${cards(capabilities.map(([title, text]) => ({ title, text, icon: "◇" })), 3)}</div></section>`;
+}
+
+function englishClaimsOperationsBlock() {
+  return `<section class="section section-soft"><div class="container split-band"><div><p class="section-slogan">Claims are part of the operating model.</p><h2>Claims coordination and local servicing</h2><p>Cooper Ninve provides local claims coordination and servicing support in Israel, helping international markets manage insured events with local language, documentation, professional communication and market familiarity, subject to policy terms, authority and market approval.</p></div><ul class="feature-list">${["Local insured, agent and service-provider communication", "Collection and coordination of relevant claim documentation", "Communication with relevant market participants", "Support throughout the policy lifecycle", "No promise of coverage outside policy terms or authority"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>`;
+}
+
+function englishPortfolioSupportBlock() {
+  return `<section class="section"><div class="container split-band"><div><p class="section-slogan">Portfolio discipline, not only individual placements.</p><h2>Portfolio management support</h2><p>For agreed relationships, Cooper Ninve can support the local operating rhythm of selected portfolios through underwriting communication, servicing coordination, claims visibility and local market feedback.</p></div><ul class="feature-list">${["Local risk-flow context", "Portfolio communication with relevant partners", "Servicing and documentation coordination", "Claims and operational feedback loops", "Support subject to agreed authority and market approval"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>`;
+}
+
+function englishClaimsOperationsTemplate() {
+  return `
+    <section class="section section-navy">
+      <div class="container">
+        <div class="center-title">
+          <h1>Claims & Operations in Israel</h1>
+          <p>Cooper Ninve supports local claims coordination, servicing and operational communication in Israel for insureds, agents and relevant international market participants, subject to policy terms, authority and market approval.</p>
+        </div>
+      </div>
+    </section>
+    ${englishClaimsOperationsBlock()}
+    ${englishPortfolioSupportBlock()}
     ${englishPartnerInquirySection()}`;
 }
 
@@ -1629,19 +1800,70 @@ function sections(type, path) {
     about: aboutSections,
     contact: contactSections,
     knowledge: knowledgeSections,
+    international: internationalPartnerSections,
   };
   return (map[type] || homeSections)();
+}
+
+function internationalPartnerSections() {
+  return `
+    <section class="section section-navy"><div class="container"><div class="center-title"><h1>Israel Market Partner</h1><p>קופר נינוה פועלת כשותף מקומי בישראל עבור שווקי ביטוח בינלאומיים, תוך תמיכה בחיתום, תפעול, שירות, תביעות וניהול תיקים, בכפוף לסמכויות ולאישורים הרלוונטיים.</p></div></div></section>
+    <section class="section"><div class="container"><div class="center-title"><h2>יכולות מקומיות עבור שותפים בינלאומיים</h2><p>העמוד מיועד לשווקים, מבטחים, מבטחי משנה, סינדיקטים, MGAs וספקי Capacity המבקשים שותף מקומי מקצועי בישראל.</p></div>${cards([
+      { title: "תמיכת חיתום מקומית", icon: "◇", text: "איסוף, ארגון ובחינת מידע חיתומי מסיכונים בישראל." },
+      { title: "תיאום תביעות ושירות", icon: "▧", text: "תקשורת מקומית, מסמכים ותיאום מול גורמים רלוונטיים בישראל." },
+      { title: "ניהול תיקים", icon: "◎", text: "תמיכה תפעולית ותקשורת שוטפת סביב תיקים ופורטפוליו מוסכם." },
+      { title: "ידע שוק ישראלי", icon: "◈", text: "היכרות עם פעילות עסקית, סוכנים, מסמכים, שירות ותביעות בישראל." },
+      { title: "גישה להפצה מקומית", icon: "▥", text: "עבודה מול רשת רחבה של סוכני ביטוח וגורמי שוק מקומיים." },
+      { title: "ביצוע תפעולי", icon: "▣", text: "ליווי תהליך החיתום, ההפקה, השירות והתביעות לאורך חיי הפוליסה." },
+    ], 3)}</div></section>
+    ${partnerLogosSection()}
+    ${finalCta("לדבר עם קופר נינוה", "פנייה זו מיועדת לשותפי שוק בינלאומיים המבקשים לדון ביכולות חיתום, תפעול, תביעות וניהול תיקים בישראל.")}`;
+}
+
+function legalSections(page, path) {
+  const english = isEnglish();
+  const legalCopy = {
+    "/privacy-policy": english
+      ? ["Privacy Policy", ["This page provides general privacy information for website users.", "Personal details submitted through website forms are intended to be used for responding to inquiries and reviewing suitability.", "A full legal privacy policy should be approved by Cooper Ninve's legal advisers before final publication."]]
+      : ["מדיניות פרטיות", ["עמוד זה מספק מידע כללי על פרטיות משתמשי האתר.", "פרטים הנמסרים בטפסים באתר מיועדים לצורך חזרה לפונה ובדיקת התאמה בלבד.", "נוסח משפטי מלא של מדיניות הפרטיות יאושר על ידי יועצי החברה לפני פרסום סופי."]],
+    "/terms-of-use": english
+      ? ["Terms of Use", ["The website content is provided for general information only.", "Nothing on the website constitutes a binding insurance offer, coverage confirmation or legal advice.", "Insurance coverage is subject to policy terms, underwriting approval, exclusions, deductibles and applicable law."]]
+      : ["תנאי שימוש", ["תוכן האתר נועד למידע כללי בלבד.", "אין לראות במידע באתר הצעת ביטוח מחייבת, אישור כיסוי או ייעוץ משפטי.", "כל כיסוי ביטוחי כפוף לתנאי הפוליסה, אישור חיתום, חריגים, השתתפויות עצמיות והוראות הדין."]],
+    "/disclosure": english
+      ? ["Disclosure and Regulatory Status", ["Cooper Ninve's role, authority and services may vary by product, market and agreement.", "Displayed partner or market references do not imply that every partner supports every product or risk.", "All activity is subject to relevant authority, product appetite, market approval and applicable policy terms."]]
+      : ["גילוי נאות ומעמד רגולטורי", ["תפקידה, סמכויותיה ושירותיה של קופר נינוה עשויים להשתנות לפי מוצר, שוק והסכם רלוונטי.", "הצגת שותפים או שווקים אינה מלמדת שכל שותף תומך בכל מוצר או סיכון.", "כל פעילות כפופה לסמכויות הרלוונטיות, תיאבון הסיכון, אישור השוק ותנאי הפוליסה החלים."]],
+    "/public-complaints": english
+      ? ["Public Complaints Procedure", ["Public inquiries and complaints may be sent through the contact channels on this website.", "Please include identifying details, policy or claim information where relevant, and a clear description of the issue.", "This placeholder should be replaced with the company's approved complaints procedure."]]
+      : ["תלונות הציבור", ["ניתן להעביר פניות או תלונות באמצעות פרטי הקשר באתר.", "מומלץ לצרף פרטים מזהים, מספר פוליסה או תביעה ככל שקיים, ותיאור ברור של הנושא.", "עמוד זה הוא בסיס לנוהל תלונות מאושר של החברה."]],
+    "/accessibility-statement": english
+      ? ["Accessibility Statement", ["Cooper Ninve aims to make the website accessible to a broad audience.", "If you encounter an accessibility issue, please contact the company through the contact details on the website.", "A full accessibility statement should be completed after accessibility review."]]
+      : ["הצהרת נגישות", ["קופר נינוה שואפת להנגיש את האתר לקהל רחב ככל האפשר.", "אם נתקלתם בקושי נגישות, ניתן לפנות לחברה דרך פרטי הקשר באתר.", "הצהרת נגישות מלאה תושלם לאחר בדיקת נגישות ייעודית."]],
+  };
+  const [title, items] = legalCopy[path] || [page.h1, [page.lead]];
+  return `<section class="section"><div class="container split-band"><div><h1>${title}</h1><p>${page.lead || ""}</p></div><ul class="feature-list">${items.map((item) => `<li>${item}</li>`).join("")}</ul></div></section>`;
 }
 
 function homeSections() {
   return `
     ${homeCountersBlock()}
+    ${howCooperWorksSection()}
     ${mgaPositioningBlock()}
     ${lloydsAdvantagesSection()}
     ${agentJourneySection()}
     ${insightsSection()}
     ${partnerLogosSection()}
     ${homepageLeadForm()}`;
+}
+
+function howCooperWorksSection() {
+  const steps = [
+    ["קבלת סיכון", "סוכן ביטוח, עסק או שותף שוק מעביר מידע ראשוני על הסיכון, תחום הפעילות והכיסוי המבוקש."],
+    ["בחינת חיתום", "צוות קופר נינוה בוחן את החשיפה, המסמכים, ניסיון התביעות, גבולות האחריות והמידע החיתומי הנדרש."],
+    ["התאמה לשוק רלוונטי", "הסיכון נבחן מול סמכויות חיתום, תיאבון סיכון, שווקים מקומיים או בינלאומיים ואישורים נדרשים."],
+    ["הפקה ושירות", "במקרה של התאמה ואישור, מתקדם תהליך הפקה, מסמכים ושירות לאורך חיי הפוליסה."],
+    ["תביעות וליווי שוטף", "קופר נינוה מספקת ליווי תביעות, תקשורת תפעולית וניהול תהליך מול הגורמים הרלוונטיים, בכפוף לתנאי הפוליסה."],
+  ];
+  return `<section class="section"><div class="container"><div class="center-title"><p class="section-slogan">מודל עבודה חיתומי ברור.</p><h2>איך קופר נינוה עובדת</h2><p>הפעילות של קופר נינוה מחברת בין סיכונים בישראל, סוכני ביטוח, עסקים ושווקים בינלאומיים באמצעות תהליך מסודר של חיתום, הפקה, שירות ותביעות.</p></div><div class="workflow-cards">${steps.map(([title, text], index) => `<article class="workflow-card"><span>${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div></div></section>`;
 }
 
 function homeCountersBlock() {
@@ -1665,7 +1887,7 @@ function homeCountersBlock() {
 }
 
 function mgaPositioningBlock() {
-  return `<section class="mga-block" aria-labelledby="mga-title"><div class="mga-sketch" data-sketch-src="/assets/backgrounds/lloyds-building-sketch.svg" aria-hidden="true"><img src="/assets/backgrounds/lloyds-building-sketch.svg" alt="" loading="lazy"></div><div class="mga-inner"><div class="mga-copy"><p class="mga-kicker">לא עוד סוכנות ביטוח, תקראו לנו חברת חיתום.</p><h2 id="mga-title">קופר נינוה היא <span>M.G.A</span></h2><strong>גוף המאגר תחתיו מספר חתמים ממעבר לים אשר נתנו לו סמכויות חיתום נרחבות.</strong><p>כלומר, גוף המחזיק סמכויות נרחבות לרבות:תמחור, חיתום ויישוב תביעות מקומי בשם החתמים מעבר לים. M.G.A הוא ONE STOP SHOP המבצע ניהול בחינה והכוונת תיקים בהתאם לתחומי המומחיות של המבטחים העומדים מאחוריו.</p><a class="btn btn-primary" href="/about-us">עוד על קופר נינוה</a></div></div></section>`;
+  return `<section class="mga-block" aria-labelledby="mga-title"><div class="mga-sketch" data-sketch-src="/assets/backgrounds/lloyds-building-sketch.svg" aria-hidden="true"><img src="/assets/backgrounds/lloyds-building-sketch.svg" alt="" loading="lazy"></div><div class="mga-inner"><div class="mga-copy"><p class="mga-kicker">לא עוד סוכנות ביטוח, תקראו לנו חברת חיתום.</p><h2 id="mga-title">קופר נינוה היא <span>M.G.A</span></h2><strong>מרכז חיתום ישראלי הפועל מול חתמים ושווקים בינלאומיים בכפוף לסמכויות, תיאבון סיכון ואישורים רלוונטיים.</strong><p>קופר נינוה מחברת בין סיכונים בישראל לבין שווקים מקומיים ובינלאומיים באמצעות בחינת חיתום, הפקה, שירות, תביעות וניהול תיקים לאורך חיי הפוליסה. כל כיסוי או פעולה כפופים לתנאי הפוליסה, סמכויות החיתום ואישור השוק הרלוונטי.</p><a class="btn btn-primary" href="/about-us">עוד על קופר נינוה</a></div></div></section>`;
 }
 
 function lloydsAdvantagesSection() {
@@ -1687,14 +1909,14 @@ function underwritingExamplesSection() {
     "פרויקטים מורכבים",
     "צווארון לבן ואחריות מקצועית טהורה",
   ];
-  return `<section class="section underwriting-examples"><div class="container underwriting-bridge"><div class="underwriting-copy"><p class="section-slogan">חיתום מקצועי לסיכונים שאינם תמיד סטנדרטיים.</p><h2>מה אנחנו עושים בפועל?</h2><p>קופר נינוה בוחנת סיכונים שאינם תמיד נכנסים לתבנית ביטוח רגילה, ומחברת בין צרכי הלקוח לבין פתרון חיתומי מתאים — באמצעות חיתום מקצועי, ניסיון בשווקים בינלאומיים והיכרות עם השוק הישראלי.</p><div class="section-actions"><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">בדיקת פתרון מתאים</a><a class="btn btn-secondary" href="/insurance-solutions">לכל פתרונות הביטוח</a></div></div><div class="example-chips" aria-label="דוגמאות לסיכונים שאנחנו בוחנים"><h3>דוגמאות לסיכונים שאנחנו בוחנים</h3><div class="example-chip-list">${useCases.map((title) => `<span class="example-chip">${title}</span>`).join("")}</div></div></div></section>`;
+  return `<section class="section underwriting-examples"><div class="container underwriting-bridge"><div class="underwriting-copy"><p class="section-slogan">חיתום מקצועי לסיכונים שאינם תמיד סטנדרטיים.</p><h2>מה אנחנו עושים בפועל?</h2><p>קופר נינוה בוחנת סיכונים שאינם תמיד נכנסים לתבנית רגילה, ומחברת בין צרכי הלקוח לבין תהליך חיתומי מתאים באמצעות ניסיון בשווקים בינלאומיים והיכרות עם השוק הישראלי.</p><div class="section-actions"><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">בחינת סיכון לחיתום</a><a class="btn btn-secondary" href="/insurance-solutions">לכל תחומי החיתום</a></div></div><div class="example-chips" aria-label="דוגמאות לסיכונים שאנחנו בוחנים"><h3>דוגמאות לסיכונים שאנחנו בוחנים</h3><div class="example-chip-list">${useCases.map((title) => `<span class="example-chip">${title}</span>`).join("")}</div></div></div></section>`;
 }
 
 function solutionsSections() {
   return `
     <section class="section section-navy">
       <div class="container">
-        <div class="center-title"><h2>פתרונות חיתום וביטוח</h2><p>קופר נינוה מספקת פתרונות חיתום, הפקה וניהול פוליסות במגוון תחומים מקצועיים ומסחריים — עבור סוכני ביטוח, עסקים וסיכונים מורכבים.</p></div>
+        <div class="center-title"><h2>תחומי חיתום ובחינת סיכונים</h2><p>קופר נינוה בוחנת סיכונים מקצועיים ומסחריים במגוון תחומים, ומקדמת תהליך חיתום, הפקה, שירות וניהול לאורך חיי הפוליסה בכפוף לסמכויות, תיאבון סיכון ואישור השוק הרלוונטי.</p></div>
         ${productCards()}
       </div>
     </section>`;
@@ -1703,21 +1925,21 @@ function solutionsSections() {
 function agentsSections() {
   return `
     ${agentJourneySection()}
-    <section class="section"><div class="container split-band"><div><h2>למה סוכני ביטוח עובדים עם קופר נינוה?</h2><p>קופר נינוה פועלת כ-MGA ו-Coverholder ומספקת לסוכני ביטוח מענה מקצועי לסיכונים שבהם נדרשת יכולת חיתומית, גישה לשווקים בינלאומיים והבנה של השוק הישראלי.</p></div><ul class="feature-list">${["פתרונות ביטוח מתקדמים", "ניסיון בסיכונים מורכבים", "תמיכה מקצועית בהגשת סיכונים", "חיתום ושירות מקומי", "עבודה מול סוכני ביטוח בפריסה רחבה"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
+    <section class="section"><div class="container split-band"><div><h2>למה סוכני ביטוח עובדים עם קופר נינוה?</h2><p>קופר נינוה פועלת כ-MGA ו-Coverholder ומספקת לסוכני ביטוח תהליך מקצועי לסיכונים שבהם נדרשת יכולת חיתומית, גישה לשווקים בינלאומיים והבנה של השוק הישראלי.</p></div><ul class="feature-list">${["בחינת סיכונים מקצועית", "ניסיון בסיכונים מורכבים", "תמיכה בהגשת מידע חיתומי", "הפקה, שירות ותביעות מקומיים", "עבודה מול רשת רחבה של סוכני ביטוח"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
     <section class="section"><div class="container split-band"><div><h2>רוצים לעבוד איתנו כסוכנים?</h2><p>השאירו פרטים ונחזור אליכם לבדיקת שיתוף פעולה או הגשת סיכון ראשון.</p></div>${form("form_submit_agent", ["שם הסוכן", "שם הסוכנות", "טלפון", "אימייל", "תחומי פעילות עיקריים", "סוגי סיכונים שמעניינים אותך"])}</div></section>`;
 }
 
 function businessSections() {
   return `
-    <section class="section"><div class="container"><div class="center-title"><h2>איזה עסק צריך פתרון ביטוח מותאם?</h2><p>עסק טכנולוגי, משרד ייעוץ, קבלן, מרפאה או חברה מקצועית אינם צריכים את אותה פוליסה בדיוק.</p></div>${cards(["עסקים המספקים שירות מקצועי", "חברות טכנולוגיה ועסקים דיגיטליים", "קבלנים ופרויקטים", "מרפאות ומקצועות טיפוליים", "עסקים עם פעילות מול קהל"].map((title) => ({ title, icon: "◇", text: "התאמת הביטוח לאופי הפעילות, הלקוחות, החשיפה המשפטית והמידע החיתומי." })), 3)}</div></section>
+    <section class="section"><div class="container"><div class="center-title"><h2>איזה עסק צריך בחינת סיכון מקצועית?</h2><p>עסק טכנולוגי, משרד ייעוץ, קבלן, מרפאה או חברה מקצועית אינם מציגים את אותו פרופיל סיכון. לכן נדרש תהליך חיתום לפי פעילות, חשיפה, מסמכים וניסיון תביעות.</p></div>${cards(["עסקים המספקים שירות מקצועי", "חברות טכנולוגיה ועסקים דיגיטליים", "קבלנים ופרויקטים", "מרפאות ומקצועות טיפוליים", "עסקים עם פעילות מול קהל"].map((title) => ({ title, icon: "◇", text: "בחינת הסיכון לפי אופי הפעילות, הלקוחות, החשיפה המשפטית והמידע החיתומי." })), 3)}</div></section>
     ${underwritingExamplesSection()}
-    <section class="section section-soft"><div class="container split-band"><div><h2>בדיקת התאמה לביטוח עסקי</h2><p>ככל שהמידע הראשוני מלא וברור יותר, ניתן לקדם את בדיקת החיתום בצורה יעילה יותר.</p></div>${form("form_submit_quote_request", ["שם מלא", "טלפון", "אימייל", "שם העסק", "תחום פעילות", "סוג ביטוח מבוקש"])}</div></section>`;
+    <section class="section section-soft"><div class="container split-band"><div><h2>בדיקת סיכון עסקי לחיתום</h2><p>ככל שהמידע הראשוני מלא וברור יותר, ניתן לקדם את בדיקת החיתום בצורה יעילה יותר.</p></div>${form("form_submit_quote_request", ["שם מלא", "טלפון", "אימייל", "שם העסק", "תחום פעילות", "סוג סיכון / תחום חיתום"])}</div></section>`;
 }
 
 function aboutSections() {
   return `
     ${teamSection()}
-    <section class="section"><div class="container"><div class="center-title"><h2>הגישה שלנו</h2></div>${cards(["מקצועיות חיתומית", "שירות מקומי", "פתרונות מותאמים", "שקיפות בתהליך", "חדשנות ותהליכים דיגיטליים"].map((title) => ({ title, icon: "•", text: "תהליך עבודה מסודר שמתחיל בהבנת הסיכון וממשיך לבדיקת התאמה, הצעה, הפקה ושירות." })), 3)}</div></section>`;
+    <section class="section"><div class="container"><div class="center-title"><h2>הגישה שלנו</h2></div>${cards(["מקצועיות חיתומית", "שירות מקומי", "גישה לשווקים בינלאומיים", "שקיפות בתהליך", "ניהול לאורך חיי הפוליסה"].map((title) => ({ title, icon: "•", text: "תהליך עבודה מסודר שמתחיל בהבנת הסיכון וממשיך לבדיקת חיתום, הפקה, שירות ותביעות בכפוף לתנאי הפוליסה והסמכויות הרלוונטיות." })), 3)}</div></section>`;
 }
 
 function teamSection() {
@@ -1726,7 +1948,7 @@ function teamSection() {
 
 function contactSections() {
   return `
-    <section class="section"><div class="container"><div class="center-title"><h2>צור קשר עם קופר נינוה</h2><p>השאירו פרטים בסיסיים וצוות קופר נינוה יחזור אליכם להכוונה ראשונית.</p></div><div class="split-band">${form("form_submit_general", ["שם מלא", "טלפון", "אימייל", "חברה / סוכנות", "סוג הפנייה", "סוג ביטוח רלוונטי"])}<div><h2>פרטי התקשרות</h2><p>ניתן לפנות אלינו גם ישירות בטלפון או במייל.</p><ul class="feature-list"><li>טלפון: 077-9965453</li><li>אימייל: info@cooper-ninve.com</li><li>כתובת: רח׳ דיזנגוף 111, תל אביב</li></ul></div></div></div></section>`;
+    <section class="section"><div class="container"><div class="center-title"><h2>צור קשר עם קופר נינוה</h2><p>השאירו פרטים בסיסיים להגשת סיכון, פנייה כסוכן, בדיקת חשיפה עסקית או פנייה בנושא שירות ותביעות.</p></div><div class="split-band">${form("form_submit_general", ["שם מלא", "טלפון", "אימייל", "חברה / סוכנות", "סוג הפנייה", "תחום חיתום רלוונטי"])}<div><h2>פרטי התקשרות</h2><p>ניתן לפנות אלינו גם ישירות בטלפון או במייל.</p><ul class="feature-list"><li>טלפון: 077-9965453</li><li>אימייל: info@cooper-ninve.com</li><li>כתובת: רח׳ דיזנגוף 111, תל אביב</li></ul></div></div></div></section>`;
 }
 
 function knowledgeSections() {
@@ -1736,24 +1958,27 @@ function knowledgeSections() {
     ["איזה מידע צריך להצעת ביטוח אחריות מקצועית?", "רשימת נתונים ומסמכים שמסייעים לקדם בדיקת חיתום יעילה."],
     ["האם עסק קטן צריך ביטוח סייבר?", "מתי גם עסק קטן חשוף לאירועי סייבר, דליפות מידע והשבתת פעילות."],
   ];
-  return `${insightsSection()}<section class="section"><div class="container split-band"><div><h2>מאמרים ונושאים מתוכננים</h2><p>מרכז הידע מוכן להתרחבות SEO עתידית לפי קבוצות המילים שהוגדרו בפרויקט.</p></div><div class="knowledge-list">${articles.map(([t, p]) => `<article><h3>${t}</h3><p>${p}</p><a href="/contact-us">שאלה לצוות החיתום</a></article>`).join("")}</div></div></section>${finalCta("מחפשים תשובה מקצועית?", "השאירו פרטים ונחזור אליכם עם הכוונה ראשונית.")}`;
+  return `${insightsSection()}<section class="section"><div class="container split-band"><div><h2>נושאי ידע וחיתום</h2><p>מרכז הידע מרכז נושאים מקצועיים שמסייעים לסוכנים ולעסקים להבין מידע חיתומי, מסמכים נדרשים ותהליכי בחינת סיכון.</p></div><div class="knowledge-list">${articles.map(([t, p]) => `<article><h3>${t}</h3><p>${p}</p><a href="/contact-us">שאלה לצוות החיתום</a></article>`).join("")}</div></div></section>${finalCta("מחפשים תשובה מקצועית?", "השאירו פרטים ונחזור אליכם עם הכוונה ראשונית.")}`;
 }
 
 function claimsSections() {
   return `
     ${claimsServiceSection()}
-    <section class="section section-soft"><div class="container split-band"><div><h2>מה כדאי לצרף לפנייה?</h2><p>מידע מלא מסייע לקדם טיפול מסודר מול הגורמים הרלוונטיים.</p></div><ul class="feature-list">${["מספר פוליסה או פרטי מבוטח", "תיאור האירוע והמועד", "מסמכים, תמונות או התכתבויות רלוונטיות", "פרטי סוכן הביטוח אם קיים", "פרטי התקשרות להמשך טיפול"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
+    <section class="section section-soft"><div class="container split-band"><div><h2>יכולת תיאום תביעות מקומית</h2><p>תביעות הן חלק מהמודל התפעולי של מרכז חיתום. קופר נינוה מספקת תקשורת מקומית, איסוף מסמכים, תיאום מול גורמים מקצועיים וליווי מול השוק הרלוונטי, בהתאם לתנאי הפוליסה והסמכויות המאושרות.</p></div><ul class="feature-list">${["תקשורת בעברית מול מבוטחים וסוכנים", "ריכוז מסמכים ומידע רלוונטי לאירוע", "תיאום מול שמאים, גורמי שירות וגורמי שוק", "ליווי לאורך חיי הפוליסה ולא רק בשלב ההפקה", "טיפול בכפוף לתנאי הפוליסה, חריגים ואישורים רלוונטיים"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
+    <section class="section"><div class="container split-band"><div><h2>מה כדאי לצרף לפנייה?</h2><p>מידע מלא מסייע לקדם טיפול מסודר מול הגורמים הרלוונטיים.</p></div><ul class="feature-list">${["מספר פוליסה או פרטי מבוטח", "תיאור האירוע והמועד", "מסמכים, תמונות או התכתבויות רלוונטיות", "פרטי סוכן הביטוח אם קיים", "פרטי התקשרות להמשך טיפול"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
     ${actionContactSection()}`;
 }
 
 function productTemplate(page) {
+  const factors = page.factors || ["תחום פעילות ואופי החשיפה", "מחזור, היקף פעילות וגבולות אחריות", "ניסיון תביעות קודם", "דרישות חוזיות או אישורי ביטוח", "מידע מקצועי, שאלונים ומסמכים תומכים", "תיאבון סיכון, סמכויות חיתום ואישור השוק הרלוונטי"];
   return `
-    <section class="section"><div class="container"><div class="center-title"><h2>למי זה מתאים?</h2></div>${cards(page.who.map((title) => ({ title, icon: "◇", text: "מתאים לבדיקה חיתומית בהתאם לאופי הפעילות, היקף הסיכון ותנאי הפוליסה." })), 3)}</div></section>
-    <section class="section section-soft"><div class="container split-band"><div><h2>מה הכיסוי יכול לכלול?</h2><p>הכיסוי המדויק כפוף לתנאי הפוליסה, אישור חיתום, גבולות אחריות, חריגים, השתתפויות עצמיות והפעילות הספציפית.</p></div><ul class="feature-list">${page.coverage.map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
-    <section class="section"><div class="container split-band"><div><h2>איזה מידע נדרש לקבלת הצעה?</h2><p>מידע מלא וברור מאפשר בדיקת התאמה יעילה יותר.</p><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">שלחו פרטים לבדיקה ראשונית</a></div><ul class="feature-list">${page.info.map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
-    <section class="section section-navy"><div class="container"><div class="section-header"><div><h2>פתרון מתאים גם לסוכני ביטוח</h2><p>סוכנים יכולים להגיש סיכונים, לקבל הכוונה לגבי מידע חסר וללוות את הלקוח בתהליך ההצעה וההפקה.</p></div><a class="btn btn-primary" href="/insurance-agents">הגשת סיכון על ידי סוכן</a></div></div></section>
+    <section class="section"><div class="container"><div class="center-title"><h2>למי הסיכון מתאים לבחינה?</h2><p>כל פנייה נבחנת לפי אופי הפעילות, המידע החיתומי, תיאבון הסיכון ותנאי הפוליסה הרלוונטיים.</p></div>${cards(page.who.map((title) => ({ title, icon: "◇", text: "מתאים לבדיקת חיתום בהתאם לאופי הפעילות, היקף הסיכון, המסמכים והאישורים הרלוונטיים." })), 3)}</div></section>
+    <section class="section section-soft"><div class="container split-band"><div><h2>מה יכול להיבחן במסגרת החיתום?</h2><p>הכיסוי המדויק כפוף לתנאי הפוליסה, סמכויות החיתום, אישור השוק הרלוונטי, גבולות אחריות, חריגים, השתתפויות עצמיות והפעילות הספציפית.</p></div><ul class="feature-list">${page.coverage.map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
+    <section class="section"><div class="container split-band"><div><h2>איזה מידע חיתומי נדרש?</h2><p>מידע מלא וברור מאפשר לבחון את הסיכון בצורה מקצועית ולזהות האם קיימת התאמה לתיאבון הסיכון ולשווקים הרלוונטיים.</p><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">שליחת פרטים לבחינת חיתום</a></div><ul class="feature-list">${page.info.map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
+    <section class="section section-soft"><div class="container split-band"><div><h2>מה משפיע על החלטת החיתום?</h2><p>החלטה חיתומית אינה מבוססת רק על שם המוצר. היא נשענת על פרופיל הסיכון, המסמכים, ניסיון התביעות, דרישות השוק והסמכויות הרלוונטיות.</p></div><ul class="feature-list">${factors.map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
+    <section class="section section-navy"><div class="container"><div class="section-header"><div><h2>תמיכה לסוכנים ולעסקים בתהליך החיתום</h2><p>קופר נינוה מסייעת באיסוף מידע, הבנת החשיפה, הכוונה למסמכים נדרשים, בחינת התאמה מול שווקים רלוונטיים והמשך שירות לאורך חיי הפוליסה.</p></div><a class="btn btn-primary" href="/insurance-agents">הגשת סיכון על ידי סוכן</a></div></div></section>
     ${faqBlock(page.faqs)}
-    ${finalCta("רוצים לבדוק התאמה?", "השאירו פרטים וצוות קופר נינוה יחזור אליכם לבדיקת התאמה ראשונית.")}`;
+    ${finalCta("רוצים לבחון סיכון?", "השאירו פרטים וצוות קופר נינוה יחזור אליכם לבדיקת חיתום ראשונית, בכפוף למידע שיימסר ולסמכויות הרלוונטיות.")}`;
 }
 
 function audienceRouting() {
@@ -1780,7 +2005,7 @@ function agentJourneySection() {
 }
 
 function claimsServiceSection() {
-  return `<section class="section"><div class="container split-band"><div><p class="section-slogan">שירות לא מסתיים בהפקה.</p><h2>תביעות ושירות לאורך חיי הפוליסה</h2><p>קופר נינוה מלווה סוכנים ולקוחות גם לאחר ההפקה — בשירות, מסמכים, תביעות וניהול תהליכים מול הגורמים הרלוונטיים.</p><a class="btn btn-outline" href="/claims">פנייה בנושא תביעה</a></div>${cards([{ title: "דיווח תביעה", icon: "▧", text: "פתיחת פנייה מסודרת עם פרטי האירוע והמסמכים הרלוונטיים.", url: "/claims", cta: "לדיווח תביעה" }, { title: "שירות ומסמכים", icon: "◎", text: "בקשות שירות, אישורים, מסמכים והכוונה לאחר הפקת הפוליסה.", url: "/contact-us", cta: "פנייה לשירות" }], 2)}</div></section>`;
+  return `<section class="section"><div class="container split-band"><div><p class="section-slogan">שירות לא מסתיים בהפקה.</p><h2>תביעות, שירות ותפעול מקומי</h2><p>קופר נינוה מלווה סוכנים, מבוטחים ושותפי שוק גם לאחר ההפקה - בשירות, מסמכים, תביעות וניהול תהליכים מול הגורמים הרלוונטיים בישראל.</p><a class="btn btn-outline" href="/contact-us">פנייה בנושא תביעה</a></div>${cards([{ title: "דיווח תביעה", icon: "▧", text: "פתיחת פנייה מסודרת עם פרטי האירוע, המסמכים והגורמים המעורבים.", url: "/contact-us", cta: "לדיווח תביעה" }, { title: "שירות ומסמכים", icon: "◎", text: "בקשות שירות, אישורים, מסמכי פוליסה והכוונה לאורך חיי הפוליסה.", url: "/contact-us", cta: "פנייה לשירות" }, { title: "תיאום מול שווקים", icon: "◇", text: "תקשורת מקצועית מול גורמי שוק רלוונטיים בכפוף לסמכויות, תנאי הפוליסה ואישורים נדרשים.", url: "/contact-us", cta: "פתיחת פנייה" }], 3)}</div></section>`;
 }
 
 function insightsSection() {
@@ -1803,7 +2028,12 @@ function actionContactSection() {
 }
 
 function partnerLogosSection() {
-  return `<section class="partner-band" aria-labelledby="home-partners-title"><div class="container"><h2 id="home-partners-title">שווקים ושותפים בינלאומיים</h2><p>קופר נינוה פועלת מול שווקים, חתמים וספקי ביטוח בינלאומיים לצורך התאמת פתרונות ביטוח לסיכונים מקצועיים ומסחריים.</p><div class="partner-logos" data-partner-logos></div></div></section>`;
+  const english = isEnglish();
+  const title = english ? "Selected International Markets and Partners" : "שווקים ושותפים בינלאומיים";
+  const text = english
+    ? "Cooper Nineveh works with selected international insurance markets and partners, subject to underwriting authority, product appetite, market approval and applicable policy terms. Displayed logos do not imply that every partner supports every product or risk."
+    : "קופר נינוה פועלת מול שווקים ושותפים בינלאומיים נבחרים, בכפוף לסמכויות חיתום, תיאבון סיכון, אישור השוק ותנאי הפוליסה הרלוונטיים. הצגת לוגו אינה מלמדת שכל שותף תומך בכל מוצר או סיכון.";
+  return `<section class="partner-band" aria-labelledby="home-partners-title"><div class="container"><h2 id="home-partners-title">${title}</h2><p>${text}</p><div class="partner-logos" data-partner-logos></div></div></section>`;
 }
 
 function whyProcessCta() {
@@ -1827,22 +2057,22 @@ function faqBlock(faqs) {
 }
 
 function finalCta(title, text) {
-  return `<section class="section section-navy"><div class="container section-header"><div><h2>${title}</h2><p>${text}</p></div><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">לקבלת הצעה</a></div></section>`;
+  return `<section class="section section-navy"><div class="container section-header"><div><h2>${title}</h2><p>${text}</p></div><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">${isEnglish() ? "Discuss Partnership" : "הגשת פנייה לחיתום"}</a></div></section>`;
 }
 
 function homepageLeadForm() {
-  return `<section class="section section-soft"><div class="container split-band"><div><h2>השאירו פרטים לבדיקה ראשונית</h2><p>ספרו לנו מי אתם ואיזה פתרון ביטוחי נדרש, וצוות קופר נינוה יחזור אליכם להכוונה ראשונית.</p></div><form class="form-panel" data-form="form_submit_homepage_lead">
+  return `<section class="section section-soft"><div class="container split-band"><div><h2>השאירו פרטים לבחינת סיכון ראשונית</h2><p>ספרו לנו מי אתם, מה אופי הסיכון ואיזה תחום חיתום רלוונטי, וצוות קופר נינוה יחזור אליכם להכוונה ראשונית.</p></div><form class="form-panel" data-form="form_submit_homepage_lead">
     <h2>פנייה מהירה</h2>
     <div class="form-grid">
       <label><span>שם מלא</span><input name="name" placeholder="שם מלא" autocomplete="name"></label>
       <label><span>טלפון</span><input name="phone" placeholder="טלפון" autocomplete="tel"></label>
       <label><span>אימייל</span><input name="email" placeholder="אימייל" autocomplete="email"></label>
       <label><span>אני</span><select name="audience"><option>סוכן ביטוח</option><option>בעל עסק</option><option>אחר</option></select></label>
-      <label class="full"><span>סוג ביטוח מבוקש</span><input name="insurance_type" placeholder="לדוגמה: סייבר, אחריות מקצועית, חבויות"></label>
+      <label class="full"><span>תחום חיתום / סוג סיכון</span><input name="insurance_type" placeholder="לדוגמה: סייבר, אחריות מקצועית, חבויות"></label>
       <label class="full"><span>הודעה קצרה</span><textarea name="message" placeholder="כתבו בקצרה את הצורך או הסיכון"></textarea></label>
     </div>
     <p class="form-note">הפרטים ישמשו לצורך חזרה אליכם ובדיקת התאמה בלבד.</p>
-    <button class="btn btn-primary" type="submit" data-track="form_submit_homepage_lead">שליחת פנייה</button>
+    <button class="btn btn-primary" type="submit" data-track="form_submit_homepage_lead">שליחת פנייה לחיתום</button>
   </form></div></section>`;
 }
 
@@ -1866,8 +2096,8 @@ function landingTemplate(page) {
           <p class="eyebrow">קופר נינוה - בדיקת התאמה ראשונית</p>
           <h1>${page.h1}</h1>
           <p class="lead">${page.lead}</p>
-          <p class="lead">פתרונות ביטוח מתקדמים באמצעות MGA ו-Coverholder עם ניסיון בסיכונים מקצועיים ומורכבים.</p>
-          <div class="hero-actions"><a class="btn btn-primary" href="#lead-form">לקבלת הצעה</a><a class="btn btn-secondary" href="tel:0779965453" data-track="click_phone">שיחה עם צוות החיתום</a></div>
+          <p class="lead">בחינת סיכון באמצעות MGA ו-Coverholder עם ניסיון בחיתום סיכונים מקצועיים ומורכבים, בכפוף לתנאי הפוליסה ואישור חיתום.</p>
+          <div class="hero-actions"><a class="btn btn-primary" href="#lead-form">הגשת פנייה לחיתום</a><a class="btn btn-secondary" href="tel:0779965453" data-track="click_phone">שיחה עם צוות החיתום</a></div>
         </div>
         <div id="lead-form" class="landing-form">${form(page.event, ["שם מלא", "טלפון", "אימייל", "שם העסק / הסוכנות", "תחום פעילות", "האם יש סוכן ביטוח?"])}</div>
       </div>
