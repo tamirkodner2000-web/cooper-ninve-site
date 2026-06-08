@@ -251,16 +251,13 @@ button:disabled {
   box-shadow: 28px 28px 0 rgba(255,255,255,.22), 56px 56px 0 rgba(255,255,255,.11);
 }
 .hero-inner {
-  width: min(1240px, calc(100% - 40px));
+  width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
-  min-height: 680px;
   padding: 88px 0 78px;
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: minmax(360px, 430px) minmax(680px, 1fr);
-  grid-template-areas: "why copy";
-  gap: clamp(56px, 8vw, 110px);
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
 }
 .hero-inner > * { min-width: 0; }
@@ -387,8 +384,7 @@ h1 { font-size: clamp(54px, 4.6vw, 70px); line-height: 1.15; max-width: 780px; l
 
 @media (max-width: 1260px) and (min-width: 901px) {
   .hero-inner {
-    grid-template-columns: minmax(340px, 390px) minmax(640px, 1fr);
-    gap: clamp(42px, 4vw, 58px);
+    grid-template-columns: minmax(0, 1fr);
   }
   .hero-copy {
     max-width: 740px;
@@ -1153,14 +1149,7 @@ summary { cursor: pointer; font-weight: 800; border-radius: 6px; }
 details:hover { box-shadow: 0 12px 28px rgba(7,25,54,.08); }
 details p { margin: 12px 0 0; color: var(--muted); }
 
-.breadcrumb {
-  background: #eef4fa;
-  padding: 14px 0;
-  color: var(--muted);
-  font-size: 14px;
-}
-.breadcrumb a { color: var(--blue-2); font-weight: 700; }
-.breadcrumb a:hover, .knowledge-list a:hover, .card a:hover { color: var(--navy); }
+.knowledge-list a:hover, .card a:hover { color: var(--navy); }
 
 .partner-band { background: white; padding: 64px 0; text-align: center; color: var(--ink); }
 .partner-band h2 { font-size: clamp(30px, 4vw, 42px); }
@@ -1512,7 +1501,7 @@ body.lang-en .footer-grid a:hover {
   .header-language-switcher { display: none; }
   .header-actions { display: none; }
   .hero-inner, .lp .hero-inner, .split-band { grid-template-columns: 1fr; }
-  .hero-inner { grid-template-areas: "copy" "why"; min-height: auto; padding: 70px 0 62px; gap: 34px; }
+  .hero-inner { grid-template-areas: "copy"; min-height: auto; padding: 70px 0 62px; }
   .hero-copy { grid-area: copy; justify-self: stretch; width: min(100%, 720px); min-width: 0; max-width: 720px; }
   .hero-card { grid-area: why; width: min(100%, 460px); max-width: 460px; justify-self: end; }
   .hero-home .hero-inner {

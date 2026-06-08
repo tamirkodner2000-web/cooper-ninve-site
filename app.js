@@ -1457,7 +1457,6 @@ function renderPartnerLogos() {
 
 function hero(page) {
   const isHomeHero = page.sections === "home";
-  const showHeroCard = !(isHomeHero && !isEnglish());
   const isHebrewHomeHero = isHomeHero && !isEnglish();
   const heroTitle = page.positioning
     ? `<h1 class="hero-title"><span class="hero-title-line">${page.h1}</span><br><span class="hero-title-line">${page.positioning.replace(/\n/g, "</span><br><span class=\"hero-title-line\">")}</span></h1>`
@@ -1490,17 +1489,8 @@ function hero(page) {
             <a class="btn btn-secondary" href="${link(page.secondary[1])}">${page.secondary[0]}</a>
           </div>
         </div>
-        ${showHeroCard ? `<aside class="hero-card hero-why-card">
-          <h2>למה קופר נינוה?</h2>
-          <ul>${(page.highlights || ["חיתום ושירות מקומי", "גישה לשווקים בינלאומיים", "ניסיון בסיכונים מורכבים", "עבודה עם סוכנים ועסקים"]).map((x) => `<li>${x}</li>`).join("")}</ul>
-        </aside>` : ""}
       </div>
     </section>`;
-}
-
-function breadcrumb(path, current) {
-  if (path === "/") return "";
-  return `<div class="breadcrumb"><div class="container"><a href="${link("/")}">${translate("דף הבית")}</a> / ${translate(current)}</div></div>`;
 }
 
 function standardTemplate(page, path) {
@@ -1510,12 +1500,12 @@ function standardTemplate(page, path) {
   if (isEnglish() && path === "/insurance-agents") return englishDistributionTemplate();
   if (isEnglish() && path === "/claims") return englishClaimsOperationsTemplate();
   if (isEnglish() && path === "/contact-us") return englishContactTemplate();
-  if (path === "/israel-market-partner") return `${breadcrumb(path, page.h1)}${internationalPartnerSections()}`;
-  if (["/privacy-policy", "/terms-of-use", "/disclosure", "/public-complaints", "/accessibility-statement"].includes(path)) return `${breadcrumb(path, page.h1)}${legalSections(page, path)}`;
+  if (path === "/israel-market-partner") return `${internationalPartnerSections()}`;
+  if (["/privacy-policy", "/terms-of-use", "/disclosure", "/public-complaints", "/accessibility-statement"].includes(path)) return `${legalSections(page, path)}`;
   if (path === "/insurance-solutions") return sections(page.sections, path);
-  if (path === "/about-us") return `${breadcrumb(path, page.h1)}${sections(page.sections, path)}`;
+  if (path === "/about-us") return `${sections(page.sections, path)}`;
   if (path === "/contact-us") return sections(page.sections, path);
-  return `${breadcrumb(path, page.h1)}${hero(page)}${sections(page.sections, path)}`;
+  return `${hero(page)}${sections(page.sections, path)}`;
 }
 
 function englishHomeTemplate() {
