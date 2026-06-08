@@ -291,19 +291,19 @@ button:disabled {
   width: 410px;
 }
 body.lang-he .hero-home .hero-inner {
-  width: min(1040px, calc(100% - 40px));
+  width: min(1180px, calc(100% - 40px));
   min-height: 560px;
   grid-template-columns: minmax(0, 780px);
   grid-template-areas: "copy";
   direction: rtl;
-  justify-content: center;
+  justify-content: start;
   gap: 0;
   padding: 76px 0 66px;
 }
 body.lang-he .hero-home .hero-copy {
-  justify-self: center;
+  justify-self: start;
   max-width: 780px;
-  padding-inline: clamp(0px, 2vw, 22px);
+  padding-inline: 0;
 }
 body.lang-he .hero-home h1 {
   max-width: 720px;
