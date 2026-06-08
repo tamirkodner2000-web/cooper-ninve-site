@@ -553,7 +553,9 @@ body.lang-he .hero-home .lead.reveal-item {
   position: relative;
   z-index: 2;
   min-height: 680px;
-  padding: 112px 8vw 104px 5vw;
+  width: min(1180px, calc(100% - 40px));
+  margin-inline: auto;
+  padding: 112px 0 104px;
   display: flex;
   align-items: center;
   justify-content: flex-end;
