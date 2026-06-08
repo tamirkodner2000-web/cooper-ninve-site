@@ -658,31 +658,29 @@ body.lang-he .hero-home .lead.reveal-item {
   text-align: right;
   list-style: none;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 26px;
   margin: 0;
   padding: 0;
   min-width: 0;
 }
 .lloyds-list li {
   position: relative;
-  min-height: 100%;
   min-width: 0;
-  border: 1px solid rgba(143,208,255,.2);
-  border-radius: var(--radius);
-  background: rgba(255,255,255,.07);
-  padding: 16px 40px 16px 18px;
+  padding: 0;
+  padding-inline-start: 26px;
   color: rgba(255,255,255,.9);
   font-weight: 700;
+  line-height: 1.55;
   overflow-wrap: anywhere;
 }
 .lloyds-list li::before {
   content: "";
   position: absolute;
-  inset-inline-end: 18px;
-  top: 1.18em;
-  width: 9px;
-  height: 9px;
+  inset-inline-start: 0;
+  top: .5em;
+  width: 8px;
+  height: 8px;
   border: 2px solid var(--focus);
   transform: rotate(45deg);
 }
@@ -1431,10 +1429,11 @@ body.lang-en .hero-card li::before {
   inset-inline-end: auto;
 }
 body.lang-en .lloyds-list li {
-  padding: 16px 18px 16px 40px;
+  padding: 0;
+  padding-inline-start: 26px;
 }
 body.lang-en .lloyds-list li::before {
-  inset-inline-start: 18px;
+  inset-inline-start: 0;
   inset-inline-end: auto;
 }
 body.lang-en .example-chip::before {
@@ -1689,7 +1688,7 @@ body.lang-en .footer-grid a:hover {
   .lloyds-copy h2 { font-size: 30px; }
   .lloyds-copy p:not(.section-slogan) { font-size: 17px; }
   .lloyds-copy .btn { max-width: 100%; white-space: normal; text-align: center; }
-  .lloyds-list li { padding: 15px 38px 15px 16px; font-size: 15px; }
+  .lloyds-list li { padding: 0; padding-inline-start: 22px; font-size: 15px; }
   .section { padding: 54px 0; }
   .section-header { display: block; }
   .section-actions { margin-top: 22px; justify-content: center; }
