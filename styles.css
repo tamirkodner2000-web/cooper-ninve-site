@@ -266,7 +266,7 @@ button:disabled {
   direction: rtl;
   width: 100%;
   max-width: 780px;
-  justify-self: end;
+  justify-self: start;
   text-align: right;
 }
 .hero-home .hero-inner {
