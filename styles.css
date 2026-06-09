@@ -782,6 +782,24 @@ body.lang-he .hero-home .lead.reveal-item {
   overflow-wrap: anywhere;
 }
 .center-title { text-align: center; max-width: 860px; margin: 0 auto 36px; }
+html[dir="rtl"] .business-risk-section .center-title {
+  text-align: right;
+  margin-inline-start: auto;
+  margin-inline-end: 0;
+}
+html[dir="rtl"] .business-risk-section .center-title::after {
+  margin-inline-start: auto;
+  margin-inline-end: 0;
+}
+html[dir="rtl"] .business-risk-section .center-title p,
+html[dir="rtl"] .business-risk-section .card,
+html[dir="rtl"] .claims-service-section,
+html[dir="rtl"] .claims-service-section .card,
+html[dir="rtl"] .agent-workflow .section-header,
+html[dir="rtl"] .agent-workflow .workflow-card {
+  direction: rtl;
+  text-align: right;
+}
 .section-slogan {
   margin: 0;
   margin-bottom: 10px;
