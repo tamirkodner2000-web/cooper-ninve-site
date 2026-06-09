@@ -1455,9 +1455,10 @@ function renderPartnerLogos() {
     </div>`).join("");
 }
 
-function hero(page) {
+function hero(page, path = "") {
   const isHomeHero = page.sections === "home";
   const isHebrewHomeHero = isHomeHero && !isEnglish();
+  const isHebrewInnerHero = !isEnglish() && ["/insurance-agents", "/business-insurance", "/claims"].includes(path);
   const heroTitle = page.positioning
     ? `<h1 class="hero-title"><span class="hero-title-line">${page.h1}</span><br><span class="hero-title-line">${page.positioning.replace(/\n/g, "</span><br><span class=\"hero-title-line\">")}</span></h1>`
     : `<h1 class="hero-title">${page.h1}</h1>`;
@@ -1478,7 +1479,7 @@ function hero(page) {
     </section>`;
   }
   return `
-    <section class="hero${isHomeHero ? " hero-home" : ""}">
+    <section class="hero${isHomeHero ? " hero-home" : ""}${isHebrewInnerHero ? " hero-inner-page" : ""}">
       <div class="container hero-inner">
         <div class="hero-copy">
           ${page.hideEyebrow ? "" : `<p class="eyebrow">${page.eyebrow || "קופר נינוה"}</p>`}
@@ -1505,7 +1506,7 @@ function standardTemplate(page, path) {
   if (path === "/insurance-solutions") return sections(page.sections, path);
   if (path === "/about-us") return `${sections(page.sections, path)}`;
   if (path === "/contact-us") return sections(page.sections, path);
-  return `${hero(page)}${sections(page.sections, path)}`;
+  return `${hero(page, path)}${sections(page.sections, path)}`;
 }
 
 function englishHomeTemplate() {
