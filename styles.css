@@ -269,23 +269,6 @@ button:disabled {
   justify-self: start;
   text-align: right;
 }
-html[dir="rtl"] .hero-inner-page .hero-inner {
-  direction: rtl;
-}
-html[dir="rtl"] .hero-inner-page .hero-copy {
-  justify-self: start;
-  text-align: right;
-}
-html[dir="rtl"] .hero-inner-page .eyebrow,
-html[dir="rtl"] .hero-inner-page .hero-title,
-html[dir="rtl"] .hero-inner-page .lead {
-  margin-inline-start: 0;
-  margin-inline-end: 0;
-  text-align: right;
-}
-html[dir="rtl"] .hero-inner-page .hero-actions {
-  justify-content: flex-start;
-}
 .hero-home .hero-inner {
   width: min(1240px, calc(100% - 40px));
   grid-template-columns: 410px minmax(650px, 760px);
@@ -1624,20 +1607,6 @@ body.lang-en .footer-grid a:hover {
   .hero-copy { text-align: center; }
   .hero-positioning { font-size: 25px; line-height: 1.16; max-width: 350px; margin-inline: auto; }
   .hero p.lead { font-size: 16px; max-width: 340px; margin-inline: auto; }
-  html[dir="rtl"] .hero-inner-page .hero-copy {
-    justify-self: stretch;
-    text-align: right;
-  }
-  html[dir="rtl"] .hero-inner-page .eyebrow,
-  html[dir="rtl"] .hero-inner-page .hero-title,
-  html[dir="rtl"] .hero-inner-page .lead {
-    margin-inline-start: 0;
-    margin-inline-end: 0;
-    text-align: right;
-  }
-  html[dir="rtl"] .hero-inner-page .hero-actions {
-    justify-content: flex-start;
-  }
   .hero-home .hero-copy { text-align: right; }
   .hero-home h1 {
     font-size: 30px;
@@ -1784,3 +1753,29 @@ body.lang-en .footer-grid a:hover {
     margin-inline: 0;
   }
 }
+
+/* ===== Global language alignment ===== */
+body.lang-he,
+html[dir="rtl"] body { text-align: right; }
+body.lang-en,
+html[dir="ltr"] body { text-align: left; }
+/* Hebrew: everything reads right; English: everything reads left.
+   Exclude the homepage hero which has its own centered layout. */
+body.lang-he .hero:not(.hero-home) .hero-copy,
+body.lang-he .hero:not(.hero-home) .eyebrow,
+body.lang-he .hero:not(.hero-home) .hero-title,
+body.lang-he .hero:not(.hero-home) .lead {
+  text-align: right;
+  justify-self: start;
+  margin-inline: 0;
+}
+body.lang-he .hero:not(.hero-home) .hero-actions { justify-content: flex-start; }
+body.lang-en .hero:not(.hero-home) .hero-copy,
+body.lang-en .hero:not(.hero-home) .eyebrow,
+body.lang-en .hero:not(.hero-home) .hero-title,
+body.lang-en .hero:not(.hero-home) .lead {
+  text-align: left;
+  justify-self: start;
+  margin-inline: 0;
+}
+body.lang-en .hero:not(.hero-home) .hero-actions { justify-content: flex-start; }
