@@ -1768,7 +1768,9 @@ body.lang-he .hero:not(.hero-home) .lead {
   text-align: right;
   justify-self: start;
   margin-inline: 0;
+  max-width: none;
 }
+body.lang-he .hero:not(.hero-home) .lead { max-width: 70ch; }
 body.lang-he .hero:not(.hero-home) .hero-actions { justify-content: flex-start; }
 body.lang-en .hero:not(.hero-home) .hero-copy,
 body.lang-en .hero:not(.hero-home) .eyebrow,
