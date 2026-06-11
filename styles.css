@@ -1770,6 +1770,11 @@ body.lang-he .hero:not(.hero-home) .lead {
   margin-inline: 0;
   max-width: none;
 }
+body.lang-he .hero:not(.hero-home) .hero-copy {
+  width: 100%;
+  max-width: none;
+  margin-inline: auto;
+}
 body.lang-he .hero:not(.hero-home) .lead { max-width: 70ch; }
 body.lang-he .hero:not(.hero-home) .hero-actions { justify-content: flex-start; }
 body.lang-en .hero:not(.hero-home) .hero-copy,
