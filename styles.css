@@ -251,8 +251,6 @@ button:disabled {
   box-shadow: 28px 28px 0 rgba(255,255,255,.22), 56px 56px 0 rgba(255,255,255,.11);
 }
 .hero-inner {
-  width: min(1180px, calc(100% - 40px));
-  margin: 0 auto;
   padding: 88px 0 78px;
   position: relative;
   z-index: 1;
@@ -1769,11 +1767,6 @@ body.lang-he .hero:not(.hero-home) .lead {
   justify-self: start;
   margin-inline: 0;
   max-width: none;
-}
-body.lang-he .hero:not(.hero-home) .hero-copy {
-  width: 100%;
-  max-width: none;
-  margin-inline: auto;
 }
 body.lang-he .hero:not(.hero-home) .lead { max-width: 70ch; }
 body.lang-he .hero:not(.hero-home) .hero-actions { justify-content: flex-start; }
