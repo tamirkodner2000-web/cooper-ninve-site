@@ -1045,7 +1045,7 @@ html[dir="rtl"] .agent-workflow .workflow-card {
   align-items: center;
 }
 body.lang-he .agent-workflow-insurance-agents .section-header {
-  width: min(100%, 740px);
+  width: min(100%, 900px);
   margin-left: auto;
   margin-right: 0;
   align-items: flex-start;
@@ -1787,10 +1787,13 @@ body.lang-he .hero:not(.hero-home) .lead { max-width: 70ch; }
 body.lang-he .hero:not(.hero-home) .hero-actions { justify-content: flex-start; }
 body.lang-he .hero-insurance-agents .hero-inner {
   direction: rtl;
-  grid-template-columns: minmax(0, 780px);
+  grid-template-columns: minmax(0, 980px);
   justify-content: start;
   justify-items: stretch;
   text-align: right;
+}
+body.lang-he .hero-insurance-agents .hero-title {
+  max-width: 980px;
 }
 body.lang-he .hero-insurance-agents .hero-copy {
   width: 100%;
