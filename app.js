@@ -1909,8 +1909,7 @@ function agentsSections() {
 function businessSections() {
   return `
     <section class="section business-risk-section"><div class="container"><div class="center-title"><h2>איזה עסק צריך בחינת סיכון מקצועית?</h2><p>עסק טכנולוגי, משרד ייעוץ, קבלן, מרפאה או חברה מקצועית אינם מציגים את אותו פרופיל סיכון. לכן נדרש תהליך חיתום לפי פעילות, חשיפה, מסמכים וניסיון תביעות.</p></div>${cards(["עסקים המספקים שירות מקצועי", "חברות טכנולוגיה ועסקים דיגיטליים", "קבלנים ופרויקטים", "מרפאות ומקצועות טיפוליים", "עסקים עם פעילות מול קהל"].map((title) => ({ title, icon: "◇", text: "בחינת הסיכון לפי אופי הפעילות, הלקוחות, החשיפה המשפטית והמידע החיתומי." })), 5)}</div></section>
-    ${underwritingExamplesSection()}
-    <section class="section section-soft"><div class="container split-band"><div><h2>בדיקת סיכון עסקי לחיתום</h2><p>ככל שהמידע הראשוני מלא וברור יותר, ניתן לקדם את בדיקת החיתום בצורה יעילה יותר.</p></div>${form("form_submit_quote_request", ["שם מלא", "טלפון", "אימייל", "שם העסק", "תחום פעילות", "סוג סיכון / תחום חיתום"])}</div></section>`;
+    <section class="section section-soft"><div class="container section-header"><div><p class="section-slogan">בדיקת התאמה ראשונית</p><h2>רוצים לבחון סיכון עסקי מול קופר נינוה?</h2><p>קופר נינוה מסייעת בבחינת סיכונים עסקיים ומורכבים, תוך התאמה לתחומי החיתום ולשווקים הרלוונטיים.</p></div><a class="btn btn-primary" href="/contact-us">מעבר לעמוד צור קשר</a></div></section>`;
 }
 
 function aboutSections() {
