@@ -1044,20 +1044,15 @@ html[dir="rtl"] .agent-workflow .workflow-card {
 .agent-workflow .section-header {
   align-items: center;
 }
-body.lang-he .agent-workflow-insurance-agents .section-header {
-  width: 100%;
-  max-width: none;
-  margin-inline: 0;
-  align-items: flex-start;
-  flex-direction: column;
-  justify-content: flex-start;
+body.lang-he .agent-workflow-insurance-agents .workflow-copy {
+  direction: rtl;
   text-align: right;
 }
-body.lang-he .agent-workflow-insurance-agents .section-header > div {
-  width: 100%;
+body.lang-he .agent-workflow-insurance-agents .workflow-copy .btn {
+  margin-top: 24px;
 }
-body.lang-he .agent-workflow-insurance-agents .section-header .btn {
-  align-self: flex-start;
+body.lang-he .agent-workflow-insurance-agents .workflow-cards {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .workflow-cards {
   counter-reset: workflow;
@@ -1785,45 +1780,6 @@ body.lang-he .hero:not(.hero-home) .lead {
 }
 body.lang-he .hero:not(.hero-home) .lead { max-width: 70ch; }
 body.lang-he .hero:not(.hero-home) .hero-actions { justify-content: flex-start; }
-body.lang-he .hero-insurance-agents .hero-inner {
-  direction: rtl;
-  grid-template-columns: minmax(0, 1fr);
-  justify-content: stretch;
-  text-align: right;
-}
-body.lang-he .hero-insurance-agents .hero-title {
-  max-width: 980px;
-}
-body.lang-he .hero-insurance-agents .hero-copy {
-  width: 100%;
-  max-width: 980px;
-  justify-self: stretch;
-  margin-inline-start: auto;
-  margin-inline-end: 0;
-  text-align: right;
-}
-body.lang-he .hero-insurance-agents .hero-actions {
-  direction: rtl;
-  justify-content: flex-start;
-}
-body.lang-he .hero-insurance-agents::after {
-  display: none;
-}
-@media (min-width: 900px) {
-  body.lang-he .hero-insurance-agents .hero-copy {
-    max-width: 1100px;
-    transform: translateX(80px);
-  }
-  body.lang-he .hero-insurance-agents .hero-title {
-    max-width: 1100px;
-  }
-  body.lang-he .agent-workflow-insurance-agents .section-header {
-    max-width: 1100px;
-    margin-inline-start: auto;
-    margin-inline-end: 0;
-    transform: translateX(80px);
-  }
-}
 body.lang-en .hero:not(.hero-home) .hero-copy,
 body.lang-en .hero:not(.hero-home) .eyebrow,
 body.lang-en .hero:not(.hero-home) .hero-title,

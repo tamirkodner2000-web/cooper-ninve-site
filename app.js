@@ -1459,7 +1459,6 @@ function hero(page, path = "") {
   const isHomeHero = page.sections === "home";
   const isHebrewHomeHero = isHomeHero && !isEnglish();
   const isHebrewInnerHero = !isEnglish() && ["/insurance-agents", "/business-insurance", "/claims"].includes(path);
-  const isHebrewInsuranceAgentsHero = !isEnglish() && path === "/insurance-agents";
   const heroTitle = page.positioning
     ? `<h1 class="hero-title"><span class="hero-title-line">${page.h1}</span><br><span class="hero-title-line">${page.positioning.replace(/\n/g, "</span><br><span class=\"hero-title-line\">")}</span></h1>`
     : `<h1 class="hero-title">${page.h1}</h1>`;
@@ -1480,7 +1479,7 @@ function hero(page, path = "") {
     </section>`;
   }
   return `
-    <section class="hero${isHomeHero ? " hero-home" : ""}${isHebrewInnerHero ? " hero-inner-page" : ""}${isHebrewInsuranceAgentsHero ? " hero-insurance-agents" : ""}">
+    <section class="hero${isHomeHero ? " hero-home" : ""}${isHebrewInnerHero ? " hero-inner-page" : ""}">
       <div class="container hero-inner">
         <div class="hero-copy">
           ${page.hideEyebrow ? "" : `<p class="eyebrow">${page.eyebrow || "קופר נינוה"}</p>`}
@@ -1979,7 +1978,11 @@ function agentJourneySection(extraClass = "") {
     ["בדיקת התאמה", "הסיכון נבחן מול יכולות החיתום, השווקים והפתרונות הרלוונטיים."],
     ["הצעה, הפקה ושירות", "במקרה של התאמה, מתקבלת הצעה ומתקדם תהליך הפקת הפוליסה ושירות."],
   ];
-  return `<section class="section section-soft agent-workflow${extraClass ? ` ${extraClass}` : ""}"><div class="container"><div class="section-header"><div><p class="section-slogan">תהליך עבודה לסוכני ביטוח.</p><h2>איך מגישים סיכון לקופר נינוה?</h2><p>תהליך עבודה ברור לסוכני ביטוח — מהגשת הסיכון ועד קבלת הצעה והפקת פוליסה.</p></div><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">הגשת סיכון לבדיקה</a></div><div class="workflow-cards">${steps.map(([title, text], index) => `<article class="workflow-card"><span>${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div></div></section>`;
+  const workflowCards = `<div class="workflow-cards">${steps.map(([title, text], index) => `<article class="workflow-card"><span>${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div>`;
+  if (extraClass) {
+    return `<section class="section section-soft agent-workflow ${extraClass}"><div class="container split-band"><div class="workflow-copy"><p class="section-slogan">תהליך עבודה לסוכני ביטוח.</p><h2>איך מגישים סיכון לקופר נינוה?</h2><p>תהליך עבודה ברור לסוכני ביטוח — מהגשת הסיכון ועד קבלת הצעה והפקת פוליסה.</p><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">הגשת סיכון לבדיקה</a></div>${workflowCards}</div></section>`;
+  }
+  return `<section class="section section-soft agent-workflow"><div class="container"><div class="section-header"><div><p class="section-slogan">תהליך עבודה לסוכני ביטוח.</p><h2>איך מגישים סיכון לקופר נינוה?</h2><p>תהליך עבודה ברור לסוכני ביטוח — מהגשת הסיכון ועד קבלת הצעה והפקת פוליסה.</p></div><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">הגשת סיכון לבדיקה</a></div>${workflowCards}</div></section>`;
 }
 
 function claimsServiceSection() {
