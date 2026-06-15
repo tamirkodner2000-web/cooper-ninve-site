@@ -1459,6 +1459,7 @@ function hero(page, path = "") {
   const isHomeHero = page.sections === "home";
   const isHebrewHomeHero = isHomeHero && !isEnglish();
   const isHebrewInnerHero = !isEnglish() && ["/insurance-agents", "/business-insurance", "/claims"].includes(path);
+  const isHebrewInsuranceAgentsHero = !isEnglish() && path === "/insurance-agents";
   const heroTitle = page.positioning
     ? `<h1 class="hero-title"><span class="hero-title-line">${page.h1}</span><br><span class="hero-title-line">${page.positioning.replace(/\n/g, "</span><br><span class=\"hero-title-line\">")}</span></h1>`
     : `<h1 class="hero-title">${page.h1}</h1>`;
@@ -1479,7 +1480,7 @@ function hero(page, path = "") {
     </section>`;
   }
   return `
-    <section class="hero${isHomeHero ? " hero-home" : ""}${isHebrewInnerHero ? " hero-inner-page" : ""}">
+    <section class="hero${isHomeHero ? " hero-home" : ""}${isHebrewInnerHero ? " hero-inner-page" : ""}${isHebrewInsuranceAgentsHero ? " hero-insurance-agents" : ""}">
       <div class="container hero-inner">
         <div class="hero-copy">
           ${page.hideEyebrow ? "" : `<p class="eyebrow">${page.eyebrow || "קופר נינוה"}</p>`}

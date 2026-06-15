@@ -1044,6 +1044,18 @@ html[dir="rtl"] .agent-workflow .workflow-card {
 .agent-workflow .section-header {
   align-items: center;
 }
+body.lang-he .agent-workflow .section-header {
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: right;
+}
+body.lang-he .agent-workflow .section-header > div {
+  width: 100%;
+}
+body.lang-he .agent-workflow .section-header .btn {
+  align-self: flex-start;
+}
 .workflow-cards {
   counter-reset: workflow;
   display: grid;
@@ -1770,6 +1782,18 @@ body.lang-he .hero:not(.hero-home) .lead {
 }
 body.lang-he .hero:not(.hero-home) .lead { max-width: 70ch; }
 body.lang-he .hero:not(.hero-home) .hero-actions { justify-content: flex-start; }
+body.lang-he .hero-insurance-agents .hero-inner {
+  justify-items: start;
+}
+body.lang-he .hero-insurance-agents .hero-copy {
+  max-width: 780px;
+  justify-self: start;
+  margin-left: auto;
+  margin-inline-end: 0;
+}
+body.lang-he .hero-insurance-agents .hero-actions {
+  justify-content: flex-start;
+}
 body.lang-en .hero:not(.hero-home) .hero-copy,
 body.lang-en .hero:not(.hero-home) .eyebrow,
 body.lang-en .hero:not(.hero-home) .hero-title,
