@@ -1902,7 +1902,7 @@ function solutionsSections() {
 
 function agentsSections() {
   return `
-    ${agentJourneySection()}
+    ${agentJourneySection("agent-workflow-insurance-agents")}
     <section class="section"><div class="container split-band"><div><h2>למה סוכני ביטוח עובדים עם קופר נינוה?</h2><p>קופר נינוה פועלת כ-MGA ו-Coverholder ומספקת לסוכני ביטוח תהליך מקצועי לסיכונים שבהם נדרשת יכולת חיתומית, גישה לשווקים בינלאומיים והבנה של השוק הישראלי.</p></div><ul class="feature-list">${["בחינת סיכונים מקצועית", "ניסיון בסיכונים מורכבים", "תמיכה בהגשת מידע חיתומי", "הפקה, שירות ותביעות מקומיים", "עבודה מול רשת רחבה של סוכני ביטוח"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
     <section class="section"><div class="container split-band"><div><h2>רוצים לעבוד איתנו כסוכנים?</h2><p>השאירו פרטים ונחזור אליכם לבדיקת שיתוף פעולה או הגשת סיכון ראשון.</p></div>${form("form_submit_agent", ["שם הסוכן", "שם הסוכנות", "טלפון", "אימייל", "תחומי פעילות עיקריים", "סוגי סיכונים שמעניינים אותך"])}</div></section>`;
 }
@@ -1972,14 +1972,14 @@ function whyCooperSection() {
   return `<section class="section section-soft"><div class="container split-band"><div><p class="section-slogan">ידע, חיתום ושירות לאורך חיי הפוליסה.</p><h2>למה קופר נינוה?</h2><p>שילוב בין ידע מקצועי, ניסיון חיתומי, גישה לשווקים בינלאומיים והיכרות עמוקה עם הצרכים של סוכני ביטוח ועסקים בישראל.</p></div><ul class="feature-list">${["יכולת חיתום מקומית", "גישה לשווקים בינלאומיים", "התמחות בסיכונים מורכבים", "שירות לסוכני ביטוח", "פתרונות לעסקים"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>`;
 }
 
-function agentJourneySection() {
+function agentJourneySection(extraClass = "") {
   const steps = [
     ["שולחים פרטי סיכון", "הסוכן מעביר מידע ראשוני על הלקוח, תחום הפעילות והכיסוי המבוקש."],
     ["משלימים מידע חיתומי", "צוות קופר נינוה מכוון לשאלונים, מסמכים ונתונים נדרשים."],
     ["בדיקת התאמה", "הסיכון נבחן מול יכולות החיתום, השווקים והפתרונות הרלוונטיים."],
     ["הצעה, הפקה ושירות", "במקרה של התאמה, מתקבלת הצעה ומתקדם תהליך הפקת הפוליסה ושירות."],
   ];
-  return `<section class="section section-soft agent-workflow"><div class="container"><div class="section-header"><div><p class="section-slogan">תהליך עבודה לסוכני ביטוח.</p><h2>איך מגישים סיכון לקופר נינוה?</h2><p>תהליך עבודה ברור לסוכני ביטוח — מהגשת הסיכון ועד קבלת הצעה והפקת פוליסה.</p></div><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">הגשת סיכון לבדיקה</a></div><div class="workflow-cards">${steps.map(([title, text], index) => `<article class="workflow-card"><span>${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div></div></section>`;
+  return `<section class="section section-soft agent-workflow${extraClass ? ` ${extraClass}` : ""}"><div class="container"><div class="section-header"><div><p class="section-slogan">תהליך עבודה לסוכני ביטוח.</p><h2>איך מגישים סיכון לקופר נינוה?</h2><p>תהליך עבודה ברור לסוכני ביטוח — מהגשת הסיכון ועד קבלת הצעה והפקת פוליסה.</p></div><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">הגשת סיכון לבדיקה</a></div><div class="workflow-cards">${steps.map(([title, text], index) => `<article class="workflow-card"><span>${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div></div></section>`;
 }
 
 function claimsServiceSection() {
