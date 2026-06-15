@@ -1806,6 +1806,9 @@ body.lang-he .hero-insurance-agents .hero-actions {
   direction: rtl;
   justify-content: flex-start;
 }
+body.lang-he .hero-insurance-agents::after {
+  display: none;
+}
 @media (min-width: 900px) {
   body.lang-he .hero-insurance-agents .hero-copy {
     max-width: 1100px;
