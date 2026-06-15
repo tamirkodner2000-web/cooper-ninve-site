@@ -1940,9 +1940,7 @@ function knowledgeSections() {
 function claimsSections() {
   return `
     ${claimsServiceSection()}
-    <section class="section section-soft"><div class="container split-band"><div><h2>תיאום תביעות בישראל</h2><p>קופר נינוה מספקת מענה מקומי בתהליך התביעה, לרבות איסוף מידע, ריכוז מסמכים, תיאום מול גורמים מקצועיים רלוונטיים ועדכון הצדדים המעורבים, בהתאם לתנאי הפוליסה והסמכויות המאושרות.</p></div><ul class="feature-list">${["קבלת פרטי האירוע והפוליסה", "ריכוז מסמכים ומידע רלוונטי לתביעה", "תיאום מול שמאים, מומחים וגורמים מקצועיים", "עדכון הסוכן או המבוטח לאורך תהליך הטיפול", "טיפול בכפוף לתנאי הפוליסה והסמכויות הרלוונטיות"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
-    <section class="section"><div class="container split-band"><div><h2>מה כדאי לצרף לפנייה?</h2><p>מידע מלא יסייע לקדם טיפול מסודר בפניית התביעה.</p></div><ul class="feature-list">${["מספר פוליסה או פרטי מבוטח", "תיאור האירוע ומועדו", "מסמכים, תמונות או התכתבויות רלוונטיות", "פרטי סוכן הביטוח, אם קיים", "פרטי התקשרות להמשך טיפול"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
-    ${claimsActionSection()}`;
+    <section class="section"><div class="container split-band"><div><h2>מה כדאי לצרף לפנייה?</h2><p>מידע מלא יסייע לקדם טיפול מסודר בפניית התביעה.</p></div><ul class="feature-list">${["מספר פוליסה או פרטי מבוטח", "תיאור האירוע ומועדו", "מסמכים, תמונות או התכתבויות רלוונטיות", "פרטי סוכן הביטוח, אם קיים", "פרטי התקשרות להמשך טיפול"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>`;
 }
 
 function productTemplate(page) {
@@ -1986,16 +1984,6 @@ function agentJourneySection(extraClass = "") {
 
 function claimsServiceSection() {
   return `<section class="section claims-service-section"><div class="container split-band"><div><p class="section-slogan">תהליך תביעה מסודר.</p><h2>טיפול בתביעות מול קופר נינוה</h2><p>קופר נינוה מסייעת בריכוז פרטי התביעה, קבלת מסמכים רלוונטיים, תיאום מול גורמים מקצועיים ועדכון הצדדים הרלוונטיים לאורך תהליך הטיפול, בכפוף לתנאי הפוליסה והסמכויות הרלוונטיות.</p><a class="btn btn-outline" href="/contact-us">פנייה בנושא תביעה</a></div>${cards([{ title: "פתיחת תביעה", icon: "▧", text: "קבלת פרטי האירוע הראשוניים, פרטי המבוטח והפוליסה, וסיווג ראשוני של סוג התביעה.", url: "/contact-us", cta: "פתיחת פנייה" }, { title: "מסמכים נדרשים", icon: "◎", text: "ריכוז מסמכים, אישורים, תמונות, דוחות או כל מידע רלוונטי אחר הנדרש לבחינת התביעה.", url: "/contact-us", cta: "שליחת מסמכים" }, { title: "בדיקה ותיאום", icon: "◇", text: "בדיקה ראשונית של המידע ותיאום מול גורמים מקצועיים רלוונטיים בהתאם לצורך.", url: "/contact-us", cta: "בדיקה ותיאום" }], 3)}</div></section>`;
-}
-
-function claimsActionSection() {
-  return `<section class="section"><div class="container"><div class="center-title"><h2>איך אפשר לעזור?</h2><p>בחרו את הפעולה המתאימה לפניית התביעה, וצוות קופר נינוה יסייע בהכוונה להמשך הטיפול.</p></div>${cards([
-    { title: "פתיחת פנייה", icon: "◇", text: "שליחת פרטי אירוע ראשוניים לבדיקת תביעה.", url: "/contact-us", cta: "פתיחת פנייה" },
-    { title: "הגשת מסמכים", icon: "◎", text: "העברת מסמכים רלוונטיים להמשך טיפול.", url: "/contact-us", cta: "שליחת מסמכים" },
-    { title: "בדיקת סטטוס", icon: "◈", text: "בירור סטטוס טיפול בתביעה קיימת.", url: "/contact-us", cta: "בדיקת סטטוס" },
-    { title: "דיווח תביעה", icon: "▧", text: "פתיחת דיווח ראשוני על אירוע ביטוחי.", url: "/contact-us", cta: "דיווח תביעה" },
-    { title: "שיחה עם צוות תביעות", icon: "✚", text: "פנייה לצוות המטפל לצורך הכוונה ראשונית.", url: "/contact-us", cta: "צור קשר" },
-  ], 5)}</div></section>`;
 }
 
 function insightsSection() {
