@@ -1864,7 +1864,7 @@ function homeCountersBlock() {
 }
 
 function mgaPositioningBlock() {
-  return `<section class="mga-block" aria-labelledby="mga-title"><div class="mga-sketch" data-sketch-src="/assets/backgrounds/lloyds-building-sketch.svg" aria-hidden="true"><img src="/assets/backgrounds/lloyds-building-sketch.svg" alt="" loading="lazy"></div><div class="mga-inner"><div class="mga-copy"><p class="mga-kicker">לא עוד סוכנות ביטוח, תקראו לנו חברת חיתום.</p><h2 id="mga-title">קופר נינוה היא <span>M.G.A</span></h2><strong>מרכז חיתום ישראלי הפועל מול חתמים ושווקים בינלאומיים בכפוף לסמכויות, תיאבון סיכון ואישורים רלוונטיים.</strong><p>קופר נינוה מחברת בין סיכונים בישראל לבין שווקים מקומיים ובינלאומיים באמצעות בחינת חיתום, הפקה, שירות, תביעות וניהול תיקים לאורך חיי הפוליסה. כל כיסוי או פעולה כפופים לתנאי הפוליסה, סמכויות החיתום ואישור השוק הרלוונטי.</p><a class="btn btn-primary" href="/about-us">עוד על קופר נינוה</a></div></div></section>`;
+  return `<section class="mga-block" aria-labelledby="mga-title"><div class="mga-inner"><div class="mga-copy"><p class="mga-kicker">לא עוד סוכנות ביטוח, תקראו לנו חברת חיתום.</p><h2 id="mga-title">קופר נינוה היא <span>M.G.A</span></h2><strong>מרכז חיתום ישראלי הפועל מול חתמים ושווקים בינלאומיים בכפוף לסמכויות, תיאבון סיכון ואישורים רלוונטיים.</strong><p>קופר נינוה מחברת בין סיכונים בישראל לבין שווקים מקומיים ובינלאומיים באמצעות בחינת חיתום, הפקה, שירות, תביעות וניהול תיקים לאורך חיי הפוליסה. כל כיסוי או פעולה כפופים לתנאי הפוליסה, סמכויות החיתום ואישור השוק הרלוונטי.</p><a class="btn btn-primary" href="/about-us">עוד על קופר נינוה</a></div></div></section>`;
 }
 
 function lloydsAdvantagesSection() {
