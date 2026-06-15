@@ -782,12 +782,15 @@ body.lang-he .hero-home .lead.reveal-item {
 .center-title { text-align: center; max-width: 860px; margin: 0 auto 36px; }
 html[dir="rtl"] .business-risk-section .center-title {
   text-align: right;
-  margin-inline-start: auto;
-  margin-inline-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: auto;
 }
 html[dir="rtl"] .business-risk-section .center-title::after {
-  margin-inline-start: auto;
-  margin-inline-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: auto;
+}
+html[dir="rtl"] .business-risk-section .grid {
+  direction: rtl;
 }
 html[dir="rtl"] .business-risk-section .center-title p,
 html[dir="rtl"] .business-risk-section .card,
