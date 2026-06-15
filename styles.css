@@ -1806,6 +1806,21 @@ body.lang-he .hero-insurance-agents .hero-actions {
   direction: rtl;
   justify-content: flex-start;
 }
+@media (min-width: 900px) {
+  body.lang-he .hero-insurance-agents .hero-copy {
+    max-width: 1100px;
+    transform: translateX(80px);
+  }
+  body.lang-he .hero-insurance-agents .hero-title {
+    max-width: 1100px;
+  }
+  body.lang-he .agent-workflow-insurance-agents .section-header {
+    max-width: 1100px;
+    margin-inline-start: auto;
+    margin-inline-end: 0;
+    transform: translateX(80px);
+  }
+}
 body.lang-en .hero:not(.hero-home) .hero-copy,
 body.lang-en .hero:not(.hero-home) .eyebrow,
 body.lang-en .hero:not(.hero-home) .hero-title,
