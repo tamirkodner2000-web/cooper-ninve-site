@@ -1919,7 +1919,7 @@ function aboutSections() {
 }
 
 function teamSection() {
-  return `<section class="section team-section" aria-labelledby="team-title"><div class="container"><div class="center-title"><p class="section-slogan">ידע, חיתום ושירות לאורך חיי הפוליסה.</p><h2 id="team-title">הכירו את המומחים שלנו</h2><p>צוות קופר נינוה משלב ניסיון חיתומי, ניהולי, משפטי ותפעולי — במטרה לספק לסוכני ביטוח ולעסקים שירות מקצועי לאורך כל חיי הפוליסה.</p></div><div class="team-grid">${teamMembers.map((member) => `<article class="team-card"><div class="team-photo"><img src="${member.image}" alt="${member.name} - ${member.role}" loading="lazy" width="420" height="320" onerror="this.hidden=true; this.nextElementSibling.hidden=false;"><span class="team-fallback" hidden>${member.initials}</span></div><div class="team-copy"><h3>${member.name}</h3><p class="team-role">${member.role}</p><p>${member.bio}</p></div></article>`).join("")}</div></div></section>`;
+  return `<section class="section team-section" aria-labelledby="team-title"><div class="container"><div class="center-title"><h2 id="team-title">הכירו את המומחים שלנו</h2></div><div class="team-grid">${teamMembers.map((member) => `<article class="team-card"><div class="team-photo"><img src="${member.image}" alt="${member.name} - ${member.role}" loading="lazy" width="420" height="320"></div><div class="team-copy"><h3>${member.name}</h3><p class="team-role">${member.role}</p><p>${member.bio}</p></div></article>`).join("")}</div></div></section>`;
 }
 
 function contactSections() {
