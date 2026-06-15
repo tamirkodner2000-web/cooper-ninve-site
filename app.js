@@ -79,8 +79,8 @@ const pages = {
   "/claims": {
     title: "תביעות | קופר נינוה",
     description: "ליווי סוכני ביטוח ומבוטחים בתהליך התביעה, מריכוז פרטי האירוע והמסמכים ועד טיפול מול הגורמים המקצועיים בהתאם לתנאי הפוליסה והסמכויות הרלוונטיות.",
-    h1: "תביעות",
-    lead: "קופר נינוה מלווה סוכני ביטוח ומבוטחים בתהליך התביעה, החל מקבלת פרטי האירוע והמסמכים הרלוונטיים ועד לתיאום מול הגורמים המקצועיים, בכפוף לתנאי הפוליסה והסמכויות הרלוונטיות.",
+    h1: "תביעות ביטוח וניהול תהליך תביעה",
+    lead: "קופר נינוה מלווה סוכני ביטוח ומבוטחים בפתיחת תביעה, ריכוז מסמכים, בדיקת פרטי האירוע ותיאום מול הגורמים הרלוונטיים, בכפוף לתנאי הפוליסה והסמכויות הרלוונטיות.",
     primary: ["פתיחת פנייה בנושא תביעה", "/contact-us"],
     secondary: ["מסמכים נדרשים", "/contact-us"],
     sections: "claims",
@@ -1459,7 +1459,6 @@ function hero(page, path = "") {
   const isHomeHero = page.sections === "home";
   const isHebrewHomeHero = isHomeHero && !isEnglish();
   const isHebrewInnerHero = !isEnglish() && ["/insurance-agents", "/business-insurance", "/claims"].includes(path);
-  const isHebrewClaimsHero = !isEnglish() && path === "/claims";
   const heroTitle = page.positioning
     ? `<h1 class="hero-title"><span class="hero-title-line">${page.h1}</span><br><span class="hero-title-line">${page.positioning.replace(/\n/g, "</span><br><span class=\"hero-title-line\">")}</span></h1>`
     : `<h1 class="hero-title">${page.h1}</h1>`;
@@ -1480,7 +1479,7 @@ function hero(page, path = "") {
     </section>`;
   }
   return `
-    <section class="hero${isHomeHero ? " hero-home" : ""}${isHebrewInnerHero ? " hero-inner-page" : ""}${isHebrewClaimsHero ? " hero-claims" : ""}">
+    <section class="hero${isHomeHero ? " hero-home" : ""}${isHebrewInnerHero ? " hero-inner-page" : ""}">
       <div class="container hero-inner">
         <div class="hero-copy">
           ${page.hideEyebrow ? "" : `<p class="eyebrow">${page.eyebrow || "קופר נינוה"}</p>`}

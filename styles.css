@@ -1783,33 +1783,6 @@ body.lang-he .hero:not(.hero-home) .lead {
 }
 body.lang-he .hero:not(.hero-home) .lead { max-width: 70ch; }
 body.lang-he .hero:not(.hero-home) .hero-actions { justify-content: flex-start; }
-body.lang-he .hero-claims .hero-inner { padding: 48px 0 46px; }
-body.lang-he .hero-claims .hero-copy {
-  justify-self: center;
-  max-width: 860px;
-  text-align: center;
-}
-body.lang-he .hero-claims .eyebrow,
-body.lang-he .hero-claims .hero-title,
-body.lang-he .hero-claims .lead {
-  margin-inline: auto;
-  text-align: center;
-}
-body.lang-he .hero-claims .hero-title {
-  font-size: clamp(46px, 4.2vw, 58px);
-  line-height: 1.1;
-  max-width: 620px;
-}
-body.lang-he .hero-claims .lead {
-  max-width: 760px;
-  font-size: clamp(19px, 1.45vw, 22px);
-  line-height: 1.75;
-  margin: 22px auto 0;
-}
-body.lang-he .hero-claims .hero-actions {
-  justify-content: center;
-  margin-top: 26px;
-}
 body.lang-en .hero:not(.hero-home) .hero-copy,
 body.lang-en .hero:not(.hero-home) .eyebrow,
 body.lang-en .hero:not(.hero-home) .hero-title,
