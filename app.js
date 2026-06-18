@@ -1472,10 +1472,6 @@ function hero(page, path = "") {
         <div class="hero-copy">
           ${homeTitle}
           <p class="lead">${page.lead}</p>
-          <div class="hero-actions">
-            <a class="btn btn-primary" href="${link(page.primary[1])}" data-track="click_quote_cta">${page.primary[0]}</a>
-            <a class="btn btn-secondary" href="${link(page.secondary[1])}">${page.secondary[0]}</a>
-          </div>
         </div>
       </div>
     </section>`;
