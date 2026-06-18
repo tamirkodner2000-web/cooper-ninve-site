@@ -35,10 +35,10 @@ const pages = {
   "/": {
     title: "קופר נינוה | ישראל - מרכז חיתום הבנוי לעתיד",
     description: "קופר נינוה היא מרכז חיתום ישראלי, MGA ו-Coverholder המחבר בין סוכני ביטוח, עסקים ושווקי ביטוח בינלאומיים באמצעות חיתום, הפקה, שירות ותביעות.",
-    eyebrow: "MGA ו-Coverholder בישראל",
+    eyebrow: "",
     hideEyebrow: true,
-    h1: "קופר נינוה - מרכז חיתום ישראלי הבנוי לעתיד",
-    positioning: "חיתום, שווקים בינלאומיים ושירות מקומי לאורך חיי הפוליסה",
+    h1: "קודם כל יושרה.",
+    positioning: "קופר נינוה,\nמרכז חיתום הבנוי לעתיד.",
     lead: "קופר נינוה מחברת בין סוכני ביטוח, עסקים ושווקי ביטוח בינלאומיים באמצעות יכולות חיתום, הפקה, שירות, תביעות וניהול תיקים בישראל, בכפוף לסמכויות חיתום, תיאבון סיכון ותנאי הפוליסה.",
     trustMetrics: [
       ["5", "מבטחי משנה"],
@@ -1463,12 +1463,14 @@ function hero(page, path = "") {
     ? `<h1 class="hero-title"><span class="hero-title-line">${page.h1}</span><br><span class="hero-title-line">${page.positioning.replace(/\n/g, "</span><br><span class=\"hero-title-line\">")}</span></h1>`
     : `<h1 class="hero-title">${page.h1}</h1>`;
   if (isHebrewHomeHero) {
+    const homeTitle = page.positioning
+      ? `<h1 class="hero-title"><span class="hero-title-line">${page.h1}</span><br><span class="hero-title-line">${page.positioning.replace(/\n/g, "</span><br><span class=\"hero-title-line\">")}</span></h1>`
+      : `<h1 class="hero-title">${page.h1}</h1>`;
     return `
     <section class="hero hero-home">
       <div class="container hero-inner">
         <div class="hero-copy">
-          <h1 class="hero-title">${page.h1}</h1>
-          <p class="hero-positioning">${page.positioning}</p>
+          ${homeTitle}
           <p class="lead">${page.lead}</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="${link(page.primary[1])}" data-track="click_quote_cta">${page.primary[0]}</a>
