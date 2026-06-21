@@ -1875,7 +1875,7 @@ function homeCountersBlock() {
 }
 
 function mgaPositioningBlock() {
-  return `<section class="mga-block" aria-labelledby="mga-title"><div class="mga-inner"><div class="mga-copy"><p class="mga-kicker">לא עוד סוכנות ביטוח, תקראו לנו חברת חיתום.</p><h2 id="mga-title">קופר נינוה היא <span>M.G.A</span></h2><strong>גוף המאגד תחתיו חתמים מעבר לים אשר העניקו לו סמכויות חיתום.</strong><p>כלומר, גוף המחזיק סמכויות נרחבות לרבות: תמחור, חיתום ויישוב תביעות מקומי בשם החתמים מעבר לים. M.G.A הוא ONE STOP SHOP המבצע ניהול בחינה והכוונת תיקים בהתאם לתחומי המומחיות של המבטחים העומדים מאחוריו.</p><a class="btn btn-primary" href="/about-us">עוד על קופר נינוה</a></div></div></section>`;
+  return `<section class="mga-block" aria-labelledby="mga-title"><div class="mga-inner"><div class="mga-copy"><p class="mga-kicker">לא עוד סוכנות ביטוח, תקראו לנו חברת חיתום.</p><h2 id="mga-title">קופר נינוה היא <span>M.G.A</span></h2><strong>גוף המאגד תחתיו חתמים מעבר לים אשר העניקו לו סמכויות חיתום.</strong><p>M.G.A הוא ONE STOP SHOP המבצע ניהול בחינה והכוונת תיקים בהתאם לתחומי המומחיות של המבטחים העומדים מאחוריו. כלומר, גוף המחזיק סמכויות נרחבות לרבות: תמחור, חיתום ויישוב תביעות מקומי בשם החתמים מעבר לים.</p><a class="btn btn-primary" href="/about-us">עוד על קופר נינוה</a></div></div></section>`;
 }
 
 function lloydsAdvantagesSection() {
