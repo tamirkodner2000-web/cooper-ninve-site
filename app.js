@@ -1849,7 +1849,6 @@ function homeSections() {
     ${homeCountersBlock()}
     ${mgaPositioningBlock()}
     ${lloydsAdvantagesSection()}
-    ${agentJourneySection()}
     ${insightsSection()}
     ${partnerLogosSection()}`;
 }
