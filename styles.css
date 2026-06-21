@@ -300,6 +300,37 @@ body.lang-he .hero-home .hero-copy {
   max-width: 780px;
   padding-inline: 0;
 }
+body.lang-he .hero-home .hero-precision-visual {
+  position: absolute;
+  inset-inline-start: max(28px, calc((100vw - 1180px) / 2 + 18px));
+  inset-block-start: 50%;
+  width: clamp(250px, 25vw, 390px);
+  aspect-ratio: 360 / 520;
+  color: rgba(188, 223, 247, .82);
+  opacity: .42;
+  pointer-events: none;
+  transform: translateY(-50%);
+  z-index: 0;
+}
+body.lang-he .hero-home .hero-precision-visual svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: visible;
+}
+body.lang-he .hero-home .hero-precision-visual path {
+  stroke: currentColor;
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+body.lang-he .hero-home .hero-ruler {
+  opacity: .72;
+}
+body.lang-he .hero-home .hero-launch-form {
+  opacity: .58;
+}
 body.lang-he .hero-home h1 {
   max-width: 720px;
   font-size: clamp(48px, 4.35vw, 66px);
@@ -1552,6 +1583,11 @@ body.lang-en .footer-grid a:hover {
     justify-content: center;
     padding: 64px 0 58px;
   }
+  body.lang-he .hero-home .hero-precision-visual {
+    inset-inline-start: 20px;
+    width: min(30vw, 270px);
+    opacity: .24;
+  }
   body.lang-he .hero-home .hero-copy {
     justify-self: center;
     max-width: 720px;
@@ -1636,6 +1672,9 @@ body.lang-en .footer-grid a:hover {
   body.lang-he .hero-home .hero-inner {
     width: calc(100vw - 28px);
     padding: 46px 0 40px;
+  }
+  body.lang-he .hero-home .hero-precision-visual {
+    display: none;
   }
   body.lang-he .hero-home .hero-copy {
     max-width: 100%;

@@ -1468,10 +1468,25 @@ function hero(page, path = "") {
       : `<h1 class="hero-title">${page.h1}</h1>`;
     return `
     <section class="hero hero-home">
+      <div class="hero-precision-visual" aria-hidden="true">
+        <svg viewBox="0 0 360 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g class="hero-ruler">
+            <path d="M72 46V474" />
+            <path d="M56 46H88M56 474H88" />
+            <path d="M72 76H104M72 116H94M72 156H104M72 196H94M72 236H104M72 276H94M72 316H104M72 356H94M72 396H104M72 436H94" />
+          </g>
+          <g class="hero-launch-form">
+            <path d="M132 432C172 352 192 274 212 188C224 136 244 94 288 62" />
+            <path d="M154 412C198 366 238 338 302 318" />
+            <path d="M226 178L266 126L292 188L254 210L226 178Z" />
+            <path d="M246 174L276 160" />
+            <path d="M186 292L226 278M176 326L206 316M164 360L194 350" />
+          </g>
+        </svg>
+      </div>
       <div class="container hero-inner">
         <div class="hero-copy">
           ${homeTitle}
-          <p class="lead">${page.lead}</p>
         </div>
       </div>
     </section>`;
