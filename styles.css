@@ -840,6 +840,15 @@ html[dir="rtl"] .business-cta-section {
 html[dir="rtl"] .business-cta-section .section-header {
   margin-bottom: 0;
 }
+html[dir="rtl"] .business-cta-section .section-header p:not(.section-slogan) {
+  max-width: 680px;
+  font-size: clamp(18px, 1.35vw, 21px);
+  line-height: 1.72;
+  font-weight: 500;
+}
+html[dir="rtl"] .business-cta-section .btn {
+  margin-top: 26px;
+}
 html[dir="rtl"] .business-risk-section .center-title::after {
   margin-inline-start: 0;
   margin-inline-end: auto;
