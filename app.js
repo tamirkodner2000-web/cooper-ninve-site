@@ -1918,7 +1918,7 @@ function agentsSections() {
   ];
   return `
     ${agentJourneySection()}
-    <section class="section agent-workflow"><div class="container"><div class="section-header"><div><h2>כשסיכון לא נכנס למסלול הרגיל — קופר נינוה נכנסת לתמונה</h2><p>קופר נינוה עובדת עם סוכני ביטוח כשותף חיתומי מאחורי הקלעים — מסייעת בבחינת סיכונים מורכבים, התאמתם לשווקים רלוונטיים והפקת פוליסות בעברית, תוך שמירה על מקומו המרכזי של הסוכן מול הלקוח.</p></div></div><div class="workflow-cards">${agentBenefits.map(([title, text], index) => `<article class="workflow-card"><span>${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div></div></section>
+    <section class="section agent-workflow"><div class="container"><div class="section-header"><div><h2>כשסיכון לא נכנס למסלול הרגיל — קופר נינוה נכנסת לתמונה</h2><p>קופר נינוה עובדת עם סוכני ביטוח כשותף חיתומי מאחורי הקלעים — מסייעת בבחינת סיכונים מורכבים, התאמתם לשווקים רלוונטיים והפקת פוליסות בעברית, תוך שמירה על מקומו המרכזי של הסוכן מול הלקוח.</p></div></div><div class="workflow-cards">${agentBenefits.map(([title, text]) => `<article class="workflow-card"><h3>${title}</h3><p>${text}</p></article>`).join("")}</div></div></section>
     <section class="section section-soft"><div class="container section-header"><div><p class="section-slogan">שיתוף פעולה עם סוכנים</p><h2>סוכני ביטוח? בואו לעבוד איתנו</h2><p>קופר נינוה עובדת עם סוכני ביטוח ומתווכים מקצועיים בבחינת סיכונים, חיתום, הפקה ושירות בתחומים מסחריים ומורכבים, בכפוף לתחומי החיתום ולשווקים הרלוונטיים.</p></div><a class="btn btn-primary" href="/contact-us">מעבר לעמוד צור קשר</a></div></section>`;
 }
 
