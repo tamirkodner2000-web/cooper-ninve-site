@@ -817,6 +817,21 @@ html[dir="rtl"] .business-risk-section .center-title {
   margin-inline-start: 0;
   margin-inline-end: auto;
 }
+html[dir="rtl"] .business-risk-section .business-risk-copy {
+  max-width: 840px;
+  margin-bottom: 0;
+}
+html[dir="rtl"] .business-risk-section .business-risk-copy::after {
+  display: none;
+}
+html[dir="rtl"] .business-risk-section .business-risk-copy p {
+  max-width: 760px;
+  margin: 18px 0 0;
+  color: #4f5f70;
+  font-size: clamp(18px, 1.45vw, 21px);
+  font-weight: 500;
+  line-height: 1.82;
+}
 html[dir="rtl"] .business-risk-section .center-title::after {
   margin-inline-start: 0;
   margin-inline-end: auto;
