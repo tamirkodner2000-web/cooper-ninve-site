@@ -1925,7 +1925,7 @@ function agentsSections() {
 function businessSections() {
   return `
     <section class="section business-risk-section"><div class="container"><div class="center-title business-risk-copy"><h2>איזה עסק צריך בחינת סיכון מקצועית?</h2><p>לא כל עסק מתאים למסלול ביטוח סטנדרטי. כאשר הפעילות מורכבת, החשיפה גבוהה, קיימות דרישות חוזיות מיוחדות או שהשוק המקומי אינו נותן מענה מספק — נדרשת בחינת סיכון מקצועית.</p><p>במקרים כאלה, השאלה אינה רק איזו פוליסה נדרשת, אלא כיצד נכון להבין את הסיכון, אילו נתונים חשוב להציג בפני החתמים, ומהו השוק המתאים לבחינה. קופר נינוה בוחנת את מאפייני העסק, תחום הפעילות, היקף החשיפה והמידע החיתומי הרלוונטי, במטרה לבחון אפשרות להתאמת פתרון ביטוחי מול השווקים והחתמים הרלוונטיים, בכפוף לתיאבון החיתום, תנאי הפוליסה ואישור השוק.</p></div></div></section>
-    <section class="section section-soft business-cta-section"><div class="container section-header"><div><p class="section-slogan">בדיקת התאמה ראשונית</p><h2>רוצים לבחון סיכון עסקי מול קופר נינוה?</h2><p>קופר נינוה מסייעת בבחינת סיכונים עסקיים ומורכבים, תוך התאמה לתחומי החיתום ולשווקים הרלוונטיים.</p></div></div></section>`;
+    <section class="section section-soft business-cta-section"><div class="container section-header"><div><p class="section-slogan">בדיקת התאמה ראשונית</p><h2>רוצים לבחון סיכון עסקי מול קופר נינוה?</h2><p>קופר נינוה מסייעת בבחינת סיכונים עסקיים ומורכבים, תוך התאמה לתחומי החיתום ולשווקים הרלוונטיים.</p><a class="btn btn-primary" href="/contact-us">מעבר לעמוד צור קשר</a></div></div></section>`;
 }
 
 function aboutSections() {
