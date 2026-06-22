@@ -832,6 +832,14 @@ html[dir="rtl"] .business-risk-section .business-risk-copy p {
   font-weight: 500;
   line-height: 1.82;
 }
+html[dir="rtl"] .business-cta-section {
+  background:
+    linear-gradient(180deg, #f8fbff 0%, #eef6fc 100%);
+  border-block: 1px solid var(--line);
+}
+html[dir="rtl"] .business-cta-section .section-header {
+  margin-bottom: 0;
+}
 html[dir="rtl"] .business-risk-section .center-title::after {
   margin-inline-start: 0;
   margin-inline-end: auto;
