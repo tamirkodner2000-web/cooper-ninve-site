@@ -7,17 +7,30 @@ const partnerLogos = [
   { alt: "QBE", src: "/assets/logos/partners/qbe-partner-logo.png", width: 1249, height: 506 },
 ];
 
+const productIcons = {
+  professional: `<svg aria-hidden="true" focusable="false" viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M11 27h10"/><path d="M7 23h18"/><path d="M10 13h12a2 2 0 0 1 2 2v8H8v-8a2 2 0 0 1 2-2Z"/><path d="M13 13v-2a3 3 0 0 1 6 0v2"/><path d="M13 18h6"/><path d="M25 7h3v8"/><path d="M22 7h-3"/><path d="M25 7v4h-5"/></svg>`,
+  cyber: `<svg aria-hidden="true" focusable="false" viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4 25 8v7c0 6-4 10-9 13-5-3-9-7-9-13V8l9-4Z"/><rect x="12" y="15" width="8" height="7" rx="1.5"/><path d="M14 15v-2a2 2 0 0 1 4 0v2"/><path d="M16 18.5v1"/></svg>`,
+  thirdParty: `<svg aria-hidden="true" focusable="false" viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="10" r="3"/><circle cx="22" cy="11" r="2.5"/><path d="M5 24c.8-4 3-6 6-6s5.2 2 6 6"/><path d="M17.5 23c.8-3 2.3-4.5 4.5-4.5 2.5 0 4 1.5 4.8 4.5"/><path d="M15.5 15.5 19 17"/></svg>`,
+  employers: `<svg aria-hidden="true" focusable="false" viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 12a6 6 0 0 1 12 0"/><path d="M8 12h16"/><path d="M13 7v5"/><path d="M19 7v5"/><circle cx="16" cy="16" r="4"/><path d="M8 27c1.2-4 4-6 8-6s6.8 2 8 6"/><path d="M6 27h20"/></svg>`,
+  product: `<svg aria-hidden="true" focusable="false" viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 11 16 6l10 5-10 5-10-5Z"/><path d="M6 11v11l10 5 10-5V11"/><path d="M16 16v11"/><path d="M11 8.5 21 13.5"/></svg>`,
+  contractors: `<svg aria-hidden="true" focusable="false" viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a6 6 0 0 1 12 0"/><path d="M8 13h16"/><path d="M14 8v5"/><path d="M18 8v5"/><circle cx="16" cy="17" r="4"/><path d="M9 28c1-4 3.5-6 7-6s6 2 7 6"/><path d="M22 22l4 4"/><path d="M24 20l4 4"/></svg>`,
+  medical: `<svg aria-hidden="true" focusable="false" viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 7v8a7 7 0 0 0 14 0V7"/><path d="M9 7H6"/><path d="M23 7h3"/><path d="M16 22v2a4 4 0 0 0 8 0v-3"/><circle cx="24" cy="18" r="3"/><path d="M14 11h4"/><path d="M16 9v4"/></svg>`,
+  directors: `<svg aria-hidden="true" focusable="false" viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="16" cy="9" r="4"/><path d="M8 27c1.2-5 4-7.5 8-7.5s6.8 2.5 8 7.5"/><path d="M14 20 16 24l2-4"/><path d="M7 15h5"/><path d="M20 15h5"/><path d="M6 18h20"/></svg>`,
+  media: `<svg aria-hidden="true" focusable="false" viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="10" width="20" height="16" rx="2"/><path d="M6 15h20"/><path d="M10 10 13 15"/><path d="M16 10 19 15"/><path d="M22 10 25 15"/><path d="M11 6h10l3 4H8l3-4Z"/><path d="M14 20 19 22.5 14 25v-5Z"/></svg>`,
+  specialRisks: `<svg aria-hidden="true" focusable="false" viewBox="0 0 32 32" width="34" height="34" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4 25 8v7c0 6-4 10-9 13-5-3-9-7-9-13V8l9-4Z"/><path d="M16 11v7"/><path d="M16 22h.01"/><path d="M12 24h8"/></svg>`,
+};
+
 const products = [
-  { title: "אחריות מקצועית", url: "/professional-liability-insurance", icon: "◎", text: "הגנה מפני תביעות הנובעות מטעות מקצועית, רשלנות, ייעוץ שגוי או מחדל במסגרת מתן שירות מקצועי." },
-  { title: "סייבר", url: "/cyber-insurance", icon: "◈", text: "כיסוי לאירועי סייבר, מתקפות כופר, דליפות מידע, השבתת פעילות, הוצאות שחזור ותביעות צד שלישי." },
-  { title: "צד שלישי", url: "/liability-insurance", icon: "◇", text: "כיסוי לעסקים מפני תביעות צד שלישי בגין נזקי גוף, רכוש או אחריות הנובעת מהפעילות העסקית." },
-  { title: "חבות מעבידים", url: "/employers-liability-insurance", icon: "▥", text: "פתרונות לחבות מעבידים והגנה מפני תביעות עובדים, בכפוף לתנאי הפוליסה ואישור חיתום." },
-  { title: "חבות המוצר", url: "/product-liability-insurance", icon: "▣", text: "כיסוי ליצרנים, יבואנים ומשווקים החשופים לתביעות הנובעות ממוצר, פגם או נזק לצד שלישי." },
-  { title: "עבודות קבלניות", url: "/contractors-all-risks-insurance", icon: "▧", text: "פתרונות ביטוח לפרויקטים, קבלנים, יזמים ועבודות תשתית, כולל רכוש, צד שלישי וחבות מעבידים." },
-  { title: "רשלנות רפואית", url: "/medical-malpractice-insurance", icon: "✚", text: "פתרונות לרופאים, מטפלים, מרפאות וגורמים רפואיים החשופים לתביעות בגין רשלנות מקצועית." },
-  { title: "דירקטורים ונושאי משרה", url: "/directors-and-officers-insurance", icon: "◉", text: "פתרונות אחריות נושאי משרה לחברות, הנהלות ודירקטוריונים מול חשיפות ניהוליות ומשפטיות." },
-  { title: "הפקות מדיה וסרטים", url: "/media-production-insurance", icon: "▤", text: "מענה ביטוחי להפקות, צוותים, ציוד, לוקיישנים ופעילות מדיה הדורשת התאמה חיתומית." },
-  { title: "סיכונים מיוחדים", url: "/special-risks-insurance", icon: "◌", text: "בדיקת פתרונות לסיכונים מורכבים, חריגים או לא סטנדרטיים שאינם נכנסים לתבנית רגילה." },
+  { title: "אחריות מקצועית", url: "/professional-liability-insurance", icon: productIcons.professional, text: "הגנה מפני תביעות הנובעות מטעות מקצועית, רשלנות, ייעוץ שגוי או מחדל במסגרת מתן שירות מקצועי." },
+  { title: "סייבר", url: "/cyber-insurance", icon: productIcons.cyber, text: "כיסוי לאירועי סייבר, מתקפות כופר, דליפות מידע, השבתת פעילות, הוצאות שחזור ותביעות צד שלישי." },
+  { title: "צד שלישי", url: "/liability-insurance", icon: productIcons.thirdParty, text: "כיסוי לעסקים מפני תביעות צד שלישי בגין נזקי גוף, רכוש או אחריות הנובעת מהפעילות העסקית." },
+  { title: "חבות מעבידים", url: "/employers-liability-insurance", icon: productIcons.employers, text: "פתרונות לחבות מעבידים והגנה מפני תביעות עובדים, בכפוף לתנאי הפוליסה ואישור חיתום." },
+  { title: "חבות המוצר", url: "/product-liability-insurance", icon: productIcons.product, text: "כיסוי ליצרנים, יבואנים ומשווקים החשופים לתביעות הנובעות ממוצר, פגם או נזק לצד שלישי." },
+  { title: "עבודות קבלניות", url: "/contractors-all-risks-insurance", icon: productIcons.contractors, text: "פתרונות ביטוח לפרויקטים, קבלנים, יזמים ועבודות תשתית, כולל רכוש, צד שלישי וחבות מעבידים." },
+  { title: "רשלנות רפואית", url: "/medical-malpractice-insurance", icon: productIcons.medical, text: "פתרונות לרופאים, מטפלים, מרפאות וגורמים רפואיים החשופים לתביעות בגין רשלנות מקצועית." },
+  { title: "דירקטורים ונושאי משרה", url: "/directors-and-officers-insurance", icon: productIcons.directors, text: "פתרונות אחריות נושאי משרה לחברות, הנהלות ודירקטוריונים מול חשיפות ניהוליות ומשפטיות." },
+  { title: "הפקות מדיה וסרטים", url: "/media-production-insurance", icon: productIcons.media, text: "מענה ביטוחי להפקות, צוותים, ציוד, לוקיישנים ופעילות מדיה הדורשת התאמה חיתומית." },
+  { title: "סיכונים מיוחדים", url: "/special-risks-insurance", icon: productIcons.specialRisks, text: "בדיקת פתרונות לסיכונים מורכבים, חריגים או לא סטנדרטיים שאינם נכנסים לתבנית רגילה." },
 ];
 
 const teamMembers = [
