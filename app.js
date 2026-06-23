@@ -1804,7 +1804,7 @@ function productCards() {
 }
 
 function sections(type, path) {
-  if (productPages[path]) return productTemplate(productPages[path]);
+  if (productPages[path]) return productTemplate(productPages[path], path);
   const map = {
     home: homeSections,
     solutions: solutionsSections,
@@ -1972,8 +1972,25 @@ function claimsSections() {
     <section class="section"><div class="container split-band"><div><h2>מה כדאי לצרף לפנייה?</h2><p>מידע מלא יסייע לקדם טיפול מסודר בפניית התביעה.</p></div><ul class="feature-list">${["מספר פוליסה או פרטי מבוטח", "תיאור האירוע ומועדו", "מסמכים, תמונות או התכתבויות רלוונטיות", "פרטי סוכן הביטוח, אם קיים", "פרטי התקשרות להמשך טיפול"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>`;
 }
 
-function productTemplate(page) {
+function productTemplate(page, path) {
   const factors = page.factors || ["תחום פעילות ואופי החשיפה", "מחזור, היקף פעילות וגבולות אחריות", "ניסיון תביעות קודם", "דרישות חוזיות או אישורי ביטוח", "מידע מקצועי, שאלונים ומסמכים תומכים", "תיאבון סיכון, סמכויות חיתום ואישור השוק הרלוונטי"];
+  if (!isEnglish()) {
+    return `
+      <section class="section product-detail-section">
+        <div class="container product-detail-layout">
+          ${productSidebar(path)}
+          <article class="product-detail-content">
+            <div class="product-intro-block">
+              <p>${page.lead}</p>
+            </div>
+            ${productDetailList("למי זה רלוונטי?", page.who)}
+            ${productDetailList("מה נבחן במסגרת החיתום?", page.coverage)}
+            ${productDetailList("מידע שעשוי להידרש", page.info)}
+            <p class="product-compliance-note">הכיסוי הביטוחי כפוף לתנאי הפוליסה, חריגים, גבולות אחריות ואישור חיתום.</p>
+          </article>
+        </div>
+      </section>`;
+  }
   return `
     <section class="section"><div class="container"><div class="center-title"><h2>למי הסיכון מתאים לבחינה?</h2><p>כל פנייה נבחנת לפי אופי הפעילות, המידע החיתומי, תיאבון הסיכון ותנאי הפוליסה הרלוונטיים.</p></div>${cards(page.who.map((title) => ({ title, icon: "◇", text: "מתאים לבדיקת חיתום בהתאם לאופי הפעילות, היקף הסיכון, המסמכים והאישורים הרלוונטיים." })), 3)}</div></section>
     <section class="section section-soft"><div class="container split-band"><div><h2>מה יכול להיבחן במסגרת החיתום?</h2><p>הכיסוי המדויק כפוף לתנאי הפוליסה, סמכויות החיתום, אישור השוק הרלוונטי, גבולות אחריות, חריגים, השתתפויות עצמיות והפעילות הספציפית.</p></div><ul class="feature-list">${page.coverage.map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
@@ -1982,6 +1999,31 @@ function productTemplate(page) {
     <section class="section section-navy"><div class="container"><div class="section-header"><div><h2>תמיכה לסוכנים ולעסקים בתהליך החיתום</h2><p>קופר נינוה מסייעת באיסוף מידע, הבנת החשיפה, הכוונה למסמכים נדרשים, בחינת התאמה מול שווקים רלוונטיים והמשך שירות לאורך חיי הפוליסה.</p></div><a class="btn btn-primary" href="/insurance-agents">הגשת סיכון על ידי סוכן</a></div></div></section>
     ${faqBlock(page.faqs)}
     ${finalCta("רוצים לבחון סיכון?", "השאירו פרטים וצוות קופר נינוה יחזור אליכם לבדיקת חיתום ראשונית, בכפוף למידע שיימסר ולסמכויות הרלוונטיות.")}`;
+}
+
+function productDetailList(title, items = []) {
+  if (!items.length) return "";
+  return `<section class="product-detail-block"><h2>${title}</h2><ul class="product-detail-list">${items.map((item) => `<li>${item}</li>`).join("")}</ul></section>`;
+}
+
+function productSidebar(currentPath) {
+  const links = products.map((item) => {
+    const active = item.url === currentPath;
+    return active
+      ? `<span class="product-side-link is-active" aria-current="page">${item.title}</span>`
+      : `<a class="product-side-link" href="${link(item.url)}">${item.title}</a>`;
+  }).join("");
+  return `<aside class="product-sidebar" aria-label="תחומי חיתום נוספים">
+    <nav class="product-side-nav">
+      <h2>תחומי חיתום נוספים</h2>
+      <div class="product-side-links">${links}</div>
+    </nav>
+    <div class="product-side-cta">
+      <h2>רוצים לבחון סיכון?</h2>
+      <p>שלחו לנו פרטים ראשוניים ונבחן האם ניתן להתאים את הסיכון לתחומי החיתום הרלוונטיים.</p>
+      <a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">יצירת קשר</a>
+    </div>
+  </aside>`;
 }
 
 function audienceRouting() {
