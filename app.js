@@ -91,11 +91,12 @@ const pages = {
   },
   "/claims": {
     title: "תביעות | קופר נינוה",
-    description: "ליווי סוכני ביטוח ומבוטחים בתהליך התביעה, מריכוז פרטי האירוע והמסמכים ועד טיפול מול הגורמים המקצועיים בהתאם לתנאי הפוליסה והסמכויות הרלוונטיות.",
-    h1: "ניהול תביעות ביטוח ותהליך תביעה בישראל",
-    lead: "קופר נינוה מלווה סוכני ביטוח ומבוטחים בפתיחת תביעה, ריכוז מסמכים, בדיקת פרטי האירוע ותיאום מול הגורמים הרלוונטיים, בכפוף לתנאי הפוליסה והסמכויות הרלוונטיות.",
-    primary: ["פתיחת פנייה בנושא תביעה", "/contact-us"],
-    secondary: ["מסמכים נדרשים", "/contact-us"],
+    description: "הסבר מקצועי על תיאום וליווי תהליכי תביעה מול סוכני ביטוח, גורמים מקצועיים ושווקים רלוונטיים, בהתאם לתנאי הפוליסה והסמכויות הרלוונטיות.",
+    h1: "ניהול ותיאום תביעות ביטוח",
+    lead: "קופר נינוה מסייעת בתיאום תהליכי תביעה כחלק ממערך החיתום והשירות, מול סוכני ביטוח, גורמים מקצועיים ושווקים רלוונטיים, בכפוף לתנאי הפוליסה והסמכויות הרלוונטיות.",
+    primary: ["", "/contact-us"],
+    secondary: ["", "/contact-us"],
+    hideActions: true,
     sections: "claims",
   },
   "/about-us": {
@@ -1509,10 +1510,10 @@ function hero(page, path = "") {
           ${page.hideEyebrow ? "" : `<p class="eyebrow">${page.eyebrow || "קופר נינוה"}</p>`}
           ${heroTitle}
           <p class="lead">${page.lead}</p>
-          <div class="hero-actions">
+          ${page.hideActions ? "" : `<div class="hero-actions">
             <a class="btn btn-primary" href="${link(page.primary[1])}" data-track="click_quote_cta">${page.primary[0]}</a>
             <a class="btn btn-secondary" href="${link(page.secondary[1])}">${page.secondary[0]}</a>
-          </div>
+          </div>`}
         </div>
       </div>
     </section>`;
@@ -1967,9 +1968,7 @@ function knowledgeSections() {
 }
 
 function claimsSections() {
-  return `
-    ${claimsServiceSection()}
-    <section class="section"><div class="container split-band"><div><h2>מה כדאי לצרף לפנייה?</h2><p>מידע מלא יסייע לקדם טיפול מסודר בפניית התביעה.</p></div><ul class="feature-list">${["מספר פוליסה או פרטי מבוטח", "תיאור האירוע ומועדו", "מסמכים, תמונות או התכתבויות רלוונטיות", "פרטי סוכן הביטוח, אם קיים", "פרטי התקשרות להמשך טיפול"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>`;
+  return `${claimsServiceSection()}`;
 }
 
 function productTemplate(page, path) {
@@ -2054,7 +2053,7 @@ function agentJourneySection(extraClass = "") {
 }
 
 function claimsServiceSection() {
-  return `<section class="section claims-service-section"><div class="container split-band"><div><p class="section-slogan">תהליך תביעה מסודר.</p><h2>טיפול בתביעות מול קופר נינוה</h2><p>קופר נינוה מסייעת בריכוז פרטי התביעה, קבלת מסמכים רלוונטיים, תיאום מול גורמים מקצועיים ועדכון הצדדים הרלוונטיים לאורך תהליך הטיפול, בכפוף לתנאי הפוליסה והסמכויות הרלוונטיות.</p><a class="btn btn-outline" href="/contact-us">פנייה בנושא תביעה</a></div>${cards([{ title: "פתיחת תביעה", icon: "▧", text: "קבלת פרטי האירוע הראשוניים, פרטי המבוטח והפוליסה, וסיווג ראשוני של סוג התביעה.", url: "/contact-us", cta: "פתיחת פנייה" }, { title: "מסמכים נדרשים", icon: "◎", text: "ריכוז מסמכים, אישורים, תמונות, דוחות או כל מידע רלוונטי אחר הנדרש לבחינת התביעה.", url: "/contact-us", cta: "שליחת מסמכים" }, { title: "בדיקה ותיאום", icon: "◇", text: "בדיקה ראשונית של המידע ותיאום מול גורמים מקצועיים רלוונטיים בהתאם לצורך.", url: "/contact-us", cta: "בדיקה ותיאום" }], 3)}</div></section>`;
+  return `<section class="section claims-service-section"><div class="container"><div class="section-header"><div><p class="section-slogan">תהליך תביעה מסודר</p><h2>אופן ניהול התביעה</h2><p>קופר נינוה מלווה את תהליך התביעה כחלק ממערך החיתום והשירות לסוכני ביטוח ולשווקים הרלוונטיים. הטיפול נעשה באמצעות ריכוז פרטי האירוע, קבלת מסמכים רלוונטיים, תיאום מול גורמים מקצועיים ועדכון הצדדים המעורבים — בהתאם לתנאי הפוליסה, סמכויות החיתום ואישור הגורמים הרלוונטיים.</p><p>הפנייה בנושא תביעה נעשית, ככלל, באמצעות סוכן הביטוח או הגורם המקצועי המטפל, כדי לשמור על תהליך מסודר ועל התאמה לתנאי הפוליסה והשוק הרלוונטי.</p></div></div></div></section>`;
 }
 
 function insightsSection() {
