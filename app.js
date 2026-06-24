@@ -93,7 +93,8 @@ const pages = {
     title: "תביעות | קופר נינוה",
     description: "הסבר מקצועי על תיאום וליווי תהליכי תביעה מול סוכני ביטוח, גורמים מקצועיים ושווקים רלוונטיים, בהתאם לתנאי הפוליסה והסמכויות הרלוונטיות.",
     h1: "תביעות",
-    lead: "קופר נינוה מנהלת ומתאמת תביעות בשם סינדיקטים משוק לויד׳ס העומדים מאחוריה. שוק לויד׳ס מוכר כאחד משווקי הביטוח הוותיקים והחזקים בעולם, עם מוניטין רב־שנים בטיפול בתביעות משמעותיות ובתיקי ביטוח מורכבים — בכפוף לתנאי הפוליסה, סמכויות החיתום ואישור הגורמים הרלוונטיים.",
+    lead: "תביעה היא רגע המבחן של כל פוליסה. קופר נינוה מנהלת ומתאמת תביעות בשם סינדיקטים משוק לויד׳ס העומדים מאחוריה — שוק ביטוח בינלאומי ותיק, חזק ומוכר, שלקח חלק בביטוח ובטיפול בתיקי הביטוח המורכבים בעולם. התהליך מתבצע בכפוף לתנאי הפוליסה, סמכויות החיתום ואישור הגורמים הרלוונטיים.",
+    supportLine: "שוק לויד׳ס מוכר בחוסנו הפיננסי ובמסורת ארוכת שנים של טיפול בתביעות משמעותיות.",
     primary: ["", "/contact-us"],
     secondary: ["", "/contact-us"],
     hideActions: true,
@@ -1473,6 +1474,7 @@ function hero(page, path = "") {
   const isHomeHero = page.sections === "home";
   const isHebrewHomeHero = isHomeHero && !isEnglish();
   const isHebrewInnerHero = !isEnglish() && ["/insurance-agents", "/business-insurance", "/claims"].includes(path);
+  const isHebrewClaimsHero = !isEnglish() && path === "/claims";
   const heroTitle = page.positioning
     ? `<h1 class="hero-title"><span class="hero-title-line">${page.h1}</span><br><span class="hero-title-line">${page.positioning.replace(/\n/g, "</span><br><span class=\"hero-title-line\">")}</span></h1>`
     : `<h1 class="hero-title">${page.h1}</h1>`;
@@ -1504,12 +1506,14 @@ function hero(page, path = "") {
     </section>`;
   }
   return `
-    <section class="hero${isHomeHero ? " hero-home" : ""}${isHebrewInnerHero ? " hero-inner-page" : ""}">
+    <section class="hero${isHomeHero ? " hero-home" : ""}${isHebrewInnerHero ? " hero-inner-page" : ""}${isHebrewClaimsHero ? " hero-claims" : ""}">
+      ${isHebrewClaimsHero ? `<div class="claims-hero-visual" aria-hidden="true"><span></span><span></span><span></span></div>` : ""}
       <div class="container hero-inner">
         <div class="hero-copy">
           ${page.hideEyebrow ? "" : `<p class="eyebrow">${page.eyebrow || "קופר נינוה"}</p>`}
           ${heroTitle}
           <p class="lead">${page.lead}</p>
+          ${page.supportLine ? `<p class="hero-support-line">${page.supportLine}</p>` : ""}
           ${page.hideActions ? "" : `<div class="hero-actions">
             <a class="btn btn-primary" href="${link(page.primary[1])}" data-track="click_quote_cta">${page.primary[0]}</a>
             <a class="btn btn-secondary" href="${link(page.secondary[1])}">${page.secondary[0]}</a>
@@ -2053,7 +2057,7 @@ function agentJourneySection(extraClass = "") {
 }
 
 function claimsServiceSection() {
-  return `<section class="section claims-service-section"><div class="container"><div class="section-header"><div><p class="section-slogan">תהליך תביעה מסודר</p><h2>אופן ניהול התביעה</h2><p>קופר נינוה מלווה את תהליך התביעה כחלק ממערך החיתום והשירות לסוכני ביטוח ולשווקים הרלוונטיים. הטיפול נעשה באמצעות ריכוז פרטי האירוע, קבלת מסמכים רלוונטיים, תיאום מול גורמים מקצועיים ועדכון הצדדים המעורבים — בהתאם לתנאי הפוליסה, סמכויות החיתום ואישור הגורמים הרלוונטיים.</p><p>הפנייה בנושא תביעה נעשית, ככלל, באמצעות סוכן הביטוח או הגורם המקצועי המטפל, כדי לשמור על תהליך מסודר ועל התאמה לתנאי הפוליסה והשוק הרלוונטי.</p></div></div></div></section>`;
+  return `<section class="section claims-service-section"><div class="container"><div class="claims-flow-header"><p class="section-slogan">תהליך תביעה מסודר</p><h2>איך מתנהל טיפול בתביעה?</h2><p>הטיפול בתביעה מתבצע, ככלל, באמצעות סוכן הביטוח או הגורם המקצועי המטפל. המטרה היא לרכז את המידע הרלוונטי, להעבירו בצורה מסודרת לגורמים המתאימים, ולשמור על תהליך מקצועי בהתאם לתנאי הפוליסה ולסמכויות הרלוונטיות.</p></div><div class="claims-flow" aria-label="תהליך טיפול בתביעה"><article class="claims-step"><span class="claims-step-number">01</span><h3>ריכוז פרטי האירוע</h3><p>סוכן הביטוח או הגורם המטפל מרכז את פרטי האירוע, פרטי הפוליסה, מסמכים תומכים וכל מידע נוסף הדרוש לבחינה ראשונית של התביעה.</p></article><article class="claims-step"><span class="claims-step-number">02</span><h3>תיאום מול הגורמים הרלוונטיים</h3><p>קופר נינוה מסייעת בתיאום המידע מול הגורמים המקצועיים, החתמים או המבטחים הרלוונטיים, בכפוף לתנאי הפוליסה, סמכויות החיתום ואישור הגורמים המוסמכים.</p></article></div><p class="claims-flow-note">הטיפול בתביעה אינו מהווה התחייבות לאישור התביעה או לתשלום תגמולי ביטוח, והוא כפוף לתנאי הפוליסה ולהחלטת הגורמים המוסמכים.</p></div></section>`;
 }
 
 function insightsSection() {
