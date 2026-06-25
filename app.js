@@ -1277,6 +1277,7 @@ function setAlternateLinks(path) {
 
 function renderChrome(path) {
   const english = isEnglish();
+  const englishSwitchLabel = `<svg width="24" height="16" viewBox="0 0 60 40" aria-hidden="true" focusable="false" style="display:block;border-radius:2px;box-shadow:0 0 0 1px rgba(255,255,255,.2);overflow:hidden;"><path fill="#012169" d="M0 0h60v40H0z"/><path stroke="#fff" stroke-width="8" d="m0 0 60 40M60 0 0 40"/><path stroke="#C8102E" stroke-width="4" d="m0 0 60 40M60 0 0 40"/><path stroke="#fff" stroke-width="13" d="M30 0v40M0 20h60"/><path stroke="#C8102E" stroke-width="8" d="M30 0v40M0 20h60"/></svg>`;
   const navItems = english ? [
     ["/israel-market-partner", "Israel Market Partner"],
     ["/insurance-solutions", "Underwriting Capabilities"],
@@ -1290,10 +1291,11 @@ function renderChrome(path) {
     ["/insurance-solutions", "תחומי חיתום"],
     ["/claims", "תביעות"],
     ["/about-us", "אודות"],
+    ["/press", "מרכז ידע"],
     ["/contact-us", "צור קשר"],
   ];
   mainNav.setAttribute("aria-label", english ? "Main navigation" : "ניווט ראשי");
-  mainNav.innerHTML = `${navItems.map(([href, label]) => `<a href="${link(href)}">${label}</a>`).join("")}<a class="language-switcher nav-language-switcher" href="${matchingLanguagePath(path, !english)}">${english ? "עברית / HE" : "EN"}</a>`;
+  mainNav.innerHTML = `${navItems.map(([href, label]) => `<a href="${link(href)}">${label}</a>`).join("")}<a class="language-switcher nav-language-switcher" href="${matchingLanguagePath(path, !english)}"${english ? "" : ` aria-label="Switch to English"`}>${english ? "עברית / HE" : englishSwitchLabel}</a>`;
 
   const brand = document.querySelector(".brand");
   if (brand) {
@@ -1311,7 +1313,7 @@ function renderChrome(path) {
       <a class="language-switcher header-language-switcher" href="${matchingLanguagePath(path, false)}">עברית / HE</a>`
       : `<a class="header-cta" href="${link("/contact-us")}" data-track="click_quote_cta">הגשת סיכון לחיתום</a>
       <a class="header-link" href="${link("/contact-us")}">צור קשר</a>
-      <a class="language-switcher header-language-switcher" href="${matchingLanguagePath(path, true)}">EN</a>`;
+      <a class="language-switcher header-language-switcher" href="${matchingLanguagePath(path, true)}" aria-label="Switch to English">${englishSwitchLabel}</a>`;
   }
 
   const footer = document.querySelector(".site-footer");
