@@ -44,48 +44,110 @@ const teamMembers = [
   { name: "ליעד לק", role: "חתם חבויות ראשי", bio: "עוסק בחיתום, בדיקת סיכונים וליווי מקצועי של תיקי ביטוח.", image: "/assets/team/liad-lek.jpg.jpg", initials: "לל" },
 ];
 
-const pressItems = [
+const pressGroups = [
   {
-    title: "נינה קודנר מועמדת ב־Women in Insurance Awards UK 2026",
-    source: "Women in Insurance Awards UK",
-    description: "נינה קודנר נכללת ברשימת המועמדות של Women in Insurance Awards UK 2026, במסגרת הכרה בינלאומית בנשים מובילות בענף הביטוח.",
-    url: "https://womenininsuranceawardsuk.co.uk/2026/en/page/2026-nominees",
-    cta: "לצפייה באזכור",
+    title: "כתבות וראיונות",
+    items: [
+      {
+        title: "הרחבת קווי מוצרים בקופר נינוה",
+        source: "Bizportal",
+        description: "כתבה על הרחבת קווי המוצרים של קופר נינוה והמשך פיתוח פעילות החיתום בהובלת אילן זיו.",
+        url: "https://www.bizportal.co.il/Insurance/news/article/20028076",
+        cta: "לקריאת הכתבה",
+      },
+      {
+        title: "שיחת פוליסה עם אילן זיו",
+        source: "Polisa",
+        description: "ראיון עם אילן זיו, מנכ״ל קופר נינוה, על פעילות החברה, תחומי הביטוח והפתרונות המקצועיים לסוכנים.",
+        url: "https://polisa.news/%D7%A9%D7%99%D7%97%D7%AA-%D7%A4%D7%95%D7%9C%D7%99%D7%A1%D7%94-%D7%A2%D7%9D-%D7%90%D7%99%D7%9C%D7%9F-%D7%96%D7%99%D7%95-%D7%9E%D7%A0%D7%9B%D7%9C-%D7%A7%D7%95%D7%A4%D7%A8-%D7%A0%D7%99%D7%A0%D7%95/",
+        cta: "לקריאת הכתבה",
+      },
+      {
+        title: "אילן זיו: יש לשפר את הנגישות לשוקי ביטוח",
+        source: "עדיף+",
+        description: "כתבה מקצועית על הצורך בשיפור הנגישות לשווקי ביטוח ועל תפקידם של פתרונות חיתום ושווקים בינלאומיים.",
+        url: "https://www.adifplus.co.il/%D7%90%D7%99%D7%9C%D7%9F-%D7%96%D7%99%D7%95-%D7%99%D7%A9-%D7%9C%D7%A9%D7%A4%D7%A8-%D7%90%D7%AA-%D7%94%D7%A0%D7%92%D7%99%D7%A9%D7%95%D7%AA-%D7%9C%D7%A9%D7%95%D7%A7%D7%99-%D7%91%D7%99%D7%98%D7%95%D7%97/",
+        cta: "לקריאת הכתבה",
+      },
+      {
+        title: "ראיון ב־103FM",
+        source: "103FM / מעריב",
+        description: "אייטם רדיו/תקשורת על פעילות קופר נינוה ותחומי הביטוח שבהם החברה פועלת.",
+        url: "https://103fm.maariv.co.il/programs/media.aspx?ZrqvnVq=IDJJHE&c41t4nzVQ=ELD",
+        cta: "להאזנה / צפייה",
+      },
+      {
+        title: "קופר נינוה מציעה פרמיה מינימלית",
+        source: "עדיף+",
+        description: "כתבה על פעילות מקצועית של קופר נינוה בתחום פתרונות הביטוח.",
+        url: "https://www.adifplus.co.il/%D7%A7%D7%95%D7%A4%D7%A8-%D7%A0%D7%99%D7%A0%D7%95%D7%94-%D7%9E%D7%A6%D7%99%D7%A2%D7%94-%D7%A4%D7%A8%D7%9E%D7%99%D7%94-%D7%9E%D7%99%D7%A0%D7%99%D7%9E%D7%9C%D7%99%D7%AA-%D7%91%D7%99%D7%9E%D7%99-%D7%94/",
+        cta: "לקריאת הכתבה",
+      },
+      {
+        title: "קופר נינוה משיקה מחלקת ביטוחי אחריות מקצועית",
+        source: "POLICY",
+        description: "כתבה על השקת מחלקת Professional Indemnity בקופר נינוה, בדגש על הנדסה, אדריכלות ובנייה.",
+        url: "https://policy-news.com/cooper-ninve-launches-professional-indemnity-department-focusing-on-engineering-architecture-and-construction/",
+        cta: "לקריאת הכתבה",
+      },
+    ],
   },
   {
-    title: "MGA בשוק לויד׳ס מקנה לנו גישה לקיבולת רחבה יותר של כיסויים",
-    source: "מגזין עדיף, פברואר 2023",
-    description: "ראיון עם אילן זיו, מנכ״ל קופר נינוה, על מעמד ה־MGA, עבודה מול שוק לויד׳ס והיתרון לסוכנים ולמבוטחים.",
-    url: "#",
-    cta: "לקריאת הכתבה",
+    title: "מגזינים ועלונים",
+    items: [
+      {
+        title: "MGA בשוק לויד׳ס מקנה לנו גישה לקיבולת רחבה יותר של כיסויים",
+        source: "מגזין עדיף, פברואר 2023",
+        description: "ראיון עם אילן זיו, מנכ״ל קופר נינוה, על מעמד ה־MGA, שוק לויד׳ס, סמכויות חיתום והיתרון לסוכנים ולמבוטחים.",
+        url: "/media-press/ilan-siw-adif-article-page-14.pdf",
+        cta: "לקריאת הכתבה",
+      },
+      {
+        title: "עלון הסבר: מהו M.G.A",
+        source: "קופר נינוה",
+        description: "עלון הסבר של קופר נינוה המציג את מודל ה־MGA ואת תפקידו כמרכז חיתום מקצועי.",
+        url: "/media-press/mga-explaining.pdf",
+        cta: "לצפייה בעלון",
+      },
+      {
+        title: "POLICY 815 — השקת מחלקת Professional Indemnity",
+        source: "POLICY, גיליון 815",
+        description: "אזכור מגזיני על השקת מחלקת האחריות המקצועית של קופר נינוה והרחבת פעילות החיתום.",
+        url: "/media-press/ilan-siw-policy-article.pdf",
+        cta: "לצפייה בגיליון",
+      },
+    ],
   },
   {
-    title: "קופר נינוה משיקה מחלקת ביטוחי אחריות מקצועית",
-    source: "POLICY",
-    description: "כתבה על השקת מחלקת Professional Indemnity בקופר נינוה, בדגש על הנדסה, אדריכלות ובנייה.",
-    url: "https://policy-news.com/cooper-ninve-launches-professional-indemnity-department-focusing-on-engineering-architecture-and-construction/",
-    cta: "לקריאת הכתבה",
+    title: "הכרה מקצועית ואירועים",
+    items: [
+      {
+        title: "נינה קודנר מועמדת ב־Women in Insurance Awards UK 2026",
+        source: "Women in Insurance Awards UK",
+        description: "נינה קודנר נכללת ברשימת המועמדות של Women in Insurance Awards UK 2026, במסגרת הכרה בינלאומית בנשים מובילות בענף הביטוח.",
+        url: "https://womenininsuranceawardsuk.co.uk/2026/en/page/2026-nominees",
+        cta: "לצפייה באזכור",
+      },
+      {
+        title: "הברוקר הישראלי הראשון בעולם",
+        source: "קופר נינוה",
+        description: "תמונה של אילן זיו ונינה קודנר עם תעודת הברוקר הישראלי הראשון בעולם.",
+        url: "/media-press/first-israeli-broker.jpg",
+        cta: "לצפייה בתמונה",
+      },
+    ],
   },
   {
-    title: "כתבה על נינה קודנר",
-    source: "פרופיל מקצועי",
-    description: "כתבה על נינה קודנר, פועלה בענף הביטוח, הקשר לשוק לויד׳ס ותפיסת השירות המקצועית של קופר נינוה.",
-    url: "#",
-    cta: "לקריאת הכתבה",
-  },
-  {
-    title: "הרחבת קווי מוצרים בקופר נינוה",
-    source: "Bizportal",
-    description: "כתבה על הרחבת קווי המוצרים של קופר נינוה והמשך פיתוח פעילות החיתום.",
-    url: "https://www.bizportal.co.il/Insurance/news/article/20028076",
-    cta: "לקריאת הכתבה",
-  },
-  {
-    title: "שיחת פוליסה עם אילן זיו",
-    source: "Polisa",
-    description: "ראיון עם אילן זיו, מנכ״ל קופר נינוה, על פעילות החברה, תחומי הביטוח והפתרונות המקצועיים לסוכנים.",
-    url: "https://polisa.news/%D7%A9%D7%99%D7%97%D7%AA-%D7%A4%D7%95%D7%9C%D7%99%D7%A1%D7%94-%D7%A2%D7%9D-%D7%90%D7%99%D7%9C%D7%9F-%D7%96%D7%99%D7%95-%D7%9E%D7%A0%D7%9B%D7%9C-%D7%A7%D7%95%D7%A4%D7%A8-%D7%A0%D7%99%D7%A0%D7%95/",
-    cta: "לקריאת הכתבה",
+    title: "פרופילים אישיים",
+    items: [
+      {
+        title: "כתבה על נינה קודנר",
+        source: "פרופיל מקצועי",
+        description: "כתבה על נינה קודנר, פועלה בענף הביטוח, הקשר לשוק לויד׳ס ותפיסת השירות המקצועית של קופר נינוה.",
+        url: "/media-press/nina-kodner-leadership-article.pdf",
+        cta: "לקריאת הכתבה",
+      },
+    ],
   },
 ];
 
@@ -156,9 +218,9 @@ const pages = {
   },
   "/press": {
     title: "קופר נינוה בתקשורת | קופר נינוה",
-    description: "כתבות, ראיונות ואזכורים מקצועיים על פעילות קופר נינוה, תחומי החיתום, שוק לויד׳ס והקשר לשוק הביטוח הבינלאומי.",
+    description: "כתבות, ראיונות, עלונים ואזכורים מקצועיים על פעילות קופר נינוה, תחומי החיתום, שוק לויד׳ס והקשר לשוק הביטוח הבינלאומי.",
     h1: "קופר נינוה בתקשורת",
-    lead: "כתבות, ראיונות ואזכורים מקצועיים על פעילות קופר נינוה, תחומי החיתום, שוק לויד׳ס והקשר לשוק הביטוח הבינלאומי.",
+    lead: "כתבות, ראיונות, עלונים ואזכורים מקצועיים על פעילות קופר נינוה, תחומי החיתום, שוק לויד׳ס והקשר לשוק הביטוח הבינלאומי.",
     primary: ["", "/press"],
     secondary: ["", "/press"],
     hideActions: true,
@@ -1111,8 +1173,10 @@ window.addEventListener("DOMContentLoaded", render);
 document.addEventListener("click", (event) => {
   const anchor = event.target.closest("a[href^='/']");
   if (!anchor || anchor.target || event.metaKey || event.ctrlKey || event.shiftKey) return;
+  const href = anchor.getAttribute("href");
+  if (!pages[normalizeRoute(href.split("#")[0])]) return;
   event.preventDefault();
-  history.pushState(null, "", anchor.getAttribute("href"));
+  history.pushState(null, "", href);
   render();
 });
 
@@ -2015,10 +2079,10 @@ function aboutSections() {
 }
 
 function pressSections() {
-  return `<section class="section press-list-section"><div class="container"><div class="press-card-grid">${pressItems.map((item) => {
-    const external = item.url !== "#" && /^https?:\/\//.test(item.url);
-    return `<article class="press-card"><p class="press-source">${item.source}</p><h2>${item.title}</h2><p>${item.description}</p><a class="card-cta" href="${item.url}"${external ? ` target="_blank" rel="noopener"` : ""}>${item.cta}</a></article>`;
-  }).join("")}</div></div></section>`;
+  return `<section class="section press-list-section"><div class="container press-groups">${pressGroups.map((group, groupIndex) => `<section class="press-group" aria-labelledby="press-group-${groupIndex + 1}"><h2 id="press-group-${groupIndex + 1}">${group.title}</h2><div class="press-card-grid">${group.items.map((item) => {
+    const external = /^https?:\/\//.test(item.url);
+    return `<article class="press-card"><p class="press-source">${item.source}</p><h3>${item.title}</h3><p>${item.description}</p><a class="card-cta" href="${item.url}"${external ? ` target="_blank" rel="noopener"` : ""}>${item.cta}</a></article>`;
+  }).join("")}</div></section>`).join("")}</div></section>`;
 }
 
 function teamSection() {
