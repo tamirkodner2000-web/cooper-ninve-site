@@ -1340,11 +1340,11 @@ function footerHtml(english, path = "/") {
     ["Knowledge Center", [["Articles and Insights", "/knowledge-center"], ["M.G.A in Insurance", "/knowledge-center"], ["Submitting a Risk for Underwriting", "/knowledge-center"]]],
     ["Contact", [["Contact Us", "/contact-us"], ["077-9965453", "tel:0779965453"], ["info@cooper-ninve.com", "mailto:info@cooper-ninve.com"]]],
   ] : [
-    ["קופר נינוה", [["אודות", "/about-us"], ["מרכז חיתום ישראלי", "/"], ["מרכז ידע", "/knowledge-center"]]],
-    ["תחומי חיתום", [["אחריות מקצועית", "/professional-liability-insurance"], ["סייבר", "/cyber-insurance"], ["עבודות קבלניות", "/contractors-all-risks-insurance"], ["רשלנות רפואית", "/medical-malpractice-insurance"], ["חבויות וצד שלישי", "/liability-insurance"]]],
-    ["לסוכני ביטוח", [["לסוכני ביטוח", "/insurance-agents"], ["הגשת סיכון לבדיקה", "/contact-us"], ["תחומי חיתום", "/insurance-solutions"]]],
-    ["תביעות ושירות", [["תביעות ושירות", "/claims"], ["שירות ומסמכים", "/contact-us"], ["דיווח תביעה", "/contact-us"]]],
-    ["מרכז ידע", [["מאמרים ותובנות", "/knowledge-center"], ["M.G.A בביטוח", "/knowledge-center"], ["הגשת סיכון לחיתום", "/knowledge-center"]]],
+    ["קופר נינוה", [["עמוד הבית", "/"], ["אודות", "/about-us"], ["קופר נינוה בתקשורת", "/press"]]],
+    ["פתרונות חיתום", [["אחריות מקצועית", "/professional-liability-insurance"], ["סייבר", "/cyber-insurance"], ["עבודות קבלניות", "/contractors-all-risks-insurance"], ["רשלנות רפואית", "/medical-malpractice-insurance"], ["דירקטורים ונושאי משרה", "/directors-and-officers-insurance"]]],
+    ["חבויות וסיכונים מיוחדים", [["צד שלישי וחבויות", "/liability-insurance"], ["חבות מעבידים", "/employers-liability-insurance"], ["חבות המוצר", "/product-liability-insurance"], ["הפקות מדיה וסרטים", "/media-production-insurance"], ["סיכונים מיוחדים", "/special-risks-insurance"]]],
+    ["עבודה עם קופר נינוה", [["לסוכני ביטוח", "/insurance-agents"], ["לעסקים וחברות", "/business-insurance"], ["תחומי חיתום", "/insurance-solutions"], ["הגשת סיכון לבדיקה", "/contact-us"]]],
+    ["תביעות", [["תביעות", "/claims"], ["צור קשר", "/contact-us"]]],
     ["יצירת קשר", [["צור קשר", "/contact-us"], ["077-9965453", "tel:0779965453"], ["info@cooper-ninve.com", "mailto:info@cooper-ninve.com"]]],
   ];
   const contactText = englishPartnerFooter ? "Israel-market underwriting execution, distribution access, policy servicing and claims coordination support for international insurance partners." : english ? "A trusted local underwriting, claims and portfolio management partner in Israel." : "מרכז חיתום ישראלי המחבר בין סוכנים, עסקים ושווקי ביטוח בינלאומיים.";
