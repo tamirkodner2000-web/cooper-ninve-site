@@ -241,7 +241,7 @@ const pages = {
     h1: "Israel Market Partner",
     lead: "A trusted local underwriting, claims and portfolio management partner in Israel for Lloyd's syndicates, international insurers, reinsurers, MGAs and capacity providers.",
     primary: ["Discuss Partnership", "/contact-us"],
-    secondary: ["Underwriting Capabilities", "/insurance-solutions"],
+    secondary: ["Underwriting Solutions", "/insurance-solutions"],
     sections: "international",
   },
   "/privacy-policy": {
@@ -491,15 +491,15 @@ const englishPrefix = "/en";
 
 const englishMeta = {
   "/": {
-    title: "Cooper Ninve | Israel Market Partner",
-    description: "A trusted local underwriting, claims and portfolio management partner in Israel for Lloyd's syndicates, international insurers, reinsurers, MGAs and capacity providers.",
+    title: "Cooper Ninve | Your Partner in the Middle East",
+    description: "An Israel-based MGA and underwriting center working with Lloyd's syndicates and international insurance markets across complex commercial, liability, specialty and regional risks.",
   },
   "/israel-market-partner": {
     title: "Israel Market Partner | Cooper Ninve",
     description: "Cooper Ninve supports international insurance markets in Israel with local underwriting support, claims coordination, portfolio management support, distribution access and operational execution.",
   },
   "/insurance-solutions": {
-    title: "Underwriting Capabilities in Israel | Cooper Ninve",
+    title: "Underwriting Solutions in Israel | Cooper Ninve",
     description: "Cooper Ninve supports selected specialty and commercial lines in Israel through local underwriting insight, risk information gathering, policy administration and market coordination, subject to appetite, authority and underwriting approval.",
   },
   "/insurance-agents": {
@@ -1153,7 +1153,7 @@ Object.assign(enText, {
   "השאירו פרטים וצוות קופר נינוה יחזור אליכם לבדיקת חיתום ראשונית, בכפוף למידע שיימסר ולסמכויות הרלוונטיות.": "Leave your details and the Cooper Ninve team will respond for an initial underwriting review, subject to provided information and relevant authority.",
   "הגשת פנייה לחיתום": "Submit an Underwriting Inquiry",
   "שווקים ושותפים בינלאומיים": "International Markets and Partners",
-  "קופר נינוה פועלת מול שווקים ושותפים בינלאומיים נבחרים, בכפוף לסמכויות חיתום, תיאבון סיכון, אישור השוק ותנאי הפוליסה הרלוונטיים. הצגת לוגו אינה מלמדת שכל שותף תומך בכל מוצר או סיכון.": "Cooper Nineveh works with selected international insurance markets and partners, subject to underwriting authority, product appetite, market approval and applicable policy terms. Displayed logos do not imply that every partner supports every product or risk.",
+  "קופר נינוה פועלת מול שווקים ושותפים בינלאומיים נבחרים, בכפוף לסמכויות חיתום, תיאבון סיכון, אישור השוק ותנאי הפוליסה הרלוונטיים. הצגת לוגו אינה מלמדת שכל שותף תומך בכל מוצר או סיכון.": "Cooper Ninve works with selected international insurance markets and partners, subject to underwriting authority, product appetite, market approval and applicable policy terms. Displayed logos do not imply that every partner supports every product or risk.",
 });
 
 const app = document.querySelector("[data-app]");
@@ -1280,7 +1280,7 @@ function renderChrome(path) {
   const englishSwitchLabel = `<svg width="24" height="16" viewBox="0 0 60 40" aria-hidden="true" focusable="false" style="display:block;border-radius:2px;box-shadow:0 0 0 1px rgba(255,255,255,.2);overflow:hidden;"><path fill="#012169" d="M0 0h60v40H0z"/><path stroke="#fff" stroke-width="8" d="m0 0 60 40M60 0 0 40"/><path stroke="#C8102E" stroke-width="4" d="m0 0 60 40M60 0 0 40"/><path stroke="#fff" stroke-width="13" d="M30 0v40M0 20h60"/><path stroke="#C8102E" stroke-width="8" d="M30 0v40M0 20h60"/></svg>`;
   const navItems = english ? [
     ["/israel-market-partner", "Israel Market Partner"],
-    ["/insurance-solutions", "Underwriting Capabilities"],
+    ["/insurance-solutions", "Underwriting Solutions"],
     ["/claims", "Claims & Operations"],
     ["/insurance-agents", "Distribution Access"],
     ["/about-us", "About"],
@@ -1329,14 +1329,14 @@ function footerHtml(english, path = "/") {
   const englishPartnerFooter = english && (path === "/contact-us" || path === "/insurance-solutions");
   const footerGroups = englishPartnerFooter ? [
     ["Cooper Ninve", [["Israel Market Partner", "/israel-market-partner"], ["About", "/about-us"], ["Insights", "/knowledge-center"]]],
-    ["For Partners", [["Partner With Us", "/contact-us"], ["Underwriting Capabilities", "/insurance-solutions"], ["Claims & Operations", "/claims"]]],
-    ["Market Interface", [["Distribution Access", "/insurance-agents"], ["Israeli Market Knowledge", "/business-insurance"], ["Underwriting Capabilities", "/insurance-solutions"]]],
+    ["For Partners", [["Partner With Us", "/contact-us"], ["Underwriting Solutions", "/insurance-solutions"], ["Claims & Operations", "/claims"]]],
+    ["Market Interface", [["Distribution Access", "/insurance-agents"], ["Israeli Market Knowledge", "/business-insurance"], ["Underwriting Solutions", "/insurance-solutions"]]],
     ["Contact", [["Partner With Us", "/contact-us"], ["077-9965453", "tel:0779965453"], ["info@cooper-ninve.com", "mailto:info@cooper-ninve.com"]]],
   ] : english ? [
     ["Cooper Ninve", [["Israel Market Partner", "/israel-market-partner"], ["About", "/about-us"], ["Knowledge Center", "/knowledge-center"]]],
-    ["Underwriting Capabilities", [["Professional Liability", "/professional-liability-insurance"], ["Cyber", "/cyber-insurance"], ["Contractors’ All Risks", "/contractors-all-risks-insurance"], ["Medical Malpractice", "/medical-malpractice-insurance"], ["Liability and Third-Party Coverage", "/liability-insurance"]]],
-    ["Distribution Access", [["Distribution Access", "/insurance-agents"], ["Submit a Risk for Review", "/contact-us"], ["Underwriting Capabilities", "/insurance-solutions"]]],
-    ["Claims & Operations", [["Claims & Operations", "/claims"], ["Service and Documents", "/contact-us"], ["Report a Claim", "/contact-us"]]],
+    ["Underwriting Solutions", [["Professional Liability", "/professional-liability-insurance"], ["Cyber", "/cyber-insurance"], ["Contractors’ All Risks", "/contractors-all-risks-insurance"], ["Medical Malpractice", "/medical-malpractice-insurance"], ["Liability and Third-Party Coverage", "/liability-insurance"]]],
+    ["Distribution Access", [["Distribution Access", "/insurance-agents"], ["Submit a Risk for Review", "/contact-us"], ["Underwriting Solutions", "/insurance-solutions"]]],
+    ["Claims & Operations", [["Claims & Operations", "/claims"], ["Service and Documents", "/contact-us"], ["Claims Coordination", "/claims"]]],
     ["Knowledge Center", [["Articles and Insights", "/knowledge-center"], ["M.G.A in Insurance", "/knowledge-center"], ["Submitting a Risk for Underwriting", "/knowledge-center"]]],
     ["Contact", [["Contact Us", "/contact-us"], ["077-9965453", "tel:0779965453"], ["info@cooper-ninve.com", "mailto:info@cooper-ninve.com"]]],
   ] : [
@@ -1666,31 +1666,52 @@ function englishHomeTemplate() {
     <section class="hero hero-home">
       <div class="container hero-inner">
         <div class="hero-copy">
-          <h1 class="hero-title">A trusted local underwriting, claims and portfolio management partner in Israel</h1>
-          <p class="lead">Cooper Ninve supports Lloyd's syndicates, international insurers, reinsurers, MGAs and capacity providers with local underwriting support, distribution access, policy servicing, claims coordination and portfolio management support in Israel.</p>
+          <p class="eyebrow">Cooper Ninve</p>
+          <h1 class="hero-title">Your partner in the Middle East</h1>
+          <p class="lead">An Israel-based MGA and underwriting center working with Lloyd's syndicates and international insurance markets across complex commercial, liability, specialty, and regional risks.</p>
           <div class="hero-actions">
-            <a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Partner With Us</a>
-            <a class="btn btn-secondary" href="${link("/israel-market-partner")}">Israel Market Partner</a>
+            <a class="btn btn-primary" href="${link("/insurance-solutions")}">Explore Underwriting Solutions</a>
+            <a class="btn btn-secondary" href="${link("/contact-us")}" data-track="click_quote_cta">Work With Cooper Ninve</a>
           </div>
         </div>
         <aside class="hero-card hero-why-card">
-          <h2>Partner capabilities</h2>
+          <h2>Local market role</h2>
           <ul>
-            <li>Local Israeli market knowledge</li>
-            <li>Local underwriting support</li>
-            <li>Access to local distribution</li>
-            <li>Claims coordination and servicing</li>
-            <li>Portfolio management support</li>
+            <li>Underwriting coordination</li>
+            <li>Local market access</li>
+            <li>Claims coordination</li>
+            <li>Portfolio management</li>
+            <li>Broker and client communication</li>
           </ul>
         </aside>
       </div>
     </section>
-    ${englishUnderwritingExecutionSection()}
-    ${englishInternationalMarketsSection()}
+    ${englishWhyCooperSection()}
+    ${englishAudienceSection()}
     ${englishPartnerWorkflowSection()}
     ${englishUnderwritingLinesPreview()}
     ${partnerLogosSection()}
     ${englishPartnerInquirySection()}`;
+}
+
+function englishWhyCooperSection() {
+  const messages = [
+    ["Underwriting-led by design", "Cooper Ninve is built around underwriting judgment, portfolio discipline, and careful risk assessment. We support complex placements with local knowledge, structured communication, and access to relevant international markets."],
+    ["A local partner for international markets", "Based in Israel, Cooper Ninve helps Lloyd's syndicates, carriers, reinsurers, and brokers understand local risks, distribution channels, documentation, and market expectations."],
+    ["Connected to Lloyd's and global insurance markets", "Cooper Ninve works with Lloyd's syndicates and international insurance markets, subject always to the relevant policy terms, delegated authorities, and market approvals."],
+    ["Claims coordination with local understanding", "Claims are a defining moment in the life of a policy. Cooper Ninve supports claims coordination between local parties and relevant market participants, subject to policy terms and the authority of the relevant insurers."],
+    ["Built on integrity and long-term relationships", "First of all, integrity. Cooper Ninve builds durable relationships with brokers, clients, markets, and underwriting partners through clear communication and disciplined execution."],
+  ];
+  return `<section class="section"><div class="container"><div class="center-title"><h2>Why Cooper Ninve</h2><p>Cooper Ninve connects local underwriting knowledge with international insurance capacity. We support brokers, clients, Lloyd's syndicates, carriers, and reinsurers through disciplined underwriting coordination, claims communication, and long-term portfolio management.</p></div>${cards(messages.map(([title, text]) => ({ title, text, icon: "◇" })), 5)}</div></section>`;
+}
+
+function englishAudienceSection() {
+  const audiences = [
+    ["For Lloyd's syndicates and carriers", "Cooper Ninve acts as a local underwriting and portfolio-management partner in Israel and the Middle East. We support market participants with risk insight, broker communication, local documentation, claims coordination, and disciplined management of delegated authority arrangements where applicable."],
+    ["For international brokers", "Cooper Ninve provides a local point of access for complex Israeli and regional risks. We help international brokers navigate local market dynamics, gather underwriting information, coordinate communication, and connect suitable risks with relevant insurance markets."],
+    ["For Israeli brokers and local partners", "Cooper Ninve works with professional insurance brokers seeking access to specialized underwriting solutions and international markets. Our focus is on structured submissions, responsive communication, and careful handling of complex liability, specialty, and commercial risks."],
+  ];
+  return `<section class="section section-soft"><div class="container"><div class="center-title"><h2>Built for markets, brokers and local partners</h2><p>A local operating partner for disciplined risk placement, communication and portfolio support across Israel and the wider region.</p></div><div class="grid grid-3">${audiences.map(([title, text]) => `<article class="card"><h3>${title}</h3><p>${text}</p></article>`).join("")}</div></div></section>`;
 }
 
 function englishIsraelMarketPartnerTemplate() {
@@ -1703,7 +1724,7 @@ function englishIsraelMarketPartnerTemplate() {
           <p class="lead">Cooper Ninve provides a local operating interface in Israel for Lloyd's syndicates, international insurers, reinsurers, MGAs and capacity providers, subject to agreed authority, appetite, market approval and policy terms.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Discuss Partnership</a>
-            <a class="btn btn-secondary" href="${link("/insurance-solutions")}">Underwriting Capabilities</a>
+            <a class="btn btn-secondary" href="${link("/insurance-solutions")}">Underwriting Solutions</a>
           </div>
         </div>
         <aside class="hero-card hero-why-card">
@@ -2218,7 +2239,7 @@ function partnerLogosSection() {
   const english = isEnglish();
   const title = english ? "Selected International Markets and Partners" : "שווקים ושותפים בינלאומיים";
   const text = english
-    ? "Cooper Nineveh works with selected international insurance markets and partners, subject to underwriting authority, product appetite, market approval and applicable policy terms. Displayed logos do not imply that every partner supports every product or risk."
+    ? "Cooper Ninve works with selected international insurance markets and partners, subject to underwriting authority, product appetite, market approval and applicable policy terms. Displayed logos do not imply that every partner supports every product or risk."
     : "קופר נינוה פועלת מול שווקים ושותפים בינלאומיים נבחרים, בכפוף לסמכויות חיתום, תיאבון סיכון, אישור השוק ותנאי הפוליסה הרלוונטיים. הצגת לוגו אינה מלמדת שכל שותף תומך בכל מוצר או סיכון.";
   return `<section class="partner-band" aria-labelledby="home-partners-title"><div class="container"><h2 id="home-partners-title">${title}</h2><p>${text}</p><div class="partner-logos" data-partner-logos></div></div></section>`;
 }
