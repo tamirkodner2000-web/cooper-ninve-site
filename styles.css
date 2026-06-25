@@ -1269,6 +1269,78 @@ html[dir="rtl"] .agent-workflow .workflow-card {
   min-height: 34px;
   border-bottom: 2px solid currentColor;
 }
+.home-press-teaser {
+  background:
+    linear-gradient(180deg, #ffffff 0%, #f5f9fd 100%);
+  border-block: 1px solid var(--line);
+}
+.press-teaser-inner {
+  direction: rtl;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(28px, 5vw, 70px);
+}
+.press-teaser-inner > div {
+  max-width: 760px;
+}
+.press-teaser-inner h2 {
+  color: var(--navy);
+  font-size: clamp(34px, 4vw, 52px);
+}
+.press-teaser-inner p:not(.section-slogan) {
+  margin: 16px 0 0;
+  color: #4f5f70;
+  font-size: clamp(18px, 1.35vw, 21px);
+  font-weight: 500;
+  line-height: 1.72;
+}
+.press-teaser-inner .btn {
+  flex: 0 0 auto;
+}
+.press-list-section {
+  background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+}
+.press-card-grid {
+  direction: rtl;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+}
+.press-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  padding: 28px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: white;
+  box-shadow: 0 8px 24px rgba(7,25,54,.06);
+  text-align: right;
+}
+.press-source {
+  margin: 0 0 12px;
+  color: var(--blue-2);
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 1.35;
+}
+.press-card h2 {
+  color: var(--navy);
+  font-size: clamp(22px, 1.85vw, 28px);
+  margin-bottom: 14px;
+}
+.press-card p:not(.press-source) {
+  color: var(--muted);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.72;
+  margin: 0 0 22px;
+}
+.press-card .card-cta {
+  margin-top: auto;
+  align-self: flex-start;
+}
 .team-section {
   background: var(--navy);
   color: white;
@@ -2029,6 +2101,13 @@ body.lang-en .footer-grid a:hover {
   .team-photo { height: 220px; }
   .footer-grid { grid-template-columns: 1fr 1fr; }
   .partner-logos { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .press-teaser-inner {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .press-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 @media (max-width: 640px) {
@@ -2219,6 +2298,15 @@ body.lang-en .footer-grid a:hover {
   .example-chip-list { gap: 9px; }
   .example-chip { min-height: 40px; padding: 9px 12px 9px 14px; font-size: 15px; }
   .grid-2, .grid-3, .grid-4, .grid-5, .trust-strip, .form-grid, .footer-grid { grid-template-columns: minmax(0, 1fr); }
+  .press-card-grid { grid-template-columns: minmax(0, 1fr); }
+  .press-card { padding: 22px; }
+  .press-teaser-inner {
+    align-items: stretch;
+    text-align: right;
+  }
+  .press-teaser-inner .btn {
+    width: 100%;
+  }
   .workflow-cards { grid-template-columns: minmax(0, 1fr); }
   .workflow-card { padding: 22px; }
   .team-grid { grid-template-columns: minmax(0, 1fr); }

@@ -44,6 +44,51 @@ const teamMembers = [
   { name: "ליעד לק", role: "חתם חבויות ראשי", bio: "עוסק בחיתום, בדיקת סיכונים וליווי מקצועי של תיקי ביטוח.", image: "/assets/team/liad-lek.jpg.jpg", initials: "לל" },
 ];
 
+const pressItems = [
+  {
+    title: "נינה קודנר מועמדת ב־Women in Insurance Awards UK 2026",
+    source: "Women in Insurance Awards UK",
+    description: "נינה קודנר נכללת ברשימת המועמדות של Women in Insurance Awards UK 2026, במסגרת הכרה בינלאומית בנשים מובילות בענף הביטוח.",
+    url: "https://womenininsuranceawardsuk.co.uk/2026/en/page/2026-nominees",
+    cta: "לצפייה באזכור",
+  },
+  {
+    title: "MGA בשוק לויד׳ס מקנה לנו גישה לקיבולת רחבה יותר של כיסויים",
+    source: "מגזין עדיף, פברואר 2023",
+    description: "ראיון עם אילן זיו, מנכ״ל קופר נינוה, על מעמד ה־MGA, עבודה מול שוק לויד׳ס והיתרון לסוכנים ולמבוטחים.",
+    url: "#",
+    cta: "לקריאת הכתבה",
+  },
+  {
+    title: "קופר נינוה משיקה מחלקת ביטוחי אחריות מקצועית",
+    source: "POLICY",
+    description: "כתבה על השקת מחלקת Professional Indemnity בקופר נינוה, בדגש על הנדסה, אדריכלות ובנייה.",
+    url: "https://policy-news.com/cooper-ninve-launches-professional-indemnity-department-focusing-on-engineering-architecture-and-construction/",
+    cta: "לקריאת הכתבה",
+  },
+  {
+    title: "כתבה על נינה קודנר",
+    source: "פרופיל מקצועי",
+    description: "כתבה על נינה קודנר, פועלה בענף הביטוח, הקשר לשוק לויד׳ס ותפיסת השירות המקצועית של קופר נינוה.",
+    url: "#",
+    cta: "לקריאת הכתבה",
+  },
+  {
+    title: "הרחבת קווי מוצרים בקופר נינוה",
+    source: "Bizportal",
+    description: "כתבה על הרחבת קווי המוצרים של קופר נינוה והמשך פיתוח פעילות החיתום.",
+    url: "https://www.bizportal.co.il/Insurance/news/article/20028076",
+    cta: "לקריאת הכתבה",
+  },
+  {
+    title: "שיחת פוליסה עם אילן זיו",
+    source: "Polisa",
+    description: "ראיון עם אילן זיו, מנכ״ל קופר נינוה, על פעילות החברה, תחומי הביטוח והפתרונות המקצועיים לסוכנים.",
+    url: "https://polisa.news/%D7%A9%D7%99%D7%97%D7%AA-%D7%A4%D7%95%D7%9C%D7%99%D7%A1%D7%94-%D7%A2%D7%9D-%D7%90%D7%99%D7%9C%D7%9F-%D7%96%D7%99%D7%95-%D7%9E%D7%A0%D7%9B%D7%9C-%D7%A7%D7%95%D7%A4%D7%A8-%D7%A0%D7%99%D7%A0%D7%95/",
+    cta: "לקריאת הכתבה",
+  },
+];
+
 const pages = {
   "/": {
     title: "קופר נינוה | ישראל - מרכז חיתום הבנוי לעתיד",
@@ -108,6 +153,16 @@ const pages = {
     primary: ["דברו איתנו", "/contact-us"],
     secondary: ["פתרונות הביטוח שלנו", "/insurance-solutions"],
     sections: "about",
+  },
+  "/press": {
+    title: "קופר נינוה בתקשורת | קופר נינוה",
+    description: "כתבות, ראיונות ואזכורים מקצועיים על פעילות קופר נינוה, תחומי החיתום, שוק לויד׳ס והקשר לשוק הביטוח הבינלאומי.",
+    h1: "קופר נינוה בתקשורת",
+    lead: "כתבות, ראיונות ואזכורים מקצועיים על פעילות קופר נינוה, תחומי החיתום, שוק לויד׳ס והקשר לשוק הביטוח הבינלאומי.",
+    primary: ["", "/press"],
+    secondary: ["", "/press"],
+    hideActions: true,
+    sections: "press",
   },
   "/contact-us": {
     title: "צור קשר | הגשת סיכון לחיתום | קופר נינוה",
@@ -1062,7 +1117,8 @@ document.addEventListener("click", (event) => {
 });
 
 function pathFromLocation() {
-  const { basePath } = routeState();
+  const { basePath, english } = routeState();
+  if (english && basePath === "/press") return "/";
   return pages[basePath] ? basePath : "/";
 }
 
@@ -1136,6 +1192,7 @@ function translatedUrl(path, toEnglish) {
 
 function matchingLanguagePath(path, toEnglish) {
   const normalized = normalizeRoute(path);
+  if (toEnglish && normalized === "/press") return englishPrefix;
   return pages[normalized] ? translatedUrl(normalized, toEnglish) : (toEnglish ? englishPrefix : "/");
 }
 
@@ -1817,6 +1874,7 @@ function sections(type, path) {
     business: businessSections,
     claims: claimsSections,
     about: aboutSections,
+    press: pressSections,
     contact: contactSections,
     knowledge: knowledgeSections,
     international: internationalPartnerSections,
@@ -1867,7 +1925,7 @@ function homeSections() {
     ${homeCountersBlock()}
     ${mgaPositioningBlock()}
     ${lloydsAdvantagesSection()}
-    ${insightsSection()}
+    ${homePressTeaserSection()}
     ${partnerLogosSection()}`;
 }
 
@@ -1889,6 +1947,10 @@ function homeCountersBlock() {
       }).join("")}
     </div>
   </section>`;
+}
+
+function homePressTeaserSection() {
+  return `<section class="section section-soft home-press-teaser"><div class="container press-teaser-inner"><div><p class="section-slogan">כתבו עלינו</p><h2>קופר נינוה בתקשורת</h2><p>כתבות, ראיונות ואזכורים מקצועיים על פעילות קופר נינוה, תחומי החיתום והקשר לשוק הביטוח הבינלאומי.</p></div><a class="btn btn-primary" href="/press">לכל הכתבות</a></div></section>`;
 }
 
 function mgaPositioningBlock() {
@@ -1950,6 +2012,13 @@ function aboutSections() {
   return `
     ${teamSection()}
     <section class="section about-article-section"><div class="container"><article class="about-article"><h2>אודות קופר נינוה</h2><p>קופר נינוה היא אחת מסוכנויות הביטוח הוותיקות והמובילות בישראל בענף הביטוח הכללי, וחברת בת של נינוה סוכנות לביטוח בע״מ, אשר נוסדה בשנת 1973. קופר נינוה פועלת כ־Coverholder בשוק לויד׳ס בישראל, ועובדת עם חברות ביטוח ומבטחי משנה מהגדולים בעולם, תוך החזקת סמכויות חיתום בשם מבטחי לויד׳ס לונדון.</p><p>קופר נינוה עובדת עם מבטחי משנה ושווקים בינלאומיים, יתרון המאפשר למבוטחים ולסוכנים העובדים עמנו גישה ישירה לעולם הביטוח הבינלאומי.</p><p>המשמעות של ביצוע החיתום בישראל גדולה הן עבור המבוטחים והן עבור הסוכנים, בעיקר בשני היבטים מרכזיים: זמן וכסף. קיצור תהליך החיתום וצמצום מספר הגורמים המטפלים בבקשה עשויים לסייע ביצירת תהליך יעיל, מדויק ונגיש יותר.</p><p>אנו מתמחים בסיכונים מיוחדים ובביטוחי חבויות, לרבות חבות מעבידים, אחריות המוצר, צד שלישי, אחריות מקצועית, רשלנות רפואית, ביטוח דירקטורים ונושאי משרה, כספים בהעברה ותחומים נוספים. הדגש הוא על מתן פתרונות בתחומים שבהם השוק המקומי מתקשה לעיתים לתת מענה מלא, תוך התאמה לצורכי הביטוח המשתנים של המבוטח.</p><p>קופר נינוה מתאימה פתרונות מיוחדים לחברות ישראליות, לרבות חברות ישראליות בעלות פעילות בינלאומית.</p><p>כאשר מדובר בפרויקטים ובסיכונים מורכבים, הדגש הוא על לימוד והבנה של פעילות הלקוח, מאפייני הסיכון והחשיפות האפשריות הנובעות מפעילותו. קופר נינוה שואפת להעניק למבוטחים ולסוכנים העובדים עמה שירות מקצועי ואישי, זמינות גבוהה, וליווי בתהליכי חיתום ותביעות באמצעות הגורמים המקצועיים הרלוונטיים.</p></article></div></section>`;
+}
+
+function pressSections() {
+  return `<section class="section press-list-section"><div class="container"><div class="press-card-grid">${pressItems.map((item) => {
+    const external = item.url !== "#" && /^https?:\/\//.test(item.url);
+    return `<article class="press-card"><p class="press-source">${item.source}</p><h2>${item.title}</h2><p>${item.description}</p><a class="card-cta" href="${item.url}"${external ? ` target="_blank" rel="noopener"` : ""}>${item.cta}</a></article>`;
+  }).join("")}</div></div></section>`;
 }
 
 function teamSection() {
