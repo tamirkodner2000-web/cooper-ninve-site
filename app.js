@@ -1288,7 +1288,7 @@ function setAlternateLinks(path) {
 
 function renderChrome(path) {
   const english = isEnglish();
-  const englishSwitchLabel = `<svg width="24" height="16" viewBox="0 0 60 40" aria-hidden="true" focusable="false" style="display:block;border-radius:2px;box-shadow:0 0 0 1px rgba(255,255,255,.2);overflow:hidden;"><path fill="#012169" d="M0 0h60v40H0z"/><path stroke="#fff" stroke-width="8" d="m0 0 60 40M60 0 0 40"/><path stroke="#C8102E" stroke-width="4" d="m0 0 60 40M60 0 0 40"/><path stroke="#fff" stroke-width="13" d="M30 0v40M0 20h60"/><path stroke="#C8102E" stroke-width="8" d="M30 0v40M0 20h60"/></svg>`;
+  const englishSwitchLabel = "EN";
   const navItems = english ? [
     ["/israel-market-partner", "Israel Market Partner"],
     ["/insurance-solutions", "Underwriting Solutions"],
