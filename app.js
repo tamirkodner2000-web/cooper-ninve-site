@@ -1172,9 +1172,48 @@ const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 let revealObserver;
 let counterObserver;
 
+const productMenuGroups = [
+  {
+    title: "חבויות מקצועיות ועסקיות",
+    links: [
+      ["אחריות מקצועית", "/professional-liability-insurance", "פתרונות ביטוח לסיכונים מקצועיים ולנותני שירותים."],
+      ["דירקטורים ונושאי משרה", "/directors-and-officers-insurance", "כיסוי לנושאי משרה, הנהלות ודירקטוריונים."],
+      ["רשלנות רפואית", "/medical-malpractice-insurance", "פתרונות ביטוח לסיכונים רפואיים ומקצועות הבריאות."],
+      ["חבות המוצר", "/product-liability-insurance", "כיסוי לאחריות הנובעת ממוצרים, ייצור ושיווק."],
+    ],
+  },
+  {
+    title: "חבויות כלליות וסיכונים מסחריים",
+    links: [
+      ["צד שלישי וחבויות", "/liability-insurance", "פתרונות לסיכוני חבות כלפי צדדים שלישיים."],
+      ["חבות מעבידים", "/employers-liability-insurance", "כיסוי לסיכוני אחריות מעבידים כלפי עובדים."],
+      ["עבודות קבלניות", "/contractors-all-risks-insurance", "פתרונות ביטוח לפרויקטים, עבודות וביצוע."],
+      ["סיכונים מיוחדים", "/special-risks-insurance", "בחינת פתרונות לסיכונים מורכבים ולא שגרתיים."],
+    ],
+  },
+  {
+    title: "תחומים נוספים",
+    links: [
+      ["סייבר", "/cyber-insurance", "פתרונות לסיכוני סייבר, מידע וטכנולוגיה."],
+      ["הפקות מדיה וסרטים", "/media-production-insurance", "כיסוי להפקות, תוכן, צילום ומדיה."],
+      ["כל מוצרי הביטוח", "/insurance-solutions", "מעבר לעמוד המרכז את כלל תחומי הביטוח."],
+    ],
+  },
+];
+
+const productMenuRoutes = new Set(productMenuGroups.flatMap((group) => group.links.map(([, href]) => href)));
+
 menuToggle.addEventListener("click", () => {
   const open = mainNav.classList.toggle("open");
   menuToggle.setAttribute("aria-expanded", String(open));
+});
+
+document.addEventListener("click", (event) => {
+  if (!event.target.closest(".nav-product-menu")) closeProductMenu();
+});
+
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") closeProductMenu();
 });
 
 window.addEventListener("popstate", render);
@@ -1307,7 +1346,11 @@ function renderChrome(path) {
     ["/contact-us", "צור קשר"],
   ];
   mainNav.setAttribute("aria-label", english ? "Main navigation" : "ניווט ראשי");
-  mainNav.innerHTML = `${navItems.map(([href, label]) => `<a href="${link(href)}">${label}</a>`).join("")}<a class="language-switcher nav-language-switcher" href="${matchingLanguagePath(path, !english)}"${english ? "" : ` aria-label="Switch to English"`}>${english ? "עברית / HE" : englishSwitchLabel}</a>`;
+  mainNav.innerHTML = `${navItems.map(([href, label]) => {
+    if (!english && href === "/insurance-solutions") return productMegaMenuHtml(path);
+    return `<a href="${link(href)}">${label}</a>`;
+  }).join("")}<a class="language-switcher nav-language-switcher" href="${matchingLanguagePath(path, !english)}"${english ? "" : ` aria-label="Switch to English"`}>${english ? "עברית / HE" : englishSwitchLabel}</a>`;
+  initProductMenu();
 
   const brand = document.querySelector(".brand");
   if (brand) {
@@ -1335,6 +1378,59 @@ function renderChrome(path) {
   if (mobileSticky) {
     mobileSticky.innerHTML = `<a href="${link("/contact-us")}" data-track="click_quote_cta">${english ? "Partner With Us" : "הגשת סיכון"}</a><a href="tel:0779965453" data-track="click_phone">${english ? "Call" : "שיחה"}</a>`;
   }
+}
+
+function productMegaMenuHtml(path) {
+  const active = productMenuRoutes.has(path) ? " active" : "";
+  return `<div class="nav-product-menu" data-product-menu>
+    <button class="nav-product-trigger${active}" type="button" aria-expanded="false" aria-controls="product-mega-menu">
+      <span>מוצרי ביטוח</span>
+      <span class="nav-chevron" aria-hidden="true">⌄</span>
+    </button>
+    <div class="product-mega-menu" id="product-mega-menu">
+      ${productMenuGroups.map((group) => `<section class="product-menu-column">
+        <h3>${group.title}</h3>
+        <div class="product-menu-links">
+          ${group.links.map(([title, href, description]) => `<a class="product-menu-link" href="${href}">
+            <strong>${title}</strong>
+            <span>${description}</span>
+          </a>`).join("")}
+        </div>
+      </section>`).join("")}
+    </div>
+  </div>`;
+}
+
+function initProductMenu() {
+  const menu = mainNav.querySelector("[data-product-menu]");
+  if (!menu) return;
+  const trigger = menu.querySelector(".nav-product-trigger");
+  const desktopQuery = window.matchMedia("(min-width: 981px)");
+  const setOpen = (open) => {
+    menu.classList.toggle("is-open", open);
+    trigger.setAttribute("aria-expanded", String(open));
+  };
+  trigger.addEventListener("click", (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+    setOpen(!menu.classList.contains("is-open"));
+  });
+  menu.addEventListener("mouseenter", () => {
+    if (desktopQuery.matches) setOpen(true);
+  });
+  menu.addEventListener("mouseleave", () => {
+    if (desktopQuery.matches) setOpen(false);
+  });
+  menu.addEventListener("focusout", (event) => {
+    if (!menu.contains(event.relatedTarget)) setOpen(false);
+  });
+}
+
+function closeProductMenu() {
+  const menu = mainNav?.querySelector("[data-product-menu]");
+  if (!menu) return;
+  menu.classList.remove("is-open");
+  menu.querySelector(".nav-product-trigger")?.setAttribute("aria-expanded", "false");
 }
 
 function footerHtml(english, path = "/") {
