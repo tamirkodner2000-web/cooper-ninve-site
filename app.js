@@ -1389,7 +1389,6 @@ function productMegaMenuHtml(path) {
     </button>
     <div class="product-mega-menu" id="product-mega-menu">
       ${productMenuGroups.map((group) => `<section class="product-menu-column">
-        <h3>${group.title}</h3>
         <div class="product-menu-links">
           ${group.links.map(([title, href, description]) => `<a class="product-menu-link" href="${href}">
             <strong>${title}</strong>
