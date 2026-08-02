@@ -125,7 +125,8 @@ button:disabled {
 .site-header {
   position: sticky;
   top: 0;
-  z-index: 10;
+  z-index: 1000;
+  overflow: visible;
   background: var(--navy-2);
   color: white;
   box-shadow: 0 1px 0 rgba(255,255,255,.06);
@@ -136,6 +137,7 @@ button:disabled {
   grid-template-columns: 190px minmax(0, 1fr) auto;
   gap: 14px;
   align-items: center;
+  overflow: visible;
 }
 .brand img { width: 190px; height: auto; aspect-ratio: 768 / 283; }
 .brand:hover { opacity: .86; }
@@ -232,7 +234,7 @@ button:disabled {
   visibility: hidden;
   pointer-events: none;
   transition: opacity var(--ease), transform var(--ease), visibility var(--ease);
-  z-index: 30;
+  z-index: 1100;
 }
 .product-mega-menu::before {
   content: "";
