@@ -226,6 +226,15 @@ const pages = {
     hideActions: true,
     sections: "press",
   },
+  "/blog": {
+    title: "בלוג | קופר נינוה",
+    description: "מאמרים מקצועיים, תובנות חיתום ועדכונים על שוק הביטוח, לויד׳ס, סיכונים מיוחדים וניהול תיקי ביטוח.",
+    h1: "בלוג",
+    lead: "מאמרים מקצועיים, תובנות חיתום ועדכונים על שוק הביטוח, לויד׳ס, סיכונים מיוחדים וניהול תיקי ביטוח.",
+    primary: ["יצירת קשר", "/contact-us"],
+    hideActions: true,
+    sections: "blog",
+  },
   "/contact-us": {
     title: "צור קשר | הגשת סיכון לחיתום | קופר נינוה",
     description: "צרו קשר עם קופר נינוה להגשת סיכון לחיתום, פנייה כסוכן ביטוח, בדיקת סיכון עסקי או שיחה עם צוות החיתום והשירות.",
@@ -1183,6 +1192,7 @@ document.addEventListener("click", (event) => {
 function pathFromLocation() {
   const { basePath, english } = routeState();
   if (english && basePath === "/press") return "/";
+  if (english && basePath === "/blog") return "/";
   return pages[basePath] ? basePath : "/";
 }
 
@@ -1257,6 +1267,7 @@ function translatedUrl(path, toEnglish) {
 function matchingLanguagePath(path, toEnglish) {
   const normalized = normalizeRoute(path);
   if (toEnglish && normalized === "/press") return englishPrefix;
+  if (toEnglish && normalized === "/blog") return englishPrefix;
   return pages[normalized] ? translatedUrl(normalized, toEnglish) : (toEnglish ? englishPrefix : "/");
 }
 
@@ -1291,7 +1302,8 @@ function renderChrome(path) {
     ["/insurance-solutions", "תחומי חיתום"],
     ["/claims", "תביעות"],
     ["/about-us", "אודות"],
-    ["/press", "מרכז ידע"],
+    ["/press", "בתקשורת"],
+    ["/blog", "בלוג"],
     ["/contact-us", "צור קשר"],
   ];
   mainNav.setAttribute("aria-label", english ? "Main navigation" : "ניווט ראשי");
@@ -1340,7 +1352,7 @@ function footerHtml(english, path = "/") {
     ["Knowledge Center", [["Articles and Insights", "/knowledge-center"], ["M.G.A in Insurance", "/knowledge-center"], ["Submitting a Risk for Underwriting", "/knowledge-center"]]],
     ["Contact", [["Contact Us", "/contact-us"], ["077-9965453", "tel:0779965453"], ["info@cooper-ninve.com", "mailto:info@cooper-ninve.com"]]],
   ] : [
-    ["קופר נינוה", [["עמוד הבית", "/"], ["אודות", "/about-us"], ["קופר נינוה בתקשורת", "/press"]]],
+    ["קופר נינוה", [["עמוד הבית", "/"], ["אודות", "/about-us"], ["קופר נינוה בתקשורת", "/press"], ["בלוג", "/blog"]]],
     ["פתרונות חיתום", [["אחריות מקצועית", "/professional-liability-insurance"], ["סייבר", "/cyber-insurance"], ["עבודות קבלניות", "/contractors-all-risks-insurance"], ["רשלנות רפואית", "/medical-malpractice-insurance"], ["דירקטורים ונושאי משרה", "/directors-and-officers-insurance"]]],
     ["חבויות וסיכונים מיוחדים", [["צד שלישי וחבויות", "/liability-insurance"], ["חבות מעבידים", "/employers-liability-insurance"], ["חבות המוצר", "/product-liability-insurance"], ["הפקות מדיה וסרטים", "/media-production-insurance"], ["סיכונים מיוחדים", "/special-risks-insurance"]]],
     ["עבודה עם קופר נינוה", [["לסוכני ביטוח", "/insurance-agents"], ["לעסקים וחברות", "/business-insurance"], ["תחומי חיתום", "/insurance-solutions"], ["הגשת סיכון לבדיקה", "/contact-us"]]],
@@ -1962,6 +1974,7 @@ function sections(type, path) {
     claims: claimsSections,
     about: aboutSections,
     press: pressSections,
+    blog: blogSections,
     contact: contactSections,
     knowledge: knowledgeSections,
     international: internationalPartnerSections,
@@ -2106,6 +2119,10 @@ function pressSections() {
     const external = /^https?:\/\//.test(item.url);
     return `<article class="press-card"><p class="press-source">${item.source}</p><h3>${item.title}</h3><p>${item.description}</p><a class="card-cta" href="${item.url}"${external ? ` target="_blank" rel="noopener"` : ""}>${item.cta}</a></article>`;
   }).join("")}</div></section>`).join("")}</div></section>`;
+}
+
+function blogSections() {
+  return `<section class="section"><div class="container split-band"><div><h2>בלוג מקצועי של קופר נינוה</h2><p>הבלוג המקצועי של קופר נינוה יכלול בהמשך מאמרים, מדריכים ותובנות מקצועיות בתחומי החיתום, הביטוח הבינלאומי, תביעות וניהול סיכונים.</p></div><div><a class="btn btn-primary" href="/contact-us">יצירת קשר</a></div></div></section>`;
 }
 
 function teamSection() {
