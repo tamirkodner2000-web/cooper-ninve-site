@@ -1385,9 +1385,6 @@ function productMegaMenuHtml(path) {
   return `<div class="nav-product-menu" data-product-menu>
     <div class="nav-product-control">
       <a class="nav-product-trigger${active}" href="/insurance-solutions" aria-haspopup="true" aria-controls="product-mega-menu">מוצרי ביטוח</a>
-      <button class="nav-product-toggle" type="button" aria-expanded="false" aria-controls="product-mega-menu" aria-label="פתיחת תפריט מוצרי ביטוח">
-      <span class="nav-chevron" aria-hidden="true">⌄</span>
-      </button>
     </div>
     <div class="product-mega-menu" id="product-mega-menu">
       ${productMenuGroups.map((group) => `<section class="product-menu-column">
@@ -1405,16 +1402,10 @@ function productMegaMenuHtml(path) {
 function initProductMenu() {
   const menu = mainNav.querySelector("[data-product-menu]");
   if (!menu) return;
-  const toggle = menu.querySelector(".nav-product-toggle");
   const desktopQuery = window.matchMedia("(min-width: 981px)");
   const setOpen = (open) => {
     menu.classList.toggle("is-open", open);
-    toggle.setAttribute("aria-expanded", String(open));
   };
-  toggle.addEventListener("click", (event) => {
-    event.stopPropagation();
-    setOpen(!menu.classList.contains("is-open"));
-  });
   menu.addEventListener("mouseenter", () => {
     if (desktopQuery.matches) setOpen(true);
   });
@@ -1430,7 +1421,6 @@ function closeProductMenu() {
   const menu = mainNav?.querySelector("[data-product-menu]");
   if (!menu) return;
   menu.classList.remove("is-open");
-  menu.querySelector(".nav-product-toggle")?.setAttribute("aria-expanded", "false");
 }
 
 function footerHtml(english, path = "/") {

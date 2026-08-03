@@ -150,8 +150,7 @@ button:disabled {
   min-width: 0;
 }
 .main-nav a,
-.nav-product-trigger,
-.nav-product-toggle {
+.nav-product-trigger {
   position: relative;
   opacity: .92;
   border-radius: 6px;
@@ -163,21 +162,10 @@ button:disabled {
 .nav-product-control {
   display: inline-flex;
   align-items: center;
-  gap: 5px;
 }
-.nav-product-trigger,
-.nav-product-toggle {
+.nav-product-trigger {
   display: inline-flex;
   align-items: center;
-}
-.nav-product-toggle {
-  padding-inline: 0;
-  border: 0;
-  background: transparent;
-  color: inherit;
-  font-family: inherit;
-  font-weight: inherit;
-  cursor: pointer;
 }
 .main-nav a::after,
 .nav-product-trigger::after {
@@ -196,9 +184,7 @@ button:disabled {
 .main-nav a.active,
 .nav-product-trigger:hover,
 .nav-product-trigger.active,
-.nav-product-toggle:hover,
-.nav-product-menu.is-open .nav-product-trigger,
-.nav-product-menu.is-open .nav-product-toggle {
+.nav-product-menu.is-open .nav-product-trigger {
   color: var(--focus);
   opacity: 1;
 }
@@ -214,17 +200,6 @@ button:disabled {
   position: relative;
   display: inline-flex;
   align-items: center;
-}
-.nav-chevron {
-  font-size: 14px;
-  line-height: 1;
-  transform: translateY(-1px);
-  transition: transform var(--ease);
-}
-.nav-product-menu.is-open .nav-chevron,
-.nav-product-menu:hover .nav-chevron,
-.nav-product-menu:focus-within .nav-chevron {
-  transform: translateY(-1px) rotate(180deg);
 }
 .product-mega-menu {
   position: absolute;
@@ -2156,13 +2131,10 @@ body.lang-en .footer-grid a:hover {
   .nav-product-trigger {
     text-align: start;
   }
-  .nav-product-toggle {
-    padding: 12px 8px;
-  }
   .product-mega-menu {
     position: static;
     width: 100%;
-    display: none;
+    display: grid;
     grid-template-columns: minmax(0, 1fr);
     gap: 12px;
     margin: 2px 0 10px;
@@ -2181,10 +2153,6 @@ body.lang-en .footer-grid a:hover {
   }
   .nav-product-menu:hover .product-mega-menu,
   .nav-product-menu:focus-within .product-mega-menu {
-    transform: none;
-  }
-  .nav-product-menu.is-open .product-mega-menu {
-    display: grid;
     transform: none;
   }
   .product-menu-column {
@@ -2223,8 +2191,7 @@ body.lang-en .footer-grid a:hover {
     align-items: stretch;
   }
   .main-nav a,
-  .nav-product-trigger,
-  .nav-product-toggle { padding: 12px 8px; }
+  .nav-product-trigger { padding: 12px 8px; }
   .main-nav.open { display: flex; }
   .nav-language-switcher { display: inline-flex; width: max-content; margin-top: 6px; }
   .header-language-switcher { display: none; }
