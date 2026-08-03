@@ -1383,10 +1383,12 @@ function renderChrome(path) {
 function productMegaMenuHtml(path) {
   const active = productMenuRoutes.has(path) ? " active" : "";
   return `<div class="nav-product-menu" data-product-menu>
-    <button class="nav-product-trigger${active}" type="button" aria-expanded="false" aria-controls="product-mega-menu">
-      <span>מוצרי ביטוח</span>
+    <div class="nav-product-control">
+      <a class="nav-product-trigger${active}" href="/insurance-solutions" aria-haspopup="true" aria-controls="product-mega-menu">מוצרי ביטוח</a>
+      <button class="nav-product-toggle" type="button" aria-expanded="false" aria-controls="product-mega-menu" aria-label="פתיחת תפריט מוצרי ביטוח">
       <span class="nav-chevron" aria-hidden="true">⌄</span>
-    </button>
+      </button>
+    </div>
     <div class="product-mega-menu" id="product-mega-menu">
       ${productMenuGroups.map((group) => `<section class="product-menu-column">
         <div class="product-menu-links">
@@ -1403,14 +1405,13 @@ function productMegaMenuHtml(path) {
 function initProductMenu() {
   const menu = mainNav.querySelector("[data-product-menu]");
   if (!menu) return;
-  const trigger = menu.querySelector(".nav-product-trigger");
+  const toggle = menu.querySelector(".nav-product-toggle");
   const desktopQuery = window.matchMedia("(min-width: 981px)");
   const setOpen = (open) => {
     menu.classList.toggle("is-open", open);
-    trigger.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute("aria-expanded", String(open));
   };
-  trigger.addEventListener("click", (event) => {
-    event.preventDefault();
+  toggle.addEventListener("click", (event) => {
     event.stopPropagation();
     setOpen(!menu.classList.contains("is-open"));
   });
@@ -1429,7 +1430,7 @@ function closeProductMenu() {
   const menu = mainNav?.querySelector("[data-product-menu]");
   if (!menu) return;
   menu.classList.remove("is-open");
-  menu.querySelector(".nav-product-trigger")?.setAttribute("aria-expanded", "false");
+  menu.querySelector(".nav-product-toggle")?.setAttribute("aria-expanded", "false");
 }
 
 function footerHtml(english, path = "/") {

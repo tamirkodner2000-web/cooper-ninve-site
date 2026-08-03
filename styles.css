@@ -150,7 +150,8 @@ button:disabled {
   min-width: 0;
 }
 .main-nav a,
-.nav-product-trigger {
+.nav-product-trigger,
+.nav-product-toggle {
   position: relative;
   opacity: .92;
   border-radius: 6px;
@@ -159,10 +160,18 @@ button:disabled {
   line-height: 1.2;
   white-space: nowrap;
 }
-.nav-product-trigger {
+.nav-product-control {
   display: inline-flex;
   align-items: center;
   gap: 5px;
+}
+.nav-product-trigger,
+.nav-product-toggle {
+  display: inline-flex;
+  align-items: center;
+}
+.nav-product-toggle {
+  padding-inline: 0;
   border: 0;
   background: transparent;
   color: inherit;
@@ -187,7 +196,9 @@ button:disabled {
 .main-nav a.active,
 .nav-product-trigger:hover,
 .nav-product-trigger.active,
-.nav-product-menu.is-open .nav-product-trigger {
+.nav-product-toggle:hover,
+.nav-product-menu.is-open .nav-product-trigger,
+.nav-product-menu.is-open .nav-product-toggle {
   color: var(--focus);
   opacity: 1;
 }
@@ -2138,10 +2149,15 @@ body.lang-en .footer-grid a:hover {
     display: block;
     width: 100%;
   }
-  .nav-product-trigger {
+  .nav-product-control {
     width: 100%;
     justify-content: space-between;
+  }
+  .nav-product-trigger {
     text-align: start;
+  }
+  .nav-product-toggle {
+    padding: 12px 8px;
   }
   .product-mega-menu {
     position: static;
@@ -2207,7 +2223,8 @@ body.lang-en .footer-grid a:hover {
     align-items: stretch;
   }
   .main-nav a,
-  .nav-product-trigger { padding: 12px 8px; }
+  .nav-product-trigger,
+  .nav-product-toggle { padding: 12px 8px; }
   .main-nav.open { display: flex; }
   .nav-language-switcher { display: inline-flex; width: max-content; margin-top: 6px; }
   .header-language-switcher { display: none; }
