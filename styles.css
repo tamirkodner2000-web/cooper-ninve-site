@@ -159,10 +159,6 @@ button:disabled {
   line-height: 1.2;
   white-space: nowrap;
 }
-.nav-product-control {
-  display: inline-flex;
-  align-items: center;
-}
 .nav-product-trigger {
   display: inline-flex;
   align-items: center;
@@ -2123,10 +2119,6 @@ body.lang-en .footer-grid a:hover {
   .nav-product-menu {
     display: block;
     width: 100%;
-  }
-  .nav-product-control {
-    width: 100%;
-    justify-content: space-between;
   }
   .nav-product-trigger {
     text-align: start;

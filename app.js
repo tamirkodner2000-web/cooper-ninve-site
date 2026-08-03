@@ -1383,9 +1383,7 @@ function renderChrome(path) {
 function productMegaMenuHtml(path) {
   const active = productMenuRoutes.has(path) ? " active" : "";
   return `<div class="nav-product-menu" data-product-menu>
-    <div class="nav-product-control">
-      <a class="nav-product-trigger${active}" href="/insurance-solutions" aria-haspopup="true" aria-controls="product-mega-menu">מוצרי ביטוח</a>
-    </div>
+    <a class="nav-product-trigger${active}" href="/insurance-solutions" aria-controls="product-mega-menu">מוצרי ביטוח</a>
     <div class="product-mega-menu" id="product-mega-menu">
       ${productMenuGroups.map((group) => `<section class="product-menu-column">
         <div class="product-menu-links">
