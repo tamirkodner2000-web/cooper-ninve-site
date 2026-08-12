@@ -2045,7 +2045,7 @@ function englishUnderwritingLinesTemplate() {
         </div>
       </div>
     </section>
-    <section class="section underwriting-page-section">
+    <section class="section underwriting-page-section underwriting-capabilities-section">
       <div class="container">
         <div class="center-title">
           <h2>Underwriting Built Around the Market</h2>
