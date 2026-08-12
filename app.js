@@ -164,7 +164,7 @@ const pages = {
       ["5", "מבטחי משנה"],
       ["1,000+", "סוכני ביטוח"],
     ],
-    primary: ["הגשת סיכון לחיתום", "/contact-us"],
+    primary: ["לקבלת הצעה לביטוח", "/contact-us"],
     secondary: ["עבודה עם סוכני ביטוח", "/insurance-agents"],
     highlights: ["MGA ו-Coverholder בישראל", "בחינת סיכונים וחיתום מקצועי", "גישה לשווקים ושותפים בינלאומיים", "הפקה, שירות ותביעות בישראל", "ניהול תיקים לאורך חיי הפוליסה"],
     sections: "home",
@@ -174,7 +174,7 @@ const pages = {
     description: "תחומי חיתום ובחינת סיכונים בתחומי אחריות מקצועית, סייבר, עבודות קבלניות, רשלנות רפואית, חבויות וסיכונים מיוחדים.",
     h1: "תחומי חיתום ובחינת סיכונים",
     lead: "לא כל עסק, פרויקט או בעל מקצוע חשופים לאותם סיכונים. תהליך חיתום נכון מתחיל בהבנת תחום הפעילות, דרישות חוזיות, ניסיון תביעות, גבולות אחריות ורמת המורכבות.",
-    primary: ["הגשת סיכון לחיתום", "/contact-us"],
+    primary: ["לקבלת הצעה לביטוח", "/contact-us"],
     secondary: ["עבודה עם סוכני ביטוח", "/insurance-agents"],
     sections: "solutions",
   },
@@ -183,7 +183,7 @@ const pages = {
     description: "קופר נינוה מספקת לסוכני ביטוח תהליך חיתום, הפקה, שירות וליווי סיכונים בתחומי אחריות מקצועית, סייבר, קבלנים, חבויות וסיכונים מיוחדים.",
     h1: "פתרונות ביטוח, הפקה ושירות לסוכני ביטוח בישראל",
     lead: "קופר נינוה היא שותף מקצועי לסוכני ביטוח בהגשת סיכונים, בחינת חיתום, גישה לשווקים בינלאומיים, הפקה, שירות וניהול לאורך חיי הפוליסה.",
-    primary: ["הגשת סיכון לחיתום", "/contact-us"],
+    primary: ["לקבלת הצעה לביטוח", "/contact-us"],
     secondary: ["תחומי חיתום", "/insurance-solutions"],
     sections: "agents",
   },
@@ -192,7 +192,7 @@ const pages = {
     description: "בחינת סיכונים ותהליך חיתום לעסקים, חברות וסיכונים מורכבים בתחומי אחריות מקצועית, סייבר, עבודות קבלניות, חבויות ורשלנות רפואית.",
     h1: "בחינת סיכונים לעסקים, חברות וסיכונים מורכבים",
     lead: "קופר נינוה בוחנת חשיפות עסקיות ומסחריות לפי אופי הפעילות, דרישות חוזיות, ניסיון תביעות וצרכי הכיסוי, ומקדמת תהליך חיתום מקצועי מול השווקים הרלוונטיים.",
-    primary: ["בדיקת סיכון עסקי", "/contact-us"],
+    primary: ["לקבלת הצעה לביטוח", "/contact-us"],
     secondary: ["תחומי חיתום", "/insurance-solutions"],
     sections: "business",
   },
@@ -241,7 +241,7 @@ const pages = {
     h1: "צור קשר עם קופר נינוה",
     lead: "רוצים להגיש סיכון לחיתום, לפתוח פנייה כסוכן או להבין איזה מידע נדרש לבדיקת חשיפה עסקית? השאירו פרטים וצוות קופר נינוה יחזור אליכם.",
     primary: ["הגשת פנייה", "/contact-us"],
-    secondary: ["הגשת סיכון כסוכן", "/insurance-agents"],
+    secondary: ["לקבלת הצעה לביטוח", "/insurance-agents"],
     sections: "contact",
   },
   "/israel-market-partner": {
@@ -452,7 +452,7 @@ const supplementalProductPages = {
     description: "בדיקת פתרונות חיתום וביטוח לסיכונים מיוחדים, מורכבים ולא סטנדרטיים.",
     h1: "ביטוח סיכונים מיוחדים",
     lead: "בדיקת פתרונות לסיכונים מורכבים, חריגים או לא סטנדרטיים שאינם נכנסים לתבנית ביטוח רגילה.",
-    primary: ["בדיקת סיכון מיוחד", "/contact-us"],
+    primary: ["לקבלת הצעה לביטוח", "/contact-us"],
     secondary: ["שיחה עם צוות החיתום", "/contact-us"],
     who: ["סיכונים לא סטנדרטיים", "עסקים עם דרישות מיוחדות", "פרויקטים מורכבים", "סוכני ביטוח", "חברות עם חשיפות ייחודיות"],
     coverage: ["בדיקת התאמה חיתומית", "פתרונות לפי אופי הסיכון", "דרישות חוזיות מיוחדות", "גישה לשווקים רלוונטיים", "ליווי בהשלמת מידע"],
@@ -619,7 +619,7 @@ const enText = {
   "מרכז ידע": "Knowledge Center",
   "אודות": "About",
   "צור קשר": "Contact Us",
-  "הגשת סיכון": "Submit a Risk",
+  "לקבלת הצעה לביטוח": "Get an Insurance Quote",
   "לקבלת הצעה": "Get a Quote",
   "שיחה": "Call",
   "דלג לתוכן": "Skip to content",
@@ -1172,36 +1172,25 @@ const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 let revealObserver;
 let counterObserver;
 
-const productMenuGroups = [
-  {
-    title: "חבויות מקצועיות ועסקיות",
-    links: [
-      ["אחריות מקצועית", "/professional-liability-insurance", "פתרונות ביטוח לסיכונים מקצועיים ולנותני שירותים."],
-      ["דירקטורים ונושאי משרה", "/directors-and-officers-insurance", "כיסוי לנושאי משרה, הנהלות ודירקטוריונים."],
-      ["רשלנות רפואית", "/medical-malpractice-insurance", "פתרונות ביטוח לסיכונים רפואיים ומקצועות הבריאות."],
-      ["חבות המוצר", "/product-liability-insurance", "כיסוי לאחריות הנובעת ממוצרים, ייצור ושיווק."],
-    ],
-  },
-  {
-    title: "חבויות כלליות וסיכונים מסחריים",
-    links: [
-      ["צד שלישי וחבויות", "/liability-insurance", "פתרונות לסיכוני חבות כלפי צדדים שלישיים."],
-      ["חבות מעבידים", "/employers-liability-insurance", "כיסוי לסיכוני אחריות מעבידים כלפי עובדים."],
-      ["עבודות קבלניות", "/contractors-all-risks-insurance", "פתרונות ביטוח לפרויקטים, עבודות וביצוע."],
-      ["סיכונים מיוחדים", "/special-risks-insurance", "בחינת פתרונות לסיכונים מורכבים ולא שגרתיים."],
-    ],
-  },
-  {
-    title: "תחומים נוספים",
-    links: [
-      ["סייבר", "/cyber-insurance", "פתרונות לסיכוני סייבר, מידע וטכנולוגיה."],
-      ["הפקות מדיה וסרטים", "/media-production-insurance", "כיסוי להפקות, תוכן, צילום ומדיה."],
-      ["כל מוצרי הביטוח", "/insurance-solutions", "מעבר לעמוד המרכז את כלל תחומי הביטוח."],
-    ],
-  },
-];
+const productMenuGroups = [{
+  title: "מוצרי ביטוח",
+  links: [
+    ["אחריות מקצועית", "/professional-liability-insurance", "פתרונות ביטוח לסיכונים מקצועיים ולנותני שירותים."],
+    ["סייבר", "/cyber-insurance", "פתרונות לסיכוני סייבר, מידע וטכנולוגיה."],
+    ["עבודות קבלניות", "/contractors-all-risks-insurance", "פתרונות ביטוח לפרויקטים, עבודות וביצוע."],
+    ["רשלנות רפואית", "/medical-malpractice-insurance", "פתרונות ביטוח לסיכונים רפואיים ומקצועות הבריאות."],
+    ["דירקטורים ונושאי משרה", "/directors-and-officers-insurance", "כיסוי לנושאי משרה, הנהלות ודירקטוריונים."],
+    ["צד שלישי וחבויות", "/liability-insurance", "פתרונות לסיכוני חבות כלפי צדדים שלישיים."],
+    ["חבות מעבידים", "/employers-liability-insurance", "כיסוי לסיכוני אחריות מעבידים כלפי עובדים."],
+    ["חבות המוצר", "/product-liability-insurance", "כיסוי לאחריות הנובעת ממוצרים, ייצור ושיווק."],
+    ["הפקות מדיה וסרטים", "/media-production-insurance", "כיסוי להפקות, תוכן, צילום ומדיה."],
+    ["סיכונים מיוחדים", "/special-risks-insurance", "בחינת פתרונות לסיכונים מורכבים ולא שגרתיים."],
+    ["כל מוצרי הביטוח", "/insurance-solutions", "מעבר לעמוד המרכז את כלל תחומי הביטוח."],
+  ],
+}];
 
 const productMenuRoutes = new Set(productMenuGroups.flatMap((group) => group.links.map(([, href]) => href)));
+const aboutMenuRoutes = new Set(["/about-us", "/blog", "/press"]);
 
 menuToggle.addEventListener("click", () => {
   const open = mainNav.classList.toggle("open");
@@ -1341,13 +1330,11 @@ function renderChrome(path) {
     ["/insurance-solutions", "תחומי חיתום"],
     ["/claims", "תביעות"],
     ["/about-us", "אודות"],
-    ["/press", "בתקשורת"],
-    ["/blog", "בלוג"],
-    ["/contact-us", "צור קשר"],
   ];
   mainNav.setAttribute("aria-label", english ? "Main navigation" : "ניווט ראשי");
   mainNav.innerHTML = `${navItems.map(([href, label]) => {
     if (!english && href === "/insurance-solutions") return productMegaMenuHtml(path);
+    if (!english && href === "/about-us") return aboutMegaMenuHtml(path);
     return `<a href="${link(href)}">${label}</a>`;
   }).join("")}<a class="language-switcher nav-language-switcher" href="${matchingLanguagePath(path, !english)}"${english ? "" : ` aria-label="Switch to English"`}>${english ? "עברית / HE" : englishSwitchLabel}</a>`;
   initProductMenu();
@@ -1366,7 +1353,7 @@ function renderChrome(path) {
     headerActions.innerHTML = english
       ? `<a class="header-cta" href="${link("/contact-us")}" data-track="click_quote_cta">Partner With Us</a>
       <a class="language-switcher header-language-switcher" href="${matchingLanguagePath(path, false)}">עברית / HE</a>`
-      : `<a class="header-cta" href="${link("/contact-us")}" data-track="click_quote_cta">הגשת סיכון לחיתום</a>
+      : `<a class="header-cta" href="${link("/contact-us")}" data-track="click_quote_cta">לקבלת הצעה לביטוח</a>
       <a class="header-link" href="${link("/contact-us")}">צור קשר</a>
       <a class="language-switcher header-language-switcher" href="${matchingLanguagePath(path, true)}" aria-label="Switch to English">${englishSwitchLabel}</a>`;
   }
@@ -1376,7 +1363,7 @@ function renderChrome(path) {
 
   const mobileSticky = document.querySelector(".mobile-sticky");
   if (mobileSticky) {
-    mobileSticky.innerHTML = `<a href="${link("/contact-us")}" data-track="click_quote_cta">${english ? "Partner With Us" : "הגשת סיכון"}</a><a href="tel:0779965453" data-track="click_phone">${english ? "Call" : "שיחה"}</a>`;
+    mobileSticky.innerHTML = `<a href="${link("/contact-us")}" data-track="click_quote_cta">${english ? "Partner With Us" : "לקבלת הצעה לביטוח"}</a><a href="tel:0779965453" data-track="click_phone">${english ? "Call" : "שיחה"}</a>`;
   }
 }
 
@@ -1397,28 +1384,41 @@ function productMegaMenuHtml(path) {
   </div>`;
 }
 
+function aboutMegaMenuHtml(path) {
+  const active = aboutMenuRoutes.has(path) ? " active" : "";
+  const links = [["אודות", "/about-us"], ["בלוג", "/blog"], ["בתקשורת", "/press"]];
+  return `<div class="nav-product-menu" data-product-menu>
+    <a class="nav-product-trigger${active}" href="/about-us" aria-controls="about-mega-menu">אודות</a>
+    <div class="product-mega-menu about-mega-menu" id="about-mega-menu">
+      <section class="product-menu-column">
+        <div class="product-menu-links">
+          ${links.map(([title, href]) => `<a class="product-menu-link" href="${href}"><strong>${title}</strong></a>`).join("")}
+        </div>
+      </section>
+    </div>
+  </div>`;
+}
+
 function initProductMenu() {
-  const menu = mainNav.querySelector("[data-product-menu]");
-  if (!menu) return;
   const desktopQuery = window.matchMedia("(min-width: 981px)");
-  const setOpen = (open) => {
-    menu.classList.toggle("is-open", open);
-  };
-  menu.addEventListener("mouseenter", () => {
-    if (desktopQuery.matches) setOpen(true);
-  });
-  menu.addEventListener("mouseleave", () => {
-    if (desktopQuery.matches) setOpen(false);
-  });
-  menu.addEventListener("focusout", (event) => {
-    if (!menu.contains(event.relatedTarget)) setOpen(false);
+  mainNav.querySelectorAll("[data-product-menu]").forEach((menu) => {
+    const setOpen = (open) => {
+      menu.classList.toggle("is-open", open);
+    };
+    menu.addEventListener("mouseenter", () => {
+      if (desktopQuery.matches) setOpen(true);
+    });
+    menu.addEventListener("mouseleave", () => {
+      if (desktopQuery.matches) setOpen(false);
+    });
+    menu.addEventListener("focusout", (event) => {
+      if (!menu.contains(event.relatedTarget)) setOpen(false);
+    });
   });
 }
 
 function closeProductMenu() {
-  const menu = mainNav?.querySelector("[data-product-menu]");
-  if (!menu) return;
-  menu.classList.remove("is-open");
+  mainNav?.querySelectorAll("[data-product-menu]").forEach((menu) => menu.classList.remove("is-open"));
 }
 
 function footerHtml(english, path = "/") {
@@ -1437,9 +1437,8 @@ function footerHtml(english, path = "/") {
     ["Contact", [["Contact Us", "/contact-us"], ["077-9965453", "tel:0779965453"], ["info@cooper-ninve.com", "mailto:info@cooper-ninve.com"]]],
   ] : [
     ["קופר נינוה", [["עמוד הבית", "/"], ["אודות", "/about-us"], ["קופר נינוה בתקשורת", "/press"], ["בלוג", "/blog"]]],
-    ["פתרונות חיתום", [["אחריות מקצועית", "/professional-liability-insurance"], ["סייבר", "/cyber-insurance"], ["עבודות קבלניות", "/contractors-all-risks-insurance"], ["רשלנות רפואית", "/medical-malpractice-insurance"], ["דירקטורים ונושאי משרה", "/directors-and-officers-insurance"]]],
-    ["חבויות וסיכונים מיוחדים", [["צד שלישי וחבויות", "/liability-insurance"], ["חבות מעבידים", "/employers-liability-insurance"], ["חבות המוצר", "/product-liability-insurance"], ["הפקות מדיה וסרטים", "/media-production-insurance"], ["סיכונים מיוחדים", "/special-risks-insurance"]]],
-    ["עבודה עם קופר נינוה", [["לסוכני ביטוח", "/insurance-agents"], ["לעסקים וחברות", "/business-insurance"], ["תחומי חיתום", "/insurance-solutions"], ["הגשת סיכון לבדיקה", "/contact-us"]]],
+    ["מוצרי ביטוח", [["אחריות מקצועית", "/professional-liability-insurance"], ["סייבר", "/cyber-insurance"], ["עבודות קבלניות", "/contractors-all-risks-insurance"], ["רשלנות רפואית", "/medical-malpractice-insurance"], ["דירקטורים ונושאי משרה", "/directors-and-officers-insurance"], ["צד שלישי וחבויות", "/liability-insurance"], ["חבות מעבידים", "/employers-liability-insurance"], ["חבות המוצר", "/product-liability-insurance"], ["הפקות מדיה וסרטים", "/media-production-insurance"], ["סיכונים מיוחדים", "/special-risks-insurance"]]],
+    ["עבודה עם קופר נינוה", [["לסוכני ביטוח", "/insurance-agents"], ["לעסקים וחברות", "/business-insurance"], ["תחומי חיתום", "/insurance-solutions"], ["לקבלת הצעה לביטוח", "/contact-us"]]],
     ["תביעות", [["תביעות", "/claims"], ["צור קשר", "/contact-us"]]],
     ["יצירת קשר", [["צור קשר", "/contact-us"], ["077-9965453", "tel:0779965453"], ["info@cooper-ninve.com", "mailto:info@cooper-ninve.com"]]],
   ];
@@ -2160,7 +2159,7 @@ function underwritingExamplesSection() {
     "פרויקטים מורכבים",
     "צווארון לבן ואחריות מקצועית טהורה",
   ];
-  return `<section class="section underwriting-examples"><div class="container underwriting-bridge"><div class="underwriting-copy"><p class="section-slogan">חיתום מקצועי לסיכונים שאינם תמיד סטנדרטיים.</p><h2>מה אנחנו עושים בפועל?</h2><p>קופר נינוה בוחנת סיכונים שאינם תמיד נכנסים לתבנית רגילה, ומחברת בין צרכי הלקוח לבין תהליך חיתומי מתאים באמצעות ניסיון בשווקים בינלאומיים והיכרות עם השוק הישראלי.</p><div class="section-actions"><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">בחינת סיכון לחיתום</a><a class="btn btn-secondary" href="/insurance-solutions">לכל תחומי החיתום</a></div></div><div class="example-chips" aria-label="דוגמאות לסיכונים שאנחנו בוחנים"><h3>דוגמאות לסיכונים שאנחנו בוחנים</h3><div class="example-chip-list">${useCases.map((title) => `<span class="example-chip">${title}</span>`).join("")}</div></div></div></section>`;
+  return `<section class="section underwriting-examples"><div class="container underwriting-bridge"><div class="underwriting-copy"><p class="section-slogan">חיתום מקצועי לסיכונים שאינם תמיד סטנדרטיים.</p><h2>מה אנחנו עושים בפועל?</h2><p>קופר נינוה בוחנת סיכונים שאינם תמיד נכנסים לתבנית רגילה, ומחברת בין צרכי הלקוח לבין תהליך חיתומי מתאים באמצעות ניסיון בשווקים בינלאומיים והיכרות עם השוק הישראלי.</p><div class="section-actions"><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">לקבלת הצעה לביטוח</a><a class="btn btn-secondary" href="/insurance-solutions">לכל תחומי החיתום</a></div></div><div class="example-chips" aria-label="דוגמאות לסיכונים שאנחנו בוחנים"><h3>דוגמאות לסיכונים שאנחנו בוחנים</h3><div class="example-chip-list">${useCases.map((title) => `<span class="example-chip">${title}</span>`).join("")}</div></div></div></section>`;
 }
 
 function solutionsSections() {
@@ -2254,9 +2253,9 @@ function productTemplate(page, path) {
   return `
     <section class="section"><div class="container"><div class="center-title"><h2>למי הסיכון מתאים לבחינה?</h2><p>כל פנייה נבחנת לפי אופי הפעילות, המידע החיתומי, תיאבון הסיכון ותנאי הפוליסה הרלוונטיים.</p></div>${cards(page.who.map((title) => ({ title, icon: "◇", text: "מתאים לבדיקת חיתום בהתאם לאופי הפעילות, היקף הסיכון, המסמכים והאישורים הרלוונטיים." })), 3)}</div></section>
     <section class="section section-soft"><div class="container split-band"><div><h2>מה יכול להיבחן במסגרת החיתום?</h2><p>הכיסוי המדויק כפוף לתנאי הפוליסה, סמכויות החיתום, אישור השוק הרלוונטי, גבולות אחריות, חריגים, השתתפויות עצמיות והפעילות הספציפית.</p></div><ul class="feature-list">${page.coverage.map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
-    <section class="section"><div class="container split-band"><div><h2>איזה מידע חיתומי נדרש?</h2><p>מידע מלא וברור מאפשר לבחון את הסיכון בצורה מקצועית ולזהות האם קיימת התאמה לתיאבון הסיכון ולשווקים הרלוונטיים.</p><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">שליחת פרטים לבחינת חיתום</a></div><ul class="feature-list">${page.info.map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
+    <section class="section"><div class="container split-band"><div><h2>איזה מידע חיתומי נדרש?</h2><p>מידע מלא וברור מאפשר לבחון את הסיכון בצורה מקצועית ולזהות האם קיימת התאמה לתיאבון הסיכון ולשווקים הרלוונטיים.</p><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">לקבלת הצעה לביטוח</a></div><ul class="feature-list">${page.info.map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
     <section class="section section-soft"><div class="container split-band"><div><h2>מה משפיע על החלטת החיתום?</h2><p>החלטה חיתומית אינה מבוססת רק על שם המוצר. היא נשענת על פרופיל הסיכון, המסמכים, ניסיון התביעות, דרישות השוק והסמכויות הרלוונטיות.</p></div><ul class="feature-list">${factors.map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
-    <section class="section section-navy"><div class="container"><div class="section-header"><div><h2>תמיכה לסוכנים ולעסקים בתהליך החיתום</h2><p>קופר נינוה מסייעת באיסוף מידע, הבנת החשיפה, הכוונה למסמכים נדרשים, בחינת התאמה מול שווקים רלוונטיים והמשך שירות לאורך חיי הפוליסה.</p></div><a class="btn btn-primary" href="/insurance-agents">הגשת סיכון על ידי סוכן</a></div></div></section>
+    <section class="section section-navy"><div class="container"><div class="section-header"><div><h2>תמיכה לסוכנים ולעסקים בתהליך החיתום</h2><p>קופר נינוה מסייעת באיסוף מידע, הבנת החשיפה, הכוונה למסמכים נדרשים, בחינת התאמה מול שווקים רלוונטיים והמשך שירות לאורך חיי הפוליסה.</p></div><a class="btn btn-primary" href="/insurance-agents">לקבלת הצעה לביטוח</a></div></div></section>
     ${faqBlock(page.faqs)}
     ${finalCta("רוצים לבחון סיכון?", "השאירו פרטים וצוות קופר נינוה יחזור אליכם לבדיקת חיתום ראשונית, בכפוף למידע שיימסר ולסמכויות הרלוונטיות.")}`;
 }
@@ -2291,7 +2290,7 @@ function audienceRouting() {
     { title: "לסוכני ביטוח", icon: "◇", text: "מרכז חיתום שמאפשר להגיש סיכונים, לקבל הכוונה מקצועית וללוות לקוחות בתהליך מסודר.", url: "/insurance-agents", cta: "מסלול לסוכנים" },
     { title: "לעסקים", icon: "◎", text: "פתרונות ביטוח לעסקים, חברות ובעלי מקצוע שזקוקים להתאמה חיתומית ולא רק לפוליסה מדף.", url: "/business-insurance", cta: "בדיקת התאמה לעסק" },
     { title: "תביעות", icon: "▧", text: "שירות, מסמכים וליווי תהליכים לאורך חיי הפוליסה, גם לאחר ההפקה.", url: "/claims", cta: "פנייה בנושא תביעה" },
-    { title: "סיכונים מורכבים", icon: "◈", text: "מענה לסיכונים מיוחדים, דרישות חוזיות או מצבים שלא נכנסים לתבנית ביטוח רגילה.", url: "/contact-us", cta: "בדיקת סיכון מורכב" },
+    { title: "סיכונים מורכבים", icon: "◈", text: "מענה לסיכונים מיוחדים, דרישות חוזיות או מצבים שלא נכנסים לתבנית ביטוח רגילה.", url: "/contact-us", cta: "לקבלת הצעה לביטוח" },
   ], 4)}`;
 }
 
@@ -2308,9 +2307,9 @@ function agentJourneySection(extraClass = "") {
   ];
   const workflowCards = `<div class="workflow-cards">${steps.map(([title, text], index) => `<article class="workflow-card"><span>${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div>`;
   if (extraClass) {
-    return `<section class="section section-soft agent-workflow ${extraClass}"><div class="container split-band"><div class="workflow-copy"><p class="section-slogan">תהליך עבודה לסוכני ביטוח.</p><h2>איך מגישים סיכון לקופר נינוה?</h2><p>תהליך עבודה ברור לסוכני ביטוח — מהגשת הסיכון ועד קבלת הצעה והפקת פוליסה.</p><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">הגשת סיכון לבדיקה</a></div>${workflowCards}</div></section>`;
+    return `<section class="section section-soft agent-workflow ${extraClass}"><div class="container split-band"><div class="workflow-copy"><p class="section-slogan">תהליך עבודה לסוכני ביטוח.</p><h2>איך מגישים סיכון לקופר נינוה?</h2><p>תהליך עבודה ברור לסוכני ביטוח — מהגשת הסיכון ועד קבלת הצעה והפקת פוליסה.</p><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">לקבלת הצעה לביטוח</a></div>${workflowCards}</div></section>`;
   }
-  return `<section class="section section-soft agent-workflow"><div class="container"><div class="section-header"><div><p class="section-slogan">תהליך עבודה לסוכני ביטוח.</p><h2>איך מגישים סיכון לקופר נינוה?</h2><p>תהליך עבודה ברור לסוכני ביטוח — מהגשת הסיכון ועד קבלת הצעה והפקת פוליסה.</p></div><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">הגשת סיכון לבדיקה</a></div>${workflowCards}</div></section>`;
+  return `<section class="section section-soft agent-workflow"><div class="container"><div class="section-header"><div><p class="section-slogan">תהליך עבודה לסוכני ביטוח.</p><h2>איך מגישים סיכון לקופר נינוה?</h2><p>תהליך עבודה ברור לסוכני ביטוח — מהגשת הסיכון ועד קבלת הצעה והפקת פוליסה.</p></div><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">לקבלת הצעה לביטוח</a></div>${workflowCards}</div></section>`;
 }
 
 function claimsServiceSection() {
@@ -2329,7 +2328,7 @@ function insightsSection() {
 function actionContactSection() {
   return `<section class="section"><div class="container"><div class="center-title"><h2>איך אפשר לעזור?</h2><p>בחרו את הפעולה המתאימה, וצוות קופר נינוה ינתב את הפנייה לגורם הרלוונטי.</p></div>${cards([
     { title: "לדבר עם חתם", icon: "◇", text: "שיחה מקצועית על סיכון, מידע חסר או התאמה ראשונית.", url: "/contact-us", cta: "פתיחת פנייה" },
-    { title: "הגשת סיכון כסוכן", icon: "◎", text: "סוכני ביטוח יכולים להעביר פרטי סיכון לבדיקה חיתומית.", url: "/insurance-agents", cta: "הגשת סיכון" },
+    { title: "הגשת סיכון כסוכן", icon: "◎", text: "סוכני ביטוח יכולים להעביר פרטי סיכון לבדיקה חיתומית.", url: "/insurance-agents", cta: "לקבלת הצעה לביטוח" },
     { title: "קבלת הצעה לעסק", icon: "◈", text: "בדיקת התאמה לעסק, חברה או בעל מקצוע.", url: "/business-insurance", cta: "בדיקה לעסק" },
     { title: "דיווח תביעה", icon: "▧", text: "פתיחת פנייה בנושא תביעה או אירוע ביטוחי.", url: "/claims", cta: "דיווח תביעה" },
     { title: "שירות ומסמכים", icon: "✚", text: "בקשות שירות, אישורים, מסמכים ושאלות לאחר הפקה.", url: "/contact-us", cta: "פנייה לשירות" },
@@ -2366,7 +2365,7 @@ function faqBlock(faqs) {
 }
 
 function finalCta(title, text) {
-  return `<section class="section section-navy"><div class="container section-header"><div><h2>${title}</h2><p>${text}</p></div><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">${isEnglish() ? "Discuss Partnership" : "הגשת פנייה לחיתום"}</a></div></section>`;
+  return `<section class="section section-navy"><div class="container section-header"><div><h2>${title}</h2><p>${text}</p></div><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">${isEnglish() ? "Discuss Partnership" : "לקבלת הצעה לביטוח"}</a></div></section>`;
 }
 
 function form(eventName, fields) {
@@ -2390,7 +2389,7 @@ function landingTemplate(page) {
           <h1>${page.h1}</h1>
           <p class="lead">${page.lead}</p>
           <p class="lead">בחינת סיכון באמצעות MGA ו-Coverholder עם ניסיון בחיתום סיכונים מקצועיים ומורכבים, בכפוף לתנאי הפוליסה ואישור חיתום.</p>
-          <div class="hero-actions"><a class="btn btn-primary" href="#lead-form">הגשת פנייה לחיתום</a><a class="btn btn-secondary" href="tel:0779965453" data-track="click_phone">שיחה עם צוות החיתום</a></div>
+          <div class="hero-actions"><a class="btn btn-primary" href="#lead-form">לקבלת הצעה לביטוח</a><a class="btn btn-secondary" href="tel:0779965453" data-track="click_phone">שיחה עם צוות החיתום</a></div>
         </div>
         <div id="lead-form" class="landing-form">${form(page.event, ["שם מלא", "טלפון", "אימייל", "שם העסק / הסוכנות", "תחום פעילות", "האם יש סוכן ביטוח?"])}</div>
       </div>

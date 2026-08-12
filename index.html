@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/styles.css" />
   </head>
-  <body>
+  <body class="lang-he">
     <a class="skip-link" href="#main">דלג לתוכן</a>
     <header class="site-header" data-site-header>
       <div class="container header-inner">
@@ -23,16 +23,43 @@
         <nav id="main-nav" class="main-nav" data-main-nav aria-label="ניווט ראשי">
           <a href="/insurance-agents">לסוכני ביטוח</a>
           <a href="/business-insurance">לעסקים</a>
-          <a href="/insurance-solutions">מוצרי ביטוח</a>
+          <div class="nav-product-menu" data-product-menu>
+            <a class="nav-product-trigger" href="/insurance-solutions" aria-controls="product-mega-menu">מוצרי ביטוח</a>
+            <div class="product-mega-menu" id="product-mega-menu">
+              <section class="product-menu-column">
+                <div class="product-menu-links">
+                  <a class="product-menu-link" href="/professional-liability-insurance"><strong>אחריות מקצועית</strong><span>פתרונות ביטוח לסיכונים מקצועיים ולנותני שירותים.</span></a>
+                  <a class="product-menu-link" href="/cyber-insurance"><strong>סייבר</strong><span>פתרונות לסיכוני סייבר, מידע וטכנולוגיה.</span></a>
+                  <a class="product-menu-link" href="/contractors-all-risks-insurance"><strong>עבודות קבלניות</strong><span>פתרונות ביטוח לפרויקטים, עבודות וביצוע.</span></a>
+                  <a class="product-menu-link" href="/medical-malpractice-insurance"><strong>רשלנות רפואית</strong><span>פתרונות ביטוח לסיכונים רפואיים ומקצועות הבריאות.</span></a>
+                  <a class="product-menu-link" href="/directors-and-officers-insurance"><strong>דירקטורים ונושאי משרה</strong><span>כיסוי לנושאי משרה, הנהלות ודירקטוריונים.</span></a>
+                  <a class="product-menu-link" href="/liability-insurance"><strong>צד שלישי וחבויות</strong><span>פתרונות לסיכוני חבות כלפי צדדים שלישיים.</span></a>
+                  <a class="product-menu-link" href="/employers-liability-insurance"><strong>חבות מעבידים</strong><span>כיסוי לסיכוני אחריות מעבידים כלפי עובדים.</span></a>
+                  <a class="product-menu-link" href="/product-liability-insurance"><strong>חבות המוצר</strong><span>כיסוי לאחריות הנובעת ממוצרים, ייצור ושיווק.</span></a>
+                  <a class="product-menu-link" href="/media-production-insurance"><strong>הפקות מדיה וסרטים</strong><span>כיסוי להפקות, תוכן, צילום ומדיה.</span></a>
+                  <a class="product-menu-link" href="/special-risks-insurance"><strong>סיכונים מיוחדים</strong><span>בחינת פתרונות לסיכונים מורכבים ולא שגרתיים.</span></a>
+                  <a class="product-menu-link" href="/insurance-solutions"><strong>כל מוצרי הביטוח</strong><span>מעבר לעמוד המרכז את כלל תחומי הביטוח.</span></a>
+                </div>
+              </section>
+            </div>
+          </div>
           <a href="/claims">תביעות</a>
-          <a href="/about-us">אודות</a>
-          <a href="/press">בתקשורת</a>
-          <a href="/blog">בלוג</a>
-          <a href="/contact-us">צור קשר</a>
+          <div class="nav-product-menu" data-product-menu>
+            <a class="nav-product-trigger" href="/about-us" aria-controls="about-mega-menu">אודות</a>
+            <div class="product-mega-menu about-mega-menu" id="about-mega-menu">
+              <section class="product-menu-column">
+                <div class="product-menu-links">
+                  <a class="product-menu-link" href="/about-us"><strong>אודות</strong></a>
+                  <a class="product-menu-link" href="/blog"><strong>בלוג</strong></a>
+                  <a class="product-menu-link" href="/press"><strong>בתקשורת</strong></a>
+                </div>
+              </section>
+            </div>
+          </div>
           <a class="language-switcher nav-language-switcher" href="/en" aria-label="Switch to English">EN</a>
         </nav>
         <div class="header-actions">
-          <a class="header-cta" href="/contact-us" data-track="click_quote_cta">הגשת סיכון לחיתום</a>
+          <a class="header-cta" href="/contact-us" data-track="click_quote_cta">לקבלת הצעה לביטוח</a>
           <a class="header-link" href="/contact-us">צור קשר</a>
           <a class="language-switcher header-language-switcher" href="/en" aria-label="Switch to English">EN</a>
         </div>
@@ -62,15 +89,12 @@
             <a href="/blog">בלוג</a>
           </section>
           <section>
-            <h3>פתרונות חיתום</h3>
+            <h3>מוצרי ביטוח</h3>
             <a href="/professional-liability-insurance">אחריות מקצועית</a>
             <a href="/cyber-insurance">סייבר</a>
             <a href="/contractors-all-risks-insurance">עבודות קבלניות</a>
             <a href="/medical-malpractice-insurance">רשלנות רפואית</a>
             <a href="/directors-and-officers-insurance">דירקטורים ונושאי משרה</a>
-          </section>
-          <section>
-            <h3>חבויות וסיכונים מיוחדים</h3>
             <a href="/liability-insurance">צד שלישי וחבויות</a>
             <a href="/employers-liability-insurance">חבות מעבידים</a>
             <a href="/product-liability-insurance">חבות המוצר</a>
@@ -82,7 +106,7 @@
             <a href="/insurance-agents">לסוכני ביטוח</a>
             <a href="/business-insurance">לעסקים וחברות</a>
             <a href="/insurance-solutions">תחומי חיתום</a>
-            <a href="/contact-us">הגשת סיכון לבדיקה</a>
+            <a href="/contact-us">לקבלת הצעה לביטוח</a>
           </section>
           <section>
             <h3>תביעות</h3>
@@ -111,7 +135,7 @@
     </footer>
 
     <div class="mobile-sticky">
-      <a href="/contact-us" data-track="click_quote_cta">הגשת סיכון</a>
+      <a href="/contact-us" data-track="click_quote_cta">לקבלת הצעה לביטוח</a>
       <a href="tel:0779965453" data-track="click_phone">שיחה</a>
     </div>
 
