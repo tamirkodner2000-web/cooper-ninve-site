@@ -1989,7 +1989,7 @@ function englishDistributionTemplate() {
 }
 
 function englishDistributionWorkflowSection() {
-  return `<section class="section section-soft"><div class="container split-band" style="align-items:center;"><div><h2 data-count-to="1000" style="font-size:clamp(76px, 12vw, 148px);line-height:.9;color:var(--navy);letter-spacing:0;">0</h2><p class="section-slogan" style="margin-top:22px;font-size:clamp(23px, 3vw, 34px);line-height:1.2;color:var(--navy);">Insurance Agencies Across Israel</p></div><ul class="feature-list">${["Deep understanding of the Israeli and international insurance markets", "Product-building capability for complex liability risks", "Local claims coordination and market communication"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>`;
+  return `<section class="section section-soft"><div class="container split-band distribution-access-intro"><ul class="feature-list distribution-access-capabilities">${["Deep understanding of the Israeli and international insurance markets", "Product-building capability for complex liability risks", "Local claims coordination and market communication"].map((x) => `<li>${x}</li>`).join("")}</ul><div class="distribution-access-stat"><h2 data-count-to="1000" style="font-size:clamp(76px, 12vw, 148px);line-height:.9;color:var(--navy);letter-spacing:0;">0</h2><p class="section-slogan" style="margin-top:22px;font-size:clamp(23px, 3vw, 34px);line-height:1.2;color:var(--navy);">Insurance Agencies Across Israel</p></div></div></section>`;
 }
 
 function englishDistributionBenefitsSection() {

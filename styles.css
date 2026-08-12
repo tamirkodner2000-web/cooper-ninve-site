@@ -1674,6 +1674,9 @@ html[dir="rtl"] .agent-workflow .workflow-card {
   gap: 46px;
   align-items: start;
 }
+.distribution-access-intro {
+  align-items: center;
+}
 .feature-list { display: grid; gap: 14px; margin: 0; padding: 0; list-style: none; }
 .feature-list li {
   background: white;
@@ -2378,6 +2381,7 @@ body.lang-en .footer-grid a:hover {
   .header-language-switcher { display: none; }
   .header-actions { display: none; }
   .hero-inner, .lp .hero-inner, .split-band { grid-template-columns: 1fr; }
+  .distribution-access-stat { order: -1; }
   .hero-inner { grid-template-areas: "copy"; min-height: auto; padding: 70px 0 62px; }
   .hero-copy { grid-area: copy; justify-self: stretch; width: min(100%, 720px); min-width: 0; max-width: 720px; }
   .hero-card { grid-area: why; width: min(100%, 460px); max-width: 460px; justify-self: end; }
