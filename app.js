@@ -1828,8 +1828,7 @@ function englishIsraelMarketPartnerTemplate() {
     </section>
     ${englishInternationalPartnerCapabilities()}
     ${englishPartnerWorkflowSection(true)}
-    ${partnerLogosSection("Selected Insurance Markets & Partners")}
-    ${englishPartnerInquirySection(true)}`;
+    ${partnerLogosSection("Selected Insurance Markets & Partners")}`;
 }
 
 function englishInternationalPartnerCapabilities() {
