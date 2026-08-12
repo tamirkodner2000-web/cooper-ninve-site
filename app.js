@@ -2028,11 +2028,6 @@ function englishUnderwritingLinesTemplate() {
     ["Capacity / Authority Check", "The proposed risk is confirmed against delegated authority and market appetite, with partner coordination where required."],
     ["Policy Issuance & Ongoing Management", "Approved risks proceed to local issuance, servicing and ongoing portfolio oversight within the agreed framework."],
   ];
-  const partnershipStrengths = [
-    { title: "Local Underwriting Presence", icon: "◇", text: "On-the-ground underwriting expertise and direct understanding of Israeli risks and business practices." },
-    { title: "Established Distribution Access", icon: "◎", text: "Access to Cooper Ninve's local insurance-agent and distribution network across relevant specialty lines." },
-    { title: "Claims & Operational Infrastructure", icon: "▧", text: "Local servicing, documentation, claims coordination and operational support throughout the policy lifecycle." },
-  ];
   return `
     <section class="hero hero-home hero-market-partner hero-underwriting-partner">
       <div class="container hero-inner">
@@ -2070,27 +2065,6 @@ function englishUnderwritingLinesTemplate() {
           <p>Selected areas where Cooper Ninve brings local underwriting experience, risk insight and market capability.</p>
         </div>
         ${cards(classes, 3)}
-      </div>
-    </section>
-    <section class="section section-navy underwriting-page-section">
-      <div class="container">
-        <div class="center-title">
-          <h2>Delegated Authority, Local Execution</h2>
-          <p>Where delegated authority is granted, Cooper Ninve can underwrite and issue insurance locally on behalf of its insurance partners, subject to the applicable Binding Authority, underwriting guidelines and agreed limits.</p>
-          <p>This creates a locally informed underwriting platform for efficient assessment, pricing, issuance and servicing—not simply a channel for forwarding submissions overseas.</p>
-        </div>
-      </div>
-    </section>
-    <section class="section section-soft underwriting-page-section">
-      <div class="container">
-        <div class="center-title">
-          <h2>Built for Long-Term Underwriting Partnerships</h2>
-          <p>Cooper Ninve combines underwriting presence, distribution access and operational infrastructure to support durable insurance-market relationships in Israel.</p>
-        </div>
-        ${cards(partnershipStrengths, 3)}
-        <div class="section-actions">
-          <a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Discuss an Underwriting Partnership</a>
-        </div>
       </div>
     </section>`;
 }
