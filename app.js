@@ -2309,7 +2309,7 @@ function agentJourneySection(extraClass = "") {
   if (extraClass) {
     return `<section class="section section-soft agent-workflow ${extraClass}"><div class="container split-band"><div class="workflow-copy"><p class="section-slogan">תהליך עבודה לסוכני ביטוח.</p><h2>איך מגישים סיכון לקופר נינוה?</h2><p>תהליך עבודה ברור לסוכני ביטוח — מהגשת הסיכון ועד קבלת הצעה והפקת פוליסה.</p><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">לקבלת הצעה לביטוח</a></div>${workflowCards}</div></section>`;
   }
-  return `<section class="section section-soft agent-workflow"><div class="container"><div class="section-header"><div><p class="section-slogan">תהליך עבודה לסוכני ביטוח.</p><h2>איך מגישים סיכון לקופר נינוה?</h2><p>תהליך עבודה ברור לסוכני ביטוח — מהגשת הסיכון ועד קבלת הצעה והפקת פוליסה.</p></div><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">לקבלת הצעה לביטוח</a></div>${workflowCards}</div></section>`;
+  return `<section class="section section-soft agent-workflow"><div class="container"><div class="section-header"><div><p class="section-slogan">תהליך עבודה לסוכני ביטוח.</p><h2>איך מגישים סיכון לקופר נינוה?</h2><p>תהליך עבודה ברור לסוכני ביטוח — מהגשת הסיכון ועד קבלת הצעה והפקת פוליסה.</p></div><a class="btn btn-primary agent-workflow-desktop-cta" href="/contact-us" data-track="click_quote_cta">לקבלת הצעה לביטוח</a></div>${workflowCards}</div></section>`;
 }
 
 function claimsServiceSection() {

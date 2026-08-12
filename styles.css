@@ -1661,6 +1661,11 @@ html[dir="rtl"] .agent-workflow .workflow-card {
 .agent-workflow .section-header {
   align-items: center;
 }
+@media (min-width: 1101px) {
+  body.lang-he .agent-workflow-desktop-cta {
+    display: none;
+  }
+}
 body.lang-he .agent-workflow-insurance-agents .workflow-copy {
   direction: rtl;
   text-align: right;
