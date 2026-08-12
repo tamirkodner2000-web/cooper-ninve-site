@@ -1318,12 +1318,11 @@ function renderChrome(path) {
   const english = isEnglish();
   const englishSwitchLabel = "EN";
   const navItems = english ? [
-    ["/israel-market-partner", "Israel Market Partner"],
-    ["/insurance-solutions", "Underwriting Solutions"],
-    ["/claims", "Claims & Operations"],
+    ["/israel-market-partner", "Market Partner"],
+    ["/insurance-solutions", "Underwriting"],
     ["/insurance-agents", "Distribution Access"],
+    ["/claims", "Claims & Operations"],
     ["/about-us", "About"],
-    ["/contact-us", "Contact"],
   ] : [
     ["/insurance-agents", "לסוכני ביטוח"],
     ["/business-insurance", "לעסקים"],
@@ -1334,7 +1333,7 @@ function renderChrome(path) {
   mainNav.setAttribute("aria-label", english ? "Main navigation" : "ניווט ראשי");
   mainNav.innerHTML = `${navItems.map(([href, label]) => {
     if (!english && href === "/insurance-solutions") return productMegaMenuHtml(path);
-    if (!english && href === "/about-us") return aboutMegaMenuHtml(path);
+    if (href === "/about-us") return aboutMegaMenuHtml(path);
     return `<a href="${link(href)}">${label}</a>`;
   }).join("")}<a class="language-switcher nav-language-switcher" href="${matchingLanguagePath(path, !english)}"${english ? "" : ` aria-label="Switch to English"`}>${english ? "עברית / HE" : englishSwitchLabel}</a>`;
   initProductMenu();
@@ -1386,13 +1385,16 @@ function productMegaMenuHtml(path) {
 
 function aboutMegaMenuHtml(path) {
   const active = aboutMenuRoutes.has(path) ? " active" : "";
-  const links = [["אודות", "/about-us"], ["בלוג", "/blog"], ["בתקשורת", "/press"]];
+  const english = isEnglish();
+  const links = english
+    ? [["About Us", "/about-us"], ["Press & Media", "/press"], ["Blog", "/blog"]]
+    : [["אודות", "/about-us"], ["בלוג", "/blog"], ["בתקשורת", "/press"]];
   return `<div class="nav-product-menu" data-product-menu>
-    <a class="nav-product-trigger${active}" href="/about-us" aria-controls="about-mega-menu">אודות</a>
+    <a class="nav-product-trigger${active}" href="${link("/about-us")}" aria-controls="about-mega-menu">${english ? "About" : "אודות"}</a>
     <div class="product-mega-menu about-mega-menu" id="about-mega-menu">
       <section class="product-menu-column">
         <div class="product-menu-links">
-          ${links.map(([title, href]) => `<a class="product-menu-link" href="${href}"><strong>${title}</strong></a>`).join("")}
+          ${links.map(([title, href]) => `<a class="product-menu-link" href="${link(href)}"><strong>${title}</strong></a>`).join("")}
         </div>
       </section>
     </div>
