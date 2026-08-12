@@ -1827,23 +1827,19 @@ function englishIsraelMarketPartnerTemplate() {
       </div>
     </section>
     ${englishInternationalPartnerCapabilities()}
-    ${englishPartnerWorkflowSection()}
-    ${englishClaimsOperationsBlock()}
-    ${englishPortfolioSupportBlock()}
-    ${partnerLogosSection()}
-    ${englishPartnerInquirySection()}`;
+    ${englishPartnerWorkflowSection(true)}
+    ${partnerLogosSection("Selected Insurance Markets & Partners")}
+    ${englishPartnerInquirySection(true)}`;
 }
 
 function englishInternationalPartnerCapabilities() {
   const capabilities = [
-    ["Local Underwriting Support", "Collection, organization and review of local risk information for selected specialty and commercial submissions."],
-    ["Claims Coordination and Servicing", "Local language, documentation and communication support for insured events in Israel, subject to policy terms and authority."],
-    ["Portfolio Management Support", "Operational communication and portfolio-level support for selected programs or portfolios where agreed with the relevant market."],
-    ["Israeli Market Knowledge", "Understanding of local business practices, distribution behavior, documentation, claims context and regulatory expectations."],
-    ["Distribution Access", "Connection to an active Israeli insurance-agent network and local risk flow across relevant specialty lines."],
-    ["Operational Execution", "Local servicing, document coordination and communication throughout underwriting, issuance, servicing and claims stages."],
+    ["Local Market Expertise", "Understanding of the Israeli insurance market, local business practices, regulatory expectations and risk environment."],
+    ["Underwriting Capability", "Local underwriting expertise, risk assessment and underwriting support delivered within agreed authority and market appetite."],
+    ["Distribution Access", "Access to Cooper Ninve's local insurance-agent network and distribution capabilities across relevant specialty lines."],
+    ["Claims & Operational Support", "Local policy servicing, claims coordination, documentation and communication throughout the insurance lifecycle."],
   ];
-  return `<section class="section"><div class="container"><div class="center-title"><h2>Why international markets work with a local Israeli partner</h2><p>International markets need more than introductions. They need structured local underwriting information, disciplined communication, claims coordination and reliable servicing on the ground.</p></div>${cards(capabilities.map(([title, text]) => ({ title, text, icon: "◇" })), 3)}</div></section>`;
+  return `<section class="section"><div class="container"><div class="center-title"><h2>Why Partner With Cooper Ninve</h2><p>Cooper Ninve combines local market expertise, underwriting capability, distribution access and operational support for international insurance partners working in Israel.</p></div>${cards(capabilities.map(([title, text]) => ({ title, text, icon: "◇" })), 2)}</div></section>`;
 }
 
 function englishClaimsOperationsBlock() {
@@ -1884,15 +1880,25 @@ function englishInternationalMarketsSection() {
   return `<section class="lloyds-advantages" aria-labelledby="lloyds-advantages-title"><div class="container lloyds-inner"><div class="lloyds-copy"><p class="section-slogan">International market access, local execution.</p><h2 id="lloyds-advantages-title">A local platform for international insurance partners</h2><p>Cooper Ninve provides a local interface for international markets seeking disciplined underwriting review, documentation, policy administration and servicing support in Israel.</p><a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Discuss Partnership</a></div><ul class="lloyds-list">${advantages.map((item) => `<li>${item}</li>`).join("")}</ul></div></section>`;
 }
 
-function englishPartnerWorkflowSection() {
-  const steps = [
+function englishPartnerWorkflowSection(marketPartner = false) {
+  const steps = marketPartner ? [
+    ["Local Market & Risk Intake", "We gather and structure local market, distribution and risk information for initial review."],
+    ["Underwriting", "We assess exposures and documentation against agreed underwriting authority, appetite and standards."],
+    ["Distribution & Market Coordination", "We connect relevant local distribution opportunities with insurance partners and coordinate market communication."],
+    ["Policy Administration", "We support documentation, issuance and local policy servicing throughout the policy lifecycle."],
+    ["Claims & Ongoing Portfolio Support", "We coordinate local claims communication and provide ongoing portfolio insight and servicing support within the agreed operating framework."],
+  ] : [
     ["Local Risk Intake", "We collect and organize local risk information from Israeli distribution and business sources."],
     ["Underwriting Review", "We assess exposures, documentation and suitability against agreed appetite and underwriting standards."],
     ["Market Coordination", "We coordinate with relevant insurers, syndicates, MGAs or capacity partners where appropriate."],
     ["Policy Servicing", "We support policy administration, documentation and local communication throughout the policy lifecycle."],
     ["Claims Coordination", "We assist with local claims intake, supporting documents and communication with the relevant market."],
   ];
-  return `<section class="section section-soft agent-workflow"><div class="container"><div class="section-header"><div><p class="section-slogan">Operational support for international markets.</p><h2>How we support international partners</h2><p>Our role is to help international insurance partners work with Israeli risks through a structured local underwriting and servicing process.</p></div><a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Partner With Us</a></div><div class="workflow-cards">${steps.map(([title, text], index) => `<article class="workflow-card"><span>${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div></div></section>`;
+  const heading = marketPartner ? "How the Partnership Works" : "How we support international partners";
+  const introduction = marketPartner
+    ? "A structured local operating process connects market insight, underwriting, distribution, policy administration and ongoing support."
+    : "Our role is to help international insurance partners work with Israeli risks through a structured local underwriting and servicing process.";
+  return `<section class="section section-soft agent-workflow"><div class="container"><div class="section-header"><div><p class="section-slogan">Operational support for international markets.</p><h2>${heading}</h2><p>${introduction}</p></div><a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Partner With Us</a></div><div class="workflow-cards">${steps.map(([title, text], index) => `<article class="workflow-card"><span>${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div></div></section>`;
 }
 
 function englishUnderwritingLinesPreview() {
@@ -1906,20 +1912,24 @@ function englishUnderwritingLinesPreview() {
   return `<section class="section section-navy"><div class="container"><div class="center-title"><h2>Underwriting appetite and product lines</h2><p>Cooper Ninve supports selected specialty lines in Israel, subject to underwriting authority, appetite, policy terms and market approval.</p></div>${cards(lines, 5)}<div class="section-actions"><a class="btn btn-primary" href="${link("/insurance-solutions")}">View Underwriting Lines</a></div></div></section>`;
 }
 
-function englishPartnerInquirySection() {
-  return `<section class="section section-soft"><div class="container split-band"><div><h2>Partner with Cooper Ninve in Israel</h2><p>International insurers, syndicates, MGAs and capacity providers can contact us to discuss underwriting appetite, local distribution, servicing and Israel-market execution.</p></div>${englishPartnerInquiryForm()}</div></section>`;
+function englishPartnerInquirySection(marketPartner = false) {
+  const heading = marketPartner ? "Partner With Cooper Ninve" : "Partner with Cooper Ninve in Israel";
+  const text = marketPartner
+    ? "Looking to access the Israeli market, expand distribution or establish a local underwriting partnership? Speak with our team."
+    : "International insurers, syndicates, MGAs and capacity providers can contact us to discuss underwriting appetite, local distribution, servicing and Israel-market execution.";
+  return `<section class="section section-soft"><div class="container split-band"><div><h2>${heading}</h2><p>${text}</p></div>${englishPartnerInquiryForm(marketPartner)}</div></section>`;
 }
 
-function englishPartnerInquiryForm() {
+function englishPartnerInquiryForm(marketPartner = false) {
   const fields = ["Full Name", "Phone", "Email", "Company / Market", "Partnership Interest"];
   return `<form class="form-panel" data-form="form_submit_homepage_lead">
-    <h2>Partner inquiry</h2>
+    <h2>${marketPartner ? "Start a Conversation" : "Partner inquiry"}</h2>
     <div class="form-grid">
       ${fields.map((field) => `<label><span>${field}</span><input name="${field}" placeholder="${field}"></label>`).join("")}
       <label class="full"><span>Message</span><textarea name="message" placeholder="Briefly describe the opportunity, appetite or partnership question"></textarea></label>
     </div>
     <p class="form-note">Details are used only to respond to your inquiry and assess potential fit.</p>
-    <button class="btn btn-primary" type="submit" data-track="form_submit_homepage_lead">Send Partner Inquiry</button>
+    <button class="btn btn-primary" type="submit" data-track="form_submit_homepage_lead">${marketPartner ? "Send Inquiry" : "Send Partner Inquiry"}</button>
   </form>`;
 }
 
@@ -2327,9 +2337,9 @@ function actionContactSection() {
   ], 5)}</div></section>`;
 }
 
-function partnerLogosSection() {
+function partnerLogosSection(titleOverride = "") {
   const english = isEnglish();
-  const title = english ? "Selected International Markets and Partners" : "שווקים ושותפים בינלאומיים";
+  const title = titleOverride || (english ? "Selected International Markets and Partners" : "שווקים ושותפים בינלאומיים");
   const text = english
     ? "Cooper Ninve works with selected international insurance markets and partners, subject to underwriting authority, product appetite, market approval and applicable policy terms. Displayed logos do not imply that every partner supports every product or risk."
     : "קופר נינוה פועלת מול שווקים ושותפים בינלאומיים נבחרים, בכפוף לסמכויות חיתום, תיאבון סיכון, אישור השוק ותנאי הפוליסה הרלוונטיים. הצגת לוגו אינה מלמדת שכל שותף תומך בכל מוצר או סיכון.";
