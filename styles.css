@@ -249,8 +249,10 @@ button:disabled {
 .product-mega-menu > .product-menu-column:only-child .product-menu-links {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
-.about-mega-menu {
-  width: min(620px, calc(100vw - 48px));
+@media (min-width: 1101px) {
+  .about-mega-menu {
+    width: min(540px, calc(100vw - 48px));
+  }
 }
 .main-nav .product-menu-link {
   display: block;
