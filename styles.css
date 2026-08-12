@@ -1336,15 +1336,18 @@ html[dir="rtl"] .agent-workflow .workflow-card {
   margin-top: 12px;
 }
 .underwriting-capabilities-section .grid,
+.market-partner-capabilities-section .grid,
 .underwriting-classes-section .grid {
   grid-auto-rows: 1fr;
 }
 .underwriting-capabilities-section .card,
+.market-partner-capabilities-section .card,
 .underwriting-classes-section .card {
   height: 100%;
   padding: 22px 26px;
 }
-.underwriting-capabilities-section .card h3 {
+.underwriting-capabilities-section .card h3,
+.market-partner-capabilities-section .card h3 {
   margin-bottom: 6px;
   font-size: 22px;
 }
@@ -1352,6 +1355,7 @@ html[dir="rtl"] .agent-workflow .workflow-card {
   margin-bottom: 8px;
 }
 .underwriting-capabilities-section .card p,
+.market-partner-capabilities-section .card p,
 .underwriting-classes-section .card p {
   margin-bottom: 0;
 }
@@ -1810,6 +1814,9 @@ body.lang-he .agent-workflow-insurance-agents .workflow-cards {
   font-weight: 800;
   line-height: 22px;
   letter-spacing: .12em;
+}
+.market-partner-workflow .underwriting-process-number {
+  background: var(--soft);
 }
 .underwriting-process-step h3 {
   margin: 18px 0 8px;

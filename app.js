@@ -1838,7 +1838,7 @@ function englishInternationalPartnerCapabilities() {
     ["Distribution Access", "Access to Cooper Ninve's local insurance-agent network and distribution capabilities across relevant specialty lines."],
     ["Claims & Operational Support", "Local policy servicing, claims coordination, documentation and communication throughout the insurance lifecycle."],
   ];
-  return `<section class="section"><div class="container"><div class="center-title"><h2>Why Partner With Cooper Ninve</h2><p>Cooper Ninve combines local market expertise, underwriting capability, distribution access and operational support for international insurance partners working in Israel.</p></div>${cards(capabilities.map(([title, text]) => ({ title, text, icon: "◇" })), 2)}</div></section>`;
+  return `<section class="section market-partner-capabilities-section"><div class="container"><div class="center-title"><h2>Why Partner With Cooper Ninve</h2><p>Cooper Ninve combines local market expertise, underwriting capability, distribution access and operational support for international insurance partners working in Israel.</p></div>${cards(capabilities.map(([title, text]) => ({ title, text, icon: false })), 2)}</div></section>`;
 }
 
 function englishClaimsOperationsBlock() {
@@ -1897,7 +1897,10 @@ function englishPartnerWorkflowSection(marketPartner = false) {
   const introduction = marketPartner
     ? "A structured local operating process connects market insight, underwriting, distribution, policy administration and ongoing support."
     : "Our role is to help international insurance partners work with Israeli risks through a structured local underwriting and servicing process.";
-  return `<section class="section section-soft agent-workflow${marketPartner ? " market-partner-workflow" : ""}"><div class="container"><div class="section-header"><div>${marketPartner ? "" : `<p class="section-slogan">Operational support for international markets.</p>`}<h2>${heading}</h2><p>${introduction}</p></div><a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Partner With Us</a></div><div class="workflow-cards">${steps.map(([title, text], index) => `<article class="workflow-card"><span>${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div></div></section>`;
+  const process = marketPartner
+    ? `<div class="underwriting-process">${steps.map(([title, text], index) => `<article class="underwriting-process-step"><span class="underwriting-process-number">0${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div>`
+    : `<div class="workflow-cards">${steps.map(([title, text], index) => `<article class="workflow-card"><span>${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div>`;
+  return `<section class="section section-soft agent-workflow${marketPartner ? " market-partner-workflow" : ""}"><div class="container"><div class="section-header"><div>${marketPartner ? "" : `<p class="section-slogan">Operational support for international markets.</p>`}<h2>${heading}</h2><p>${introduction}</p></div><a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Partner With Us</a></div>${process}</div></section>`;
 }
 
 function englishUnderwritingLinesPreview() {
