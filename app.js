@@ -2007,28 +2007,89 @@ function englishDistributionCtaSection() {
 }
 
 function englishUnderwritingLinesTemplate() {
-  const lines = [
-    { title: "Professional Liability", icon: "◎", text: "Specialty professional exposures reviewed with local risk information, policy terms and agreed underwriting appetite.", url: "/professional-liability-insurance", cta: "View Line" },
-    { title: "Cyber", icon: "◈", text: "Cyber submissions supported by Israeli market context, documentation review and coordination with relevant markets.", url: "/cyber-insurance", cta: "View Line" },
-    { title: "Third-Party Liability", icon: "◇", text: "Commercial liability exposures considered with local operating, contractual and servicing context.", url: "/liability-insurance", cta: "View Line" },
-    { title: "Employers’ Liability", icon: "▥", text: "Employers’ liability opportunities reviewed subject to appetite, policy terms and underwriting approval.", url: "/employers-liability-insurance", cta: "View Line" },
-    { title: "Product Liability", icon: "▣", text: "Product-related exposures for manufacturers, importers and distributors assessed with Israeli market information.", url: "/product-liability-insurance", cta: "View Line" },
-    { title: "Contractors’ All Risks", icon: "▧", text: "Construction and project risks supported through local project context, documentation and market coordination.", url: "/contractors-all-risks-insurance", cta: "View Line" },
-    { title: "Medical Malpractice", icon: "✚", text: "Healthcare and professional medical exposures reviewed according to underwriting appetite and policy terms.", url: "/medical-malpractice-insurance", cta: "View Line" },
-    { title: "Directors’ and Officers’ Liability (D&O)", icon: "◉", text: "Management liability exposures considered with local corporate, governance and risk information.", url: "/directors-and-officers-insurance", cta: "View Line" },
-    { title: "Media and Film Production", icon: "▤", text: "Selected production risks reviewed where local documentation and market appetite support further consideration.", url: "/media-production-insurance", cta: "View Line" },
-    { title: "Special Risks", icon: "◌", text: "Non-standard and complex risks reviewed where appetite, authority and market approval allow.", url: "/special-risks-insurance", cta: "View Line" },
+  const capabilities = [
+    { title: "Risk Assessment", icon: "◇", text: "Local underwriting and evaluation of risks based on exposure, business activity and relevant underwriting information." },
+    { title: "Pricing & Terms", icon: "◎", text: "Risk-based pricing, terms, conditions and deductibles within agreed authority and underwriting guidelines." },
+    { title: "Policy Structuring", icon: "▧", text: "Structuring cover around local exposures while working within the capacity provider's appetite and policy framework." },
+    { title: "Portfolio Management", icon: "◈", text: "Ongoing underwriting oversight, portfolio communication and feedback to insurance partners." },
+  ];
+  const classes = [
+    { title: "Professional Indemnity", icon: "◎", text: "Professional, advisory and specialist-service exposures requiring disciplined local underwriting assessment." },
+    { title: "Cyber", icon: "◈", text: "Technology, data and cyber exposures evaluated using relevant controls, operations and incident information." },
+    { title: "Liability", icon: "◇", text: "Commercial and third-party liability risks assessed within agreed appetite and underwriting parameters." },
+    { title: "Product Liability", icon: "▣", text: "Product-related exposures across manufacturing, importing and distribution activities." },
+    { title: "Medical Malpractice", icon: "✚", text: "Healthcare and medical professional risks reviewed with local practice and exposure context." },
+    { title: "Contractors & Complex Risks", icon: "▧", text: "Construction, project and non-standard risks requiring detailed information and specialist consideration." },
+  ];
+  const steps = [
+    ["Risk Submission", "Local risk information and supporting documents are gathered into a structured underwriting submission."],
+    ["Underwriting Review", "Our team evaluates the exposure, business activity, controls and relevant underwriting information."],
+    ["Pricing & Terms", "We develop appropriate pricing, terms, conditions and deductibles within the applicable guidelines."],
+    ["Capacity / Authority Check", "The proposed risk is confirmed against delegated authority and market appetite, with partner coordination where required."],
+    ["Policy Issuance & Ongoing Management", "Approved risks proceed to local issuance, servicing and ongoing portfolio oversight within the agreed framework."],
+  ];
+  const partnershipStrengths = [
+    { title: "Local Underwriting Presence", icon: "◇", text: "On-the-ground underwriting expertise and direct understanding of Israeli risks and business practices." },
+    { title: "Established Distribution Access", icon: "◎", text: "Access to Cooper Ninve's local insurance-agent and distribution network across relevant specialty lines." },
+    { title: "Claims & Operational Infrastructure", icon: "▧", text: "Local servicing, documentation, claims coordination and operational support throughout the policy lifecycle." },
   ];
   return `
+    <section class="hero hero-home hero-market-partner hero-underwriting-partner">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <h1 class="hero-title">Local Underwriting Expertise. International Capacity.</h1>
+          <p class="lead">Cooper Ninve combines local market knowledge with delegated underwriting authority to help international insurers access and manage Israeli risks efficiently. Our underwriting team assesses, prices and manages risks within agreed authority, appetite and portfolio parameters.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Partner With Us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="container">
+        <div class="center-title">
+          <h2>Underwriting Built Around the Market</h2>
+          <p>Local underwriting capability designed to support insurance partners with disciplined assessment, execution and portfolio communication in Israel.</p>
+        </div>
+        ${cards(capabilities, 2)}
+      </div>
+    </section>
+    <section class="section section-soft">
+      <div class="container">
+        <div class="center-title">
+          <h2>Classes of Business</h2>
+          <p>Selected areas where Cooper Ninve brings local underwriting experience, risk insight and market capability.</p>
+        </div>
+        ${cards(classes, 3)}
+      </div>
+    </section>
+    <section class="section agent-workflow underwriting-partner-workflow">
+      <div class="container">
+        <div class="center-title">
+          <h2>From Submission to Policy</h2>
+          <p>A structured local underwriting process from initial risk information through issuance and ongoing management, subject to agreed authority, guidelines and market appetite.</p>
+        </div>
+        <div class="workflow-cards">${steps.map(([title, text], index) => `<article class="workflow-card"><span>${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div>
+      </div>
+    </section>
     <section class="section section-navy">
       <div class="container">
         <div class="center-title">
-          <h1>Underwriting Lines in Israel</h1>
-          <p>Cooper Ninve supports selected specialty and commercial lines in Israel through local underwriting insight, risk information gathering, policy administration and market coordination, subject to appetite, authority and underwriting approval.</p>
+          <h2>Delegated Authority, Local Execution</h2>
+          <p>Where delegated authority is granted, Cooper Ninve can underwrite and issue insurance locally on behalf of its insurance partners, subject to the applicable Binding Authority, underwriting guidelines and agreed limits.</p>
+          <p>This creates a locally informed underwriting platform for efficient assessment, pricing, issuance and servicing—not simply a channel for forwarding submissions overseas.</p>
         </div>
-        ${cards(lines, 5)}
+      </div>
+    </section>
+    <section class="section section-soft">
+      <div class="container">
+        <div class="center-title">
+          <h2>Built for Long-Term Underwriting Partnerships</h2>
+          <p>Cooper Ninve combines underwriting presence, distribution access and operational infrastructure to support durable insurance-market relationships in Israel.</p>
+        </div>
+        ${cards(partnershipStrengths, 3)}
         <div class="section-actions">
-          <a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Discuss Underwriting Appetite</a>
+          <a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Discuss an Underwriting Partnership</a>
         </div>
       </div>
     </section>`;

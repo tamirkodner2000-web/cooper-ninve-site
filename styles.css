@@ -1725,14 +1725,17 @@ body.lang-he .agent-workflow-insurance-agents .workflow-cards {
   overflow-wrap: anywhere;
 }
 @media (min-width: 981px) {
-  body.lang-en .market-partner-workflow .workflow-cards {
+  body.lang-en .market-partner-workflow .workflow-cards,
+  body.lang-en .underwriting-partner-workflow .workflow-cards {
     grid-template-columns: repeat(5, minmax(0, 1fr));
     gap: 14px;
   }
-  body.lang-en .market-partner-workflow .workflow-card {
+  body.lang-en .market-partner-workflow .workflow-card,
+  body.lang-en .underwriting-partner-workflow .workflow-card {
     padding: 22px 18px 20px;
   }
-  body.lang-en .market-partner-workflow .workflow-card h3 {
+  body.lang-en .market-partner-workflow .workflow-card h3,
+  body.lang-en .underwriting-partner-workflow .workflow-card h3 {
     font-size: 19px;
   }
 }
