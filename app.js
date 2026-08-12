@@ -2063,13 +2063,13 @@ function englishUnderwritingLinesTemplate() {
         ${cards(classes, 3)}
       </div>
     </section>
-    <section class="section agent-workflow underwriting-partner-workflow underwriting-page-section">
+    <section class="section underwriting-process-section underwriting-page-section">
       <div class="container">
         <div class="center-title">
           <h2>From Submission to Policy</h2>
           <p>A structured local underwriting process from initial risk information through issuance and ongoing management, subject to agreed authority, guidelines and market appetite.</p>
         </div>
-        <div class="workflow-cards">${steps.map(([title, text], index) => `<article class="workflow-card"><span>${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div>
+        <div class="underwriting-process">${steps.map(([title, text], index) => `<article class="underwriting-process-step"><span class="underwriting-process-number">0${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div>
       </div>
     </section>
     <section class="section section-navy underwriting-page-section">
@@ -2106,7 +2106,7 @@ function cards(items, cols = 3) {
 }
 
 function productCards() {
-  return cards(products, 5);
+  return cards(products.map((product) => ({ ...product, icon: false })), 5);
 }
 
 function sections(type, path) {
