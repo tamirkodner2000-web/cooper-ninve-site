@@ -1897,7 +1897,7 @@ function englishPartnerWorkflowSection(marketPartner = false) {
   const introduction = marketPartner
     ? "A structured local operating process connects market insight, underwriting, distribution, policy administration and ongoing support."
     : "Our role is to help international insurance partners work with Israeli risks through a structured local underwriting and servicing process.";
-  return `<section class="section section-soft agent-workflow"><div class="container"><div class="section-header"><div><p class="section-slogan">Operational support for international markets.</p><h2>${heading}</h2><p>${introduction}</p></div><a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Partner With Us</a></div><div class="workflow-cards">${steps.map(([title, text], index) => `<article class="workflow-card"><span>${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div></div></section>`;
+  return `<section class="section section-soft agent-workflow${marketPartner ? " market-partner-workflow" : ""}"><div class="container"><div class="section-header"><div>${marketPartner ? "" : `<p class="section-slogan">Operational support for international markets.</p>`}<h2>${heading}</h2><p>${introduction}</p></div><a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Partner With Us</a></div><div class="workflow-cards">${steps.map(([title, text], index) => `<article class="workflow-card"><span>${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div></div></section>`;
 }
 
 function englishUnderwritingLinesPreview() {
