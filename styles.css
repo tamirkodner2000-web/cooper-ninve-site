@@ -1316,16 +1316,23 @@ html[dir="rtl"] .agent-workflow .workflow-card {
   background: var(--blue);
   margin: 18px auto 0;
 }
-.underwriting-capabilities-section {
+.underwriting-page-section {
   padding-block: 62px;
 }
-.underwriting-capabilities-section .center-title {
+.underwriting-page-section .center-title {
+  text-align: center;
   margin-bottom: 28px;
 }
-.underwriting-capabilities-section .center-title p {
+.underwriting-page-section .center-title:last-child {
+  margin-bottom: 0;
+}
+.underwriting-page-section .center-title h2 {
+  margin: 0;
+}
+.underwriting-page-section .center-title p {
   margin: 8px auto 0;
 }
-.underwriting-capabilities-section .center-title::after {
+.underwriting-page-section .center-title::after {
   margin-top: 12px;
 }
 

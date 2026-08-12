@@ -2045,7 +2045,7 @@ function englishUnderwritingLinesTemplate() {
         </div>
       </div>
     </section>
-    <section class="section underwriting-capabilities-section">
+    <section class="section underwriting-page-section">
       <div class="container">
         <div class="center-title">
           <h2>Underwriting Built Around the Market</h2>
@@ -2054,7 +2054,7 @@ function englishUnderwritingLinesTemplate() {
         ${cards(capabilities, 2)}
       </div>
     </section>
-    <section class="section section-soft">
+    <section class="section section-soft underwriting-page-section">
       <div class="container">
         <div class="center-title">
           <h2>Classes of Business</h2>
@@ -2063,7 +2063,7 @@ function englishUnderwritingLinesTemplate() {
         ${cards(classes, 3)}
       </div>
     </section>
-    <section class="section agent-workflow underwriting-partner-workflow">
+    <section class="section agent-workflow underwriting-partner-workflow underwriting-page-section">
       <div class="container">
         <div class="center-title">
           <h2>From Submission to Policy</h2>
@@ -2072,7 +2072,7 @@ function englishUnderwritingLinesTemplate() {
         <div class="workflow-cards">${steps.map(([title, text], index) => `<article class="workflow-card"><span>${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div>
       </div>
     </section>
-    <section class="section section-navy">
+    <section class="section section-navy underwriting-page-section">
       <div class="container">
         <div class="center-title">
           <h2>Delegated Authority, Local Execution</h2>
@@ -2081,7 +2081,7 @@ function englishUnderwritingLinesTemplate() {
         </div>
       </div>
     </section>
-    <section class="section section-soft">
+    <section class="section section-soft underwriting-page-section">
       <div class="container">
         <div class="center-title">
           <h2>Built for Long-Term Underwriting Partnerships</h2>
