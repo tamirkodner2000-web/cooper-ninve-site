@@ -1813,27 +1813,17 @@ function englishAudienceSection() {
 
 function englishIsraelMarketPartnerTemplate() {
   return `
-    <section class="hero hero-home">
+    <section class="hero hero-home hero-market-partner">
       <div class="container hero-inner">
         <div class="hero-copy">
-          <p class="eyebrow">Israel Market Partner</p>
-          <h1 class="hero-title">Local underwriting, claims and portfolio management support in Israel</h1>
-          <p class="lead">Cooper Ninve provides a local operating interface in Israel for Lloyd's syndicates, international insurers, reinsurers, MGAs and capacity providers, subject to agreed authority, appetite, market approval and policy terms.</p>
+          <h1 class="hero-title">Cooper Ninve - Your Trusted Insurance Partner</h1>
+          <p class="lead">Cooper Ninve is a leading Managing General Agent (MGA) built to meet the evolving needs of the insurance market.</p>
+          <p class="lead hero-market-partner-detail">As an MGA, we have been entrusted with extensive underwriting authority by our insurance partners, allowing us to provide comprehensive services including pricing, underwriting, and local claims handling on behalf of overseas insurers.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Discuss Partnership</a>
             <a class="btn btn-secondary" href="${link("/insurance-solutions")}">Underwriting Solutions</a>
           </div>
         </div>
-        <aside class="hero-card hero-why-card">
-          <h2>Local operating role</h2>
-          <ul>
-            <li>Underwriting information and review support</li>
-            <li>Claims coordination and local servicing</li>
-            <li>Portfolio management support and communication</li>
-            <li>Israeli distribution access</li>
-            <li>Regulatory and local market knowledge</li>
-          </ul>
-        </aside>
       </div>
     </section>
     ${englishInternationalPartnerCapabilities()}

@@ -2055,6 +2055,26 @@ body.lang-en .underwriting-copy,
 body.lang-en .lloyds-copy {
   justify-self: start;
 }
+body.lang-en .hero-market-partner .hero-title,
+body.lang-en .hero-market-partner .lead {
+  max-width: 900px;
+}
+body.lang-en .hero-market-partner .hero-market-partner-detail {
+  margin-top: 16px;
+}
+@media (min-width: 901px) {
+  body.lang-en .hero-market-partner .hero-inner {
+    width: min(1100px, calc(100% - 40px));
+    grid-template-columns: minmax(0, 900px);
+    grid-template-areas: "copy";
+    justify-content: center;
+    gap: 0;
+  }
+  body.lang-en .hero-market-partner .hero-copy {
+    max-width: 900px;
+    justify-self: center;
+  }
+}
 body.lang-en .hero-actions,
 body.lang-en .hero-home .hero-actions,
 body.lang-en .section-actions {
