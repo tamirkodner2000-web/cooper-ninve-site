@@ -2008,18 +2008,18 @@ function englishDistributionCtaSection() {
 
 function englishUnderwritingLinesTemplate() {
   const capabilities = [
-    { title: "Risk Assessment", icon: "◇", text: "Local underwriting and evaluation of risks based on exposure, business activity and relevant underwriting information." },
-    { title: "Pricing & Terms", icon: "◎", text: "Risk-based pricing, terms, conditions and deductibles within agreed authority and underwriting guidelines." },
-    { title: "Policy Structuring", icon: "▧", text: "Structuring cover around local exposures while working within the capacity provider's appetite and policy framework." },
-    { title: "Portfolio Management", icon: "◈", text: "Ongoing underwriting oversight, portfolio communication and feedback to insurance partners." },
+    { title: "Risk Assessment", icon: false, text: "Local underwriting and evaluation of risks based on exposure, business activity and relevant underwriting information." },
+    { title: "Pricing & Terms", icon: false, text: "Risk-based pricing, terms, conditions and deductibles within agreed authority and underwriting guidelines." },
+    { title: "Policy Structuring", icon: false, text: "Structuring cover around local exposures while working within the capacity provider's appetite and policy framework." },
+    { title: "Portfolio Management", icon: false, text: "Ongoing underwriting oversight, portfolio communication and feedback to insurance partners." },
   ];
   const classes = [
-    { title: "Professional Indemnity", icon: "◎", text: "Professional, advisory and specialist-service exposures requiring disciplined local underwriting assessment." },
-    { title: "Cyber", icon: "◈", text: "Technology, data and cyber exposures evaluated using relevant controls, operations and incident information." },
-    { title: "Liability", icon: "◇", text: "Commercial and third-party liability risks assessed within agreed appetite and underwriting parameters." },
-    { title: "Product Liability", icon: "▣", text: "Product-related exposures across manufacturing, importing and distribution activities." },
-    { title: "Medical Malpractice", icon: "✚", text: "Healthcare and medical professional risks reviewed with local practice and exposure context." },
-    { title: "Contractors & Complex Risks", icon: "▧", text: "Construction, project and non-standard risks requiring detailed information and specialist consideration." },
+    { title: "Professional Indemnity", icon: false, text: "Professional, advisory and specialist-service exposures requiring disciplined local underwriting assessment." },
+    { title: "Cyber", icon: false, text: "Technology, data and cyber exposures evaluated using relevant controls, operations and incident information." },
+    { title: "Liability", icon: false, text: "Commercial and third-party liability risks assessed within agreed appetite and underwriting parameters." },
+    { title: "Product Liability", icon: false, text: "Product-related exposures across manufacturing, importing and distribution activities." },
+    { title: "Medical Malpractice", icon: false, text: "Healthcare and medical professional risks reviewed with local practice and exposure context." },
+    { title: "Contractors & Complex Risks", icon: false, text: "Construction, project and non-standard risks requiring detailed information and specialist consideration." },
   ];
   const steps = [
     ["Risk Submission", "Local risk information and supporting documents are gathered into a structured underwriting submission."],
@@ -2054,7 +2054,7 @@ function englishUnderwritingLinesTemplate() {
         ${cards(capabilities, 2)}
       </div>
     </section>
-    <section class="section section-soft underwriting-page-section">
+    <section class="section section-soft underwriting-page-section underwriting-classes-section">
       <div class="container">
         <div class="center-title">
           <h2>Classes of Business</h2>
@@ -2098,7 +2098,7 @@ function englishUnderwritingLinesTemplate() {
 function cards(items, cols = 3) {
   return `<div class="grid grid-${cols}">${items.map((item) => `
     ${item.url ? `<a class="card card-link" href="${link(item.url)}">` : `<article class="card">`}
-      <div class="icon-circle">${item.icon || "•"}</div>
+      ${item.icon === false ? "" : `<div class="icon-circle">${item.icon || "•"}</div>`}
       <h3>${item.title}</h3>
       <p>${item.text}</p>
       ${item.url ? `<span class="card-cta">${item.cta || "קרא עוד"}</span>` : ""}

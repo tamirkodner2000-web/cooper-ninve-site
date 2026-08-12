@@ -1335,24 +1335,24 @@ html[dir="rtl"] .agent-workflow .workflow-card {
 .underwriting-page-section .center-title::after {
   margin-top: 12px;
 }
-.underwriting-capabilities-section .grid {
+.underwriting-capabilities-section .grid,
+.underwriting-classes-section .grid {
   grid-auto-rows: 1fr;
 }
-.underwriting-capabilities-section .card {
+.underwriting-capabilities-section .card,
+.underwriting-classes-section .card {
   height: 100%;
-  padding: 20px 26px;
-}
-.underwriting-capabilities-section .icon-circle {
-  width: 54px;
-  height: 54px;
-  margin-bottom: 10px;
-  font-size: 23px;
+  padding: 22px 26px;
 }
 .underwriting-capabilities-section .card h3 {
   margin-bottom: 6px;
   font-size: 22px;
 }
-.underwriting-capabilities-section .card p {
+.underwriting-classes-section .card h3 {
+  margin-bottom: 8px;
+}
+.underwriting-capabilities-section .card p,
+.underwriting-classes-section .card p {
   margin-bottom: 0;
 }
 
