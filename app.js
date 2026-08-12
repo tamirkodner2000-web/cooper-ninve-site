@@ -2054,15 +2054,6 @@ function englishUnderwritingLinesTemplate() {
         ${cards(capabilities, 2)}
       </div>
     </section>
-    <section class="section section-soft underwriting-page-section underwriting-classes-section">
-      <div class="container">
-        <div class="center-title">
-          <h2>Classes of Business</h2>
-          <p>Selected areas where Cooper Ninve brings local underwriting experience, risk insight and market capability.</p>
-        </div>
-        ${cards(classes, 3)}
-      </div>
-    </section>
     <section class="section underwriting-process-section underwriting-page-section">
       <div class="container">
         <div class="center-title">
@@ -2070,6 +2061,15 @@ function englishUnderwritingLinesTemplate() {
           <p>A structured local underwriting process from initial risk information through issuance and ongoing management, subject to agreed authority, guidelines and market appetite.</p>
         </div>
         <div class="underwriting-process">${steps.map(([title, text], index) => `<article class="underwriting-process-step"><span class="underwriting-process-number">0${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div>
+      </div>
+    </section>
+    <section class="section section-soft underwriting-page-section underwriting-classes-section">
+      <div class="container">
+        <div class="center-title">
+          <h2>Classes of Business</h2>
+          <p>Selected areas where Cooper Ninve brings local underwriting experience, risk insight and market capability.</p>
+        </div>
+        ${cards(classes, 3)}
       </div>
     </section>
     <section class="section section-navy underwriting-page-section">
