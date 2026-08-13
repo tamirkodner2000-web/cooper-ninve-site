@@ -1352,8 +1352,7 @@ function renderChrome(path) {
     headerActions.innerHTML = english
       ? `<a class="header-cta" href="${link("/contact-us")}" data-track="click_quote_cta">Partner With Us</a>
       <a class="language-switcher header-language-switcher" href="${matchingLanguagePath(path, false)}">עברית / HE</a>`
-      : `<a class="header-cta" href="${link("/contact-us")}" data-track="click_quote_cta">לקבלת הצעה לביטוח</a>
-      <a class="header-link" href="${link("/contact-us")}">צור קשר</a>
+      : `<a class="header-link" href="${link("/contact-us")}">צור קשר</a>
       <a class="language-switcher header-language-switcher" href="${matchingLanguagePath(path, true)}" aria-label="Switch to English">${englishSwitchLabel}</a>`;
   }
 
