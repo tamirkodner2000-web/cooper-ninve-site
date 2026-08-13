@@ -2179,6 +2179,23 @@ details p { margin: 12px 0 0; color: var(--muted); }
   background: white;
   color: var(--navy);
 }
+.lang-he .header-actions {
+  gap: 12px;
+}
+.lang-he .header-language-switcher {
+  border: 0;
+  border-radius: 0;
+  padding: 6px 2px;
+  color: rgba(255,255,255,.72);
+  font-weight: 700;
+  opacity: .9;
+  transition: color var(--ease), opacity var(--ease);
+}
+.lang-he .header-language-switcher:hover {
+  background: transparent;
+  color: white;
+  opacity: 1;
+}
 .nav-language-switcher {
   display: none;
 }
