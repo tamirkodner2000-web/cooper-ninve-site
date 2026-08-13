@@ -2182,7 +2182,8 @@ details p { margin: 12px 0 0; color: var(--muted); }
 .lang-he .header-actions {
   gap: 12px;
 }
-.lang-he .header-language-switcher {
+.lang-he .header-language-switcher,
+.lang-en .header-language-switcher {
   border: 0;
   border-radius: 0;
   padding: 6px 2px;
@@ -2191,7 +2192,8 @@ details p { margin: 12px 0 0; color: var(--muted); }
   opacity: .9;
   transition: color var(--ease), opacity var(--ease);
 }
-.lang-he .header-language-switcher:hover {
+.lang-he .header-language-switcher:hover,
+.lang-en .header-language-switcher:hover {
   background: transparent;
   color: white;
   opacity: 1;
@@ -2232,7 +2234,7 @@ body.lang-en .main-nav a::after {
 }
 body.lang-en .header-actions {
   justify-self: end;
-  gap: 8px;
+  gap: 12px;
 }
 body.lang-en .header-cta,
 body.lang-en .header-link {

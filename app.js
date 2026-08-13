@@ -1335,7 +1335,7 @@ function renderChrome(path) {
     if (!english && href === "/insurance-solutions") return productMegaMenuHtml(path);
     if (href === "/about-us") return aboutMegaMenuHtml(path);
     return `<a href="${link(href)}">${label}</a>`;
-  }).join("")}<a class="language-switcher nav-language-switcher" href="${matchingLanguagePath(path, !english)}"${english ? "" : ` aria-label="Switch to English"`}>${english ? "עברית / HE" : englishSwitchLabel}</a>`;
+  }).join("")}<a class="language-switcher nav-language-switcher" href="${matchingLanguagePath(path, !english)}"${english ? ` aria-label="Switch to Hebrew"` : ` aria-label="Switch to English"`}>${english ? "HE" : englishSwitchLabel}</a>`;
   initProductMenu();
 
   const brand = document.querySelector(".brand");
@@ -1351,7 +1351,7 @@ function renderChrome(path) {
   if (headerActions) {
     headerActions.innerHTML = english
       ? `<a class="header-cta" href="${link("/contact-us")}" data-track="click_quote_cta">Partner With Us</a>
-      <a class="language-switcher header-language-switcher" href="${matchingLanguagePath(path, false)}">עברית / HE</a>`
+      <a class="language-switcher header-language-switcher" href="${matchingLanguagePath(path, false)}" aria-label="Switch to Hebrew">HE</a>`
       : `<a class="header-link" href="${link("/contact-us")}">צור קשר</a>
       <a class="language-switcher header-language-switcher" href="${matchingLanguagePath(path, true)}" aria-label="Switch to English">${englishSwitchLabel}</a>`;
   }
