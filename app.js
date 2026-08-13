@@ -517,7 +517,7 @@ const englishMeta = {
   },
   "/claims": {
     title: "Claims and Operations in Israel | Cooper Ninve",
-    description: "Local claims coordination, servicing and operational communication support in Israel, subject to policy terms, authority and market approval.",
+    description: "Local claims coordination, servicing and operational support in Israel for international insurers, syndicates and insurance partners.",
   },
   "/about-us": {
     title: "About Cooper Ninve | MGA and Advanced Insurance Solutions",
@@ -1787,27 +1787,66 @@ function englishInternationalPartnerCapabilities() {
   return `<section class="section market-partner-capabilities-section"><div class="container"><div class="center-title"><h2>Why Partner With Cooper Ninve</h2><p>Cooper Ninve combines local market expertise, underwriting capability, distribution access and operational support for international insurance partners working in Israel.</p></div>${cards(capabilities.map(([title, text]) => ({ title, text, icon: false })), 2)}</div></section>`;
 }
 
-function englishClaimsOperationsBlock() {
-  return `<section class="section section-soft"><div class="container split-band"><div><p class="section-slogan">Claims are part of the operating model.</p><h2>Claims coordination and local servicing</h2><p>Cooper Ninve provides local claims coordination and servicing support in Israel, helping international markets manage insured events with local language, documentation, professional communication and market familiarity, subject to policy terms, authority and market approval.</p></div><ul class="feature-list">${["Local insured, agent and service-provider communication", "Collection and coordination of relevant claim documentation", "Communication with relevant market participants", "Support throughout the policy lifecycle", "No promise of coverage outside policy terms or authority"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>`;
-}
-
-function englishPortfolioSupportBlock() {
-  return `<section class="section"><div class="container split-band"><div><p class="section-slogan">Portfolio discipline, not only individual placements.</p><h2>Portfolio management support</h2><p>For agreed relationships, Cooper Ninve can support the local operating rhythm of selected portfolios through underwriting communication, servicing coordination, claims visibility and local market feedback.</p></div><ul class="feature-list">${["Local risk-flow context", "Portfolio communication with relevant partners", "Servicing and documentation coordination", "Claims and operational feedback loops", "Support subject to agreed authority and market approval"].map((x) => `<li>${x}</li>`).join("")}</ul></div></section>`;
-}
-
 function englishClaimsOperationsTemplate() {
+  const capabilities = [
+    { title: "Local Claims Coordination", icon: false, text: "Managing local communication, documentation and claim intake." },
+    { title: "Insured & Broker Communication", icon: false, text: "Local-language communication with insureds, agents, brokers and service providers." },
+    { title: "Market Communication", icon: false, text: "Structured updates and coordination with insurers, syndicates and relevant market participants." },
+    { title: "Policy Lifecycle Support", icon: false, text: "Operational support from issuance and servicing through claims and portfolio administration." },
+  ];
+  const operationalStages = [
+    ["Policy Issuance", "Coordinating local documentation and policy setup following underwriting approval."],
+    ["Servicing", "Managing policy servicing requests and operational communication throughout the policy term."],
+    ["Claims Visibility", "Maintaining local visibility over notifications, documentation and claims progress."],
+    ["Market Reporting", "Providing structured operational and claims updates to relevant insurance partners."],
+    ["Portfolio Feedback", "Sharing servicing and claims insights to support ongoing portfolio oversight."],
+  ];
+  const localExecution = [
+    { title: "Local Language & Market Context", icon: false, text: "Faster, clearer communication with insureds, brokers and service providers." },
+    { title: "Structured Market Reporting", icon: false, text: "Clear information flow between Israel and international insurance partners." },
+    { title: "Consistent Portfolio Oversight", icon: false, text: "Operational visibility across servicing, claims and ongoing portfolio activity." },
+  ];
   return `
-    <section class="section section-navy">
-      <div class="container">
-        <div class="center-title">
-          <h1>Claims & Operations in Israel</h1>
-          <p>Cooper Ninve supports local claims coordination, servicing and operational communication in Israel for insureds, agents and relevant international market participants, subject to policy terms, authority and market approval.</p>
+    <section class="hero hero-home hero-market-partner hero-claims-operations-partner">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <h1 class="hero-title">Local Claims & Operations. International Market Standards.</h1>
+          <p class="lead">Cooper Ninve provides local claims coordination, servicing and operational support in Israel for international insurers, syndicates and insurance partners — combining local market execution with disciplined communication and portfolio oversight.</p>
         </div>
       </div>
     </section>
-    ${englishClaimsOperationsBlock()}
-    ${englishPortfolioSupportBlock()}
-    ${englishPartnerInquirySection()}`;
+    <section class="section claims-page-section claims-capabilities-section">
+      <div class="container">
+        <div class="center-title">
+          <h2>Claims & Local Servicing Capabilities</h2>
+        </div>
+        ${cards(capabilities, 2)}
+        <p class="claims-authority-note">Coverage and claims outcomes remain subject to applicable policy terms and the authority of the relevant insurance partner.</p>
+      </div>
+    </section>
+    <section class="section section-soft claims-page-section claims-operations-process">
+      <div class="container">
+        <div class="center-title">
+          <h2>Operational Portfolio Support</h2>
+          <p>Local operational support helps maintain a consistent rhythm across policy servicing, claims communication, market reporting and portfolio oversight.</p>
+        </div>
+        <div class="underwriting-process">${operationalStages.map(([title, text], index) => `<article class="underwriting-process-step"><span class="underwriting-process-number">0${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div>
+      </div>
+    </section>
+    <section class="section claims-page-section claims-local-value-section">
+      <div class="container">
+        <div class="center-title">
+          <h2>Why Local Claims Execution Matters</h2>
+        </div>
+        ${cards(localExecution, 3)}
+      </div>
+    </section>
+    <section class="section section-soft claims-partner-cta">
+      <div class="container section-header">
+        <div><h2>Need a Local Claims & Operations Partner in Israel?</h2></div>
+        <a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Partner With Us</a>
+      </div>
+    </section>`;
 }
 
 function englishUnderwritingExecutionSection() {
