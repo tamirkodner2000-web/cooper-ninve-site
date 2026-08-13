@@ -1280,6 +1280,28 @@ html[dir="rtl"] .agent-workflow .workflow-card {
   font-weight: 500;
   line-height: 1.75;
 }
+@media (min-width: 641px) {
+  .lang-he .claims-flow::before,
+  .lang-he .claims-step::before {
+    display: none;
+  }
+  .lang-he .claims-step {
+    padding-block-start: 30px;
+  }
+  .lang-he .claims-step-number {
+    display: block;
+    width: auto;
+    height: auto;
+    margin-bottom: 18px;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    font-size: 12px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: .12em;
+  }
+}
 .claims-flow-note {
   max-width: 860px;
   margin: 24px 0 0;
