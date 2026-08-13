@@ -1794,13 +1794,6 @@ function englishClaimsOperationsTemplate() {
     { title: "Market Communication", icon: false, text: "Structured updates and coordination with insurers, syndicates and relevant market participants." },
     { title: "Policy Lifecycle Support", icon: false, text: "Operational support from issuance and servicing through claims and portfolio administration." },
   ];
-  const operationalStages = [
-    ["Policy Issuance", "Coordinating local documentation and policy setup following underwriting approval."],
-    ["Servicing", "Managing policy servicing requests and operational communication throughout the policy term."],
-    ["Claims Visibility", "Maintaining local visibility over notifications, documentation and claims progress."],
-    ["Market Reporting", "Providing structured operational and claims updates to relevant insurance partners."],
-    ["Portfolio Feedback", "Sharing servicing and claims insights to support ongoing portfolio oversight."],
-  ];
   const localExecution = [
     { title: "Local Language & Market Context", icon: false, text: "Faster, clearer communication with insureds, brokers and service providers." },
     { title: "Structured Market Reporting", icon: false, text: "Clear information flow between Israel and international insurance partners." },
@@ -1824,27 +1817,12 @@ function englishClaimsOperationsTemplate() {
         <p class="claims-authority-note">Coverage and claims outcomes remain subject to applicable policy terms and the authority of the relevant insurance partner.</p>
       </div>
     </section>
-    <section class="section section-soft claims-page-section claims-operations-process">
-      <div class="container">
-        <div class="center-title">
-          <h2>Operational Portfolio Support</h2>
-          <p>Local operational support helps maintain a consistent rhythm across policy servicing, claims communication, market reporting and portfolio oversight.</p>
-        </div>
-        <div class="underwriting-process">${operationalStages.map(([title, text], index) => `<article class="underwriting-process-step"><span class="underwriting-process-number">0${index + 1}</span><h3>${title}</h3><p>${text}</p></article>`).join("")}</div>
-      </div>
-    </section>
     <section class="section claims-page-section claims-local-value-section">
       <div class="container">
         <div class="center-title">
           <h2>Why Local Claims Execution Matters</h2>
         </div>
         ${cards(localExecution, 3)}
-      </div>
-    </section>
-    <section class="section section-soft claims-partner-cta">
-      <div class="container section-header">
-        <div><h2>Need a Local Claims & Operations Partner in Israel?</h2></div>
-        <a class="btn btn-primary" href="${link("/contact-us")}" data-track="click_quote_cta">Partner With Us</a>
       </div>
     </section>`;
 }

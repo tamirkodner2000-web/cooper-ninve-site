@@ -1391,14 +1391,6 @@ html[dir="rtl"] .agent-workflow .workflow-card {
   line-height: 1.6;
   text-align: center;
 }
-.claims-partner-cta {
-  padding-block: 52px;
-}
-.claims-partner-cta .section-header {
-  align-items: center;
-  margin-bottom: 0;
-}
-
 .grid { display: grid; gap: 24px; }
 .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -1855,9 +1847,6 @@ body.lang-he .agent-workflow-insurance-agents .workflow-cards {
   letter-spacing: .12em;
 }
 .market-partner-workflow .underwriting-process-number {
-  background: var(--soft);
-}
-.claims-operations-process .underwriting-process-number {
   background: var(--soft);
 }
 .underwriting-process-step h3 {
