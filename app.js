@@ -1333,7 +1333,7 @@ function renderChrome(path) {
   mainNav.setAttribute("aria-label", english ? "Main navigation" : "ניווט ראשי");
   mainNav.innerHTML = `${navItems.map(([href, label]) => {
     if (!english && href === "/insurance-solutions") return productMegaMenuHtml(path);
-    if (href === "/about-us") return aboutMegaMenuHtml(path);
+    if (!english && href === "/about-us") return aboutMegaMenuHtml(path);
     return `<a href="${link(href)}">${label}</a>`;
   }).join("")}<a class="language-switcher nav-language-switcher" href="${matchingLanguagePath(path, !english)}"${english ? ` aria-label="Switch to Hebrew"` : ` aria-label="Switch to English"`}>${english ? "HE" : englishSwitchLabel}</a>`;
   initProductMenu();
@@ -1384,16 +1384,13 @@ function productMegaMenuHtml(path) {
 
 function aboutMegaMenuHtml(path) {
   const active = aboutMenuRoutes.has(path) ? " active" : "";
-  const english = isEnglish();
-  const links = english
-    ? [["About Us", "/about-us"], ["Press & Media", "/press"], ["Blog", "/blog"]]
-    : [["אודות", "/about-us"], ["בלוג", "/blog"], ["בתקשורת", "/press"]];
+  const links = [["אודות", "/about-us"], ["בלוג", "/blog"], ["בתקשורת", "/press"]];
   return `<div class="nav-product-menu" data-product-menu>
-    <a class="nav-product-trigger${active}" href="${link("/about-us")}" aria-controls="about-mega-menu">${english ? "About" : "אודות"}</a>
+    <a class="nav-product-trigger${active}" href="/about-us" aria-controls="about-mega-menu">אודות</a>
     <div class="product-mega-menu about-mega-menu" id="about-mega-menu">
       <section class="product-menu-column">
         <div class="product-menu-links">
-          ${links.map(([title, href]) => `<a class="product-menu-link" href="${link(href)}"><strong>${title}</strong></a>`).join("")}
+          ${links.map(([title, href]) => `<a class="product-menu-link" href="${href}"><strong>${title}</strong></a>`).join("")}
         </div>
       </section>
     </div>
@@ -2193,6 +2190,11 @@ function businessSections() {
 }
 
 function aboutSections() {
+  if (isEnglish()) {
+    return `
+      ${teamSection()}
+      <section class="section about-article-section"><div class="container"><article class="about-article" lang="en" dir="ltr"><h2>About Cooper Ninve</h2><p>Cooper Ninve is one of Israel’s longest-established and leading insurance agencies in the general insurance sector and a subsidiary of Ninve Insurance Agency Ltd., founded in 1973. Cooper Ninve operates as a Coverholder in the Lloyd’s market in Israel and works with leading international insurers and reinsurers, while holding delegated underwriting authority on behalf of Lloyd’s underwriters in London.</p><p>Cooper Ninve works with reinsurers and international insurance markets, providing insurers and insurance agents who work with us with direct access to the global insurance market.</p><p>Local underwriting in Israel offers significant advantages for both insureds and insurance agents, particularly in two key areas: time and cost. Shortening the underwriting process and reducing the number of parties involved can help create a more efficient, accurate and accessible experience.</p><p>We specialize in complex and specialty risks and liability insurance, including Employers’ Liability, Product Liability, Third-Party Liability, Professional Indemnity, Medical Malpractice, Directors &amp; Officers Liability, Money in Transit and additional lines of business. Our focus is on providing solutions in areas where the local market may not always be able to offer a complete solution, while adapting coverage to the evolving insurance needs of each insured.</p><p>Cooper Ninve provides tailored insurance solutions for Israeli companies, including businesses with international operations.</p><p>When dealing with complex projects and risks, our approach begins with a thorough understanding of the client’s operations, risk characteristics and potential exposures. Cooper Ninve aims to provide insurers and insurance agents working with us with professional and personal service, high availability, and ongoing support throughout the underwriting and claims processes through the relevant professional teams.</p></article></div></section>`;
+  }
   return `
     ${teamSection()}
     <section class="section about-article-section"><div class="container"><article class="about-article"><h2>אודות קופר נינוה</h2><p>קופר נינוה היא אחת מסוכנויות הביטוח הוותיקות והמובילות בישראל בענף הביטוח הכללי, וחברת בת של נינוה סוכנות לביטוח בע״מ, אשר נוסדה בשנת 1973. קופר נינוה פועלת כ־Coverholder בשוק לויד׳ס בישראל, ועובדת עם חברות ביטוח ומבטחי משנה מהגדולים בעולם, תוך החזקת סמכויות חיתום בשם מבטחי לויד׳ס לונדון.</p><p>קופר נינוה עובדת עם מבטחי משנה ושווקים בינלאומיים, יתרון המאפשר למבוטחים ולסוכנים העובדים עמנו גישה ישירה לעולם הביטוח הבינלאומי.</p><p>המשמעות של ביצוע החיתום בישראל גדולה הן עבור המבוטחים והן עבור הסוכנים, בעיקר בשני היבטים מרכזיים: זמן וכסף. קיצור תהליך החיתום וצמצום מספר הגורמים המטפלים בבקשה עשויים לסייע ביצירת תהליך יעיל, מדויק ונגיש יותר.</p><p>אנו מתמחים בסיכונים מיוחדים ובביטוחי חבויות, לרבות חבות מעבידים, אחריות המוצר, צד שלישי, אחריות מקצועית, רשלנות רפואית, ביטוח דירקטורים ונושאי משרה, כספים בהעברה ותחומים נוספים. הדגש הוא על מתן פתרונות בתחומים שבהם השוק המקומי מתקשה לעיתים לתת מענה מלא, תוך התאמה לצורכי הביטוח המשתנים של המבוטח.</p><p>קופר נינוה מתאימה פתרונות מיוחדים לחברות ישראליות, לרבות חברות ישראליות בעלות פעילות בינלאומית.</p><p>כאשר מדובר בפרויקטים ובסיכונים מורכבים, הדגש הוא על לימוד והבנה של פעילות הלקוח, מאפייני הסיכון והחשיפות האפשריות הנובעות מפעילותו. קופר נינוה שואפת להעניק למבוטחים ולסוכנים העובדים עמה שירות מקצועי ואישי, זמינות גבוהה, וליווי בתהליכי חיתום ותביעות באמצעות הגורמים המקצועיים הרלוונטיים.</p></article></div></section>`;
