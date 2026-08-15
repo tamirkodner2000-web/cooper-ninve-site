@@ -1301,6 +1301,29 @@ function initCarousels() {
   });
 }
 
+// Footer nav groups become single-open accordions (collapsed by default on mobile).
+// CSS keeps panels open on desktop, so these toggles are inert there.
+function initFooterAccordion(footer) {
+  const toggles = footer.querySelectorAll(".footer-group-toggle");
+  if (!toggles.length) return;
+  toggles.forEach((toggle) => {
+    toggle.addEventListener("click", () => {
+      const group = toggle.closest("[data-footer-group]");
+      if (!group) return;
+      const wasOpen = group.classList.contains("is-open");
+      footer.querySelectorAll("[data-footer-group].is-open").forEach((openGroup) => {
+        openGroup.classList.remove("is-open");
+        const openToggle = openGroup.querySelector(".footer-group-toggle");
+        if (openToggle) openToggle.setAttribute("aria-expanded", "false");
+      });
+      if (!wasOpen) {
+        group.classList.add("is-open");
+        toggle.setAttribute("aria-expanded", "true");
+      }
+    });
+  });
+}
+
 const productMenuGroups = [{
   title: "מוצרי ביטוח",
   links: [
@@ -1499,7 +1522,10 @@ function renderChrome(path) {
   }
 
   const footer = document.querySelector(".site-footer");
-  if (footer) footer.innerHTML = footerHtml(english, path);
+  if (footer) {
+    footer.innerHTML = footerHtml(english, path);
+    initFooterAccordion(footer);
+  }
 
   const mobileSticky = document.querySelector(".mobile-sticky");
   if (mobileSticky) {
@@ -1599,7 +1625,7 @@ function footerHtml(english, path = "/") {
           <li>${address}</li>
         </ul>
       </section>
-      ${footerGroups.map(([title, links]) => `<section><h3>${title}</h3>${links.map(([label, href]) => `<a href="${href.startsWith("/") ? link(href) : href}">${label}</a>`).join("")}</section>`).join("")}
+      ${footerGroups.map(([title, links], i) => `<section class="footer-nav-group" data-footer-group><h3 class="footer-group-head"><button class="footer-group-toggle" type="button" aria-expanded="false" aria-controls="footer-panel-${i}"><span class="footer-group-label">${title}</span><span class="footer-chevron" aria-hidden="true"></span></button></h3><div class="footer-group-panel" id="footer-panel-${i}"><div class="footer-group-panel-inner">${links.map(([label, href]) => `<a href="${href.startsWith("/") ? link(href) : href}">${label}</a>`).join("")}</div></div></section>`).join("")}
     </div>
     <div class="container footer-bottom">
       <p>${rights}</p>
