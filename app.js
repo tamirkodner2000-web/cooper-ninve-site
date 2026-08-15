@@ -1194,7 +1194,11 @@ function initHeroParallax() {
     heroParallaxHandler = null;
   }
   const hero = app.querySelector(".hero");
-  if (!hero || motionQuery.matches) return;
+  // Parallax is desktop-only: skip on touch/small screens for performance and calm motion.
+  if (!hero || motionQuery.matches || window.innerWidth <= 640) {
+    if (hero) hero.style.removeProperty("--hero-par");
+    return;
+  }
   const apply = () => {
     const rect = hero.getBoundingClientRect();
     if (rect.bottom < 0 || rect.top > window.innerHeight) { heroParallaxTicking = false; return; }
@@ -1231,9 +1235,14 @@ const productMenuGroups = [{
 const productMenuRoutes = new Set(productMenuGroups.flatMap((group) => group.links.map(([, href]) => href)));
 const aboutMenuRoutes = new Set(["/about-us", "/blog", "/press"]);
 
-menuToggle.addEventListener("click", () => {
-  const open = mainNav.classList.toggle("open");
+function setMobileNav(open) {
+  mainNav.classList.toggle("open", open);
   menuToggle.setAttribute("aria-expanded", String(open));
+  document.body.classList.toggle("nav-open", open);
+}
+
+menuToggle.addEventListener("click", () => {
+  setMobileNav(!mainNav.classList.contains("open"));
 });
 
 document.addEventListener("click", (event) => {
@@ -1241,7 +1250,10 @@ document.addEventListener("click", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") closeProductMenu();
+  if (event.key === "Escape") {
+    closeProductMenu();
+    if (mainNav.classList.contains("open")) setMobileNav(false);
+  }
 });
 
 window.addEventListener("popstate", render);
@@ -1295,8 +1307,7 @@ function render() {
   document.querySelectorAll(".main-nav a").forEach((a) => {
     a.classList.toggle("active", normalizeRoute(a.getAttribute("href")) === path);
   });
-  mainNav.classList.remove("open");
-  menuToggle.setAttribute("aria-expanded", "false");
+  setMobileNav(false);
   app.innerHTML = path.startsWith("/lp/") ? landingTemplate(page) : standardTemplate(page, path);
   if (isEnglish()) translateApp();
   renderPartnerLogos();
