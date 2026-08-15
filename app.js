@@ -1162,11 +1162,54 @@ Object.assign(enText, {
 });
 
 const app = document.querySelector("[data-app]");
+const siteHeader = document.querySelector("[data-site-header]");
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const mainNav = document.querySelector("[data-main-nav]");
 const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 let revealObserver;
 let counterObserver;
+let heroParallaxTicking = false;
+let heroParallaxHandler = null;
+
+// Header condenses and gains depth once the page is scrolled.
+(function initHeaderScroll() {
+  if (!siteHeader) return;
+  let ticking = false;
+  const update = () => {
+    siteHeader.classList.toggle("is-scrolled", window.scrollY > 14);
+    ticking = false;
+  };
+  window.addEventListener("scroll", () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }, { passive: true });
+  update();
+})();
+
+// Subtle vertical parallax on the hero's branded geometry.
+function initHeroParallax() {
+  if (heroParallaxHandler) {
+    window.removeEventListener("scroll", heroParallaxHandler);
+    heroParallaxHandler = null;
+  }
+  const hero = app.querySelector(".hero");
+  if (!hero || motionQuery.matches) return;
+  const apply = () => {
+    const rect = hero.getBoundingClientRect();
+    if (rect.bottom < 0 || rect.top > window.innerHeight) { heroParallaxTicking = false; return; }
+    const offset = Math.max(-1, Math.min(1, -rect.top / window.innerHeight));
+    hero.style.setProperty("--hero-par", `${(offset * 46).toFixed(1)}px`);
+    heroParallaxTicking = false;
+  };
+  heroParallaxHandler = () => {
+    if (heroParallaxTicking) return;
+    heroParallaxTicking = true;
+    requestAnimationFrame(apply);
+  };
+  window.addEventListener("scroll", heroParallaxHandler, { passive: true });
+  apply();
+}
 
 const productMenuGroups = [{
   title: "מוצרי ביטוח",
@@ -1261,6 +1304,7 @@ function render() {
   initSketchVisuals();
   initAnimations();
   initDistributionCounters();
+  initHeroParallax();
   window.scrollTo({ top: 0, behavior: "instant" });
 }
 
@@ -1513,7 +1557,7 @@ function initAnimations() {
   const heroItems = [...app.querySelectorAll(".hero .eyebrow, .hero-title, .hero-positioning, .hero .lead, .hero-actions .btn, .hero-card")];
   const heroCardItems = [...app.querySelectorAll(".hero-card li")];
   const scrollItems = [
-    ...app.querySelectorAll(".card, .workflow-card, .feature-list li, .step, .partner-logo-card, .home-counter-card"),
+    ...app.querySelectorAll(".card, .workflow-card, .feature-list li, .step, .partner-logo-card, .home-counter-card, .team-card, .press-card, .section-header, .center-title, .underwriting-process-step"),
   ];
   const animatedItems = [...heroItems, ...heroCardItems, ...scrollItems];
 
@@ -1546,11 +1590,11 @@ function initAnimations() {
     });
   }, { rootMargin: "0px 0px -10% 0px", threshold: 0.12 });
 
-  app.querySelectorAll(".grid, .workflow-cards, .feature-list, .steps, .partner-logos").forEach((group) => {
-    group.querySelectorAll(".card, .workflow-card, li, .step, .partner-logo-card").forEach((item, index) => {
+  app.querySelectorAll(".grid, .workflow-cards, .feature-list, .steps, .partner-logos, .team-grid, .press-card-grid, .underwriting-process").forEach((group) => {
+    group.querySelectorAll(".card, .workflow-card, li, .step, .partner-logo-card, .team-card, .press-card, .underwriting-process-step").forEach((item, index) => {
       const isPartnerLogo = item.classList.contains("partner-logo-card");
-      const stagger = isPartnerLogo ? 105 : 90;
-      const maxDelay = isPartnerLogo ? 630 : 450;
+      const stagger = isPartnerLogo ? 105 : 84;
+      const maxDelay = isPartnerLogo ? 630 : 460;
       item.style.setProperty("--reveal-delay", `${Math.min(index * stagger, maxDelay)}ms`);
     });
   });
