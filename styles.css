@@ -3427,17 +3427,25 @@ body.nav-open { overflow: hidden; }
     inset-block-end: auto;
     height: calc(100vh - 60px);
     height: calc(100dvh - 60px);
+    /* Top-align the menu: the base horizontal nav uses justify-content:center,
+       which would vertically center this full-height column and open a large
+       gap under the header when the accordions are collapsed. */
+    justify-content: flex-start;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
     background:
       radial-gradient(120% 40% at 100% 0%, rgba(63,151,207,.16), transparent 60%),
       linear-gradient(180deg, var(--navy) 0%, var(--navy-deep) 100%);
-    padding: 14px 16px calc(28px + env(safe-area-inset-bottom));
+    padding: 16px 16px calc(28px + env(safe-area-inset-bottom));
     gap: 0;
     border-top: 1px solid rgba(143,208,255,.14);
     box-shadow: 0 24px 40px rgba(6,16,32,.4);
   }
+  /* Beat the desktop `body.lang-en .main-nav { justify-content:center }` override
+     so the English mobile menu is top-aligned too (not vertically centered). */
+  body.lang-en .main-nav,
+  body.lang-he .main-nav { justify-content: flex-start; }
   .main-nav.open { animation: navPanelIn .3s var(--ease-out); }
   .main-nav > a,
   .main-nav > .nav-product-menu {
