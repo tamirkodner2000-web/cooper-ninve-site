@@ -3627,15 +3627,18 @@ body.nav-open { overflow: hidden; }
   .is-carousel {
     display: flex;
     flex-wrap: nowrap;
+    align-items: stretch;      /* uniform card height → consistent top edge, no per-swipe jump */
     gap: 14px;
     width: 100%;
     min-width: 0;
     max-width: 100%;
     margin-inline: 0;
     padding-inline: 0;
-    padding-block: 6px 4px;
+    /* small top + enough bottom that the card's soft shadow is not clipped by the
+       overflow-x scroll container (overflow-y is forced to a clipping value) */
+    padding-block: 4px 14px;
     overflow-x: auto;
-    overflow-y: visible;
+    overflow-y: hidden;
     scroll-snap-type: x mandatory;
     scroll-padding-inline: 0;
     -webkit-overflow-scrolling: touch;
@@ -3651,10 +3654,13 @@ body.nav-open { overflow: hidden; }
     min-height: 0;
     scroll-snap-align: start;
     scroll-snap-stop: always;
-    /* reveal-on-swipe should be immediate, not staggered like a vertical grid */
-    --reveal-delay: 0ms !important;
-    --reveal-duration: 420ms;
-    --reveal-distance: 12px;
+    /* Carousel cards must never carry a vertical transform: the reveal's
+       translateY offset pushed cards into the clipped zone (top/badge cut off,
+       cards shifting between slides). Keep them flat and fully visible; the
+       horizontal swipe itself is the reveal. */
+    transform: none !important;
+    opacity: 1 !important;
+    transition-property: border-color, box-shadow, background-color;
   }
   /* Keep nested grid tracks from expanding to the carousel's scroll content */
   .press-groups { grid-template-columns: minmax(0, 1fr); }
@@ -3670,7 +3676,7 @@ body.nav-open { overflow: hidden; }
     align-items: center;
     justify-content: center;
     gap: 14px;
-    margin-top: 16px;
+    margin-top: 12px;
   }
   .carousel-arrow {
     width: 38px;

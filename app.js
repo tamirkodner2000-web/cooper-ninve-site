@@ -1227,6 +1227,19 @@ function initCarousels() {
     group.classList.add("is-carousel");
     group.dataset.carousel = "ready";
 
+    // On mobile only, drop the vertical fade-up reveal from carousel cards: its
+    // translateY offset + opacity:0 pushed cards into the horizontally-clipping
+    // track and left them invisible until a horizontal IntersectionObserver hit
+    // (top/badge cut off, cards shifting between slides). Desktop keeps its reveal.
+    // (CSS also force-flattens carousel children on mobile as a resize-safe backup.)
+    if (window.innerWidth <= 640) {
+      cards.forEach((card) => {
+        card.classList.remove("reveal-item", "is-visible");
+        card.style.removeProperty("--reveal-delay");
+        if (revealObserver) revealObserver.unobserve(card);
+      });
+    }
+
     const rtl = !isEnglish();
     const nav = document.createElement("div");
     nav.className = "carousel-nav";
