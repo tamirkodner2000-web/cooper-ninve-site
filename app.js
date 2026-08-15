@@ -1215,6 +1215,92 @@ function initHeroParallax() {
   apply();
 }
 
+// Tall repeated card grids become horizontal scroll-snap carousels on phones.
+// Pure-CSS handles the swipe; this only wires the brand dots + arrows indicator.
+const CAROUSEL_MIN_CARDS = 3;
+function initCarousels() {
+  const groups = app.querySelectorAll(".grid, .workflow-cards, .team-grid, .press-card-grid");
+  groups.forEach((group) => {
+    if (group.dataset.carousel) return;
+    const cards = [...group.children];
+    if (cards.length < CAROUSEL_MIN_CARDS) return;
+    group.classList.add("is-carousel");
+    group.dataset.carousel = "ready";
+
+    const rtl = !isEnglish();
+    const nav = document.createElement("div");
+    nav.className = "carousel-nav";
+    nav.setAttribute("aria-hidden", "true");
+
+    const prevBtn = document.createElement("button");
+    prevBtn.type = "button";
+    prevBtn.className = "carousel-arrow carousel-prev";
+    prevBtn.tabIndex = -1;
+    prevBtn.textContent = rtl ? "›" : "‹";
+
+    const nextBtn = document.createElement("button");
+    nextBtn.type = "button";
+    nextBtn.className = "carousel-arrow carousel-next";
+    nextBtn.tabIndex = -1;
+    nextBtn.textContent = rtl ? "‹" : "›";
+
+    const dots = document.createElement("div");
+    dots.className = "carousel-dots";
+    cards.forEach((_, i) => {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "carousel-dot";
+      dot.tabIndex = -1;
+      dot.dataset.index = String(i);
+      dots.appendChild(dot);
+    });
+
+    nav.append(prevBtn, dots, nextBtn);
+    group.after(nav);
+
+    const clamp = (i) => Math.max(0, Math.min(cards.length - 1, i));
+    const scrollToIndex = (i) => {
+      const target = cards[clamp(i)];
+      if (target) target.scrollIntoView({
+        behavior: motionQuery.matches ? "auto" : "smooth",
+        inline: "start",
+        block: "nearest",
+      });
+    };
+    const activeIndex = () => {
+      const box = group.getBoundingClientRect();
+      const center = box.left + box.width / 2;
+      let best = 0, bestDist = Infinity;
+      cards.forEach((card, i) => {
+        const r = card.getBoundingClientRect();
+        const dist = Math.abs((r.left + r.width / 2) - center);
+        if (dist < bestDist) { bestDist = dist; best = i; }
+      });
+      return best;
+    };
+
+    let ticking = false;
+    const update = () => {
+      const active = activeIndex();
+      [...dots.children].forEach((dot, i) => dot.classList.toggle("is-active", i === active));
+      prevBtn.disabled = active <= 0;
+      nextBtn.disabled = active >= cards.length - 1;
+      ticking = false;
+    };
+    group.addEventListener("scroll", () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    }, { passive: true });
+    prevBtn.addEventListener("click", () => scrollToIndex(activeIndex() - 1));
+    nextBtn.addEventListener("click", () => scrollToIndex(activeIndex() + 1));
+    [...dots.children].forEach((dot) => {
+      dot.addEventListener("click", () => scrollToIndex(Number(dot.dataset.index)));
+    });
+    update();
+  });
+}
+
 const productMenuGroups = [{
   title: "מוצרי ביטוח",
   links: [
@@ -1316,6 +1402,7 @@ function render() {
   initAnimations();
   initDistributionCounters();
   initHeroParallax();
+  initCarousels();
   window.scrollTo({ top: 0, behavior: "instant" });
 }
 

@@ -3615,3 +3615,119 @@ body.nav-open { overflow: hidden; }
   }
   body.nav-open .menu-toggle { transform: none; }
 }
+
+/* =========================================================================
+   MOBILE CARD CAROUSEL — tall repeated card grids become horizontal,
+   native scroll-snap swipe rows on phones only. Desktop/tablet untouched.
+   The .is-carousel class is added by JS to qualifying (3+ card) groups.
+   ========================================================================= */
+.carousel-nav { display: none; }
+
+@media (max-width: 640px) {
+  .is-carousel {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 14px;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    margin-inline: 0;
+    padding-inline: 0;
+    padding-block: 6px 4px;
+    overflow-x: auto;
+    overflow-y: visible;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: 0;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .is-carousel::-webkit-scrollbar { width: 0; height: 0; display: none; }
+  .is-carousel > * {
+    flex: 0 0 82vw;
+    width: 82vw;
+    max-width: 82vw;
+    min-height: 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    /* reveal-on-swipe should be immediate, not staggered like a vertical grid */
+    --reveal-delay: 0ms !important;
+    --reveal-duration: 420ms;
+    --reveal-distance: 12px;
+  }
+  /* Keep nested grid tracks from expanding to the carousel's scroll content */
+  .press-groups { grid-template-columns: minmax(0, 1fr); }
+  .press-group { min-width: 0; }
+  /* Slightly more compact card interiors inside a carousel */
+  .is-carousel > .card,
+  .is-carousel > .workflow-card { padding: 20px 20px 22px; }
+  .is-carousel > .press-card { padding: 22px; }
+
+  /* ---- Navigation: minimal brand indicator (arrows + diamond dots) ---- */
+  .carousel-nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 16px;
+  }
+  .carousel-arrow {
+    width: 38px;
+    height: 38px;
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 20px;
+    line-height: 1;
+    color: var(--blue-2);
+    background: #fff;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    box-shadow: var(--shadow-sm);
+    transition: color var(--ease), background-color var(--ease), border-color var(--ease), opacity var(--ease), transform var(--ease);
+  }
+  .carousel-arrow:active { transform: scale(.92); }
+  .carousel-arrow:disabled {
+    opacity: .34;
+    box-shadow: none;
+    cursor: default;
+  }
+  .section-navy .carousel-arrow,
+  .team-section .carousel-arrow {
+    color: #fff;
+    background: rgba(255,255,255,.08);
+    border-color: rgba(143,208,255,.34);
+  }
+  .carousel-dots {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+  }
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: 1.5px solid var(--line-strong);
+    background: transparent;
+    transform: rotate(45deg);
+    border-radius: 1px;
+    transition: background-color var(--ease), border-color var(--ease), transform var(--ease), width var(--ease), height var(--ease);
+  }
+  .carousel-dot.is-active {
+    width: 10px;
+    height: 10px;
+    border-color: transparent;
+    background: linear-gradient(135deg, var(--gold), var(--blue-bright));
+  }
+  .section-navy .carousel-dot,
+  .team-section .carousel-dot { border-color: rgba(143,208,255,.4); }
+  .section-navy .carousel-dot.is-active,
+  .team-section .carousel-dot.is-active { background: linear-gradient(135deg, var(--gold-soft), var(--sky)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .is-carousel { scroll-behavior: auto; }
+}
