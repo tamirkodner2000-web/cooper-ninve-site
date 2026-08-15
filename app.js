@@ -1580,6 +1580,7 @@ function aboutMegaMenuHtml(path) {
 
 function initProductMenu() {
   const desktopQuery = window.matchMedia("(min-width: 981px)");
+  const mobileMenuQuery = window.matchMedia("(max-width: 640px)");
   mainNav.querySelectorAll("[data-product-menu]").forEach((menu) => {
     const setOpen = (open) => {
       menu.classList.toggle("is-open", open);
@@ -1593,6 +1594,25 @@ function initProductMenu() {
     menu.addEventListener("focusout", (event) => {
       if (!menu.contains(event.relatedTarget)) setOpen(false);
     });
+    // Mobile: the category trigger toggles an accordion (one open at a time)
+    // instead of navigating — every destination stays reachable as a child link.
+    const trigger = menu.querySelector(".nav-product-trigger");
+    if (trigger) {
+      trigger.setAttribute("aria-expanded", "false");
+      trigger.addEventListener("click", (event) => {
+        if (!mobileMenuQuery.matches) return; // desktop/tablet: navigate as before
+        event.preventDefault();
+        event.stopPropagation();
+        const willOpen = !menu.classList.contains("is-open");
+        mainNav.querySelectorAll("[data-product-menu].is-open").forEach((other) => {
+          other.classList.remove("is-open");
+          const otherTrigger = other.querySelector(".nav-product-trigger");
+          if (otherTrigger) otherTrigger.setAttribute("aria-expanded", "false");
+        });
+        setOpen(willOpen);
+        trigger.setAttribute("aria-expanded", String(willOpen));
+      });
+    }
   });
 }
 
