@@ -1161,6 +1161,36 @@ Object.assign(enText, {
   "קופר נינוה פועלת מול שווקים ושותפים בינלאומיים נבחרים, בכפוף לסמכויות חיתום, תיאבון סיכון, אישור השוק ותנאי הפוליסה הרלוונטיים. הצגת לוגו אינה מלמדת שכל שותף תומך בכל מוצר או סיכון.": "Cooper Ninve works with selected international insurance markets and partners, subject to underwriting authority, product appetite, market approval and applicable policy terms. Displayed logos do not imply that every partner supports every product or risk.",
 });
 
+// Landing page (/lp/*) copy — English coverage for the runtime translation layer.
+Object.assign(enText, {
+  "קופר נינוה - בדיקת התאמה ראשונית": "Cooper Ninve - Initial Suitability Review",
+  "בחינת סיכון באמצעות MGA ו-Coverholder עם ניסיון בחיתום סיכונים מקצועיים ומורכבים, בכפוף לתנאי הפוליסה ואישור חיתום.": "Risk review through an MGA and Coverholder with experience underwriting professional and complex risks, subject to the policy terms and underwriting approval.",
+  "שם העסק / הסוכנות": "Business / Agency Name",
+  "האם יש סוכן ביטוח?": "Do You Have an Insurance Agent?",
+  "בדיקת התאמה ראשונית בהתאם לאופי הפעילות, המידע החיתומי והצרכים הביטוחיים.": "Initial suitability review according to the activity, underwriting information and insurance needs.",
+  "ניסיון בסיכונים מורכבים, גישה לשווקים בינלאומיים, חיתום ושירות מקומי ועבודה מסודרת מול סוכנים ועסקים.": "Experience in complex risks, access to international markets, local underwriting and service, and structured work with agents and businesses.",
+  "הגשת מידע ראשוני": "Initial information submission",
+  "בדיקת חיתום מקצועית": "Professional underwriting review",
+  "הכוונה לגבי מידע חסר": "Guidance regarding missing information",
+  "תהליך מותאם לשוק הישראלי": "A process adapted to the Israeli market",
+  "האם אפשר לפנות ישירות או דרך סוכן?": "Can an Inquiry Be Submitted Directly or Through an Agent?",
+  "ניתן לפנות לבדיקה ראשונית. בהתאם לסוג הפנייה, ייתכן שהתהליך יתבצע יחד עם סוכן ביטוח או באמצעותו.": "You can submit an inquiry for an initial review. Depending on the type of inquiry, the process may be carried out together with an insurance agent or through one.",
+  "כמה זמן לוקח לקבל הצעה?": "How Long Does It Take to Receive a Quote?",
+  "משך הזמן תלוי במורכבות הסיכון ובשלמות המידע שהועבר.": "The timeframe depends on the complexity of the risk and the completeness of the information provided.",
+  "האם הכיסוי מובטח?": "Is Coverage Guaranteed?",
+  "לא. כל הצעה וכיסוי כפופים לחיתום, תנאי פוליסה, גבולות אחריות, חריגים והשתתפויות עצמיות.": "No. Every quote and coverage is subject to underwriting, policy terms, limits of liability, exclusions and deductibles.",
+  "ביטוח אחריות מקצועית לעסקים ובעלי מקצוע": "Professional Liability Insurance for Businesses and Professionals",
+  "הגנה מפני תביעות הנובעות מטעות מקצועית, רשלנות, מחדל, ייעוץ שגוי או נזק כספי שנגרם ללקוח במסגרת השירות המקצועי.": "Protection against claims arising from professional negligence, errors, omissions, incorrect advice, or financial loss caused to a client in the course of professional services.",
+  "חברות שירותים וטכנולוגיה": "Services and Technology Companies",
+  "בעלי מקצוע עם דרישת ביטוח": "Professionals with an Insurance Requirement",
+  "הגנה ביטוחית מפני אירועי סייבר, מתקפות כופר, דליפות מידע, השבתת מערכות, הוצאות שחזור, אובדן הכנסות ותביעות צד שלישי.": "Insurance protection against cyber incidents, ransomware attacks, data leaks, system outages, recovery costs, loss of income and third-party claims.",
+  "עסקים המחזיקים מידע": "Businesses Holding Data",
+  "עסקים עם פעילות אונליין": "Businesses with Online Activity",
+  "גישה לפתרונות ביטוח מתקדמים בתחומי אחריות מקצועית, סייבר, עבודות קבלניות, חבויות, רשלנות רפואית וסיכונים מיוחדים עם חיתום ושירות מקומי.": "Access to advanced insurance solutions in professional liability, cyber, contractors all risks, liabilities, medical malpractice and special risks, with local underwriting and service.",
+  "חיתום מקצועי": "Professional Underwriting",
+  "שירות והפקה מקומית": "Local Service and Issuance",
+});
+
 const app = document.querySelector("[data-app]");
 const siteHeader = document.querySelector("[data-site-header]");
 const menuToggle = document.querySelector("[data-menu-toggle]");
