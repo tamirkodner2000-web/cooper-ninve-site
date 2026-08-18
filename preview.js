@@ -188,7 +188,14 @@
    * Section rendering — mirrors landingTemplate() markup in app.js
    * ------------------------------------------------------------------ */
 
-  function formMarkup(form) {
+  /* Preview-only notice. This is preview UI text, not CMS content, so it is
+     not migrated - it follows the previewed record's language. */
+  var FORM_NOTE = {
+    hebrew: "הטופס מוצג לצורך תצוגה מקדימה בלבד ואינו נשלח.",
+    english: "This form is shown for preview purposes only and is not submitted.",
+  };
+
+  function formMarkup(form, english) {
     var title = text(form.title);
     var description = text(form.description);
     var submitLabel = text(form.submitLabel);
@@ -226,12 +233,12 @@
       (submitLabel
         ? '<button class="btn btn-primary" type="button" disabled>' + esc(submitLabel) + "</button>"
         : "") +
-      '<p class="preview-form-note">הטופס מוצג לצורך תצוגה מקדימה בלבד ואינו נשלח.</p>' +
+      '<p class="preview-form-note">' + esc(english ? FORM_NOTE.english : FORM_NOTE.hebrew) + "</p>" +
       "</form>"
     );
   }
 
-  function heroMarkup(hero, form) {
+  function heroMarkup(hero, form, english) {
     var eyebrow = text(hero.eyebrow);
     var heading = text(hero.heading);
     var description = text(hero.description);
@@ -239,7 +246,7 @@
     var primary = ctaMarkup(hero.primaryCTA, "btn btn-primary");
     var secondary = ctaMarkup(hero.secondaryCTA, "btn btn-secondary");
     var actions = primary + secondary;
-    var formHtml = formMarkup(form);
+    var formHtml = formMarkup(form, english);
 
     if (!eyebrow && !heading && !description && !supportLine && !actions && !formHtml) return "";
 
@@ -438,12 +445,13 @@
     var landing = data.landingPage || {};
     var hero = landing.hero || {};
     var main = landing.main || {};
+    var english = text(data.language) === "english";
 
     applyDocumentMeta(data);
     renderBar(data);
 
     var body =
-      heroMarkup(hero, main.form || {}) +
+      heroMarkup(hero, main.form || {}, english) +
       (text(main.introParagraph)
         ? '<section class="section"><div class="container"><div class="center-title"><p>' +
           esc(text(main.introParagraph)) + "</p></div></div></section>"
