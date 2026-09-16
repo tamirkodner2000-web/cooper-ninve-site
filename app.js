@@ -1200,6 +1200,7 @@ let revealObserver;
 let counterObserver;
 let heroParallaxTicking = false;
 let heroParallaxHandler = null;
+let renderGeneration = 0;
 
 // Header condenses and gains depth once the page is scrolled.
 (function initHeaderScroll() {
@@ -1408,8 +1409,12 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-window.addEventListener("popstate", render);
-window.addEventListener("DOMContentLoaded", render);
+window.addEventListener("popstate", () => {
+  void render();
+});
+window.addEventListener("DOMContentLoaded", () => {
+  void render();
+});
 document.addEventListener("click", (event) => {
   const anchor = event.target.closest("a[href^='/']");
   if (!anchor || anchor.target || event.metaKey || event.ctrlKey || event.shiftKey) return;
@@ -1417,8 +1422,37 @@ document.addEventListener("click", (event) => {
   if (!pages[normalizeRoute(href.split("#")[0])]) return;
   event.preventDefault();
   history.pushState(null, "", href);
-  render();
+  void render();
 });
+
+function landingRoute(path) {
+  const raw = String(path || "").replace(/\/$/, "") || "/";
+  const withoutEn = raw.replace(/^\/en(?=\/|$)/, "") || "/";
+  const match = withoutEn.match(/^\/lp\/[a-z0-9-]+/i);
+  if (!match) return "";
+  const route = match[0];
+  return landingPages[route] ? route : "";
+}
+
+function requestedPathname() {
+  const fromLocation = (location.pathname || "/").replace(/\/$/, "") || "/";
+  const injected = typeof window.__SPA_REQUEST_PATH === "string"
+    ? window.__SPA_REQUEST_PATH.replace(/\/$/, "") || "/"
+    : "";
+  const landingFromInject = landingRoute(injected);
+  const landingFromLocation = landingRoute(fromLocation);
+  if (landingFromInject && landingFromInject !== landingFromLocation) {
+    history.replaceState(null, "", landingFromInject + location.search + location.hash);
+    window.__SPA_REQUEST_PATH = "";
+    return landingFromInject;
+  }
+  if (injected && injected !== "/" && (fromLocation === "/" || fromLocation === "/index.html")) {
+    history.replaceState(null, "", injected + location.search + location.hash);
+    window.__SPA_REQUEST_PATH = "";
+    return injected;
+  }
+  return landingFromLocation || fromLocation;
+}
 
 function pathFromLocation() {
   const { basePath, english } = routeState();
@@ -1428,6 +1462,8 @@ function pathFromLocation() {
   }
   if (english && basePath === "/press") return "/";
   if (english && basePath === "/blog") return "/";
+  const landing = landingRoute(basePath) || landingRoute(requestedPathname());
+  if (landing) return landing;
   return pages[basePath] ? basePath : "/";
 }
 
@@ -1448,19 +1484,55 @@ function setMeta(page, path) {
   setAlternateLinks(path);
 }
 
-function render() {
+function publicCanonicalPath(path) {
+  return path;
+}
+
+async function render() {
+  const token = ++renderGeneration;
   const path = pathFromLocation();
-  const page = pages[path] || pages["/"];
-  setMeta(page, path);
+  const landing = landingRoute(path);
+  const page = landing ? landingPages[landing] : (pages[path] || pages["/"]);
   renderChrome(path);
-  document.body.classList.toggle("lp", path.startsWith("/lp/"));
+  document.body.classList.toggle("lp", Boolean(landing));
   document.body.classList.toggle("lang-en", isEnglish());
   document.body.classList.toggle("lang-he", !isEnglish());
   document.querySelectorAll(".main-nav a").forEach((a) => {
     a.classList.toggle("active", normalizeRoute(a.getAttribute("href")) === path);
   });
   setMobileNav(false);
-  app.innerHTML = path.startsWith("/lp/") ? landingTemplate(page) : standardTemplate(page, path);
+
+  let html;
+  let usedCms = false;
+  if (
+    !isEnglish() &&
+    landing &&
+    window.CooperNinveCMS &&
+    typeof window.CooperNinveCMS.fetchLandingPage === "function"
+  ) {
+    const cms = await window.CooperNinveCMS.fetchLandingPage({ path: landing });
+    if (token !== renderGeneration) return;
+    if (cms && typeof window.CooperNinveCMS.renderLanding === "function") {
+      usedCms = true;
+      if (typeof window.CooperNinveCMS.applySeo === "function") {
+        window.CooperNinveCMS.applySeo(cms, page, path, {
+          canonicalPath: publicCanonicalPath,
+          setAlternateLinks,
+        });
+      } else {
+        setMeta(page, path);
+      }
+      html = window.CooperNinveCMS.renderLanding(cms, { trackingFallback: page.event });
+    }
+  }
+
+  if (token !== renderGeneration) return;
+  if (!usedCms) {
+    setMeta(page, path);
+    html = landing ? landingTemplate(page) : standardTemplate(page, path);
+  }
+
+  app.innerHTML = html;
   if (isEnglish()) translateApp();
   renderPartnerLogos();
   bindForms();
@@ -1473,7 +1545,7 @@ function render() {
 }
 
 function routeState() {
-  const pathname = location.pathname.replace(/\/$/, "") || "/";
+  const pathname = requestedPathname();
   const english = pathname === englishPrefix || pathname.startsWith(`${englishPrefix}/`);
   const withoutPrefix = english ? pathname.slice(englishPrefix.length) || "/" : pathname;
   return { english, basePath: withoutPrefix || "/" };
