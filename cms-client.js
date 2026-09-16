@@ -1,7 +1,6 @@
 /*
  * Public CMS delivery client. Landing preview tokens are never used here.
- * Public landing integration is Hebrew /lp/* only. English product pages
- * are not fetched through this client.
+ * Hebrew /lp/* uses landing-page delivery. Product routes use /api/public/products.
  */
 (function (window) {
   "use strict";
@@ -13,6 +12,7 @@
     "/lp/cyber-insurance": true,
     "/lp/insurance-agents": true,
   };
+  var PRODUCT_PATH = /^\/[a-z0-9-]+-insurance$/;
 
   function cmsBase() {
     return String(window.COOPER_NINVE_CMS_URL || DEFAULT_BASE).replace(/\/$/, "");
@@ -29,6 +29,22 @@
     return Boolean(match && HEBREW_LANDING_PATHS[match[0]]);
   }
 
+  function isProductPath(path) {
+    return PRODUCT_PATH.test(String(path || ""));
+  }
+
+  function isPublicSafe(data) {
+    return Boolean(
+      data &&
+        typeof data === "object" &&
+        !("reviewNotes" in data) &&
+        !("landingInternalNotes" in data) &&
+        !("reviewStatus" in data) &&
+        !("status" in data) &&
+        !("_status" in data)
+    );
+  }
+
   function hasHeading(data) {
     var landing = data && data.landingPage;
     var hero = landing && landing.hero;
@@ -40,8 +56,7 @@
 
   function isHebrewLandingPayload(data) {
     return Boolean(
-      data &&
-        typeof data === "object" &&
+      isPublicSafe(data) &&
         data.pageType === "landing" &&
         typeof data.slug === "string" &&
         data.slug &&
@@ -50,11 +65,20 @@
         typeof data.landingPage === "object" &&
         data.seo &&
         typeof data.seo === "object" &&
-        hasHeading(data) &&
-        !("reviewNotes" in data) &&
-        !("landingInternalNotes" in data) &&
-        !("reviewStatus" in data) &&
-        !("_status" in data)
+        hasHeading(data)
+    );
+  }
+
+  function isProductPayload(data, language) {
+    return Boolean(
+      isPublicSafe(data) &&
+        data.pageType === "product" &&
+        typeof data.slug === "string" &&
+        data.slug &&
+        data.language === language &&
+        data.seo &&
+        typeof data.seo === "object" &&
+        (String(data.productName || "").trim() || String(data.shortDescription || "").trim())
     );
   }
 
@@ -99,9 +123,71 @@
     });
   }
 
+  function fetchProduct(options) {
+    var path = options && options.path;
+    if (!isProductPath(path)) return Promise.resolve(null);
+
+    var language = options.language === "english" ? "english" : "hebrew";
+    var slug = String(path).replace(/^\//, "");
+    var url =
+      cmsBase() +
+      "/api/public/products?slug=" +
+      encodeURIComponent(slug) +
+      "&language=" +
+      encodeURIComponent(language);
+
+    return fetchJson(url).then(function (data) {
+      return isProductPayload(data, language) ? data : null;
+    });
+  }
+
+  function ctaPair(cta, fallback) {
+    if (!cta || !String(cta.label || "").trim() || !String(cta.destination || "").trim()) {
+      return fallback;
+    }
+    return [String(cta.label).trim(), String(cta.destination).trim()];
+  }
+
+  function textList(values, fallback) {
+    if (!Array.isArray(values) || !values.length) return fallback;
+    var next = values.map(function (value) { return String(value || "").trim(); }).filter(Boolean);
+    return next.length ? next : fallback;
+  }
+
+  function faqList(values, fallback) {
+    if (!Array.isArray(values) || !values.length) return fallback;
+    var next = values
+      .map(function (item) {
+        return [String(item && item.question || "").trim(), String(item && item.answer || "").trim()];
+      })
+      .filter(function (item) { return item[0] && item[1]; });
+    return next.length ? next : fallback;
+  }
+
+  function mergeProductPage(staticPage, cms) {
+    if (!staticPage) return staticPage;
+    if (!cms) return staticPage;
+    var seo = cms.seo || {};
+    return Object.assign({}, staticPage, {
+      coverage: textList(cms.coverage, staticPage.coverage),
+      description: String(seo.metaDescription || cms.shortDescription || staticPage.description || "").trim(),
+      faqs: faqList(cms.faqs, staticPage.faqs),
+      h1: String(cms.productName || staticPage.h1 || "").trim(),
+      info: textList(cms.info, staticPage.info),
+      lead: String(cms.shortDescription || staticPage.lead || "").trim(),
+      primary: ctaPair(cms.primaryCTA, staticPage.primary),
+      secondary: ctaPair(cms.secondaryCTA, staticPage.secondary),
+      title: String(seo.metaTitle || cms.productName || staticPage.title || "").trim(),
+      who: textList(cms.who, staticPage.who),
+    });
+  }
+
   window.CooperNinveCMS = {
     fetchLandingPage: fetchLandingPage,
+    fetchProduct: fetchProduct,
     isLandingPath: isHebrewLandingPath,
+    isProductPath: isProductPath,
+    mergeProductPage: mergeProductPage,
     pathToSlug: pathToSlug,
   };
 })(window);

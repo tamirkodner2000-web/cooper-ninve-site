@@ -1485,6 +1485,7 @@ function setMeta(page, path) {
 }
 
 function publicCanonicalPath(path) {
+  if (isEnglish()) return path === "/" ? "/en" : `/en${path}`;
   return path;
 }
 
@@ -1492,7 +1493,7 @@ async function render() {
   const token = ++renderGeneration;
   const path = pathFromLocation();
   const landing = landingRoute(path);
-  const page = landing ? landingPages[landing] : (pages[path] || pages["/"]);
+  let page = landing ? landingPages[landing] : (pages[path] || pages["/"]);
   renderChrome(path);
   document.body.classList.toggle("lp", Boolean(landing));
   document.body.classList.toggle("lang-en", isEnglish());
@@ -1503,7 +1504,7 @@ async function render() {
   setMobileNav(false);
 
   let html;
-  let usedCms = false;
+  let usedLandingCms = false;
   if (
     !isEnglish() &&
     landing &&
@@ -1513,7 +1514,7 @@ async function render() {
     const cms = await window.CooperNinveCMS.fetchLandingPage({ path: landing });
     if (token !== renderGeneration) return;
     if (cms && typeof window.CooperNinveCMS.renderLanding === "function") {
-      usedCms = true;
+      usedLandingCms = true;
       if (typeof window.CooperNinveCMS.applySeo === "function") {
         window.CooperNinveCMS.applySeo(cms, page, path, {
           canonicalPath: publicCanonicalPath,
@@ -1526,8 +1527,29 @@ async function render() {
     }
   }
 
+  if (!usedLandingCms && productPages[path] && window.CooperNinveCMS && typeof window.CooperNinveCMS.fetchProduct === "function") {
+    const cms = await window.CooperNinveCMS.fetchProduct({
+      language: isEnglish() ? "english" : "hebrew",
+      path,
+    });
+    if (token !== renderGeneration) return;
+    if (cms) {
+      const seoFallback = isEnglish() && englishMeta[path] ? Object.assign({}, page, englishMeta[path]) : page;
+      page = window.CooperNinveCMS.mergeProductPage(seoFallback, cms);
+      if (typeof window.CooperNinveCMS.applySeo === "function") {
+        window.CooperNinveCMS.applySeo(cms, page, path, {
+          canonicalPath: publicCanonicalPath,
+          setAlternateLinks,
+        });
+      } else {
+        setMeta(page, path);
+      }
+      html = standardTemplate(page, path);
+    }
+  }
+
   if (token !== renderGeneration) return;
-  if (!usedCms) {
+  if (html == null) {
     setMeta(page, path);
     html = landing ? landingTemplate(page) : standardTemplate(page, path);
   }
@@ -2053,6 +2075,7 @@ function standardTemplate(page, path) {
   if (path === "/insurance-solutions") return sections(page.sections, path);
   if (path === "/about-us") return `${sections(page.sections, path)}`;
   if (path === "/contact-us") return sections(page.sections, path);
+  if (productPages[path]) return `${hero(page, path)}${productTemplate(page, path)}`;
   return `${hero(page, path)}${sections(page.sections, path)}`;
 }
 
@@ -2349,7 +2372,6 @@ function productCards() {
 }
 
 function sections(type, path) {
-  if (productPages[path]) return productTemplate(productPages[path], path);
   const map = {
     home: homeSections,
     solutions: solutionsSections,
