@@ -314,6 +314,27 @@
     el.setAttribute("href", href);
   }
 
+  function cmsOrigin() {
+    if (window.CooperNinveCMS && typeof window.CooperNinveCMS.cmsBase === "function") {
+      return window.CooperNinveCMS.cmsBase();
+    }
+    var hostname = window.location && window.location.hostname;
+    if (hostname === "localhost" || hostname === "127.0.0.1" || hostname === "[::1]") {
+      return "http://localhost:3000";
+    }
+    return "https://cms.tamir-kodner.com";
+  }
+
+  function absoluteSiteUrl(url, path, helpers) {
+    var raw = text(url);
+    if (!raw) {
+      return location.origin + (helpers && helpers.canonicalPath ? helpers.canonicalPath(path) : path || "");
+    }
+    if (/^https?:\/\//i.test(raw)) return raw;
+    if (raw.charAt(0) === "/") return location.origin + raw;
+    return location.origin + "/" + raw;
+  }
+
   function applySeo(data, fallback, path, helpers) {
     var seo = (data && data.seo) || {};
     var english = text(data.language) === "english";
@@ -336,7 +357,7 @@
     );
     upsertMeta('meta[name="robots"]', "name", "robots", robots);
 
-    var canonical = text(seo.canonicalURL) || location.origin + (helpers.canonicalPath ? helpers.canonicalPath(path) : path);
+    var canonical = absoluteSiteUrl(seo.canonicalURL, path, helpers);
     upsertLink("canonical", canonical, { canonical: true });
 
     var ogTitle = text(seo.openGraphTitle) || title;
@@ -346,7 +367,12 @@
 
     var image = seo.socialSharingImage && seo.socialSharingImage.url;
     if (image) {
-      var imageUrl = image.charAt(0) === "/" ? String(window.COOPER_NINVE_CMS_URL || "http://localhost:3000").replace(/\/$/, "") + image : image;
+      var imageUrl =
+        image.charAt(0) === "/"
+          ? (window.CooperNinveCMS && typeof window.CooperNinveCMS.resolveCmsUrl === "function"
+              ? window.CooperNinveCMS.resolveCmsUrl(image)
+              : cmsOrigin() + image)
+          : image;
       upsertMeta('meta[property="og:image"]', "property", "og:image", imageUrl);
       if (text(seo.imageAltText)) upsertMeta('meta[property="og:image:alt"]', "property", "og:image:alt", text(seo.imageAltText));
     }

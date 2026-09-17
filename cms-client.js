@@ -5,8 +5,10 @@
 (function (window) {
   "use strict";
 
-  var DEFAULT_BASE = "http://localhost:3000";
+  var LOCAL_CMS = "http://localhost:3000";
+  var PRODUCTION_CMS = "https://cms.tamir-kodner.com";
   var TIMEOUT_MS = 4000;
+  var HEBREW_CHAR = /[\u0590-\u05FF]/;
   var HEBREW_LANDING_PATHS = {
     "/lp/professional-liability": true,
     "/lp/cyber-insurance": true,
@@ -14,8 +16,38 @@
   };
   var PRODUCT_PATH = /^\/[a-z0-9-]+-insurance$/;
 
+  function isLocalHost(hostname) {
+    return hostname === "localhost" || hostname === "127.0.0.1" || hostname === "[::1]";
+  }
+
   function cmsBase() {
-    return String(window.COOPER_NINVE_CMS_URL || DEFAULT_BASE).replace(/\/$/, "");
+    var hostname = window.location && window.location.hostname;
+    var localPage = isLocalHost(hostname);
+    var configured = String(window.COOPER_NINVE_CMS_URL || "").replace(/\/$/, "");
+    if (configured) {
+      if (!localPage && /localhost|127\.0\.0\.1|\[::1\]/i.test(configured)) {
+        return PRODUCTION_CMS;
+      }
+      return configured;
+    }
+    if (localPage) return LOCAL_CMS;
+    return PRODUCTION_CMS;
+  }
+
+  function resolveCmsUrl(url) {
+    var raw = String(url || "").trim();
+    if (!raw) return "";
+    if (raw.charAt(0) === "/") return cmsBase() + raw;
+    return raw;
+  }
+
+  function containsHebrew(value) {
+    return HEBREW_CHAR.test(String(value || ""));
+  }
+
+  function looksEnglish(value) {
+    var raw = String(value || "").trim();
+    return Boolean(raw) && !containsHebrew(raw);
   }
 
   function pathToSlug(path) {
@@ -141,53 +173,80 @@
     });
   }
 
-  function ctaPair(cta, fallback) {
+  function ctaPair(cta, fallback, requireEnglish) {
     if (!cta || !String(cta.label || "").trim() || !String(cta.destination || "").trim()) {
       return fallback;
     }
+    if (requireEnglish && !looksEnglish(cta.label)) return fallback;
     return [String(cta.label).trim(), String(cta.destination).trim()];
   }
 
-  function textList(values, fallback) {
+  function textList(values, fallback, requireEnglish) {
     if (!Array.isArray(values) || !values.length) return fallback;
     var next = values.map(function (value) { return String(value || "").trim(); }).filter(Boolean);
-    return next.length ? next : fallback;
+    if (!next.length) return fallback;
+    if (requireEnglish && next.some(containsHebrew)) return fallback;
+    return next;
   }
 
-  function faqList(values, fallback) {
+  function faqList(values, fallback, requireEnglish) {
     if (!Array.isArray(values) || !values.length) return fallback;
     var next = values
       .map(function (item) {
         return [String(item && item.question || "").trim(), String(item && item.answer || "").trim()];
       })
       .filter(function (item) { return item[0] && item[1]; });
-    return next.length ? next : fallback;
+    if (!next.length) return fallback;
+    if (requireEnglish && next.some(function (item) { return containsHebrew(item[0]) || containsHebrew(item[1]); })) {
+      return fallback;
+    }
+    return next;
+  }
+
+  function englishOrFallback(value, fallback) {
+    var raw = String(value || "").trim();
+    if (!raw) return fallback;
+    return looksEnglish(raw) ? raw : fallback;
   }
 
   function mergeProductPage(staticPage, cms) {
     if (!staticPage) return staticPage;
     if (!cms) return staticPage;
     var seo = cms.seo || {};
+    var english = cms.language === "english";
+    var h1 = english ? englishOrFallback(cms.productName, staticPage.h1) : String(cms.productName || staticPage.h1 || "").trim();
+    var lead = english
+      ? englishOrFallback(cms.shortDescription, staticPage.lead)
+      : String(cms.shortDescription || staticPage.lead || "").trim();
+    var title = english
+      ? englishOrFallback(seo.metaTitle, englishOrFallback(cms.productName, staticPage.title))
+      : String(seo.metaTitle || cms.productName || staticPage.title || "").trim();
+    var description = english
+      ? englishOrFallback(seo.metaDescription, englishOrFallback(cms.shortDescription, staticPage.description))
+      : String(seo.metaDescription || cms.shortDescription || staticPage.description || "").trim();
+
     return Object.assign({}, staticPage, {
-      coverage: textList(cms.coverage, staticPage.coverage),
-      description: String(seo.metaDescription || cms.shortDescription || staticPage.description || "").trim(),
-      faqs: faqList(cms.faqs, staticPage.faqs),
-      h1: String(cms.productName || staticPage.h1 || "").trim(),
-      info: textList(cms.info, staticPage.info),
-      lead: String(cms.shortDescription || staticPage.lead || "").trim(),
-      primary: ctaPair(cms.primaryCTA, staticPage.primary),
-      secondary: ctaPair(cms.secondaryCTA, staticPage.secondary),
-      title: String(seo.metaTitle || cms.productName || staticPage.title || "").trim(),
-      who: textList(cms.who, staticPage.who),
+      coverage: textList(cms.coverage, staticPage.coverage, english),
+      description: description,
+      faqs: faqList(cms.faqs, staticPage.faqs, english),
+      h1: h1,
+      info: textList(cms.info, staticPage.info, english),
+      lead: lead,
+      primary: ctaPair(cms.primaryCTA, staticPage.primary, english),
+      secondary: ctaPair(cms.secondaryCTA, staticPage.secondary, english),
+      title: title,
+      who: textList(cms.who, staticPage.who, english),
     });
   }
 
   window.CooperNinveCMS = {
+    cmsBase: cmsBase,
     fetchLandingPage: fetchLandingPage,
     fetchProduct: fetchProduct,
     isLandingPath: isHebrewLandingPath,
     isProductPath: isProductPath,
     mergeProductPage: mergeProductPage,
     pathToSlug: pathToSlug,
+    resolveCmsUrl: resolveCmsUrl,
   };
 })(window);

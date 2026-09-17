@@ -2576,7 +2576,8 @@ function productTemplate(page, path) {
             <p class="product-compliance-note">הכיסוי הביטוחי כפוף לתנאי הפוליסה, חריגים, גבולות אחריות ואישור חיתום.</p>
           </article>
         </div>
-      </section>`;
+      </section>
+      ${Array.isArray(page.faqs) && page.faqs.length ? faqBlock(page.faqs) : ""}`;
   }
   return `
     <section class="section"><div class="container"><div class="center-title"><h2>למי הסיכון מתאים לבחינה?</h2><p>כל פנייה נבחנת לפי אופי הפעילות, המידע החיתומי, תיאבון הסיכון ותנאי הפוליסה הרלוונטיים.</p></div>${cards(page.who.map((title) => ({ title, icon: "◇", text: "מתאים לבדיקת חיתום בהתאם לאופי הפעילות, היקף הסיכון, המסמכים והאישורים הרלוונטיים." })), 3)}</div></section>
