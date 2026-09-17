@@ -155,6 +155,45 @@
     });
   }
 
+  function isNavigationPayload(data) {
+    return Boolean(
+      isPublicSafe(data) &&
+        Array.isArray(data.headerNavigationItems) &&
+        Array.isArray(data.footerNavigationItems) &&
+        Array.isArray(data.footerNavigationGroups) &&
+        Array.isArray(data.productMenuGroups)
+    );
+  }
+
+  function isSiteSettingsPayload(data) {
+    return Boolean(
+      isPublicSafe(data) &&
+        typeof data === "object" &&
+        ("hebrewSiteName" in data || "englishSiteName" in data || "phone" in data || "contactEmail" in data || "mainLogo" in data)
+    );
+  }
+
+  function fetchNavigation() {
+    return fetchJson(cmsBase() + "/api/public/navigation").then(function (data) {
+      return isNavigationPayload(data) ? data : null;
+    });
+  }
+
+  function fetchSiteSettings() {
+    return fetchJson(cmsBase() + "/api/public/site-settings").then(function (data) {
+      return isSiteSettingsPayload(data) ? data : null;
+    });
+  }
+
+  function fetchChrome() {
+    return Promise.all([fetchNavigation(), fetchSiteSettings()]).then(function (parts) {
+      var navigation = parts[0];
+      var siteSettings = parts[1];
+      if (!navigation || !siteSettings) return null;
+      return { navigation: navigation, siteSettings: siteSettings };
+    });
+  }
+
   function fetchProduct(options) {
     var path = options && options.path;
     if (!isProductPath(path)) return Promise.resolve(null);
@@ -241,8 +280,11 @@
 
   window.CooperNinveCMS = {
     cmsBase: cmsBase,
+    fetchChrome: fetchChrome,
     fetchLandingPage: fetchLandingPage,
+    fetchNavigation: fetchNavigation,
     fetchProduct: fetchProduct,
+    fetchSiteSettings: fetchSiteSettings,
     isLandingPath: isHebrewLandingPath,
     isProductPath: isProductPath,
     mergeProductPage: mergeProductPage,

@@ -1388,6 +1388,74 @@ const productMenuGroups = [{
 const productMenuRoutes = new Set(productMenuGroups.flatMap((group) => group.links.map(([, href]) => href)));
 const aboutMenuRoutes = new Set(["/about-us", "/blog", "/press"]);
 
+let chromeCachePromise = null;
+
+function loadCmsChrome() {
+  if (chromeCachePromise) return chromeCachePromise;
+  if (!window.CooperNinveCMS || typeof window.CooperNinveCMS.fetchChrome !== "function") {
+    chromeCachePromise = Promise.resolve(null);
+    return chromeCachePromise;
+  }
+  chromeCachePromise = window.CooperNinveCMS.fetchChrome().catch(() => null);
+  return chromeCachePromise;
+}
+
+function cmsItemHref(item) {
+  return String((item && (item.href || item.externalURL)) || "").trim();
+}
+
+function cmsLangItems(items, english) {
+  const lang = english ? "english" : "hebrew";
+  const list = Array.isArray(items) ? items : [];
+  const matched = list.filter((item) => item.language === lang);
+  return matched.length ? matched : list.filter((item) => !item.language);
+}
+
+function cmsHeaderReady(nav, english) {
+  const items = cmsLangItems(nav && nav.headerNavigationItems, english).filter((item) => item.label && cmsItemHref(item));
+  const hrefs = items.map((item) => cmsItemHref(item).split("#")[0]);
+  if (items.length < 3) return false;
+  if (english) return hrefs.some((href) => href === "/insurance-solutions" || href === "/insurance-agents" || href === "/about-us");
+  return hrefs.includes("/insurance-agents") && (hrefs.includes("/claims") || hrefs.includes("/about-us") || hrefs.includes("/insurance-solutions"));
+}
+
+function cmsProductGroups(nav, english) {
+  return cmsLangItems(nav && nav.productMenuGroups, english).filter((group) =>
+    Array.isArray(group.items) && group.items.some((item) => item.label && cmsItemHref(item))
+  );
+}
+
+function cmsFooterGroups(nav, english) {
+  return cmsLangItems(nav && nav.footerNavigationGroups, english).filter((group) =>
+    group.heading && Array.isArray(group.items) && group.items.some((item) => item.label && cmsItemHref(item))
+  );
+}
+
+function cmsMediaUrl(media) {
+  if (!media || !media.url) return "";
+  if (window.CooperNinveCMS && typeof window.CooperNinveCMS.resolveCmsUrl === "function") {
+    return window.CooperNinveCMS.resolveCmsUrl(media.url);
+  }
+  return media.url;
+}
+
+function applyCmsFavicon(settings) {
+  const url = cmsMediaUrl(settings && settings.favicon);
+  if (!url) return;
+  let icon = document.querySelector('link[rel="icon"]');
+  if (!icon) {
+    icon = document.createElement("link");
+    icon.setAttribute("rel", "icon");
+    document.head.appendChild(icon);
+  }
+  icon.setAttribute("href", url);
+}
+
+function telHref(phone) {
+  const digits = String(phone || "").replace(/[^0-9+]/g, "");
+  return digits ? `tel:${digits}` : "";
+}
+
 function setMobileNav(open) {
   mainNav.classList.toggle("open", open);
   menuToggle.setAttribute("aria-expanded", String(open));
@@ -1494,7 +1562,9 @@ async function render() {
   const path = pathFromLocation();
   const landing = landingRoute(path);
   let page = landing ? landingPages[landing] : (pages[path] || pages["/"]);
-  renderChrome(path);
+  const chrome = await loadCmsChrome();
+  if (token !== renderGeneration) return;
+  renderChrome(path, chrome);
   document.body.classList.toggle("lp", Boolean(landing));
   document.body.classList.toggle("lang-en", isEnglish());
   document.body.classList.toggle("lang-he", !isEnglish());
@@ -1617,10 +1687,17 @@ function setAlternateLinks(path) {
   document.head.append(canonical, english);
 }
 
-function renderChrome(path) {
+function renderChrome(path, chrome = null) {
   const english = isEnglish();
   const englishSwitchLabel = "EN";
-  const navItems = english ? [
+  const settings = chrome && chrome.siteSettings;
+  const nav = chrome && chrome.navigation;
+  const headerItems = nav && cmsHeaderReady(nav, english)
+    ? cmsLangItems(nav.headerNavigationItems, english).filter((item) => item.label && cmsItemHref(item))
+    : null;
+  const navItems = headerItems
+    ? headerItems.map((item) => [cmsItemHref(item), item.label])
+    : english ? [
     ["/insurance-solutions", "Underwriting"],
     ["/insurance-agents", "Distribution Access"],
     ["/claims", "Claims & Operations"],
@@ -1632,18 +1709,31 @@ function renderChrome(path) {
     ["/claims", "תביעות"],
     ["/about-us", "אודות"],
   ];
+  const productGroups = nav ? cmsProductGroups(nav, english) : [];
   mainNav.setAttribute("aria-label", english ? "Main navigation" : "ניווט ראשי");
   mainNav.innerHTML = `${navItems.map(([href, label]) => {
-    if (!english && href === "/insurance-solutions") return productMegaMenuHtml(path);
-    if (!english && href === "/about-us") return aboutMegaMenuHtml(path);
-    return `<a href="${link(href)}">${label}</a>`;
+    const route = href.startsWith("/") ? href.split("#")[0] : "";
+    if (!english && route === "/insurance-solutions") return productMegaMenuHtml(path, productGroups, "מוצרי ביטוח", href);
+    if (!english && (route === "/about-us" || label === "אודות")) return aboutMegaMenuHtml(path);
+    const safeHref = href.startsWith("/") ? link(href) : href;
+    const target = headerItems && headerItems.find((item) => item.label === label && item.openInNewTab) ? ' target="_blank" rel="noopener noreferrer"' : "";
+    return `<a href="${safeHref}"${target}>${label}</a>`;
   }).join("")}<a class="language-switcher nav-language-switcher" href="${matchingLanguagePath(path, !english)}"${english ? ` aria-label="Switch to Hebrew"` : ` aria-label="Switch to English"`}>${english ? "HE" : englishSwitchLabel}</a>`;
   initProductMenu();
 
   const brand = document.querySelector(".brand");
+  const siteName = english
+    ? (settings && settings.englishSiteName) || "Cooper Ninve"
+    : (settings && settings.hebrewSiteName) || "קופר נינוה";
   if (brand) {
     brand.href = link("/");
-    brand.setAttribute("aria-label", english ? "Cooper Ninve - Home" : "קופר נינוה - דף הבית");
+    brand.setAttribute("aria-label", english ? `${siteName} - Home` : `${siteName} - דף הבית`);
+    const brandImg = brand.querySelector("img");
+    const logoUrl = cmsMediaUrl(settings && settings.mainLogo);
+    if (brandImg && logoUrl) {
+      brandImg.src = logoUrl;
+      brandImg.alt = (settings.mainLogo && settings.mainLogo.alt) || siteName;
+    }
   }
 
   const skipLink = document.querySelector(".skip-link");
@@ -1660,26 +1750,38 @@ function renderChrome(path) {
 
   const footer = document.querySelector(".site-footer");
   if (footer) {
-    footer.innerHTML = footerHtml(english, path);
+    footer.innerHTML = footerHtml(english, path, chrome);
     initFooterAccordion(footer);
   }
 
+  if (settings) applyCmsFavicon(settings);
+
+  const phone = (settings && settings.phone) || "0779965453";
   const mobileSticky = document.querySelector(".mobile-sticky");
   if (mobileSticky) {
-    mobileSticky.innerHTML = `<a href="${link("/contact-us")}" data-track="click_quote_cta">${english ? "Partner With Us" : "לקבלת הצעה לביטוח"}</a><a href="tel:0779965453" data-track="click_phone">${english ? "Call" : "שיחה"}</a>`;
+    mobileSticky.innerHTML = `<a href="${link("/contact-us")}" data-track="click_quote_cta">${english ? "Partner With Us" : "לקבלת הצעה לביטוח"}</a><a href="${telHref(phone)}" data-track="click_phone">${english ? "Call" : "שיחה"}</a>`;
   }
 }
 
-function productMegaMenuHtml(path) {
+function productMegaMenuHtml(path, cmsGroups = [], triggerLabel = "", triggerHref = "/insurance-solutions") {
   const active = productMenuRoutes.has(path) ? " active" : "";
+  const label = triggerLabel || (isEnglish() ? "Underwriting" : "מוצרי ביטוח");
+  const groups = cmsGroups.length
+    ? cmsGroups.map((group) => ({
+        title: group.heading || label,
+        links: group.items
+          .filter((item) => item.label && cmsItemHref(item))
+          .map((item) => [item.label, cmsItemHref(item), item.description || ""]),
+      }))
+    : productMenuGroups;
   return `<div class="nav-product-menu" data-product-menu>
-    <a class="nav-product-trigger${active}" href="/insurance-solutions" aria-controls="product-mega-menu">מוצרי ביטוח</a>
+    <a class="nav-product-trigger${active}" href="${link(triggerHref.startsWith("/") ? triggerHref : "/insurance-solutions")}" aria-controls="product-mega-menu">${label}</a>
     <div class="product-mega-menu" id="product-mega-menu">
-      ${productMenuGroups.map((group) => `<section class="product-menu-column">
+      ${groups.map((group) => `<section class="product-menu-column">
         <div class="product-menu-links">
-          ${group.links.map(([title, href, description]) => `<a class="product-menu-link" href="${href}">
+          ${group.links.map(([title, href, description]) => `<a class="product-menu-link" href="${href.startsWith("/") ? link(href) : href}">
             <strong>${title}</strong>
-            <span>${description}</span>
+            ${description ? `<span>${description}</span>` : ""}
           </a>`).join("")}
         </div>
       </section>`).join("")}
@@ -1744,9 +1846,15 @@ function closeProductMenu() {
   mainNav?.querySelectorAll("[data-product-menu]").forEach((menu) => menu.classList.remove("is-open"));
 }
 
-function footerHtml(english, path = "/") {
+function footerHtml(english, path = "/", chrome = null) {
+  const settings = chrome && chrome.siteSettings;
+  const nav = chrome && chrome.navigation;
   const englishPartnerFooter = english && (path === "/contact-us" || path === "/insurance-solutions");
-  const footerGroups = englishPartnerFooter ? [
+  const cmsGroups = nav ? cmsFooterGroups(nav, english) : [];
+  const footerGroups = cmsGroups.length >= 3 ? cmsGroups.map((group) => [
+    group.heading,
+    group.items.filter((item) => item.label && cmsItemHref(item)).map((item) => [item.label, cmsItemHref(item)]),
+  ]) : englishPartnerFooter ? [
     ["Cooper Ninve", [["Israel Market Partner", "/israel-market-partner"], ["About", "/about-us"], ["Insights", "/knowledge-center"]]],
     ["For Partners", [["Partner With Us", "/contact-us"], ["Underwriting Solutions", "/insurance-solutions"], ["Claims & Operations", "/claims"]]],
     ["Market Interface", [["Distribution Access", "/insurance-agents"], ["Israeli Market Knowledge", "/business-insurance"], ["Underwriting Solutions", "/insurance-solutions"]]],
@@ -1765,20 +1873,25 @@ function footerHtml(english, path = "/") {
     ["תביעות", [["תביעות", "/claims"], ["צור קשר", "/contact-us"]]],
     ["יצירת קשר", [["צור קשר", "/contact-us"], ["077-9965453", "tel:0779965453"], ["info@cooper-ninve.com", "mailto:info@cooper-ninve.com"]]],
   ];
-  const contactText = englishPartnerFooter ? "Israel-market underwriting execution, distribution access, policy servicing and claims coordination support for international insurance partners." : english ? "A trusted local underwriting, claims and portfolio management partner in Israel." : "מרכז חיתום ישראלי המחבר בין סוכנים, עסקים ושווקי ביטוח בינלאומיים.";
-  const address = english ? "111 Dizengoff St., Tel Aviv" : "רח׳ דיזנגוף 111, תל אביב";
-  const rights = english ? "© 2026 Cooper Ninve. All rights reserved." : "© 2026 Cooper Ninve. כל הזכויות שמורות.";
+  const contactText = (english ? settings && settings.englishSiteDescription : settings && settings.hebrewSiteDescription)
+    || (englishPartnerFooter ? "Israel-market underwriting execution, distribution access, policy servicing and claims coordination support for international insurance partners." : english ? "A trusted local underwriting, claims and portfolio management partner in Israel." : "מרכז חיתום ישראלי המחבר בין סוכנים, עסקים ושווקי ביטוח בינלאומיים.");
+  const address = (settings && settings.address) || (english ? "111 Dizengoff St., Tel Aviv" : "רח׳ דיזנגוף 111, תל אביב");
+  const rights = (settings && settings.copyrightText) || (english ? "© 2026 Cooper Ninve. All rights reserved." : "© 2026 Cooper Ninve. כל הזכויות שמורות.");
   const legal = english ? [["Privacy Policy", "/privacy-policy"], ["Terms of Use", "/terms-of-use"], ["Disclosure", "/disclosure"], ["Public Complaints", "/public-complaints"], ["Accessibility", "/accessibility-statement"]] : [["מדיניות פרטיות", "/privacy-policy"], ["תנאי שימוש", "/terms-of-use"], ["גילוי נאות", "/disclosure"], ["תלונות הציבור", "/public-complaints"], ["הצהרת נגישות", "/accessibility-statement"]];
-  const note = english ? "Insurance coverage is subject to the policy terms, exclusions, limits of liability and underwriting approval." : "הכיסוי הביטוחי כפוף לתנאי הפוליסה, חריגים, גבולות אחריות ואישור חיתום.";
+  const note = (settings && settings.footerLegalNote) || (english ? "Insurance coverage is subject to the policy terms, exclusions, limits of liability and underwriting approval." : "הכיסוי הביטוחי כפוף לתנאי הפוליסה, חריגים, גבולות אחריות ואישור חיתום.");
+  const phone = (settings && settings.phone) || "077-9965453";
+  const email = (settings && settings.contactEmail) || "info@cooper-ninve.com";
+  const logoUrl = cmsMediaUrl(settings && settings.mainLogo) || "/assets/logo/cooper-ninve-logo-white.png";
+  const logoAlt = (settings && settings.mainLogo && settings.mainLogo.alt) || "Cooper Ninve";
   return `<div class="footer-main">
     <div class="container footer-grid footer-grid-wide">
       <section class="footer-contact">
-        <img src="/assets/logo/cooper-ninve-logo-white.png" alt="Cooper Ninve" width="768" height="283" loading="lazy" decoding="async" />
+        <img src="${logoUrl}" alt="${logoAlt}" width="768" height="283" loading="lazy" decoding="async" />
         <p class="footer-slogan" lang="en">First of all, integrity.</p>
         <p>${contactText}</p>
         <ul>
-          <li><a href="tel:0779965453" data-track="click_phone">077-9965453</a></li>
-          <li><a href="mailto:info@cooper-ninve.com" data-track="click_email">info@cooper-ninve.com</a></li>
+          <li><a href="${telHref(phone)}" data-track="click_phone">${phone}</a></li>
+          <li><a href="mailto:${email}" data-track="click_email">${email}</a></li>
           <li>${address}</li>
         </ul>
       </section>
