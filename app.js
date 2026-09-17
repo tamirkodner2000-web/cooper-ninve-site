@@ -1415,8 +1415,10 @@ function cmsHeaderReady(nav, english) {
   const items = cmsLangItems(nav && nav.headerNavigationItems, english).filter((item) => item.label && cmsItemHref(item));
   const hrefs = items.map((item) => cmsItemHref(item).split("#")[0]);
   if (items.length < 3) return false;
-  if (english) return hrefs.some((href) => href === "/insurance-solutions" || href === "/insurance-agents" || href === "/about-us");
-  return hrefs.includes("/insurance-agents") && (hrefs.includes("/claims") || hrefs.includes("/about-us") || hrefs.includes("/insurance-solutions"));
+  if (english) {
+    return hrefs.includes("/insurance-solutions") && hrefs.includes("/insurance-agents") && hrefs.includes("/claims") && hrefs.includes("/about-us");
+  }
+  return hrefs.includes("/insurance-agents") && hrefs.includes("/business-insurance") && hrefs.includes("/insurance-solutions") && hrefs.includes("/claims") && hrefs.includes("/about-us");
 }
 
 function cmsProductGroups(nav, english) {
