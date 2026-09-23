@@ -194,6 +194,69 @@
     });
   }
 
+  function isHomepagePayload(data, language) {
+    var seo = data && data.seo;
+    return Boolean(
+      isPublicSafe(data) &&
+        data.pageType === "homepage" &&
+        data.language === language &&
+        typeof data.slug === "string" &&
+        data.slug === "home" &&
+        seo &&
+        typeof seo === "object"
+    );
+  }
+
+  function fetchHomepage(options) {
+    var language = options && options.language === "english" ? "english" : "hebrew";
+    if (language !== "hebrew") return Promise.resolve(null);
+
+    var url =
+      cmsBase() +
+      "/api/public/pages?slug=home&language=" +
+      encodeURIComponent(language);
+
+    return fetchJson(url).then(function (data) {
+      return isHomepagePayload(data, language) ? data : null;
+    });
+  }
+
+  function homepagePartnerLogos(cms) {
+    var block = cms && cms.partnerLogos;
+    var items = block && Array.isArray(block.partners) ? block.partners : [];
+    var next = items
+      .map(function (item) {
+        var logo = item && item.logo;
+        var src = logo && logo.url ? resolveCmsUrl(logo.url) : "";
+        if (!src) return null;
+        return {
+          alt: String((item && (item.alt || item.name)) || "").trim(),
+          height: typeof logo.height === "number" ? logo.height : undefined,
+          src: src,
+          width: typeof logo.width === "number" ? logo.width : undefined,
+        };
+      })
+      .filter(function (item) {
+        return item && item.src && item.alt;
+      });
+    return next.length >= 6 ? next : null;
+  }
+
+  function mergeHomepagePage(staticPage, cms) {
+    if (!staticPage || !cms || cms.language !== "hebrew") return staticPage;
+    var seo = cms.seo || {};
+    var title = String(seo.metaTitle || "").trim();
+    var description = String(seo.metaDescription || "").trim();
+    if (title && !containsHebrew(title)) title = "";
+    if (description && !containsHebrew(description)) description = "";
+    return Object.assign({}, staticPage, {
+      cmsPartnerLogos: homepagePartnerLogos(cms),
+      cmsSeo: seo,
+      description: description || staticPage.description,
+      title: title || staticPage.title,
+    });
+  }
+
   function fetchProduct(options) {
     var path = options && options.path;
     if (!isProductPath(path)) return Promise.resolve(null);
@@ -281,12 +344,14 @@
   window.CooperNinveCMS = {
     cmsBase: cmsBase,
     fetchChrome: fetchChrome,
+    fetchHomepage: fetchHomepage,
     fetchLandingPage: fetchLandingPage,
     fetchNavigation: fetchNavigation,
     fetchProduct: fetchProduct,
     fetchSiteSettings: fetchSiteSettings,
     isLandingPath: isHebrewLandingPath,
     isProductPath: isProductPath,
+    mergeHomepagePage: mergeHomepagePage,
     mergeProductPage: mergeProductPage,
     pathToSlug: pathToSlug,
     resolveCmsUrl: resolveCmsUrl,

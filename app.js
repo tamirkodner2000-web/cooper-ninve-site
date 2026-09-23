@@ -1554,6 +1554,14 @@ async function render() {
   const path = pathFromLocation();
   const landing = landingRoute(path);
   let page = landing ? landingPages[landing] : (pages[path] || pages["/"]);
+  const homepagePromise =
+    !isEnglish() &&
+    path === "/" &&
+    !landing &&
+    window.CooperNinveCMS &&
+    typeof window.CooperNinveCMS.fetchHomepage === "function"
+      ? window.CooperNinveCMS.fetchHomepage({ language: "hebrew" }).catch(() => null)
+      : Promise.resolve(null);
   const chrome = await loadCmsChrome();
   if (token !== renderGeneration) return;
   renderChrome(path, chrome);
@@ -1589,7 +1597,24 @@ async function render() {
     }
   }
 
-  if (!usedLandingCms && productPages[path] && window.CooperNinveCMS && typeof window.CooperNinveCMS.fetchProduct === "function") {
+  if (!usedLandingCms && path === "/" && !isEnglish() && !landing) {
+    const cms = await homepagePromise;
+    if (token !== renderGeneration) return;
+    if (cms && typeof window.CooperNinveCMS.mergeHomepagePage === "function") {
+      page = window.CooperNinveCMS.mergeHomepagePage(page, cms);
+      if (typeof window.CooperNinveCMS.applySeo === "function") {
+        window.CooperNinveCMS.applySeo(cms, page, path, {
+          canonicalPath: publicCanonicalPath,
+          setAlternateLinks,
+        });
+      } else {
+        setMeta(page, path);
+      }
+      html = standardTemplate(page, path);
+    }
+  }
+
+  if (!usedLandingCms && html == null && productPages[path] && window.CooperNinveCMS && typeof window.CooperNinveCMS.fetchProduct === "function") {
     const cms = await window.CooperNinveCMS.fetchProduct({
       language: isEnglish() ? "english" : "hebrew",
       path,
@@ -1618,7 +1643,7 @@ async function render() {
 
   app.innerHTML = html;
   if (isEnglish()) translateApp();
-  renderPartnerLogos();
+  renderPartnerLogos(page && page.cmsPartnerLogos);
   bindForms();
   initSketchVisuals();
   initAnimations();
@@ -2106,10 +2131,11 @@ function initSketchVisuals() {
   });
 }
 
-function renderPartnerLogos() {
+function renderPartnerLogos(logos = partnerLogos) {
   const logoGrid = document.querySelector("[data-partner-logos]");
   if (!logoGrid) return;
-  logoGrid.innerHTML = partnerLogos.map(({ alt, src, width, height }) => `
+  const items = Array.isArray(logos) && logos.length ? logos : partnerLogos;
+  logoGrid.innerHTML = items.map(({ alt, src, width, height }) => `
     <div class="partner-logo-card">
       <img src="${src}" alt="${alt}" width="${width}" height="${height}" decoding="async" style="--logo-ratio:${width} / ${height}" onerror="this.hidden=true; this.nextElementSibling.hidden=false;">
       <span class="partner-logo-fallback" hidden>${alt}</span>
