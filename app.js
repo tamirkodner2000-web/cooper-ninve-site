@@ -1411,16 +1411,6 @@ function cmsLangItems(items, english) {
   return matched.length ? matched : list.filter((item) => !item.language);
 }
 
-function cmsHeaderReady(nav, english) {
-  const items = cmsLangItems(nav && nav.headerNavigationItems, english).filter((item) => item.label && cmsItemHref(item));
-  const hrefs = items.map((item) => cmsItemHref(item).split("#")[0]);
-  if (items.length < 3) return false;
-  if (english) {
-    return hrefs.includes("/insurance-solutions") && hrefs.includes("/insurance-agents") && hrefs.includes("/claims") && hrefs.includes("/about-us");
-  }
-  return hrefs.includes("/insurance-agents") && hrefs.includes("/business-insurance") && hrefs.includes("/insurance-solutions") && hrefs.includes("/claims") && hrefs.includes("/about-us");
-}
-
 function cmsProductGroups(nav, english) {
   return cmsLangItems(nav && nav.productMenuGroups, english).filter((group) =>
     Array.isArray(group.items) && group.items.some((item) => item.label && cmsItemHref(item))
@@ -1694,10 +1684,10 @@ function renderChrome(path, chrome = null) {
   const englishSwitchLabel = "EN";
   const settings = chrome && chrome.siteSettings;
   const nav = chrome && chrome.navigation;
-  const headerItems = nav && cmsHeaderReady(nav, english)
+  const headerItems = nav
     ? cmsLangItems(nav.headerNavigationItems, english).filter((item) => item.label && cmsItemHref(item))
     : null;
-  const navItems = headerItems
+  const navItems = headerItems && headerItems.length
     ? headerItems.map((item) => [cmsItemHref(item), item.label])
     : english ? [
     ["/insurance-solutions", "Underwriting"],
@@ -1715,7 +1705,7 @@ function renderChrome(path, chrome = null) {
   mainNav.setAttribute("aria-label", english ? "Main navigation" : "ניווט ראשי");
   mainNav.innerHTML = `${navItems.map(([href, label]) => {
     const route = href.startsWith("/") ? href.split("#")[0] : "";
-    if (!english && route === "/insurance-solutions") return productMegaMenuHtml(path, productGroups, "מוצרי ביטוח", href);
+    if (!english && route === "/insurance-solutions") return productMegaMenuHtml(path, productGroups, label, href);
     if (!english && (route === "/about-us" || label === "אודות")) return aboutMegaMenuHtml(path);
     const safeHref = href.startsWith("/") ? link(href) : href;
     const target = headerItems && headerItems.find((item) => item.label === label && item.openInNewTab) ? ' target="_blank" rel="noopener noreferrer"' : "";
@@ -1853,15 +1843,15 @@ function footerHtml(english, path = "/", chrome = null) {
   const nav = chrome && chrome.navigation;
   const englishPartnerFooter = english && (path === "/contact-us" || path === "/insurance-solutions");
   const cmsGroups = nav ? cmsFooterGroups(nav, english) : [];
-  const footerGroups = cmsGroups.length >= 3 ? cmsGroups.map((group) => [
-    group.heading,
-    group.items.filter((item) => item.label && cmsItemHref(item)).map((item) => [item.label, cmsItemHref(item)]),
-  ]) : englishPartnerFooter ? [
+  const footerGroups = englishPartnerFooter ? [
     ["Cooper Ninve", [["Israel Market Partner", "/israel-market-partner"], ["About", "/about-us"], ["Insights", "/knowledge-center"]]],
     ["For Partners", [["Partner With Us", "/contact-us"], ["Underwriting Solutions", "/insurance-solutions"], ["Claims & Operations", "/claims"]]],
     ["Market Interface", [["Distribution Access", "/insurance-agents"], ["Israeli Market Knowledge", "/business-insurance"], ["Underwriting Solutions", "/insurance-solutions"]]],
     ["Contact", [["Partner With Us", "/contact-us"], ["077-9965453", "tel:0779965453"], ["info@cooper-ninve.com", "mailto:info@cooper-ninve.com"]]],
-  ] : english ? [
+  ] : cmsGroups.length >= 3 ? cmsGroups.map((group) => [
+    group.heading,
+    group.items.filter((item) => item.label && cmsItemHref(item)).map((item) => [item.label, cmsItemHref(item)]),
+  ]) : english ? [
     ["Cooper Ninve", [["Israel Market Partner", "/israel-market-partner"], ["About", "/about-us"], ["Knowledge Center", "/knowledge-center"]]],
     ["Underwriting Solutions", [["Professional Liability", "/professional-liability-insurance"], ["Cyber", "/cyber-insurance"], ["Contractors’ All Risks", "/contractors-all-risks-insurance"], ["Medical Malpractice", "/medical-malpractice-insurance"], ["Liability and Third-Party Coverage", "/liability-insurance"]]],
     ["Distribution Access", [["Distribution Access", "/insurance-agents"], ["Submit a Risk for Review", "/contact-us"], ["Underwriting Solutions", "/insurance-solutions"]]],
