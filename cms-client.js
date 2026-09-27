@@ -15,6 +15,17 @@
     "/lp/insurance-agents": true,
   };
   var PRODUCT_PATH = /^\/[a-z0-9-]+-insurance$/;
+  var STANDARD_PAGE_TYPES = {
+    "/about-us": "standard",
+    "/business-insurance": "business",
+    "/claims": "claims",
+    "/insurance-agents": "agents",
+  };
+  var STANDARD_HERO_PATHS = {
+    "/business-insurance": true,
+    "/claims": true,
+    "/insurance-agents": true,
+  };
 
   function isLocalHost(hostname) {
     return hostname === "localhost" || hostname === "127.0.0.1" || hostname === "[::1]";
@@ -62,7 +73,7 @@
   }
 
   function isProductPath(path) {
-    return PRODUCT_PATH.test(String(path || ""));
+    return PRODUCT_PATH.test(String(path || "")) && !STANDARD_PAGE_TYPES[path];
   }
 
   function isPublicSafe(data) {
@@ -221,6 +232,71 @@
     });
   }
 
+  function isStandardPagePath(path) {
+    return Boolean(STANDARD_PAGE_TYPES[path]);
+  }
+
+  function isStandardPagePayload(data, language, path) {
+    var expectedType = STANDARD_PAGE_TYPES[path];
+    var seo = data && data.seo;
+    return Boolean(
+      expectedType &&
+        isPublicSafe(data) &&
+        data.pageType === expectedType &&
+        data.language === language &&
+        typeof data.slug === "string" &&
+        data.slug === String(path || "").replace(/^\//, "") &&
+        seo &&
+        typeof seo === "object"
+    );
+  }
+
+  function fetchStandardPage(options) {
+    var path = options && options.path;
+    var language = options && options.language === "english" ? "english" : "hebrew";
+    if (language !== "hebrew" || !isStandardPagePath(path)) return Promise.resolve(null);
+
+    var slug = String(path).replace(/^\//, "");
+    var url =
+      cmsBase() +
+      "/api/public/pages?slug=" +
+      encodeURIComponent(slug) +
+      "&language=" +
+      encodeURIComponent(language);
+
+    return fetchJson(url).then(function (data) {
+      return isStandardPagePayload(data, language, path) ? data : null;
+    });
+  }
+
+  function hebrewOrFallback(value, fallback) {
+    var raw = String(value || "").trim();
+    if (!raw || !containsHebrew(raw)) return fallback;
+    return raw;
+  }
+
+  function mergeStandardPage(staticPage, cms, path) {
+    if (!staticPage || !cms || cms.language !== "hebrew") return staticPage;
+    var seo = cms.seo || {};
+    var title = hebrewOrFallback(seo.metaTitle, staticPage.title);
+    var description = hebrewOrFallback(seo.metaDescription, staticPage.description);
+    var next = Object.assign({}, staticPage, {
+      cmsSeo: seo,
+      description: description,
+      title: title,
+    });
+    if (!STANDARD_HERO_PATHS[path]) return next;
+
+    var hero = cms.hero || {};
+    next.h1 = hebrewOrFallback(hero.heading, staticPage.h1);
+    next.lead = hebrewOrFallback(hero.subheading, staticPage.lead);
+    next.primary = ctaPair(hero.primaryCTA, staticPage.primary);
+    if (next.primary[0] && !containsHebrew(next.primary[0])) next.primary = staticPage.primary;
+    next.secondary = ctaPair(hero.secondaryCTA, staticPage.secondary);
+    if (next.secondary[0] && !containsHebrew(next.secondary[0])) next.secondary = staticPage.secondary;
+    return next;
+  }
+
   function homepagePartnerLogos(cms) {
     var block = cms && cms.partnerLogos;
     var items = block && Array.isArray(block.partners) ? block.partners : [];
@@ -346,6 +422,7 @@
     fetchChrome: fetchChrome,
     fetchHomepage: fetchHomepage,
     fetchLandingPage: fetchLandingPage,
+    fetchStandardPage: fetchStandardPage,
     fetchNavigation: fetchNavigation,
     fetchProduct: fetchProduct,
     fetchSiteSettings: fetchSiteSettings,
@@ -353,6 +430,7 @@
     isProductPath: isProductPath,
     mergeHomepagePage: mergeHomepagePage,
     mergeProductPage: mergeProductPage,
+    mergeStandardPage: mergeStandardPage,
     pathToSlug: pathToSlug,
     resolveCmsUrl: resolveCmsUrl,
   };

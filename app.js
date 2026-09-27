@@ -1562,6 +1562,13 @@ async function render() {
     typeof window.CooperNinveCMS.fetchHomepage === "function"
       ? window.CooperNinveCMS.fetchHomepage({ language: "hebrew" }).catch(() => null)
       : Promise.resolve(null);
+  const standardPagePromise =
+    !isEnglish() &&
+    !landing &&
+    window.CooperNinveCMS &&
+    typeof window.CooperNinveCMS.fetchStandardPage === "function"
+      ? window.CooperNinveCMS.fetchStandardPage({ language: "hebrew", path }).catch(() => null)
+      : Promise.resolve(null);
   const chrome = await loadCmsChrome();
   if (token !== renderGeneration) return;
   renderChrome(path, chrome);
@@ -1602,6 +1609,23 @@ async function render() {
     if (token !== renderGeneration) return;
     if (cms && typeof window.CooperNinveCMS.mergeHomepagePage === "function") {
       page = window.CooperNinveCMS.mergeHomepagePage(page, cms);
+      if (typeof window.CooperNinveCMS.applySeo === "function") {
+        window.CooperNinveCMS.applySeo(cms, page, path, {
+          canonicalPath: publicCanonicalPath,
+          setAlternateLinks,
+        });
+      } else {
+        setMeta(page, path);
+      }
+      html = standardTemplate(page, path);
+    }
+  }
+
+  if (!usedLandingCms && html == null && !landing && path !== "/") {
+    const cms = await standardPagePromise;
+    if (token !== renderGeneration) return;
+    if (cms && typeof window.CooperNinveCMS.mergeStandardPage === "function") {
+      page = window.CooperNinveCMS.mergeStandardPage(page, cms, path);
       if (typeof window.CooperNinveCMS.applySeo === "function") {
         window.CooperNinveCMS.applySeo(cms, page, path, {
           canonicalPath: publicCanonicalPath,

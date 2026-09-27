@@ -92,6 +92,55 @@ const hebrewMerged = prod.mergeProductPage(staticPage, hebrewCms)
 check('hebrew uses CMS who', hebrewMerged.who[0] === 'יועצים ונותני שירותים')
 check('hebrew uses CMS faqs', hebrewMerged.faqs[0][0] === 'שאלה')
 
+const standardStatic = {
+  title: 'תביעות | קופר נינוה',
+  description: 'תיאור סטטי',
+  h1: 'תביעות',
+  lead: 'ליד סטטי',
+  primary: ['', '/contact-us'],
+  secondary: ['', '/contact-us'],
+  hideActions: true,
+}
+
+const standardCms = {
+  language: 'hebrew',
+  pageType: 'claims',
+  slug: 'claims',
+  seo: {
+    metaTitle: 'תביעות | קופר נינוה',
+    metaDescription: 'תיאור מ-CMS בעברית',
+  },
+  hero: {
+    heading: 'תביעות',
+    subheading: 'ליד מ-CMS בעברית',
+    primaryCTA: { label: '', destination: '/contact-us' },
+    secondaryCTA: { label: '', destination: '/contact-us' },
+  },
+}
+
+const mergedClaims = prod.mergeStandardPage(standardStatic, standardCms, '/claims')
+check('standard hebrew uses CMS title', mergedClaims.title === standardCms.seo.metaTitle)
+check('standard hebrew uses CMS lead', mergedClaims.lead === 'ליד מ-CMS בעברית')
+check('standard empty CTA keeps fallback', mergedClaims.primary[0] === '')
+
+const aboutMerged = prod.mergeStandardPage(
+  { title: 'אודות', description: 'תיאור', h1: 'אודות קופר נינוה', lead: 'ליד סטטי' },
+  {
+    language: 'hebrew',
+    seo: { metaTitle: 'אודות קופר נינוה | CMS', metaDescription: 'תיאור CMS' },
+    hero: { heading: 'אודות קופר נינוה', subheading: 'ליד שלא אמור להחליף' },
+  },
+  '/about-us',
+)
+check('about-us keeps static h1', aboutMerged.h1 === 'אודות קופר נינוה')
+check('about-us uses CMS title', aboutMerged.title === 'אודות קופר נינוה | CMS')
+
+const englishIgnored = prod.mergeStandardPage(standardStatic, Object.assign({}, standardCms, { language: 'english' }), '/claims')
+check('english standard merge ignored', englishIgnored.lead === 'ליד סטטי')
+
+const englishFetch = prod.fetchStandardPage({ language: 'english', path: '/about-us' })
+check('english standard fetch is thenable', typeof englishFetch.then === 'function')
+
 if (failures.length) {
   console.error(`\n${failures.length} failed`)
   process.exit(1)
