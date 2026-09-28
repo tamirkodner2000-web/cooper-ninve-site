@@ -1569,8 +1569,25 @@ async function render() {
     typeof window.CooperNinveCMS.fetchStandardPage === "function"
       ? window.CooperNinveCMS.fetchStandardPage({ language: "hebrew", path }).catch(() => null)
       : Promise.resolve(null);
+  const pressPromise =
+    !isEnglish() &&
+    path === "/press" &&
+    window.CooperNinveCMS &&
+    typeof window.CooperNinveCMS.fetchPressMedia === "function"
+      ? window.CooperNinveCMS.fetchPressMedia().catch(() => null)
+      : Promise.resolve(null);
   const chrome = await loadCmsChrome();
   if (token !== renderGeneration) return;
+  livePressGroups = pressGroups;
+  if (path === "/press" && !isEnglish()) {
+    const pressCms = await pressPromise;
+    if (token !== renderGeneration) return;
+    const mapped =
+      pressCms && typeof window.CooperNinveCMS.mergePressGroups === "function"
+        ? window.CooperNinveCMS.mergePressGroups(pressGroups, pressCms)
+        : null;
+    if (mapped) livePressGroups = mapped;
+  }
   renderChrome(path, chrome);
   document.body.classList.toggle("lp", Boolean(landing));
   document.body.classList.toggle("lang-en", isEnglish());
@@ -2680,8 +2697,10 @@ function aboutSections() {
     <section class="section about-article-section"><div class="container"><article class="about-article"><h2>אודות קופר נינוה</h2><p>קופר נינוה היא אחת מסוכנויות הביטוח הוותיקות והמובילות בישראל בענף הביטוח הכללי, וחברת בת של נינוה סוכנות לביטוח בע״מ, אשר נוסדה בשנת 1973. קופר נינוה פועלת כ־Coverholder בשוק לויד׳ס בישראל, ועובדת עם חברות ביטוח ומבטחי משנה מהגדולים בעולם, תוך החזקת סמכויות חיתום בשם מבטחי לויד׳ס לונדון.</p><p>קופר נינוה עובדת עם מבטחי משנה ושווקים בינלאומיים, יתרון המאפשר למבוטחים ולסוכנים העובדים עמנו גישה ישירה לעולם הביטוח הבינלאומי.</p><p>המשמעות של ביצוע החיתום בישראל גדולה הן עבור המבוטחים והן עבור הסוכנים, בעיקר בשני היבטים מרכזיים: זמן וכסף. קיצור תהליך החיתום וצמצום מספר הגורמים המטפלים בבקשה עשויים לסייע ביצירת תהליך יעיל, מדויק ונגיש יותר.</p><p>אנו מתמחים בסיכונים מיוחדים ובביטוחי חבויות, לרבות חבות מעבידים, אחריות המוצר, צד שלישי, אחריות מקצועית, רשלנות רפואית, ביטוח דירקטורים ונושאי משרה, כספים בהעברה ותחומים נוספים. הדגש הוא על מתן פתרונות בתחומים שבהם השוק המקומי מתקשה לעיתים לתת מענה מלא, תוך התאמה לצורכי הביטוח המשתנים של המבוטח.</p><p>קופר נינוה מתאימה פתרונות מיוחדים לחברות ישראליות, לרבות חברות ישראליות בעלות פעילות בינלאומית.</p><p>כאשר מדובר בפרויקטים ובסיכונים מורכבים, הדגש הוא על לימוד והבנה של פעילות הלקוח, מאפייני הסיכון והחשיפות האפשריות הנובעות מפעילותו. קופר נינוה שואפת להעניק למבוטחים ולסוכנים העובדים עמה שירות מקצועי ואישי, זמינות גבוהה, וליווי בתהליכי חיתום ותביעות באמצעות הגורמים המקצועיים הרלוונטיים.</p></article></div></section>`;
 }
 
+let livePressGroups = pressGroups;
+
 function pressSections() {
-  return `<section class="section press-list-section"><div class="container press-groups">${pressGroups.map((group, groupIndex) => `<section class="press-group" aria-labelledby="press-group-${groupIndex + 1}"><h2 id="press-group-${groupIndex + 1}">${group.title}</h2><div class="press-card-grid">${group.items.map((item) => {
+  return `<section class="section press-list-section"><div class="container press-groups">${livePressGroups.map((group, groupIndex) => `<section class="press-group" aria-labelledby="press-group-${groupIndex + 1}"><h2 id="press-group-${groupIndex + 1}">${group.title}</h2><div class="press-card-grid">${group.items.map((item) => {
     const external = /^https?:\/\//.test(item.url);
     return `<article class="press-card"><p class="press-source">${item.source}</p><h3>${item.title}</h3><p>${item.description}</p><a class="card-cta" href="${item.url}"${external ? ` target="_blank" rel="noopener"` : ""}>${item.cta}</a></article>`;
   }).join("")}</div></section>`).join("")}</div></section>`;

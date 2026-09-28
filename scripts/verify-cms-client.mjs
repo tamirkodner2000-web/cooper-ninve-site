@@ -141,6 +141,36 @@ check('english standard merge ignored', englishIgnored.lead === 'ליד סטטי
 const englishFetch = prod.fetchStandardPage({ language: 'english', path: '/about-us' })
 check('english standard fetch is thenable', typeof englishFetch.then === 'function')
 
+const staticPress = [
+  { title: 'כתבות וראיונות', items: [{}, {}, {}, {}, {}, {}] },
+  { title: 'מגזינים ועלונים', items: [{}, {}, {}] },
+  { title: 'הכרה מקצועית ואירועים', items: [{}, {}] },
+  { title: 'פרופילים אישיים', items: [{}] },
+]
+const pressCms = {
+  language: 'hebrew',
+  items: [
+    { title: 'א', publicationName: 'מקור', categoryOrGroup: 'כתבות וראיונות', shortDescription: 'תיאור א', ctaLabel: 'לקריאה', displayOrder: 0, destinationType: 'externalURL', destination: 'https://example.com/a' },
+    { title: 'ב', publicationName: 'מקור', categoryOrGroup: 'כתבות וראיונות', shortDescription: 'תיאור ב', ctaLabel: 'לקריאה', displayOrder: 1, destinationType: 'externalURL', destination: 'https://example.com/b' },
+    { title: 'ג', publicationName: 'מקור', categoryOrGroup: 'כתבות וראיונות', shortDescription: 'תיאור ג', ctaLabel: 'לקריאה', displayOrder: 2, destinationType: 'externalURL', destination: 'https://example.com/c' },
+    { title: 'ד', publicationName: 'מקור', categoryOrGroup: 'כתבות וראיונות', shortDescription: 'תיאור ד', ctaLabel: 'לקריאה', displayOrder: 3, destinationType: 'externalURL', destination: 'https://example.com/d' },
+    { title: 'ה', publicationName: 'מקור', categoryOrGroup: 'כתבות וראיונות', shortDescription: 'תיאור ה', ctaLabel: 'לקריאה', displayOrder: 4, destinationType: 'externalURL', destination: 'https://example.com/e' },
+    { title: 'ו', publicationName: 'מקור', categoryOrGroup: 'כתבות וראיונות', shortDescription: 'תיאור ו', ctaLabel: 'לקריאה', displayOrder: 5, destinationType: 'externalURL', destination: 'https://example.com/f' },
+    { title: 'ז', publicationName: 'מקור', categoryOrGroup: 'מגזינים ועלונים', shortDescription: 'תיאור ז', ctaLabel: 'לצפייה', displayOrder: 6, destinationType: 'fileOrImage', destination: '/api/media/file/a.pdf' },
+    { title: 'ח', publicationName: 'מקור', categoryOrGroup: 'מגזינים ועלונים', shortDescription: 'תיאור ח', ctaLabel: 'לצפייה', displayOrder: 7, destinationType: 'fileOrImage', destination: '/api/media/file/b.pdf' },
+    { title: 'ט', publicationName: 'מקור', categoryOrGroup: 'מגזינים ועלונים', shortDescription: 'תיאור ט', ctaLabel: 'לצפייה', displayOrder: 8, destinationType: 'fileOrImage', destination: '/api/media/file/c.pdf' },
+    { title: 'י', publicationName: 'מקור', categoryOrGroup: 'הכרה מקצועית ואירועים', shortDescription: 'תיאור י', ctaLabel: 'לצפייה', displayOrder: 9, destinationType: 'externalURL', destination: 'https://example.com/i' },
+    { title: 'יא', publicationName: 'מקור', categoryOrGroup: 'הכרה מקצועית ואירועים', shortDescription: 'תיאור יא', ctaLabel: 'לצפייה', displayOrder: 10, destinationType: 'fileOrImage', destination: '/api/media/file/d.jpg' },
+    { title: 'יב', publicationName: 'מקור', categoryOrGroup: 'פרופילים אישיים', shortDescription: 'תיאור יב', ctaLabel: 'לקריאה', displayOrder: 11, destinationType: 'fileOrImage', destination: '/api/media/file/e.pdf' },
+  ],
+}
+const mappedPress = prod.mergePressGroups(staticPress, pressCms)
+check('press maps 4 groups', mappedPress && mappedPress.length === 4)
+check('press group counts', mappedPress && mappedPress.map((g) => g.items.length).join('/') === '6/3/2/1')
+check('press resolves media against CMS origin', mappedPress && mappedPress[1].items[0].url === 'https://cms.tamir-kodner.com/api/media/file/a.pdf')
+check('press empty payload falls back', prod.mergePressGroups(staticPress, { language: 'hebrew', items: [] }) == null)
+check('press incomplete payload falls back', prod.mergePressGroups(staticPress, { language: 'hebrew', items: pressCms.items.slice(0, 11) }) == null)
+
 if (failures.length) {
   console.error(`\n${failures.length} failed`)
   process.exit(1)

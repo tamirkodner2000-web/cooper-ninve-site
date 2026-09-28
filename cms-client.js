@@ -417,6 +417,76 @@
     });
   }
 
+  function isPressMediaPayload(data) {
+    return Boolean(
+      isPublicSafe(data) &&
+        data.language === "hebrew" &&
+        Array.isArray(data.items)
+    );
+  }
+
+  function isCompletePressItem(item, resolveUrl) {
+    if (!item || typeof item !== "object") return false;
+    var title = String(item.title || "").trim();
+    var source = String(item.publicationName || "").trim();
+    var group = String(item.categoryOrGroup || "").trim();
+    var description = String(item.shortDescription || "").trim();
+    var cta = String(item.ctaLabel || "").trim();
+    var destination = resolveUrl(item.destination);
+    var type = String(item.destinationType || "").trim();
+    if (!title || !source || !group || !description || !cta || !destination) return false;
+    if (!containsHebrew(description) || !containsHebrew(cta)) return false;
+    if (type === "externalURL" && !/^https?:\/\//i.test(destination)) return false;
+    if (type !== "externalURL" && type !== "fileOrImage") return false;
+    return true;
+  }
+
+  function mergePressGroups(staticGroups, data) {
+    if (!Array.isArray(staticGroups) || !staticGroups.length || !isPressMediaPayload(data)) return null;
+    var expectedCount = staticGroups.reduce(function (total, group) {
+      return total + ((group.items && group.items.length) || 0);
+    }, 0);
+    var resolveUrl = resolveCmsUrl;
+    var valid = data.items.filter(function (item) {
+      return isCompletePressItem(item, resolveUrl);
+    });
+    if (valid.length !== expectedCount || valid.length !== data.items.length) return null;
+
+    var byGroup = {};
+    valid
+      .slice()
+      .sort(function (left, right) {
+        return (Number(left.displayOrder) || 0) - (Number(right.displayOrder) || 0);
+      })
+      .forEach(function (item) {
+        var key = String(item.categoryOrGroup || "").trim();
+        if (!byGroup[key]) byGroup[key] = [];
+        byGroup[key].push({
+          title: String(item.title || "").trim(),
+          source: String(item.publicationName || "").trim(),
+          description: String(item.shortDescription || "").trim(),
+          url: resolveUrl(item.destination),
+          cta: String(item.ctaLabel || "").trim(),
+        });
+      });
+
+    var mapped = [];
+    for (var i = 0; i < staticGroups.length; i += 1) {
+      var staticGroup = staticGroups[i];
+      var items = byGroup[staticGroup.title] || [];
+      if (items.length !== ((staticGroup.items && staticGroup.items.length) || 0)) return null;
+      mapped.push({ title: staticGroup.title, items: items });
+    }
+    return mapped;
+  }
+
+  function fetchPressMedia() {
+    var url = cmsBase() + "/api/public/press-media?language=hebrew";
+    return fetchJson(url).then(function (data) {
+      return isPressMediaPayload(data) ? data : null;
+    });
+  }
+
   window.CooperNinveCMS = {
     cmsBase: cmsBase,
     fetchChrome: fetchChrome,
@@ -424,7 +494,8 @@
     fetchLandingPage: fetchLandingPage,
     fetchStandardPage: fetchStandardPage,
     fetchNavigation: fetchNavigation,
-    fetchProduct: fetchProduct,
+    fetchPressMedia: fetchPressMedia,
+    mergePressGroups: mergePressGroups,
     fetchSiteSettings: fetchSiteSettings,
     isLandingPath: isHebrewLandingPath,
     isProductPath: isProductPath,
