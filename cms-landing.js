@@ -106,7 +106,9 @@
     return (
       '<form class="form-panel" data-form="' +
       esc(eventName) +
-      '">' +
+      '"' +
+      (text(form.routingKey) ? ' data-routing-key="' + esc(text(form.routingKey)) + '"' : '') +
+      '>' +
       (title ? "<h2>" + esc(title) + "</h2>" : "") +
       (description ? "<p>" + esc(description) + "</p>" : "") +
       '<div class="form-grid">' +

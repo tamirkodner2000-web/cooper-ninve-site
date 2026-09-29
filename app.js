@@ -2907,14 +2907,86 @@ function landingTemplate(page) {
 }
 
 function bindForms() {
-  document.querySelectorAll("form").forEach((formEl) => {
-    formEl.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const btn = formEl.querySelector("button[type='submit']");
-      btn.textContent = isEnglish() ? "Inquiry Received" : "הפנייה נקלטה";
-      btn.disabled = true;
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({ event: formEl.dataset.form || "form_submit_general", page_url: location.href, page_title: document.title });
-    });
-  });
+  document.querySelectorAll("form.form-panel").forEach((formEl) => {
+    if (formEl.dataset.bound === "1" || formEl.hasAttribute("data-preview-form")) return
+    formEl.dataset.bound = "1"
+    if (!formEl.querySelector(`[name="hp_field"]`)) {
+      const honey = document.createElement("input")
+      honey.type = "text"
+      honey.name = "hp_field"
+      honey.tabIndex = -1
+      honey.autocomplete = "off"
+      honey.setAttribute("aria-hidden", "true")
+      honey.style.cssText = "position:absolute;left:-9999px;height:0;width:0;opacity:0;"
+      formEl.appendChild(honey)
+    }
+    formEl.dataset.startedAt = String(Date.now())
+    const status = document.createElement("p")
+    status.className = "form-note form-status"
+    status.hidden = true
+    formEl.appendChild(status)
+    formEl.addEventListener("submit", async (event) => {
+      event.preventDefault()
+      const btn = formEl.querySelector("button[type='submit']")
+      if (!btn || btn.dataset.sending === "1" || btn.disabled) return
+      const original = btn.dataset.originalLabel || btn.textContent
+      btn.dataset.originalLabel = original
+      const fail = isEnglish() ? "Could not send. Please try again." : "לא ניתן לשלוח את הפנייה. נסו שוב."
+      const pending = isEnglish() ? "Sending..." : "שולחים..."
+      const success = isEnglish() ? "Inquiry Received" : "הפנייה נקלטה"
+      status.hidden = true
+      btn.dataset.sending = "1"
+      btn.disabled = true
+      btn.textContent = pending
+      try {
+        const fields = {}
+        new FormData(formEl).forEach((value, key) => {
+          if (key === "hp_field") return
+          fields[key] = String(value)
+        })
+        const params = new URLSearchParams(location.search)
+        const payload = {
+          formId: formEl.dataset.form || "form_submit_general",
+          path: location.pathname,
+          language: isEnglish() ? "english" : "hebrew",
+          startedAt: Number(formEl.dataset.startedAt || Date.now()),
+          hp_field: formEl.querySelector('[name="hp_field"]')?.value || "",
+          routingKey: formEl.dataset.routingKey || "",
+          consent: formEl.querySelector('[name="consent"]')
+            ? Boolean(formEl.querySelector('[name="consent"]').checked)
+            : null,
+          fields,
+          utm: {
+            source: params.get("utm_source") || "",
+            medium: params.get("utm_medium") || "",
+            campaign: params.get("utm_campaign") || "",
+            content: params.get("utm_content") || "",
+            term: params.get("utm_term") || "",
+          },
+        }
+        const response = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          credentials: "same-origin",
+          body: JSON.stringify(payload),
+        })
+        const body = await response.json().catch(() => ({}))
+        if (!response.ok || !body.ok) throw new Error("fail")
+        btn.textContent = success
+        btn.disabled = true
+        window.dataLayer = window.dataLayer || []
+        window.dataLayer.push({
+          event: formEl.dataset.form || "form_submit_general",
+          page_url: location.href,
+          page_title: document.title,
+        })
+      } catch {
+        btn.dataset.sending = ""
+        btn.disabled = false
+        btn.textContent = original
+        status.hidden = false
+        status.textContent = fail
+      }
+    })
+  })
 }

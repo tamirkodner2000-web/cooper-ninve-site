@@ -6,9 +6,13 @@
 import http from 'node:http'
 import fs from 'node:fs'
 import path from 'node:path'
+import { createRequire } from 'node:module'
 import { fileURLToPath } from 'node:url'
 
-const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)))
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
+const root = path.resolve(__dirname)
+const require = createRequire(import.meta.url)
+const { MAX_BODY_BYTES, sendResend, validateContact } = require('./api/contact-core.cjs')
 const port = Number(process.env.PORT || 5173)
 const host = process.env.HOST || "0.0.0.0"
 const indexFile = path.join(root, "index.html")
@@ -60,14 +64,87 @@ const resolveFile = (urlPath) => {
   return candidate
 }
 
+const json = (res, status, body) => {
+  res.writeHead(status, {
+    "Cache-Control": "no-store",
+    "Content-Type": "application/json; charset=utf-8",
+  })
+  res.end(JSON.stringify(body))
+}
+
+const readJsonBody = (req) =>
+  new Promise((resolve, reject) => {
+    const chunks = []
+    let size = 0
+    req.on("data", (chunk) => {
+      size += chunk.length
+      if (size > MAX_BODY_BYTES) {
+        reject(Object.assign(new Error("too large"), { status: 413 }))
+        req.destroy()
+        return
+      }
+      chunks.push(chunk)
+    })
+    req.on("end", () => {
+      const raw = Buffer.concat(chunks).toString("utf8")
+      if (!raw) {
+        resolve({ parsed: {}, bytes: 0 })
+        return
+      }
+      try {
+        resolve({ parsed: JSON.parse(raw), bytes: Buffer.byteLength(raw) })
+      } catch {
+        reject(Object.assign(new Error("invalid"), { status: 400 }))
+      }
+    })
+    req.on("error", reject)
+  })
+
+const handleContact = async (req, res) => {
+  if (req.method === "OPTIONS") {
+    res.writeHead(204)
+    res.end()
+    return
+  }
+  if (req.method !== "POST") {
+    json(res, 405, { ok: false })
+    return
+  }
+  try {
+    const { parsed, bytes } = await readJsonBody(req)
+    const result = validateContact(parsed || {}, {
+      ip: String(req.headers["x-forwarded-for"] || req.socket.remoteAddress || ""),
+      bodyBytes: bytes,
+    })
+    if (result.ignored) {
+      json(res, 200, { ok: true })
+      return
+    }
+    if (!result.ok) {
+      json(res, result.status || 400, { ok: false })
+      return
+    }
+    await sendResend(result.email)
+    json(res, 200, { ok: true })
+  } catch (error) {
+    json(res, error.status === 503 ? 503 : error.status === 413 ? 413 : 502, { ok: false })
+  }
+}
+
 const server = http.createServer((req, res) => {
-  if (req.method !== 'GET' && req.method !== 'HEAD') {
+  const urlPath = decodeURIComponent((req.url || "/").split("?")[0])
+  if (urlPath === "/api/contact") {
+    handleContact(req, res)
+    return
+  }
+
+  if (req.method !== "GET" && req.method !== "HEAD") {
     res.writeHead(405)
     res.end()
     return
   }
 
-  const target = resolveFile(req.url || '/')
+  const target = resolveFile(req.url || "/")
   if (!target) {
     res.writeHead(403)
     res.end()
@@ -92,7 +169,6 @@ const server = http.createServer((req, res) => {
       }
     }
 
-    const urlPath = decodeURIComponent((req.url || "/").split("?")[0])
     sendIndex(res, urlPath.replace(/\/$/, "") || "/")
   })
 })

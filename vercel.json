@@ -15,6 +15,10 @@
       "continue": true
     },
     {
+      "src": "/api/contact",
+      "dest": "/api/contact.js"
+    },
+    {
       "handle": "filesystem"
     },
     {
