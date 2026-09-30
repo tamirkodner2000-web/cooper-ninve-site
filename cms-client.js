@@ -318,6 +318,91 @@
     return next.length >= 6 ? next : null;
   }
 
+  function safeInternalHref(value) {
+    var raw = String(value || "").trim();
+    if (!raw || raw.charAt(0) !== "/" || raw.charAt(1) === "/") return "";
+    if (!/^\/[a-z0-9/_-]*$/i.test(raw)) return "";
+    return raw;
+  }
+
+  function homepageCta(cta) {
+    if (!cta) return null;
+    var label = String(cta.label || "").trim();
+    var href = safeInternalHref(cta.destination);
+    if (!label || !href || !containsHebrew(label)) return null;
+    return { href: href, label: label };
+  }
+
+  function requireHomepageText(value) {
+    var raw = String(value || "").trim();
+    return raw && containsHebrew(raw) ? raw : "";
+  }
+
+  function homepageBodyFromCms(cms) {
+    var hero = cms && cms.homepageHero;
+    var body = cms && cms.homepageBody;
+    var partners = cms && cms.partnerLogos;
+    if (!hero || !body || !partners) return null;
+
+    var heading = String(hero.heading || "").trim();
+    var positioning = String(hero.positioning || "").trim();
+    var countersHeading = String(body.countersHeading || "").trim();
+    var counters = Array.isArray(body.counters)
+      ? body.counters
+          .map(function (item) {
+            return {
+              label: String((item && item.label) || "").trim(),
+              value: String((item && item.value) || "").trim(),
+            };
+          })
+          .filter(function (item) {
+            return item.value && item.label && containsHebrew(item.label);
+          })
+      : [];
+    var lloydsItems = Array.isArray(body.lloydsItems)
+      ? body.lloydsItems.map(function (item) { return String(item || "").trim(); }).filter(Boolean)
+      : [];
+    var mgaCTA = homepageCta(body.mgaCTA);
+    var lloydsCTA = homepageCta(body.lloydsCTA);
+    var pressCTA = homepageCta(body.pressCTA);
+    var partnerHeading = String(partners.heading || "").trim();
+    var partnerDescription = String(partners.description || "").trim();
+
+    if (!heading || !containsHebrew(heading)) return null;
+    if (!positioning || !containsHebrew(positioning)) return null;
+    if (!countersHeading || !containsHebrew(countersHeading) || counters.length !== 3) return null;
+    if (!requireHomepageText(body.mgaKicker) || !requireHomepageText(body.mgaHeading) || !String(body.mgaHighlight || "").trim()) return null;
+    if (!requireHomepageText(body.mgaEmphasis) || !requireHomepageText(body.mgaBody) || !mgaCTA) return null;
+    if (!requireHomepageText(body.lloydsSlogan) || !requireHomepageText(body.lloydsHeading) || !requireHomepageText(body.lloydsIntro)) return null;
+    if (!lloydsCTA || lloydsItems.length !== 6) return null;
+    if (!requireHomepageText(body.pressSlogan) || !requireHomepageText(body.pressHeading) || !requireHomepageText(body.pressDescription) || !pressCTA) return null;
+    if (!partnerHeading || !containsHebrew(partnerHeading) || !partnerDescription || !containsHebrew(partnerDescription)) return null;
+
+    return {
+      counters: counters,
+      countersHeading: countersHeading,
+      heading: heading,
+      lloydsCTA: lloydsCTA,
+      lloydsHeading: String(body.lloydsHeading).trim(),
+      lloydsIntro: String(body.lloydsIntro).trim(),
+      lloydsItems: lloydsItems,
+      lloydsSlogan: String(body.lloydsSlogan).trim(),
+      mgaBody: String(body.mgaBody).trim(),
+      mgaCTA: mgaCTA,
+      mgaEmphasis: String(body.mgaEmphasis).trim(),
+      mgaHeading: String(body.mgaHeading).trim(),
+      mgaHighlight: String(body.mgaHighlight).trim(),
+      mgaKicker: String(body.mgaKicker).trim(),
+      partnerDescription: partnerDescription,
+      partnerHeading: partnerHeading,
+      positioning: positioning,
+      pressCTA: pressCTA,
+      pressDescription: String(body.pressDescription).trim(),
+      pressHeading: String(body.pressHeading).trim(),
+      pressSlogan: String(body.pressSlogan).trim(),
+    };
+  }
+
   function mergeHomepagePage(staticPage, cms) {
     if (!staticPage || !cms || cms.language !== "hebrew") return staticPage;
     var seo = cms.seo || {};
@@ -325,12 +410,19 @@
     var description = String(seo.metaDescription || "").trim();
     if (title && !containsHebrew(title)) title = "";
     if (description && !containsHebrew(description)) description = "";
-    return Object.assign({}, staticPage, {
+    var cmsHome = homepageBodyFromCms(cms);
+    var next = Object.assign({}, staticPage, {
+      cmsHome: cmsHome,
       cmsPartnerLogos: homepagePartnerLogos(cms),
       cmsSeo: seo,
       description: description || staticPage.description,
       title: title || staticPage.title,
     });
+    if (cmsHome) {
+      next.h1 = cmsHome.heading;
+      next.positioning = cmsHome.positioning;
+    }
+    return next;
   }
 
   function fetchProduct(options) {

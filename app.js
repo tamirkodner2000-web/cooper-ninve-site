@@ -2244,11 +2244,11 @@ function standardTemplate(page, path) {
   if (isEnglish() && path === "/contact-us") return englishContactTemplate();
   if (path === "/israel-market-partner") return `${internationalPartnerSections()}`;
   if (["/privacy-policy", "/terms-of-use", "/disclosure", "/public-complaints", "/accessibility-statement"].includes(path)) return `${legalSections(page, path)}`;
-  if (path === "/insurance-solutions") return sections(page.sections, path);
-  if (path === "/about-us") return `${sections(page.sections, path)}`;
-  if (path === "/contact-us") return sections(page.sections, path);
+  if (path === "/insurance-solutions") return sections(page.sections, path, page);
+  if (path === "/about-us") return `${sections(page.sections, path, page)}`;
+  if (path === "/contact-us") return sections(page.sections, path, page);
   if (productPages[path]) return `${hero(page, path)}${productTemplate(page, path)}`;
-  return `${hero(page, path)}${sections(page.sections, path)}`;
+  return `${hero(page, path)}${sections(page.sections, path, page)}`;
 }
 
 function englishHomeTemplate() {
@@ -2543,9 +2543,9 @@ function productCards() {
   return cards(products.map((product) => ({ ...product, icon: false })), 5);
 }
 
-function sections(type, path) {
+function sections(type, path, page) {
   const map = {
-    home: homeSections,
+    home: () => homeSections(page),
     solutions: solutionsSections,
     agents: agentsSections,
     business: businessSections,
@@ -2557,7 +2557,7 @@ function sections(type, path) {
     knowledge: knowledgeSections,
     international: internationalPartnerSections,
   };
-  return (map[type] || homeSections)();
+  return (map[type] || (() => homeSections(page)))();
 }
 
 function internationalPartnerSections() {
@@ -2598,24 +2598,28 @@ function legalSections(page, path) {
   return `<section class="section"><div class="container split-band"><div><h1>${title}</h1><p>${page.lead || ""}</p></div><ul class="feature-list">${items.map((item) => `<li>${item}</li>`).join("")}</ul></div></section>`;
 }
 
-function homeSections() {
+function homeSections(page) {
+  const home = page && page.cmsHome;
   return `
-    ${homeCountersBlock()}
-    ${mgaPositioningBlock()}
-    ${lloydsAdvantagesSection()}
-    ${homePressTeaserSection()}
-    ${partnerLogosSection()}`;
+    ${homeCountersBlock(home)}
+    ${mgaPositioningBlock(home)}
+    ${lloydsAdvantagesSection(home)}
+    ${homePressTeaserSection(home)}
+    ${partnerLogosSection(home && home.partnerHeading, home && home.partnerDescription)}`;
 }
 
-function homeCountersBlock() {
-  const counters = [
-    ["5", "מבטחי משנה"],
-    ["1,000+", "סוכנויות ביטוח"],
-    ["10,000+", "לקוחות מרוצים"],
-  ];
+function homeCountersBlock(home) {
+  const heading = home && home.countersHeading ? home.countersHeading : "כמה סיבות טובות לעבוד עם קופר נינוה";
+  const counters = home && Array.isArray(home.counters) && home.counters.length === 3
+    ? home.counters.map((item) => [item.value, item.label])
+    : [
+      ["5", "מבטחי משנה"],
+      ["1,000+", "סוכנויות ביטוח"],
+      ["10,000+", "לקוחות מרוצים"],
+    ];
   return `<section class="home-counters" aria-label="נתוני אמון">
     <div class="container home-counters-heading">
-      <h2>כמה סיבות טובות לעבוד עם קופר נינוה</h2>
+      <h2>${heading}</h2>
     </div>
     <div class="container home-counters-inner">
       ${counters.map(([value, label]) => {
@@ -2627,16 +2631,28 @@ function homeCountersBlock() {
   </section>`;
 }
 
-function homePressTeaserSection() {
-  return `<section class="section section-soft home-press-teaser"><div class="container press-teaser-inner"><div><p class="section-slogan">כתבו עלינו</p><h2>קופר נינוה בתקשורת</h2><p>כתבות, ראיונות ואזכורים מקצועיים על פעילות קופר נינוה, תחומי החיתום והקשר לשוק הביטוח הבינלאומי.</p></div><a class="btn btn-primary" href="/press">לכל הכתבות</a></div></section>`;
+function homePressTeaserSection(home) {
+  const slogan = home ? home.pressSlogan : "כתבו עלינו";
+  const heading = home ? home.pressHeading : "קופר נינוה בתקשורת";
+  const text = home ? home.pressDescription : "כתבות, ראיונות ואזכורים מקצועיים על פעילות קופר נינוה, תחומי החיתום והקשר לשוק הביטוח הבינלאומי.";
+  const cta = home ? home.pressCTA : { href: "/press", label: "לכל הכתבות" };
+  return `<section class="section section-soft home-press-teaser"><div class="container press-teaser-inner"><div><p class="section-slogan">${slogan}</p><h2>${heading}</h2><p>${text}</p></div><a class="btn btn-primary" href="${cta.href}">${cta.label}</a></div></section>`;
 }
 
-function mgaPositioningBlock() {
-  return `<section class="mga-block" aria-labelledby="mga-title"><div class="mga-inner"><div class="mga-copy"><p class="mga-kicker">לא עוד סוכנות ביטוח, תקראו לנו חברת חיתום.</p><h2 id="mga-title">קופר נינוה היא <span>M.G.A</span></h2><strong>גוף המאגד תחתיו חתמים מעבר לים אשר העניקו לו סמכויות חיתום.</strong><p>M.G.A הוא ONE STOP SHOP המבצע ניהול בחינה והכוונת תיקים בהתאם לתחומי המומחיות של המבטחים העומדים מאחוריו. כלומר, גוף המחזיק סמכויות נרחבות לרבות: תמחור, חיתום ויישוב תביעות מקומי בשם החתמים מעבר לים.</p><a class="btn btn-primary" href="/about-us">עוד על קופר נינוה</a></div></div></section>`;
+function mgaPositioningBlock(home) {
+  const kicker = home ? home.mgaKicker : "לא עוד סוכנות ביטוח, תקראו לנו חברת חיתום.";
+  const heading = home ? home.mgaHeading : "קופר נינוה היא";
+  const highlight = home ? home.mgaHighlight : "M.G.A";
+  const emphasis = home ? home.mgaEmphasis : "גוף המאגד תחתיו חתמים מעבר לים אשר העניקו לו סמכויות חיתום.";
+  const body = home ? home.mgaBody : "M.G.A הוא ONE STOP SHOP המבצע ניהול בחינה והכוונת תיקים בהתאם לתחומי המומחיות של המבטחים העומדים מאחוריו. כלומר, גוף המחזיק סמכויות נרחבות לרבות: תמחור, חיתום ויישוב תביעות מקומי בשם החתמים מעבר לים.";
+  const cta = home ? home.mgaCTA : { href: "/about-us", label: "עוד על קופר נינוה" };
+  return `<section class="mga-block" aria-labelledby="mga-title"><div class="mga-inner"><div class="mga-copy"><p class="mga-kicker">${kicker}</p><h2 id="mga-title">${heading} <span>${highlight}</span></h2><strong>${emphasis}</strong><p>${body}</p><a class="btn btn-primary" href="${cta.href}">${cta.label}</a></div></div></section>`;
 }
 
-function lloydsAdvantagesSection() {
-  const advantages = [
+function lloydsAdvantagesSection(home) {
+  const advantages = home && Array.isArray(home.lloydsItems) && home.lloydsItems.length
+    ? home.lloydsItems
+    : [
     "עבודה מול מספר סינדיקטים של Lloyd’s, לצד גישה לשווקים בינלאומיים מעבר לשוק המקומי.",
     "חתמים בעלי ניסיון והיכרות מקצועית עם דרישות החיתום של שוק Lloyd’s בלונדון.",
     "אפשרות לבחון שינויים, הרחבות ותוספות שאינן זמינות תמיד בשוק המקומי.",
@@ -2644,7 +2660,11 @@ function lloydsAdvantagesSection() {
     "פתרונות ללקוחות בעלי פעילות עסקית מחוץ לגבולות ישראל.",
     "יכולת לבנות פוליסות לא סטנדרטיות בהתאמה אישית, לפי מפרטי יועצי ביטוח ובהתאם לרגולציה בישראל.",
   ];
-  return `<section class="lloyds-advantages" aria-labelledby="lloyds-advantages-title"><div class="container lloyds-inner"><div class="lloyds-copy"><p class="section-slogan">גישה לשוק בינלאומי, שירות מקומי.</p><h2 id="lloyds-advantages-title">ייחוד העבודה עם שוק הלוידס</h2><p>שוק Lloyd’s מאפשר גמישות חיתומית, גישה לידע מקצועי בינלאומי ויכולת לבנות פתרונות ביטוח שאינם תמיד זמינים במסגרת השוק המקומי. קופר נינוה מחברת בין היכולות האלה לבין חיתום, שירות והפקת פוליסות בישראל.</p><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">לדבר עם צוות החיתום</a></div><ul class="lloyds-list">${advantages.map((item) => `<li>${item}</li>`).join("")}</ul></div></section>`;
+  const slogan = home ? home.lloydsSlogan : "גישה לשוק בינלאומי, שירות מקומי.";
+  const heading = home ? home.lloydsHeading : "ייחוד העבודה עם שוק הלוידס";
+  const intro = home ? home.lloydsIntro : "שוק Lloyd’s מאפשר גמישות חיתומית, גישה לידע מקצועי בינלאומי ויכולת לבנות פתרונות ביטוח שאינם תמיד זמינים במסגרת השוק המקומי. קופר נינוה מחברת בין היכולות האלה לבין חיתום, שירות והפקת פוליסות בישראל.";
+  const cta = home ? home.lloydsCTA : { href: "/contact-us", label: "לדבר עם צוות החיתום" };
+  return `<section class="lloyds-advantages" aria-labelledby="lloyds-advantages-title"><div class="container lloyds-inner"><div class="lloyds-copy"><p class="section-slogan">${slogan}</p><h2 id="lloyds-advantages-title">${heading}</h2><p>${intro}</p><a class="btn btn-primary" href="${cta.href}" data-track="click_quote_cta">${cta.label}</a></div><ul class="lloyds-list">${advantages.map((item) => `<li>${item}</li>`).join("")}</ul></div></section>`;
 }
 
 function underwritingExamplesSection() {
@@ -2838,12 +2858,12 @@ function actionContactSection() {
   ], 5)}</div></section>`;
 }
 
-function partnerLogosSection(titleOverride = "") {
+function partnerLogosSection(titleOverride = "", textOverride = "") {
   const english = isEnglish();
   const title = titleOverride || (english ? "Selected International Markets and Partners" : "שווקים ושותפים בינלאומיים");
-  const text = english
+  const text = textOverride || (english
     ? "Cooper Ninve works with selected international insurance markets and partners, subject to underwriting authority, product appetite, market approval and applicable policy terms. Displayed logos do not imply that every partner supports every product or risk."
-    : "קופר נינוה פועלת מול שווקים ושותפים בינלאומיים נבחרים, בכפוף לסמכויות חיתום, תיאבון סיכון, אישור השוק ותנאי הפוליסה הרלוונטיים. הצגת לוגו אינה מלמדת שכל שותף תומך בכל מוצר או סיכון.";
+    : "קופר נינוה פועלת מול שווקים ושותפים בינלאומיים נבחרים, בכפוף לסמכויות חיתום, תיאבון סיכון, אישור השוק ותנאי הפוליסה הרלוונטיים. הצגת לוגו אינה מלמדת שכל שותף תומך בכל מוצר או סיכון.");
   return `<section class="partner-band" aria-labelledby="home-partners-title"><div class="container"><h2 id="home-partners-title">${title}</h2><p>${text}</p><div class="partner-logos" data-partner-logos></div></div></section>`;
 }
 
