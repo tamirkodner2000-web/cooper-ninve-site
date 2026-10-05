@@ -42,6 +42,7 @@ const teamMembers = [
   { name: "אורי קליין", role: "מנמ\"ר", bio: "מוביל את מערכות העסק.", image: "/assets/team/uri-klein.jpg.jpeg", initials: "אק" },
   { name: "אבישי פרץ", role: "סמנכ״ל כספים", bio: "אחראי על תחום הכספים, בקרה, גבייה ותהליכים פיננסיים.", image: "/assets/team/avishai.jpg.jpg", initials: "אפ" },
   { name: "ליעד לק", role: "חתם חבויות ראשי", bio: "עוסק בחיתום, בדיקת סיכונים וליווי מקצועי של תיקי ביטוח.", image: "/assets/team/liad-lek.jpg.jpg", initials: "לל" },
+  { name: "מאיה דבי", role: "", bio: "", image: "/assets/team/maya-debby.jpg", initials: "מד" },
 ];
 
 const pressGroups = [
