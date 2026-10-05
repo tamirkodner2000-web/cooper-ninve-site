@@ -22,15 +22,15 @@ const productIcons = {
 
 const products = [
   { title: "אחריות מקצועית", url: "/professional-liability-insurance", icon: productIcons.professional, text: "הגנה מפני תביעות הנובעות מטעות מקצועית, רשלנות, ייעוץ שגוי או מחדל במסגרת מתן שירות מקצועי." },
-  { title: "סייבר", url: "/cyber-insurance", icon: productIcons.cyber, text: "כיסוי לאירועי סייבר, מתקפות כופר, דליפות מידע, השבתת פעילות, הוצאות שחזור ותביעות צד שלישי." },
   { title: "צד שלישי", url: "/liability-insurance", icon: productIcons.thirdParty, text: "כיסוי לעסקים מפני תביעות צד שלישי בגין נזקי גוף, רכוש או אחריות הנובעת מהפעילות העסקית." },
   { title: "חבות מעבידים", url: "/employers-liability-insurance", icon: productIcons.employers, text: "פתרונות לחבות מעבידים והגנה מפני תביעות עובדים, בכפוף לתנאי הפוליסה ואישור חיתום." },
   { title: "חבות המוצר", url: "/product-liability-insurance", icon: productIcons.product, text: "כיסוי ליצרנים, יבואנים ומשווקים החשופים לתביעות הנובעות ממוצר, פגם או נזק לצד שלישי." },
   { title: "עבודות קבלניות", url: "/contractors-all-risks-insurance", icon: productIcons.contractors, text: "פתרונות ביטוח לפרויקטים, קבלנים, יזמים ועבודות תשתית, כולל רכוש, צד שלישי וחבות מעבידים." },
   { title: "רשלנות רפואית", url: "/medical-malpractice-insurance", icon: productIcons.medical, text: "פתרונות לרופאים, מטפלים, מרפאות וגורמים רפואיים החשופים לתביעות בגין רשלנות מקצועית." },
-  { title: "דירקטורים ונושאי משרה", url: "/directors-and-officers-insurance", icon: productIcons.directors, text: "פתרונות אחריות נושאי משרה לחברות, הנהלות ודירקטוריונים מול חשיפות ניהוליות ומשפטיות." },
   { title: "הפקות מדיה וסרטים", url: "/media-production-insurance", icon: productIcons.media, text: "מענה ביטוחי להפקות, צוותים, ציוד, לוקיישנים ופעילות מדיה הדורשת התאמה חיתומית." },
   { title: "סיכונים מיוחדים", url: "/special-risks-insurance", icon: productIcons.specialRisks, text: "בדיקת פתרונות לסיכונים מורכבים, חריגים או לא סטנדרטיים שאינם נכנסים לתבנית רגילה." },
+  { title: "סייבר", url: "/cyber-insurance", icon: productIcons.cyber, text: "כיסוי לאירועי סייבר, מתקפות כופר, דליפות מידע, השבתת פעילות, הוצאות שחזור ותביעות צד שלישי." },
+  { title: "דירקטורים ונושאי משרה", url: "/directors-and-officers-insurance", icon: productIcons.directors, text: "פתרונות אחריות נושאי משרה לחברות, הנהלות ודירקטוריונים מול חשיפות ניהוליות ומשפטיות." },
 ];
 
 const teamMembers = [
@@ -1373,15 +1373,15 @@ const productMenuGroups = [{
   title: "מוצרי ביטוח",
   links: [
     ["אחריות מקצועית", "/professional-liability-insurance", "פתרונות ביטוח לסיכונים מקצועיים ולנותני שירותים."],
-    ["סייבר", "/cyber-insurance", "פתרונות לסיכוני סייבר, מידע וטכנולוגיה."],
-    ["עבודות קבלניות", "/contractors-all-risks-insurance", "פתרונות ביטוח לפרויקטים, עבודות וביצוע."],
-    ["רשלנות רפואית", "/medical-malpractice-insurance", "פתרונות ביטוח לסיכונים רפואיים ומקצועות הבריאות."],
-    ["דירקטורים ונושאי משרה", "/directors-and-officers-insurance", "כיסוי לנושאי משרה, הנהלות ודירקטוריונים."],
     ["צד שלישי וחבויות", "/liability-insurance", "פתרונות לסיכוני חבות כלפי צדדים שלישיים."],
     ["חבות מעבידים", "/employers-liability-insurance", "כיסוי לסיכוני אחריות מעבידים כלפי עובדים."],
     ["חבות המוצר", "/product-liability-insurance", "כיסוי לאחריות הנובעת ממוצרים, ייצור ושיווק."],
+    ["עבודות קבלניות", "/contractors-all-risks-insurance", "פתרונות ביטוח לפרויקטים, עבודות וביצוע."],
+    ["רשלנות רפואית", "/medical-malpractice-insurance", "פתרונות ביטוח לסיכונים רפואיים ומקצועות הבריאות."],
     ["הפקות מדיה וסרטים", "/media-production-insurance", "כיסוי להפקות, תוכן, צילום ומדיה."],
     ["סיכונים מיוחדים", "/special-risks-insurance", "בחינת פתרונות לסיכונים מורכבים ולא שגרתיים."],
+    ["סייבר", "/cyber-insurance", "פתרונות לסיכוני סייבר, מידע וטכנולוגיה."],
+    ["דירקטורים ונושאי משרה", "/directors-and-officers-insurance", "כיסוי לנושאי משרה, הנהלות ודירקטוריונים."],
     ["כל מוצרי הביטוח", "/insurance-solutions", "מעבר לעמוד המרכז את כלל תחומי הביטוח."],
   ],
 }];
@@ -1927,7 +1927,7 @@ function footerHtml(english, path = "/", chrome = null) {
     ["Contact", [["Contact Us", "/contact-us"], ["077-9965453", "tel:0779965453"], ["info@cooper-ninve.com", "mailto:info@cooper-ninve.com"]]],
   ] : [
     ["קופר נינוה", [["עמוד הבית", "/"], ["אודות", "/about-us"], ["קופר נינוה בתקשורת", "/press"], ["בלוג", "/blog"]]],
-    ["מוצרי ביטוח", [["אחריות מקצועית", "/professional-liability-insurance"], ["סייבר", "/cyber-insurance"], ["עבודות קבלניות", "/contractors-all-risks-insurance"], ["רשלנות רפואית", "/medical-malpractice-insurance"], ["דירקטורים ונושאי משרה", "/directors-and-officers-insurance"], ["צד שלישי וחבויות", "/liability-insurance"], ["חבות מעבידים", "/employers-liability-insurance"], ["חבות המוצר", "/product-liability-insurance"], ["הפקות מדיה וסרטים", "/media-production-insurance"], ["סיכונים מיוחדים", "/special-risks-insurance"]]],
+    ["מוצרי ביטוח", [["אחריות מקצועית", "/professional-liability-insurance"], ["צד שלישי וחבויות", "/liability-insurance"], ["חבות מעבידים", "/employers-liability-insurance"], ["חבות המוצר", "/product-liability-insurance"], ["עבודות קבלניות", "/contractors-all-risks-insurance"], ["רשלנות רפואית", "/medical-malpractice-insurance"], ["הפקות מדיה וסרטים", "/media-production-insurance"], ["סיכונים מיוחדים", "/special-risks-insurance"], ["סייבר", "/cyber-insurance"], ["דירקטורים ונושאי משרה", "/directors-and-officers-insurance"]]],
     ["עבודה עם קופר נינוה", [["לסוכני ביטוח", "/insurance-agents"], ["לעסקים וחברות", "/business-insurance"], ["תחומי חיתום", "/insurance-solutions"], ["לקבלת הצעה לביטוח", "/contact-us"]]],
     ["תביעות", [["תביעות", "/claims"], ["צור קשר", "/contact-us"]]],
     ["יצירת קשר", [["צור קשר", "/contact-us"], ["077-9965453", "tel:0779965453"], ["info@cooper-ninve.com", "mailto:info@cooper-ninve.com"]]],
