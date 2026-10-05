@@ -1886,7 +1886,7 @@ body.lang-en .press-card::before { transform-origin: left center; }
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 24px;
 }
 .team-card {
@@ -1955,7 +1955,7 @@ body.lang-en .press-card::before { transform-origin: left center; }
   color: var(--blue-2);
   font-weight: 900;
   font-size: 15px;
-  margin: 0 0 12px;
+  margin: 0;
 }
 .team-copy p:not(.team-role) {
   color: var(--muted);

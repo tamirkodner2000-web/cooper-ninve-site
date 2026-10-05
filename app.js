@@ -36,13 +36,13 @@ const products = [
 const teamMembers = [
   { name: "יהושע נתן", role: "יו״ר", bio: "מוביל את פעילות החברה והחזון האסטרטגי של קופר נינוה.", image: "/assets/team/yehoshua-natan.jpg.jpeg", initials: "ינ" },
   { name: "נינה קודנר", role: "חתמת ראשית", bio: "מובילה את תחום החיתום המקצועי והמסחרי של החברה.", image: "/assets/team/nina-kodner.jpg.jpeg", initials: "נק" },
-  { name: "פריסילה יוסף", role: "סמנכ״לית תפעול", bio: "אחראית על ניהול תהליכי תפעול, שירות וממשקי עבודה בחברה.", image: "/assets/team/priscilla.jpg.jpeg", initials: "פי" },
+  { name: "פריסילה יוסף", role: "סמנכ״לית תפעול", bio: "אחראית על ניהול תהליכי תפעול, שירות וממשקי עבודה בחברה.", image: "/assets/team/priscilla-yosef.jpg", initials: "פי" },
   { name: "אילן זיו", role: "מנכ״ל", bio: "מוביל את ניהול החברה, פיתוח עסקי וקשרי שוק.", image: "/assets/team/eylon-ziv.jpg.jpeg", initials: "אז" },
   { name: "נטע אילני", role: "יועצת משפטית", bio: "אחראית על היבטים משפטיים, רגולציה וליווי מקצועי.", image: "/assets/team/neta-ilani.jpg.jpeg", initials: "נא" },
   { name: "אורי קליין", role: "מנמ\"ר", bio: "מוביל את מערכות העסק.", image: "/assets/team/uri-klein.jpg.jpeg", initials: "אק" },
   { name: "אבישי פרץ", role: "סמנכ״ל כספים", bio: "אחראי על תחום הכספים, בקרה, גבייה ותהליכים פיננסיים.", image: "/assets/team/avishai.jpg.jpg", initials: "אפ" },
   { name: "ליעד לק", role: "חתם חבויות ראשי", bio: "עוסק בחיתום, בדיקת סיכונים וליווי מקצועי של תיקי ביטוח.", image: "/assets/team/liad-lek.jpg.jpg", initials: "לל" },
-  { name: "מאיה דבי", role: "", bio: "", image: "/assets/team/maya-debby.jpg", initials: "מד" },
+  { name: "מאיה דבי", role: "", bio: "", image: "/assets/team/maya-debby-photo.jpg", initials: "מד" },
 ];
 
 const pressGroups = [
@@ -2732,7 +2732,7 @@ function blogSections() {
 }
 
 function teamSection() {
-  return `<section class="section team-section" aria-labelledby="team-title"><div class="container"><div class="center-title"><h2 id="team-title">הכירו את המומחים שלנו</h2></div><div class="team-grid">${teamMembers.map((member) => `<article class="team-card"><div class="team-photo"><img src="${member.image}" alt="${member.name} - ${member.role}" loading="lazy" width="420" height="320"></div><div class="team-copy"><h3>${member.name}</h3><p class="team-role">${member.role}</p><p>${member.bio}</p></div></article>`).join("")}</div></div></section>`;
+  return `<section class="section team-section" aria-labelledby="team-title"><div class="container"><div class="center-title"><h2 id="team-title">הכירו את המומחים שלנו</h2></div><div class="team-grid">${teamMembers.map((member) => `<article class="team-card"><div class="team-photo"><img src="${member.image}" alt="${member.name} - ${member.role}" loading="lazy" width="420" height="320"></div><div class="team-copy"><h3>${member.name}</h3><p class="team-role">${member.role}</p></div></article>`).join("")}</div></div></section>`;
 }
 
 function contactSections() {
