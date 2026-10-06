@@ -212,6 +212,12 @@ button:disabled {
 .nav-product-trigger {
   display: inline-flex;
   align-items: center;
+  margin: 0;
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
 }
 .main-nav a::after,
 .nav-product-trigger::after {
@@ -277,7 +283,6 @@ button:disabled {
   height: 22px;
 }
 .nav-product-menu:hover .product-mega-menu,
-.nav-product-menu:focus-within .product-mega-menu,
 .nav-product-menu.is-open .product-mega-menu {
   opacity: 1;
   visibility: visible;
@@ -1127,7 +1132,7 @@ body.lang-he .hero-home .lead.reveal-item {
   gap: 12px;
   justify-content: flex-start;
 }
-.section-header h2, .center-title h2 { font-size: clamp(32px, 4.2vw, 50px); line-height: 1.08; letter-spacing: -.02em; }
+.section-header h2, .center-title h1, .center-title h2 { font-size: clamp(32px, 4.2vw, 50px); line-height: 1.08; letter-spacing: -.02em; }
 .section-header > div, .section-header > .section-header-copy { position: relative; }
 .section-header h2::after {
   content: "";
@@ -1976,12 +1981,14 @@ body.lang-en .about-article {
   direction: ltr;
   text-align: left;
 }
+.about-article h1,
 .about-article h2 {
   color: var(--navy);
   font-size: clamp(34px, 4vw, 52px);
   text-align: center;
   margin-bottom: 32px;
 }
+.about-article h1::after,
 .about-article h2::after {
   content: "";
   display: block;
@@ -2882,8 +2889,7 @@ body.lang-en .footer-grid a:hover {
   .product-mega-menu::before {
     content: none;
   }
-  .nav-product-menu:hover .product-mega-menu,
-  .nav-product-menu:focus-within .product-mega-menu {
+  .nav-product-menu:hover .product-mega-menu {
     transform: none;
   }
   .product-menu-column {
@@ -3464,8 +3470,7 @@ body.nav-open { overflow: hidden; }
   }
   .nav-product-trigger { justify-content: space-between; gap: 10px; cursor: pointer; }
   .main-nav a::after { display: none; }
-  /* Category expand chevron (replaces the desktop underline pseudo on mobile).
-     Higher specificity than `.main-nav a::after` since the trigger is an <a>. */
+  /* Category expand chevron (replaces the desktop underline pseudo on mobile). */
   .main-nav .nav-product-trigger::after {
     content: "";
     position: static;
@@ -3581,7 +3586,7 @@ body.nav-open { overflow: hidden; }
   .hero p.lead, .hero-home p.lead,
   body.lang-he .hero-home p.lead { font-size: clamp(15px, 4.2vw, 17px); line-height: 1.66; }
   .hero-claims .hero-title { font-size: clamp(40px, 13vw, 62px); line-height: .98; }
-  .section-header h2, .center-title h2 { font-size: clamp(24px, 6.4vw, 30px); line-height: 1.14; }
+  .section-header h2, .center-title h1, .center-title h2 { font-size: clamp(24px, 6.4vw, 30px); line-height: 1.14; }
   .section-header h2::after { margin-top: 14px; }
   .card h3 { font-size: 20px; margin-bottom: 10px; }
   .card p { margin-bottom: 16px; }

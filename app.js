@@ -1449,10 +1449,65 @@ function telHref(phone) {
   return digits ? `tel:${digits}` : "";
 }
 
-function setMobileNav(open) {
+const DRAWER_FOCUSABLE = "a[href], button:not([disabled]), [tabindex]:not([tabindex=\"-1\"])";
+
+function menuToggleName(open) {
+  if (isEnglish()) return open ? "Close menu" : "Open menu";
+  return open ? "סגירת תפריט" : "פתיחת תפריט";
+}
+
+function syncMenuToggleName(open = mainNav.classList.contains("open")) {
+  if (!menuToggle) return;
+  menuToggle.setAttribute("aria-label", menuToggleName(open));
+}
+
+function navInertTargets() {
+  return [
+    app,
+    document.querySelector(".site-footer"),
+    document.querySelector(".mobile-sticky"),
+    document.querySelector(".skip-link"),
+    document.querySelector(".brand"),
+    document.querySelector(".header-actions"),
+  ].filter(Boolean);
+}
+
+function setOutsideNavInert(on) {
+  navInertTargets().forEach((element) => {
+    if (on) element.setAttribute("inert", "");
+    else element.removeAttribute("inert");
+  });
+}
+
+function drawerFocusables() {
+  const items = [];
+  if (menuToggle) items.push(menuToggle);
+  mainNav.querySelectorAll(DRAWER_FOCUSABLE).forEach((element) => {
+    if (element.closest("[hidden]") || element.getAttribute("aria-hidden") === "true") return;
+    if (!element.getClientRects().length) return;
+    items.push(element);
+  });
+  return items;
+}
+
+function setMobileNav(open, options = {}) {
+  const restoreFocus = options.restoreFocus !== false;
+  const wasOpen = mainNav.classList.contains("open");
   mainNav.classList.toggle("open", open);
   menuToggle.setAttribute("aria-expanded", String(open));
   document.body.classList.toggle("nav-open", open);
+  syncMenuToggleName(open);
+  if (open) {
+    setOutsideNavInert(true);
+    requestAnimationFrame(() => {
+      const items = drawerFocusables();
+      const firstInMenu = items.find((element) => element !== menuToggle) || items[0];
+      if (firstInMenu) firstInMenu.focus();
+    });
+    return;
+  }
+  setOutsideNavInert(false);
+  if (wasOpen && restoreFocus && menuToggle) menuToggle.focus();
 }
 
 menuToggle.addEventListener("click", () => {
@@ -1464,9 +1519,30 @@ document.addEventListener("click", (event) => {
 });
 
 document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    closeProductMenu();
-    if (mainNav.classList.contains("open")) setMobileNav(false);
+  if (event.key === "Tab" && mainNav.classList.contains("open")) {
+    const items = drawerFocusables();
+    if (items.length < 2) return;
+    const first = items[0];
+    const last = items[items.length - 1];
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
+    }
+    return;
+  }
+  if (event.key !== "Escape") return;
+  const openMega = mainNav.querySelector("[data-product-menu].is-open");
+  if (openMega) {
+    event.preventDefault();
+    closeProductMenu({ restoreFocus: true });
+    return;
+  }
+  if (mainNav.classList.contains("open")) {
+    event.preventDefault();
+    setMobileNav(false);
   }
 });
 
@@ -1616,7 +1692,7 @@ async function render() {
     const hrefPath = normalizeRoute(a.getAttribute("href"));
     a.classList.toggle("active", hrefPath === path || (hrefPath === "/blog" && path.startsWith("/blog/")));
   });
-  setMobileNav(false);
+  setMobileNav(false, { restoreFocus: false });
 
   let html;
   let usedLandingCms = false;
@@ -1823,6 +1899,7 @@ function renderChrome(path, chrome = null) {
   ];
   const productGroups = nav ? cmsProductGroups(nav, english) : [];
   mainNav.setAttribute("aria-label", english ? "Main navigation" : "ניווט ראשי");
+  syncMenuToggleName(mainNav.classList.contains("open"));
   mainNav.innerHTML = `${navItems.map(([href, label]) => {
     const route = href.startsWith("/") ? href.split("#")[0] : "";
     if (!english && route === "/insurance-solutions") return productMegaMenuHtml(path, productGroups, label, href);
@@ -1887,7 +1964,7 @@ function productMegaMenuHtml(path, cmsGroups = [], triggerLabel = "", triggerHre
       }))
     : productMenuGroups;
   return `<div class="nav-product-menu" data-product-menu>
-    <a class="nav-product-trigger${active}" href="${link(triggerHref.startsWith("/") ? triggerHref : "/insurance-solutions")}" aria-controls="product-mega-menu">${label}</a>
+    <button class="nav-product-trigger${active}" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="product-mega-menu">${label}</button>
     <div class="product-mega-menu" id="product-mega-menu">
       ${groups.map((group) => `<section class="product-menu-column">
         <div class="product-menu-links">
@@ -1905,7 +1982,7 @@ function aboutMegaMenuHtml(path) {
   const active = aboutMenuRoutes.has(path) ? " active" : "";
   const links = [["אודות", "/about-us"], ["בלוג", "/blog"], ["בתקשורת", "/press"]];
   return `<div class="nav-product-menu" data-product-menu>
-    <a class="nav-product-trigger${active}" href="/about-us" aria-controls="about-mega-menu">אודות</a>
+    <button class="nav-product-trigger${active}" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="about-mega-menu">אודות</button>
     <div class="product-mega-menu about-mega-menu" id="about-mega-menu">
       <section class="product-menu-column">
         <div class="product-menu-links">
@@ -1918,13 +1995,24 @@ function aboutMegaMenuHtml(path) {
 
 function initProductMenu() {
   const desktopQuery = window.matchMedia("(min-width: 981px)");
-  const mobileMenuQuery = window.matchMedia("(max-width: 640px)");
   mainNav.querySelectorAll("[data-product-menu]").forEach((menu) => {
+    const trigger = menu.querySelector(".nav-product-trigger");
     const setOpen = (open) => {
       menu.classList.toggle("is-open", open);
+      if (trigger) trigger.setAttribute("aria-expanded", String(open));
+    };
+    const closeOthers = () => {
+      mainNav.querySelectorAll("[data-product-menu].is-open").forEach((other) => {
+        if (other === menu) return;
+        other.classList.remove("is-open");
+        const otherTrigger = other.querySelector(".nav-product-trigger");
+        if (otherTrigger) otherTrigger.setAttribute("aria-expanded", "false");
+      });
     };
     menu.addEventListener("mouseenter", () => {
-      if (desktopQuery.matches) setOpen(true);
+      if (!desktopQuery.matches) return;
+      closeOthers();
+      setOpen(true);
     });
     menu.addEventListener("mouseleave", () => {
       if (desktopQuery.matches) setOpen(false);
@@ -1932,30 +2020,41 @@ function initProductMenu() {
     menu.addEventListener("focusout", (event) => {
       if (!menu.contains(event.relatedTarget)) setOpen(false);
     });
-    // Mobile: the category trigger toggles an accordion (one open at a time)
-    // instead of navigating — every destination stays reachable as a child link.
-    const trigger = menu.querySelector(".nav-product-trigger");
     if (trigger) {
       trigger.setAttribute("aria-expanded", "false");
+      trigger.setAttribute("aria-haspopup", "true");
       trigger.addEventListener("click", (event) => {
-        if (!mobileMenuQuery.matches) return; // desktop/tablet: navigate as before
         event.preventDefault();
         event.stopPropagation();
         const willOpen = !menu.classList.contains("is-open");
-        mainNav.querySelectorAll("[data-product-menu].is-open").forEach((other) => {
-          other.classList.remove("is-open");
-          const otherTrigger = other.querySelector(".nav-product-trigger");
-          if (otherTrigger) otherTrigger.setAttribute("aria-expanded", "false");
-        });
+        closeOthers();
         setOpen(willOpen);
-        trigger.setAttribute("aria-expanded", String(willOpen));
+        if (willOpen && desktopQuery.matches) {
+          const firstLink = menu.querySelector(".product-menu-link");
+          if (firstLink) firstLink.focus();
+        }
+      });
+      trigger.addEventListener("keydown", (event) => {
+        if (event.key !== "ArrowDown" || !desktopQuery.matches) return;
+        event.preventDefault();
+        closeOthers();
+        setOpen(true);
+        const firstLink = menu.querySelector(".product-menu-link");
+        if (firstLink) firstLink.focus();
       });
     }
   });
 }
 
-function closeProductMenu() {
-  mainNav?.querySelectorAll("[data-product-menu]").forEach((menu) => menu.classList.remove("is-open"));
+function closeProductMenu(options = {}) {
+  const restoreFocus = options.restoreFocus === true;
+  mainNav?.querySelectorAll("[data-product-menu]").forEach((menu) => {
+    const wasOpen = menu.classList.contains("is-open");
+    menu.classList.remove("is-open");
+    const trigger = menu.querySelector(".nav-product-trigger");
+    if (trigger) trigger.setAttribute("aria-expanded", "false");
+    if (restoreFocus && wasOpen && trigger) trigger.focus();
+  });
 }
 
 function footerHtml(english, path = "/", chrome = null) {
@@ -2735,7 +2834,7 @@ function solutionsSections() {
   return `
     <section class="section section-navy">
       <div class="container">
-        <div class="center-title"><h2>תחומי חיתום ובחינת סיכונים</h2><p>קופר נינוה בוחנת סיכונים מקצועיים ומסחריים במגוון תחומים, ומקדמת תהליך חיתום, הפקה, שירות וניהול לאורך חיי הפוליסה בכפוף לסמכויות, תיאבון סיכון ואישור השוק הרלוונטי.</p></div>
+        <div class="center-title"><h1>תחומי חיתום ובחינת סיכונים</h1><p>קופר נינוה בוחנת סיכונים מקצועיים ומסחריים במגוון תחומים, ומקדמת תהליך חיתום, הפקה, שירות וניהול לאורך חיי הפוליסה בכפוף לסמכויות, תיאבון סיכון ואישור השוק הרלוונטי.</p></div>
         ${productCards()}
       </div>
     </section>`;
@@ -2768,7 +2867,7 @@ function aboutSections() {
   }
   return `
     ${teamSection()}
-    <section class="section about-article-section"><div class="container"><article class="about-article"><h2>אודות קופר נינוה</h2><p>קופר נינוה היא אחת מסוכנויות הביטוח הוותיקות והמובילות בישראל בענף הביטוח הכללי, וחברת בת של נינוה סוכנות לביטוח בע״מ, אשר נוסדה בשנת 1973. קופר נינוה פועלת כ־Coverholder בשוק לויד׳ס בישראל, ועובדת עם חברות ביטוח ומבטחי משנה מהגדולים בעולם, תוך החזקת סמכויות חיתום בשם מבטחי לויד׳ס לונדון.</p><p>קופר נינוה עובדת עם מבטחי משנה ושווקים בינלאומיים, יתרון המאפשר למבוטחים ולסוכנים העובדים עמנו גישה ישירה לעולם הביטוח הבינלאומי.</p><p>המשמעות של ביצוע החיתום בישראל גדולה הן עבור המבוטחים והן עבור הסוכנים, בעיקר בשני היבטים מרכזיים: זמן וכסף. קיצור תהליך החיתום וצמצום מספר הגורמים המטפלים בבקשה עשויים לסייע ביצירת תהליך יעיל, מדויק ונגיש יותר.</p><p>אנו מתמחים בסיכונים מיוחדים ובביטוחי חבויות, לרבות חבות מעבידים, אחריות המוצר, צד שלישי, אחריות מקצועית, רשלנות רפואית, ביטוח דירקטורים ונושאי משרה, כספים בהעברה ותחומים נוספים. הדגש הוא על מתן פתרונות בתחומים שבהם השוק המקומי מתקשה לעיתים לתת מענה מלא, תוך התאמה לצורכי הביטוח המשתנים של המבוטח.</p><p>קופר נינוה מתאימה פתרונות מיוחדים לחברות ישראליות, לרבות חברות ישראליות בעלות פעילות בינלאומית.</p><p>כאשר מדובר בפרויקטים ובסיכונים מורכבים, הדגש הוא על לימוד והבנה של פעילות הלקוח, מאפייני הסיכון והחשיפות האפשריות הנובעות מפעילותו. קופר נינוה שואפת להעניק למבוטחים ולסוכנים העובדים עמה שירות מקצועי ואישי, זמינות גבוהה, וליווי בתהליכי חיתום ותביעות באמצעות הגורמים המקצועיים הרלוונטיים.</p></article></div></section>`;
+    <section class="section about-article-section"><div class="container"><article class="about-article"><h1>אודות קופר נינוה</h1><p>קופר נינוה היא אחת מסוכנויות הביטוח הוותיקות והמובילות בישראל בענף הביטוח הכללי, וחברת בת של נינוה סוכנות לביטוח בע״מ, אשר נוסדה בשנת 1973. קופר נינוה פועלת כ־Coverholder בשוק לויד׳ס בישראל, ועובדת עם חברות ביטוח ומבטחי משנה מהגדולים בעולם, תוך החזקת סמכויות חיתום בשם מבטחי לויד׳ס לונדון.</p><p>קופר נינוה עובדת עם מבטחי משנה ושווקים בינלאומיים, יתרון המאפשר למבוטחים ולסוכנים העובדים עמנו גישה ישירה לעולם הביטוח הבינלאומי.</p><p>המשמעות של ביצוע החיתום בישראל גדולה הן עבור המבוטחים והן עבור הסוכנים, בעיקר בשני היבטים מרכזיים: זמן וכסף. קיצור תהליך החיתום וצמצום מספר הגורמים המטפלים בבקשה עשויים לסייע ביצירת תהליך יעיל, מדויק ונגיש יותר.</p><p>אנו מתמחים בסיכונים מיוחדים ובביטוחי חבויות, לרבות חבות מעבידים, אחריות המוצר, צד שלישי, אחריות מקצועית, רשלנות רפואית, ביטוח דירקטורים ונושאי משרה, כספים בהעברה ותחומים נוספים. הדגש הוא על מתן פתרונות בתחומים שבהם השוק המקומי מתקשה לעיתים לתת מענה מלא, תוך התאמה לצורכי הביטוח המשתנים של המבוטח.</p><p>קופר נינוה מתאימה פתרונות מיוחדים לחברות ישראליות, לרבות חברות ישראליות בעלות פעילות בינלאומית.</p><p>כאשר מדובר בפרויקטים ובסיכונים מורכבים, הדגש הוא על לימוד והבנה של פעילות הלקוח, מאפייני הסיכון והחשיפות האפשריות הנובעות מפעילותו. קופר נינוה שואפת להעניק למבוטחים ולסוכנים העובדים עמה שירות מקצועי ואישי, זמינות גבוהה, וליווי בתהליכי חיתום ותביעות באמצעות הגורמים המקצועיים הרלוונטיים.</p></article></div></section>`;
 }
 
 let livePressGroups = pressGroups;
@@ -2786,7 +2885,7 @@ function teamSection() {
 
 function contactSections() {
   return `
-    <section class="section"><div class="container"><div class="center-title"><h2>צור קשר עם קופר נינוה</h2><p>השאירו פרטים בסיסיים להגשת סיכון, פנייה כסוכן, בדיקת חשיפה עסקית או פנייה בנושא שירות ותביעות.</p></div><div class="split-band">${form("form_submit_general", ["שם מלא", "טלפון", "אימייל", "חברה / סוכנות", "סוג הפנייה", "תחום חיתום רלוונטי"])}<div><h2>פרטי התקשרות</h2><p>ניתן לפנות אלינו גם ישירות בטלפון או במייל.</p><ul class="feature-list"><li>טלפון: 077-9965453</li><li>אימייל: info@cooper-ninve.com</li><li>כתובת: רח׳ דיזנגוף 111, תל אביב</li></ul></div></div></div></section>`;
+    <section class="section"><div class="container"><div class="center-title"><h1>צור קשר עם קופר נינוה</h1><p>השאירו פרטים בסיסיים להגשת סיכון, פנייה כסוכן, בדיקת חשיפה עסקית או פנייה בנושא שירות ותביעות.</p></div><div class="split-band">${form("form_submit_general", ["שם מלא", "טלפון", "אימייל", "חברה / סוכנות", "סוג הפנייה", "תחום חיתום רלוונטי"])}<div><h2>פרטי התקשרות</h2><p>ניתן לפנות אלינו גם ישירות בטלפון או במייל.</p><ul class="feature-list"><li>טלפון: 077-9965453</li><li>אימייל: info@cooper-ninve.com</li><li>כתובת: רח׳ דיזנגוף 111, תל אביב</li></ul></div></div></div></section>`;
 }
 
 function blogSections(posts) {

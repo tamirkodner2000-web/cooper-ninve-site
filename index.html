@@ -19,12 +19,12 @@
         <a class="brand" href="/" aria-label="קופר נינוה - דף הבית">
           <img src="/assets/logo/cooper-ninve-logo-white.png" alt="Cooper Ninve" width="768" height="283" fetchpriority="high" decoding="sync" />
         </a>
-        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" data-menu-toggle>☰</button>
+        <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label="פתיחת תפריט" data-menu-toggle><span aria-hidden="true">☰</span></button>
         <nav id="main-nav" class="main-nav" data-main-nav aria-label="ניווט ראשי">
           <a href="/insurance-agents">לסוכני ביטוח</a>
           <a href="/business-insurance">לעסקים</a>
           <div class="nav-product-menu" data-product-menu>
-            <a class="nav-product-trigger" href="/insurance-solutions" aria-controls="product-mega-menu">מוצרי ביטוח</a>
+            <button class="nav-product-trigger" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="product-mega-menu">מוצרי ביטוח</button>
             <div class="product-mega-menu" id="product-mega-menu">
               <section class="product-menu-column">
                 <div class="product-menu-links">
@@ -45,7 +45,7 @@
           </div>
           <a href="/claims">תביעות</a>
           <div class="nav-product-menu" data-product-menu>
-            <a class="nav-product-trigger" href="/about-us" aria-controls="about-mega-menu">אודות</a>
+            <button class="nav-product-trigger" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="about-mega-menu">אודות</button>
             <div class="product-mega-menu about-mega-menu" id="about-mega-menu">
               <section class="product-menu-column">
                 <div class="product-menu-links">
