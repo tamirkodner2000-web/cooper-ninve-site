@@ -586,6 +586,7 @@
     fetchHomepage: fetchHomepage,
     fetchLandingPage: fetchLandingPage,
     fetchStandardPage: fetchStandardPage,
+    fetchProduct: fetchProduct,
     fetchNavigation: fetchNavigation,
     fetchPressMedia: fetchPressMedia,
     mergePressGroups: mergePressGroups,
