@@ -1248,8 +1248,32 @@ function initHeroParallax() {
 }
 
 // Tall repeated card grids become horizontal scroll-snap carousels on phones.
-// Pure-CSS handles the swipe; this only wires the brand dots + arrows indicator.
+// Pure-CSS handles the swipe; this wires accessible dots + arrows.
 const CAROUSEL_MIN_CARDS = 3;
+const CAROUSEL_FOCUSABLE = "a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]";
+const carouselMobileQuery = window.matchMedia("(max-width: 640px)");
+
+function carouselInteractive(card) {
+  const nested = [...card.querySelectorAll(CAROUSEL_FOCUSABLE)];
+  if (card.matches("a[href], button")) nested.unshift(card);
+  return nested;
+}
+
+function restoreCarouselTab(element) {
+  if (element.dataset.carouselTab === undefined) return;
+  const previous = element.dataset.carouselTab;
+  delete element.dataset.carouselTab;
+  if (previous === "") element.removeAttribute("tabindex");
+  else element.setAttribute("tabindex", previous);
+}
+
+function suppressCarouselTab(element) {
+  if (element.dataset.carouselTab === undefined) {
+    element.dataset.carouselTab = element.hasAttribute("tabindex") ? element.getAttribute("tabindex") : "";
+  }
+  element.tabIndex = -1;
+}
+
 function initCarousels() {
   const groups = app.querySelectorAll(".grid, .workflow-cards, .team-grid, .press-card-grid");
   groups.forEach((group) => {
@@ -1259,11 +1283,6 @@ function initCarousels() {
     group.classList.add("is-carousel");
     group.dataset.carousel = "ready";
 
-    // On mobile only, drop the vertical fade-up reveal from carousel cards: its
-    // translateY offset + opacity:0 pushed cards into the horizontally-clipping
-    // track and left them invisible until a horizontal IntersectionObserver hit
-    // (top/badge cut off, cards shifting between slides). Desktop keeps its reveal.
-    // (CSS also force-flattens carousel children on mobile as a resize-safe backup.)
     if (window.innerWidth <= 640) {
       cards.forEach((card) => {
         card.classList.remove("reveal-item", "is-visible");
@@ -1275,28 +1294,31 @@ function initCarousels() {
     const rtl = !isEnglish();
     const nav = document.createElement("div");
     nav.className = "carousel-nav";
-    nav.setAttribute("aria-hidden", "true");
+    nav.setAttribute("role", "group");
+    nav.setAttribute("aria-label", rtl ? "ניווט שקופיות" : "Slide navigation");
 
     const prevBtn = document.createElement("button");
     prevBtn.type = "button";
     prevBtn.className = "carousel-arrow carousel-prev";
-    prevBtn.tabIndex = -1;
-    prevBtn.textContent = rtl ? "›" : "‹";
+    prevBtn.setAttribute("aria-label", rtl ? "הקודם" : "Previous");
+    prevBtn.innerHTML = `<span aria-hidden="true">${rtl ? "›" : "‹"}</span>`;
 
     const nextBtn = document.createElement("button");
     nextBtn.type = "button";
     nextBtn.className = "carousel-arrow carousel-next";
-    nextBtn.tabIndex = -1;
-    nextBtn.textContent = rtl ? "‹" : "›";
+    nextBtn.setAttribute("aria-label", rtl ? "הבא" : "Next");
+    nextBtn.innerHTML = `<span aria-hidden="true">${rtl ? "‹" : "›"}</span>`;
 
     const dots = document.createElement("div");
     dots.className = "carousel-dots";
+    dots.setAttribute("role", "group");
+    dots.setAttribute("aria-label", rtl ? "שקופיות" : "Slides");
     cards.forEach((_, i) => {
       const dot = document.createElement("button");
       dot.type = "button";
       dot.className = "carousel-dot";
-      dot.tabIndex = -1;
       dot.dataset.index = String(i);
+      dot.setAttribute("aria-label", rtl ? `מעבר לשקופית ${i + 1}` : `Go to slide ${i + 1}`);
       dots.appendChild(dot);
     });
 
@@ -1324,12 +1346,29 @@ function initCarousels() {
       return best;
     };
 
+    const syncSlideFocus = (active) => {
+      const mobile = carouselMobileQuery.matches;
+      cards.forEach((card, i) => {
+        carouselInteractive(card).forEach((element) => {
+          if (mobile && i !== active) suppressCarouselTab(element);
+          else restoreCarouselTab(element);
+        });
+      });
+    };
+
     let ticking = false;
     const update = () => {
+      if (!group.isConnected) return;
       const active = activeIndex();
-      [...dots.children].forEach((dot, i) => dot.classList.toggle("is-active", i === active));
+      [...dots.children].forEach((dot, i) => {
+        const isActive = i === active;
+        dot.classList.toggle("is-active", isActive);
+        if (isActive) dot.setAttribute("aria-current", "true");
+        else dot.removeAttribute("aria-current");
+      });
       prevBtn.disabled = active <= 0;
       nextBtn.disabled = active >= cards.length - 1;
+      syncSlideFocus(active);
       ticking = false;
     };
     group.addEventListener("scroll", () => {
@@ -1342,6 +1381,7 @@ function initCarousels() {
     [...dots.children].forEach((dot) => {
       dot.addEventListener("click", () => scrollToIndex(Number(dot.dataset.index)));
     });
+    carouselMobileQuery.addEventListener("change", update);
     update();
   });
 }
@@ -1905,8 +1945,9 @@ function renderChrome(path, chrome = null) {
     if (!english && route === "/insurance-solutions") return productMegaMenuHtml(path, productGroups, label, href);
     if (!english && (route === "/about-us" || label === "אודות")) return aboutMegaMenuHtml(path);
     const safeHref = href.startsWith("/") ? link(href) : href;
-    const target = headerItems && headerItems.find((item) => item.label === label && item.openInNewTab) ? ' target="_blank" rel="noopener noreferrer"' : "";
-    return `<a href="${safeHref}"${target}>${label}</a>`;
+    const target = headerItems && headerItems.find((item) => item.label === label && item.openInNewTab);
+    const newTab = Boolean(target);
+    return `<a href="${safeHref}"${newTabAttrs(newTab)}>${label}${newTab ? newTabDisclosureHtml() : ""}</a>`;
   }).join("")}<a class="language-switcher nav-language-switcher" href="${matchingLanguagePath(path, !english)}"${english ? ` aria-label="Switch to Hebrew"` : ` aria-label="Switch to English"`}>${english ? "HE" : englishSwitchLabel}</a>`;
   initProductMenu();
 
@@ -2682,14 +2723,47 @@ function englishUnderwritingLinesTemplate() {
     </section>`;
 }
 
+function newTabDisclosureHtml() {
+  const text = isEnglish() ? "opens in a new tab" : "נפתח בחלון חדש";
+  return `<span class="sr-only"> (${text})</span>`;
+}
+
+function newTabAttrs(openInNewTab) {
+  return openInNewTab ? ` target="_blank" rel="noopener noreferrer"` : "";
+}
+
+function isGenericCtaLabel(visible) {
+  return /^(קרא עוד|מידע נוסף|לקריאה|לקריאת הכתבה|Read More|Read more|View lines|Learn more|Learn More)$/i.test(String(visible || "").trim());
+}
+
+function contextualLinkName(visible, topic, { newTab = false } = {}) {
+  let name = String(visible || "").trim();
+  const title = String(topic || "").trim();
+  if (title && name && !name.includes(title) && isGenericCtaLabel(name)) {
+    name = isEnglish() ? `${name} about ${title}` : `${name} על ${title}`;
+  }
+  if (newTab) name += isEnglish() ? " (opens in a new tab)" : " (נפתח בחלון חדש)";
+  return name;
+}
+
+function linkNameAttr(visible, topic, options = {}) {
+  const name = contextualLinkName(visible, topic, options);
+  const shown = String(visible || "").trim();
+  if (!name || name === shown) return "";
+  return ` aria-label="${escapeText(name)}"`;
+}
+
 function cards(items, cols = 3) {
-  return `<div class="grid grid-${cols}">${items.map((item) => `
-    ${item.url ? `<a class="card card-link" href="${link(item.url)}">` : `<article class="card">`}
+  return `<div class="grid grid-${cols}">${items.map((item) => {
+    const cta = item.cta || (isEnglish() ? "Read More" : "קרא עוד");
+    return `
+    ${item.url ? `<a class="card card-link" href="${link(item.url)}"${linkNameAttr(cta, item.title)}>` : `<article class="card">`}
       ${item.icon === false ? "" : `<div class="icon-circle">${item.icon || "•"}</div>`}
       <h3>${item.title}</h3>
       <p>${item.text}</p>
-      ${item.url ? `<span class="card-cta">${item.cta || "קרא עוד"}</span>` : ""}
-    ${item.url ? `</a>` : `</article>`}`).join("")}</div>`;
+      ${item.url ? `<span class="card-cta">${cta}</span>` : ""}
+    ${item.url ? `</a>` : `</article>`}`;
+  }).join("")}</div>`;
 }
 
 function productCards() {
@@ -2875,7 +2949,10 @@ let livePressGroups = pressGroups;
 function pressSections() {
   return `<section class="section press-list-section"><div class="container press-groups">${livePressGroups.map((group, groupIndex) => `<section class="press-group" aria-labelledby="press-group-${groupIndex + 1}"><h2 id="press-group-${groupIndex + 1}">${group.title}</h2><div class="press-card-grid">${group.items.map((item) => {
     const external = /^https?:\/\//.test(item.url);
-    return `<article class="press-card"><p class="press-source">${item.source}</p><h3>${item.title}</h3><p>${item.description}</p><a class="card-cta" href="${item.url}"${external ? ` target="_blank" rel="noopener"` : ""}>${item.cta}</a></article>`;
+    const contextSr = isGenericCtaLabel(item.cta) && item.title && !String(item.cta).includes(item.title)
+      ? `<span class="sr-only">${isEnglish() ? ` about ${escapeText(item.title)}` : ` על ${escapeText(item.title)}`}</span>`
+      : "";
+    return `<article class="press-card"><p class="press-source">${item.source}</p><h3>${item.title}</h3><p>${item.description}</p><a class="card-cta" href="${item.url}"${newTabAttrs(external)}>${item.cta}${contextSr}${external ? newTabDisclosureHtml() : ""}</a></article>`;
   }).join("")}</div></section>`).join("")}</div></section>`;
 }
 
@@ -2906,7 +2983,7 @@ function blogSections(posts) {
     const imageHtml = image
       ? `<div class="blog-card-image"><img src="${escapeText(image)}" alt="${escapeText(alt)}" loading="lazy" width="640" height="360"></div>`
       : "";
-    return `<a class="blog-card" href="${href}"><article>${imageHtml}${category}<h3>${escapeText(post.title)}</h3>${excerpt}<span class="card-cta">מידע נוסף</span></article></a>`;
+    return `<a class="blog-card" href="${href}"${linkNameAttr("מידע נוסף", post.title)}><article>${imageHtml}${category}<h3>${escapeText(post.title)}</h3>${excerpt}<span class="card-cta">מידע נוסף</span></article></a>`;
   }).join("");
   return `<section class="section"><div class="container"><div class="blog-grid">${cardsHtml}</div></div></section>`;
 }

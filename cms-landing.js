@@ -54,9 +54,12 @@
     }
 
     if (!href) return "";
+    var extra = cta.openInNewTab
+      ? '<span class="sr-only"> (נפתח בחלון חדש)</span>'
+      : "";
     var target = cta.openInNewTab ? ' target="_blank" rel="noopener noreferrer"' : "";
     var trackAttr = track ? ' data-track="' + esc(track) + '"' : "";
-    return '<a class="' + className + '" href="' + esc(href) + '"' + target + trackAttr + ">" + esc(label) + "</a>";
+    return '<a class="' + className + '" href="' + esc(href) + '"' + target + trackAttr + ">" + esc(label) + extra + "</a>";
   }
 
   function fieldKind(label) {
@@ -284,8 +287,11 @@
         var label = text(item && item.label);
         var href = safeHref(item && (item.url || item.externalURL));
         if (!label || !href) return "";
+        var extra = item.openInNewTab
+          ? '<span class="sr-only"> (נפתח בחלון חדש)</span>'
+          : "";
         var target = item.openInNewTab ? ' target="_blank" rel="noopener noreferrer"' : "";
-        return '<a class="btn btn-secondary" href="' + esc(href) + '"' + target + ">" + esc(label) + "</a>";
+        return '<a class="btn btn-secondary" href="' + esc(href) + '"' + target + ">" + esc(label) + extra + "</a>";
       })
       .join("");
     if (!productCards && !links) return "";
