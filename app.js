@@ -284,9 +284,9 @@ const pages = {
   },
   "/accessibility-statement": {
     title: "הצהרת נגישות | קופר נינוה",
-    description: "הצהרת נגישות כללית לאתר קופר נינוה.",
+    description: "הצהרת נגישות לאתר קופר נינוה: מאפייני נגישות שיושמו, מגבלות ידועות ופרטי פנייה.",
     h1: "הצהרת נגישות",
-    lead: "קופר נינוה שואפת להנגיש את האתר לקהל רחב ככל האפשר. עמוד זה הוא בסיס להצהרת נגישות מלאה.",
+    lead: "קופר נינוה פועלת להנגשת האתר. עמוד זה מתאר את מאמצי הנגישות שבוצעו ואת דרכי הפנייה בנושא.",
     sections: "accessibility",
   },
   "/knowledge-center": {
@@ -546,7 +546,7 @@ const englishMeta = {
   },
   "/accessibility-statement": {
     title: "Accessibility Statement | Cooper Ninve",
-    description: "General accessibility statement for the Cooper Ninve website.",
+    description: "Accessibility statement for the Cooper Ninve website, including implemented features, known limitations, and contact details.",
   },
   "/knowledge-center": {
     title: "Insurance Knowledge Center | Cooper Ninve",
@@ -2437,7 +2437,8 @@ function standardTemplate(page, path) {
   if (isEnglish() && path === "/claims") return englishClaimsOperationsTemplate();
   if (isEnglish() && path === "/contact-us") return englishContactTemplate();
   if (path === "/israel-market-partner") return `${internationalPartnerSections()}`;
-  if (["/privacy-policy", "/terms-of-use", "/disclosure", "/public-complaints", "/accessibility-statement"].includes(path)) return `${legalSections(page, path)}`;
+  if (path === "/accessibility-statement") return accessibilityStatementTemplate();
+  if (["/privacy-policy", "/terms-of-use", "/disclosure", "/public-complaints"].includes(path)) return `${legalSections(page, path)}`;
   if (path === "/insurance-solutions") return sections(page.sections, path, page);
   if (path === "/about-us") return `${sections(page.sections, path, page)}`;
   if (path === "/contact-us") return sections(page.sections, path, page);
@@ -2817,12 +2818,98 @@ function legalSections(page, path) {
     "/public-complaints": english
       ? ["Public Complaints Procedure", ["Public inquiries and complaints may be sent through the contact channels on this website.", "Please include identifying details, policy or claim information where relevant, and a clear description of the issue.", "This placeholder should be replaced with the company's approved complaints procedure."]]
       : ["תלונות הציבור", ["ניתן להעביר פניות או תלונות באמצעות פרטי הקשר באתר.", "מומלץ לצרף פרטים מזהים, מספר פוליסה או תביעה ככל שקיים, ותיאור ברור של הנושא.", "עמוד זה הוא בסיס לנוהל תלונות מאושר של החברה."]],
-    "/accessibility-statement": english
-      ? ["Accessibility Statement", ["Cooper Ninve aims to make the website accessible to a broad audience.", "If you encounter an accessibility issue, please contact the company through the contact details on the website.", "A full accessibility statement should be completed after accessibility review."]]
-      : ["הצהרת נגישות", ["קופר נינוה שואפת להנגיש את האתר לקהל רחב ככל האפשר.", "אם נתקלתם בקושי נגישות, ניתן לפנות לחברה דרך פרטי הקשר באתר.", "הצהרת נגישות מלאה תושלם לאחר בדיקת נגישות ייעודית."]],
   };
   const [title, items] = legalCopy[path] || [page.h1, [page.lead]];
   return `<section class="section"><div class="container split-band"><div><h1>${title}</h1><p>${page.lead || ""}</p></div><ul class="feature-list">${items.map((item) => `<li>${item}</li>`).join("")}</ul></div></section>`;
+}
+
+function accessibilityStatementTemplate() {
+  const english = isEnglish();
+  const title = english ? "Accessibility Statement" : "הצהרת נגישות";
+  const contactHref = link("/contact-us");
+  const he = `
+      <h1>${title}</h1>
+      <div class="blog-article-body">
+        <p>קופר נינוה פועלת להנגשת האתר לקהל רחב, לרבות אנשים עם מוגבלויות ומשתמשים בטכנולוגיות מסייעות. הצהרה זו מתארת את עבודת הנגישות שבוצעה באתר, את המאפיינים שיושמו, ואת הדרכים לפנות אלינו בנושא נגישות.</p>
+        <p>אין בהצהרה זו טענה לעמידה מלאה בתקן WCAG, בתקן ישראלי 5568, או לאישור או הסמכה של צד שלישי.</p>
+        <h2>מחויבות</h2>
+        <p>אנו רואים בנגישות חלק מתחזוקת האתר. סבב שיפורי נגישות בוצע בניווט, במבנה הסמנטי, בטפסים, בקרוסלות, בטיפול בשפות ובהעדפות תנועה.</p>
+        <h2>מאפייני נגישות שיושמו באתר</h2>
+        <ul>
+          <li>ניווט נגיש במקלדת, כולל התפריט הראשי ותפריט המובייל</li>
+          <li>סימון מיקוד נראה</li>
+          <li>קישור דילוג לתוכן הראשי</li>
+          <li>כותרות וציוני דרך סמנטיים (למשל אזור תוכן ראשי, ניווט ותחתית האתר)</li>
+          <li>טפסים עם תוויות, סימון שדות חובה והודעות שגיאה ברמת השדה</li>
+          <li>אזורי live לעדכון לגבי שגיאות ושליחת טופס</li>
+          <li>תמיכה בהעדפת הפחתת תנועה (prefers-reduced-motion)</li>
+          <li>פקדי קרוסלה נגישים במקלדת, עם תוויות בעברית ובאנגלית</li>
+          <li>טיפול בכיווניות ובשפה: עברית מימין לשמאל ואנגלית משמאל לימין</li>
+          <li>טקסט חלופי משמעותי ללוגו ולתמונות שבהן צוין טקסט חלופי</li>
+        </ul>
+        <h2>דפדפנים ומכשירים</h2>
+        <p>האתר מיועד לשימוש בדפדפנים עדכניים נפוצים ובמכשירי מחשב, טאבלט וטלפון. לא פורסם מטריצת בדיקות מוסמכת לדפדפנים או לטכנולוגיות מסייעות ספציפיות, ואין כאן רשימת מוצרים שנבדקו באופן רשמי.</p>
+        <h2>מגבלות ידועות</h2>
+        <p>עבודת הנגישות נמשכת. בין המגבלות הידועות במועד עדכון הצהרה זו:</p>
+        <ul>
+          <li>אין טענת התאמה מלאה לתקן נגישות, ואין הסמכה חיצונית מתועדת</li>
+          <li>בחלק מכרטיסי התוכן קישור העטיפה כולל את כותרת הכרטיס והתיאור בשם הנגיש של הקישור</li>
+          <li>תוכן חדש שיפורסם דרך מערכת התוכן יידרש לבדיקת מבנה כותרות ורשימות בעת הפרסום</li>
+        </ul>
+        <p>לא מפורסם כאן שם רכז נגישות, מועד הסמכה, הסדרי נגישות פיזית במשרדים או פטורים — משום שפרטים אלה אינם מתועדים באתר.</p>
+        <h2>דיווח על בעיית נגישות</h2>
+        <p>אם נתקלתם בקושי בשימוש באתר, ניתן לפנות אלינו. נשמח לקבל תיאור של העמוד, הדפדפן או הטכנולוגיה המסייעת, ומה לא פעל כמצופה.</p>
+        <ul>
+          <li>טלפון: <a href="tel:0779965453">077-9965453</a></li>
+          <li>דוא״ל: <a href="mailto:info@cooper-ninve.com">info@cooper-ninve.com</a></li>
+          <li>כתובת: רח׳ דיזנגוף 111, תל אביב</li>
+          <li>טופס פנייה באתר: <a href="${contactHref}">צור קשר</a></li>
+        </ul>
+        <h2>תאריך עדכון</h2>
+        <p>הצהרה זו עודכנה לאחרונה ב־6 באוקטובר 2026, בעקבות סבב שיפורי נגישות באתר.</p>
+      </div>`;
+  const en = `
+      <h1>${title}</h1>
+      <div class="blog-article-body">
+        <p>Cooper Ninve works to make this website usable by a wide audience, including people with disabilities and people who use assistive technologies. This statement describes accessibility work that has been carried out, features that have been implemented, and how to contact us about accessibility.</p>
+        <p>This statement does not claim full WCAG conformance, Israeli Standard 5568 conformance, or any third-party certification.</p>
+        <h2>Commitment</h2>
+        <p>We treat accessibility as part of maintaining the website. A dedicated accessibility pass has been applied to navigation, semantic structure, forms, carousels, language handling, and reduced-motion preferences.</p>
+        <h2>Accessibility features currently implemented</h2>
+        <ul>
+          <li>Keyboard-accessible navigation, including the main menu and the mobile menu</li>
+          <li>Visible focus indicators</li>
+          <li>A skip link to the main content</li>
+          <li>Semantic headings and landmarks (for example main, navigation, and footer)</li>
+          <li>Accessible forms with labels, marked required fields, and field-level error messages</li>
+          <li>Live regions for form error and submission status</li>
+          <li>Reduced-motion support via prefers-reduced-motion</li>
+          <li>Keyboard-accessible carousel controls with Hebrew and English labels</li>
+          <li>RTL Hebrew and LTR English language handling</li>
+          <li>Meaningful alternative text for the logo and for images where alternative text is provided</li>
+        </ul>
+        <h2>Browsers and devices</h2>
+        <p>The website is intended for current common browsers and for computer, tablet, and phone use. We have not published a certified browser or assistive-technology test matrix, and this page does not list products as officially tested.</p>
+        <h2>Known limitations</h2>
+        <p>Accessibility work is ongoing. Known limitations at the date of this update include:</p>
+        <ul>
+          <li>No claim of full conformance to an accessibility standard, and no documented external certification</li>
+          <li>On some content cards, a wrapping link includes the card heading and description in the link’s accessible name</li>
+          <li>New CMS content will still need heading and list structure review when it is published</li>
+        </ul>
+        <p>This page does not name an accessibility coordinator, a certification date, physical office accessibility arrangements, or exemptions, because those details are not documented on the website.</p>
+        <h2>Reporting an accessibility issue</h2>
+        <p>If you have difficulty using the website, please contact us. It helps to include the page, the browser or assistive technology you used, and what did not work as expected.</p>
+        <ul>
+          <li>Phone: <a href="tel:0779965453">077-9965453</a></li>
+          <li>Email: <a href="mailto:info@cooper-ninve.com">info@cooper-ninve.com</a></li>
+          <li>Address: 111 Dizengoff St., Tel Aviv</li>
+          <li>Website contact form: <a href="${contactHref}">Contact us</a></li>
+        </ul>
+        <h2>Date of this update</h2>
+        <p>This statement was last updated on 6 October 2026, following an accessibility remediation pass on the website.</p>
+      </div>`;
+  return `<section class="section"><div class="container"><article class="blog-article">${english ? en : he}</article></div></section>`;
 }
 
 function homeSections(page) {
