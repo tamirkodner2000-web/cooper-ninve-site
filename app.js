@@ -2757,6 +2757,19 @@ function claimsSections() {
 function productTemplate(page, path) {
   const factors = page.factors || ["תחום פעילות ואופי החשיפה", "מחזור, היקף פעילות וגבולות אחריות", "ניסיון תביעות קודם", "דרישות חוזיות או אישורי ביטוח", "מידע מקצועי, שאלונים ומסמכים תומכים", "תיאבון סיכון, סמכויות חיתום ואישור השוק הרלוונטי"];
   if (!isEnglish()) {
+    const article = String(page.fullContentHtml || "").trim();
+    if (article) {
+      return `
+      <section class="section product-detail-section">
+        <div class="container product-detail-layout">
+          ${productSidebar(path)}
+          <article class="product-detail-content">
+            ${page.lead ? `<div class="product-intro-block"><p>${page.lead}</p></div>` : ""}
+            ${article}
+          </article>
+        </div>
+      </section>`;
+    }
     return `
       <section class="section product-detail-section">
         <div class="container product-detail-layout">

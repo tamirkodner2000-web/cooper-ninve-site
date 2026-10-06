@@ -499,6 +499,7 @@
       coverage: textList(cms.coverage, staticPage.coverage, english),
       description: description,
       faqs: faqList(cms.faqs, staticPage.faqs, english),
+      fullContentHtml: english ? "" : String(cms.fullContentHtml || "").trim(),
       h1: h1,
       info: textList(cms.info, staticPage.info, english),
       lead: lead,
