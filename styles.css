@@ -38,7 +38,12 @@
 }
 
 * { box-sizing: border-box; }
-html { scroll-behavior: smooth; }
+html {
+  --a11y-text-scale: 1;
+  font-size: calc(100% * var(--a11y-text-scale, 1));
+  scroll-behavior: smooth;
+}
+html.a11y-reduce-motion { scroll-behavior: auto; }
 body {
   margin: 0;
   color: var(--ink);
@@ -155,6 +160,37 @@ button:disabled {
     stroke-dashoffset: 0;
     transition: none;
   }
+}
+html.a11y-reduce-motion {
+  scroll-behavior: auto;
+}
+html.a11y-reduce-motion *,
+html.a11y-reduce-motion *::before,
+html.a11y-reduce-motion *::after {
+  animation-duration: .01ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: .01ms !important;
+  transition-delay: 0ms !important;
+}
+html.a11y-reduce-motion .reveal-item,
+html.a11y-reduce-motion .reveal-item.is-visible {
+  opacity: 1;
+  transform: none;
+}
+html.a11y-reduce-motion .mga-sketch,
+html.a11y-reduce-motion .mga-block.is-sketch-visible .mga-sketch {
+  opacity: .72;
+  transform: none;
+}
+html.a11y-reduce-motion .mga-sketch.is-sketch-enhanced,
+html.a11y-reduce-motion .mga-sketch.is-sketch-reveal,
+html.a11y-reduce-motion .mga-block.is-sketch-visible .mga-sketch.is-sketch-reveal {
+  clip-path: none;
+  filter: none;
+}
+html.a11y-reduce-motion .mga-sketch-line {
+  stroke-dashoffset: 0;
+  transition: none;
 }
 .container { width: min(1180px, calc(100% - 40px)); margin-inline: auto; }
 .skip-link {
@@ -2623,6 +2659,27 @@ details p { margin: 12px 0 0; color: var(--muted); }
     transform: none;
   }
 }
+html.a11y-reduce-motion .card.reveal-item,
+html.a11y-reduce-motion .workflow-card.reveal-item,
+html.a11y-reduce-motion .feature-list li.reveal-item,
+html.a11y-reduce-motion .step.reveal-item,
+html.a11y-reduce-motion .partner-logo-card.reveal-item,
+html.a11y-reduce-motion .home-counter-card.reveal-item,
+html.a11y-reduce-motion .team-card.reveal-item,
+html.a11y-reduce-motion .press-card.reveal-item,
+html.a11y-reduce-motion .underwriting-process-step.reveal-item,
+html.a11y-reduce-motion .card.reveal-item.is-visible,
+html.a11y-reduce-motion .workflow-card.reveal-item.is-visible,
+html.a11y-reduce-motion .feature-list li.reveal-item.is-visible,
+html.a11y-reduce-motion .step.reveal-item.is-visible,
+html.a11y-reduce-motion .partner-logo-card.reveal-item.is-visible,
+html.a11y-reduce-motion .home-counter-card.reveal-item.is-visible,
+html.a11y-reduce-motion .team-card.reveal-item.is-visible,
+html.a11y-reduce-motion .press-card.reveal-item.is-visible,
+html.a11y-reduce-motion .underwriting-process-step.reveal-item.is-visible {
+  opacity: 1;
+  transform: none;
+}
 
 .site-footer {
   position: relative;
@@ -3750,6 +3807,15 @@ body.nav-open { overflow: hidden; }
   .main-nav .product-mega-menu { transition: none; }
   .nav-product-trigger::after { transition: none; }
 }
+html.a11y-reduce-motion .main-nav.open,
+html.a11y-reduce-motion body.nav-open .main-nav > a,
+html.a11y-reduce-motion body.nav-open .main-nav > .nav-product-menu,
+html.a11y-reduce-motion body.nav-open .main-nav > .language-switcher {
+  animation: none;
+}
+html.a11y-reduce-motion body.nav-open .menu-toggle { transform: none; }
+html.a11y-reduce-motion .main-nav .product-mega-menu { transition: none; }
+html.a11y-reduce-motion .nav-product-trigger::after { transition: none; }
 
 /* =========================================================================
    MOBILE CARD CAROUSEL — tall repeated card grids become horizontal,
@@ -3872,6 +3938,7 @@ body.nav-open { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) {
   .is-carousel { scroll-behavior: auto; }
 }
+html.a11y-reduce-motion .is-carousel { scroll-behavior: auto; }
 
 /* =========================================================================
    MOBILE FOOTER — brand/contact + branded single-open accordions + compact
@@ -3994,6 +4061,8 @@ body.nav-open { overflow: hidden; }
   .footer-group-panel { transition: none; }
   .footer-chevron { transition: none; }
 }
+html.a11y-reduce-motion .footer-group-panel { transition: none; }
+html.a11y-reduce-motion .footer-chevron { transition: none; }
 
 .blog-grid {
   display: grid;
@@ -4071,4 +4140,171 @@ body.nav-open { overflow: hidden; }
 @media (max-width: 800px) {
   .blog-grid { grid-template-columns: 1fr; }
   .blog-card-image img { height: 200px; }
+}
+
+.a11y-widget {
+  position: fixed;
+  z-index: 40;
+  inset-inline-start: 16px;
+  inset-block-end: 22px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: min(22rem, calc(100vw - 24px));
+  pointer-events: none;
+}
+.a11y-widget > * { pointer-events: auto; }
+.a11y-fab {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 164, 91, .5);
+  background: var(--navy);
+  color: #fff;
+  box-shadow: var(--shadow-md);
+  display: grid;
+  place-items: center;
+}
+.a11y-fab:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 3px;
+  box-shadow: 0 0 0 5px rgba(143, 208, 255, .28);
+}
+.a11y-panel {
+  width: min(20.5rem, calc(100vw - 24px));
+  max-height: min(70vh, 28rem);
+  overflow: auto;
+  background: var(--white);
+  color: var(--ink);
+  border: 1px solid var(--line-strong);
+  border-radius: 14px;
+  box-shadow: var(--shadow-lg);
+  padding: 14px;
+}
+.a11y-panel-title {
+  margin: 0 0 8px;
+  color: var(--navy);
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+.a11y-text-status {
+  margin: 0 0 12px;
+  color: var(--muted);
+  font-size: .92rem;
+  font-weight: 600;
+}
+.a11y-actions {
+  display: grid;
+  gap: 8px;
+}
+.a11y-action {
+  width: 100%;
+  margin: 0;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--line-strong);
+  background: var(--soft);
+  color: var(--navy);
+  font-weight: 700;
+  text-align: start;
+}
+.a11y-action[aria-pressed="true"] {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+}
+.a11y-action-reset {
+  margin-top: 4px;
+  background: #fff;
+}
+@media (max-width: 640px) {
+  .a11y-widget {
+    inset-inline-start: 12px;
+    inset-block-end: calc(70px + env(safe-area-inset-bottom));
+  }
+  .a11y-panel { max-height: min(58vh, 24rem); }
+}
+
+html.a11y-contrast {
+  --ink: #0a0a0a;
+  --muted: #1f1f1f;
+  --white: #fff;
+  --paper: #fff;
+  --soft: #fff;
+  --mist: #fff;
+  --line: #111;
+  --line-strong: #000;
+  --input-border: #000;
+  --focus-on-light: #000;
+  --focus: #ffe600;
+}
+html.a11y-contrast body {
+  background: #fff;
+  color: #000;
+}
+html.a11y-contrast .site-header,
+html.a11y-contrast .site-footer,
+html.a11y-contrast .section-navy,
+html.a11y-contrast .team-section,
+html.a11y-contrast .mga-block,
+html.a11y-contrast .mobile-sticky a,
+html.a11y-contrast .a11y-fab {
+  background: #000;
+  color: #fff;
+  border-color: #fff;
+}
+html.a11y-contrast .btn-primary,
+html.a11y-contrast .header-cta {
+  background: #000;
+  color: #fff;
+  border: 2px solid #000;
+}
+html.a11y-contrast .btn-secondary,
+html.a11y-contrast .btn-outline,
+html.a11y-contrast .a11y-action {
+  background: #fff;
+  color: #000;
+  border: 2px solid #000;
+}
+html.a11y-contrast .a11y-action[aria-pressed="true"] {
+  background: #000;
+  color: #fff;
+}
+html.a11y-contrast input,
+html.a11y-contrast select,
+html.a11y-contrast textarea {
+  border: 2px solid #000;
+  background: #fff;
+  color: #000;
+}
+html.a11y-contrast a:focus-visible,
+html.a11y-contrast button:focus-visible,
+html.a11y-contrast input:focus-visible,
+html.a11y-contrast select:focus-visible,
+html.a11y-contrast textarea:focus-visible {
+  outline: 3px solid #000;
+  outline-offset: 3px;
+}
+html.a11y-contrast .site-header :is(a, button):focus-visible,
+html.a11y-contrast .a11y-fab:focus-visible,
+html.a11y-contrast .site-footer :is(a, button):focus-visible {
+  outline-color: #ffe600;
+}
+
+html.a11y-links a {
+  text-decoration: underline;
+  text-underline-offset: .18em;
+  text-decoration-thickness: 1.5px;
+}
+html.a11y-links :is(.btn, .header-cta, .brand, .card-link, .blog-card, .menu-toggle, .nav-product-trigger, .carousel-arrow, .carousel-dot, .a11y-fab, .a11y-action, .footer-group-toggle) {
+  text-decoration: none;
+}
+html.a11y-links .mobile-sticky a { text-decoration: none; }
+html.a11y-links .card-link .card-cta,
+html.a11y-links .blog-card h2,
+html.a11y-links .blog-card h3 {
+  text-decoration: underline;
+  text-underline-offset: .16em;
 }

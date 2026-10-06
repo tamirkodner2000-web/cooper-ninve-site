@@ -11,6 +11,23 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;700;800;900&family=Montserrat:wght@600;700;800;900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/styles.css" />
+    <script>
+      (function () {
+        try {
+          var raw = localStorage.getItem("cn-a11y-prefs");
+          if (!raw) return;
+          var prefs = JSON.parse(raw);
+          var root = document.documentElement;
+          var allowed = { 90: 1, 100: 1, 110: 1, 120: 1, 130: 1 };
+          var text = allowed[prefs.text] ? prefs.text : 100;
+          root.style.setProperty("--a11y-text-scale", String(text / 100));
+          root.setAttribute("data-a11y-text", String(text));
+          if (prefs.contrast) root.classList.add("a11y-contrast");
+          if (prefs.links) root.classList.add("a11y-links");
+          if (prefs.motion) root.classList.add("a11y-reduce-motion");
+        } catch (e) {}
+      })();
+    </script>
   </head>
   <body class="lang-he">
     <a class="skip-link" href="#main">דלג לתוכן</a>
@@ -136,6 +153,28 @@
     <div class="mobile-sticky">
       <a href="/contact-us" data-track="click_quote_cta">לקבלת הצעה לביטוח</a>
       <a href="tel:0779965453" data-track="click_phone">שיחה</a>
+    </div>
+
+    <div class="a11y-widget" data-a11y-widget>
+      <div class="a11y-panel" id="a11y-panel" hidden role="dialog" aria-modal="false" aria-labelledby="a11y-panel-title">
+        <p class="a11y-panel-title" id="a11y-panel-title">אפשרויות נגישות</p>
+        <p class="a11y-text-status" data-a11y-text-status aria-live="polite">גודל טקסט: 100%</p>
+        <div class="a11y-actions">
+          <button type="button" class="a11y-action" data-a11y-action="text-up">הגדלת טקסט</button>
+          <button type="button" class="a11y-action" data-a11y-action="text-down">הקטנת טקסט</button>
+          <button type="button" class="a11y-action" data-a11y-action="contrast" aria-pressed="false">ניגודיות גבוהה</button>
+          <button type="button" class="a11y-action" data-a11y-action="links" aria-pressed="false">הדגשת קישורים</button>
+          <button type="button" class="a11y-action" data-a11y-action="motion" aria-pressed="false">הפחתת אנימציות</button>
+          <button type="button" class="a11y-action a11y-action-reset" data-a11y-action="reset">איפוס הגדרות</button>
+        </div>
+      </div>
+      <button type="button" class="a11y-fab" data-a11y-open aria-expanded="false" aria-controls="a11y-panel" aria-label="פתיחת אפשרויות נגישות">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="10.2" fill="none" stroke="currentColor" stroke-width="1.7"></circle>
+          <circle cx="12" cy="6.6" r="1.55" fill="currentColor"></circle>
+          <path fill="currentColor" d="M7.6 10.05h8.8v1.7h-3.05V18.7h-2.7v-6.95H7.6z"></path>
+        </svg>
+      </button>
     </div>
 
     <script src="/cms-client.js" defer></script>

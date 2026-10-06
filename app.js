@@ -1197,6 +1197,9 @@ const siteHeader = document.querySelector("[data-site-header]");
 const menuToggle = document.querySelector("[data-menu-toggle]");
 const mainNav = document.querySelector("[data-main-nav]");
 const motionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+function reduceMotionPreferred() {
+  return document.documentElement.classList.contains("a11y-reduce-motion") || motionQuery.matches;
+}
 let revealObserver;
 let counterObserver;
 let heroParallaxTicking = false;
@@ -1227,7 +1230,7 @@ function initHeroParallax() {
   }
   const hero = app.querySelector(".hero");
   // Parallax is desktop-only: skip on touch/small screens for performance and calm motion.
-  if (!hero || motionQuery.matches || window.innerWidth <= 640) {
+  if (!hero || reduceMotionPreferred() || window.innerWidth <= 640) {
     if (hero) hero.style.removeProperty("--hero-par");
     return;
   }
@@ -1329,7 +1332,7 @@ function initCarousels() {
     const scrollToIndex = (i) => {
       const target = cards[clamp(i)];
       if (target) target.scrollIntoView({
-        behavior: motionQuery.matches ? "auto" : "smooth",
+        behavior: reduceMotionPreferred() ? "auto" : "smooth",
         inline: "start",
         block: "nearest",
       });
@@ -1507,6 +1510,7 @@ function navInertTargets() {
     document.querySelector(".site-footer"),
     document.querySelector(".mobile-sticky"),
     document.querySelector(".skip-link"),
+    document.querySelector("[data-a11y-widget]"),
     document.querySelector(".brand"),
     document.querySelector(".header-actions"),
   ].filter(Boolean);
@@ -1574,6 +1578,10 @@ document.addEventListener("keydown", (event) => {
     return;
   }
   if (event.key !== "Escape") return;
+  if (closeA11yPanel({ restoreFocus: true })) {
+    event.preventDefault();
+    return;
+  }
   const openMega = mainNav.querySelector("[data-product-menu].is-open");
   if (openMega) {
     event.preventDefault();
@@ -1991,6 +1999,8 @@ function renderChrome(path, chrome = null) {
   if (mobileSticky) {
     mobileSticky.innerHTML = `<a href="${link("/contact-us")}" data-track="click_quote_cta">${english ? "Partner With Us" : "לקבלת הצעה לביטוח"}</a><a href="${telHref(phone)}" data-track="click_phone">${english ? "Call" : "שיחה"}</a>`;
   }
+
+  syncA11yToolbarLanguage();
 }
 
 function productMegaMenuHtml(path, cmsGroups = [], triggerLabel = "", triggerHref = "/insurance-solutions") {
@@ -2209,7 +2219,7 @@ function initAnimations() {
 
   if (!animatedItems.length) return;
 
-  if (motionQuery.matches || !("IntersectionObserver" in window)) {
+  if (reduceMotionPreferred() || !("IntersectionObserver" in window)) {
     animatedItems.forEach((item) => item.classList.add("is-visible"));
     return;
   }
@@ -2264,7 +2274,7 @@ function initDistributionCounters() {
     const suffix = counter.dataset.countSuffix || (target >= 1000 ? "+" : "");
     const finalValue = counter.dataset.countFinal || formatCounter(target, suffix);
 
-    if (motionQuery.matches) {
+    if (reduceMotionPreferred()) {
       counter.textContent = finalValue;
       return;
     }
@@ -2345,7 +2355,7 @@ function initSketchVisuals() {
 
       block.classList.add("is-sketch-ready");
 
-      if (motionQuery.matches || !("IntersectionObserver" in window)) {
+      if (reduceMotionPreferred() || !("IntersectionObserver" in window)) {
         section?.classList.add("is-sketch-visible");
         return;
       }
@@ -2832,6 +2842,7 @@ function accessibilityStatementTemplate() {
       <div class="blog-article-body">
         <p>קופר נינוה פועלת להנגשת האתר לקהל רחב, לרבות אנשים עם מוגבלויות ומשתמשים בטכנולוגיות מסייעות. הצהרה זו מתארת את עבודת הנגישות שבוצעה באתר, את המאפיינים שיושמו, ואת הדרכים לפנות אלינו בנושא נגישות.</p>
         <p>אין בהצהרה זו טענה לעמידה מלאה בתקן WCAG, בתקן ישראלי 5568, או לאישור או הסמכה של צד שלישי.</p>
+        <p>באתר זמינים גם כלי התאמה אישיים לנוחות הגלישה.</p>
         <h2>מחויבות</h2>
         <p>אנו רואים בנגישות חלק מתחזוקת האתר. סבב שיפורי נגישות בוצע בניווט, במבנה הסמנטי, בטפסים, בקרוסלות, בטיפול בשפות ובהעדפות תנועה.</p>
         <h2>מאפייני נגישות שיושמו באתר</h2>
@@ -2873,6 +2884,7 @@ function accessibilityStatementTemplate() {
       <div class="blog-article-body">
         <p>Cooper Ninve works to make this website usable by a wide audience, including people with disabilities and people who use assistive technologies. This statement describes accessibility work that has been carried out, features that have been implemented, and how to contact us about accessibility.</p>
         <p>This statement does not claim full WCAG conformance, Israeli Standard 5568 conformance, or any third-party certification.</p>
+        <p>The website also provides optional display preferences for browsing comfort.</p>
         <h2>Commitment</h2>
         <p>We treat accessibility as part of maintaining the website. A dedicated accessibility pass has been applied to navigation, semantic structure, forms, carousels, language handling, and reduced-motion preferences.</p>
         <h2>Accessibility features currently implemented</h2>
@@ -3578,3 +3590,215 @@ function validateFormFields(formEl, fields) {
   }
   return true
 }
+
+const A11Y_PREFS_KEY = "cn-a11y-prefs";
+const A11Y_TEXT_STEPS = [90, 100, 110, 120, 130];
+const A11Y_COPY = {
+  he: {
+    open: "פתיחת אפשרויות נגישות",
+    close: "סגירת אפשרויות נגישות",
+    title: "אפשרויות נגישות",
+    textStatus: (value) => `גודל טקסט: ${value}%`,
+    textUp: "הגדלת טקסט",
+    textDown: "הקטנת טקסט",
+    contrast: "ניגודיות גבוהה",
+    links: "הדגשת קישורים",
+    motion: "הפחתת אנימציות",
+    reset: "איפוס הגדרות",
+  },
+  en: {
+    open: "Open accessibility options",
+    close: "Close accessibility options",
+    title: "Accessibility Options",
+    textStatus: (value) => `Text size: ${value}%`,
+    textUp: "Increase text",
+    textDown: "Decrease text",
+    contrast: "High contrast",
+    links: "Highlight links",
+    motion: "Reduce motion",
+    reset: "Reset accessibility settings",
+  },
+};
+
+function defaultA11yPrefs() {
+  return { text: 100, contrast: false, links: false, motion: false };
+}
+
+function readA11yPrefs() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(A11Y_PREFS_KEY) || "null");
+    const allowed = A11Y_TEXT_STEPS.includes(Number(parsed && parsed.text));
+    return {
+      text: allowed ? Number(parsed.text) : 100,
+      contrast: Boolean(parsed && parsed.contrast),
+      links: Boolean(parsed && parsed.links),
+      motion: Boolean(parsed && parsed.motion),
+    };
+  } catch (error) {
+    return defaultA11yPrefs();
+  }
+}
+
+function writeA11yPrefs(prefs) {
+  try {
+    if (!prefs.contrast && !prefs.links && !prefs.motion && prefs.text === 100) {
+      localStorage.removeItem(A11Y_PREFS_KEY);
+      return;
+    }
+    localStorage.setItem(A11Y_PREFS_KEY, JSON.stringify({
+      text: prefs.text,
+      contrast: Boolean(prefs.contrast),
+      links: Boolean(prefs.links),
+      motion: Boolean(prefs.motion),
+    }));
+  } catch (error) {}
+}
+
+function applyA11yPrefs(prefs, persist = true) {
+  const root = document.documentElement;
+  const text = A11Y_TEXT_STEPS.includes(prefs.text) ? prefs.text : 100;
+  const next = {
+    text,
+    contrast: Boolean(prefs.contrast),
+    links: Boolean(prefs.links),
+    motion: Boolean(prefs.motion),
+  };
+  root.style.setProperty("--a11y-text-scale", String(next.text / 100));
+  root.setAttribute("data-a11y-text", String(next.text));
+  root.classList.toggle("a11y-contrast", next.contrast);
+  root.classList.toggle("a11y-links", next.links);
+  root.classList.toggle("a11y-reduce-motion", next.motion);
+  if (persist) writeA11yPrefs(next);
+  syncA11yToolbarControls(next);
+  return next;
+}
+
+function a11yCopy() {
+  return isEnglish() ? A11Y_COPY.en : A11Y_COPY.he;
+}
+
+function a11yPanelEl() {
+  return document.getElementById("a11y-panel");
+}
+
+function a11yOpenBtn() {
+  return document.querySelector("[data-a11y-open]");
+}
+
+function a11yPanelOpen() {
+  const panel = a11yPanelEl();
+  return Boolean(panel && !panel.hasAttribute("hidden"));
+}
+
+function syncA11yToolbarLanguage() {
+  const copy = a11yCopy();
+  const panel = a11yPanelEl();
+  const openBtn = a11yOpenBtn();
+  const title = document.getElementById("a11y-panel-title");
+  const status = document.querySelector("[data-a11y-text-status]");
+  const prefs = readA11yPrefs();
+  if (title) title.textContent = copy.title;
+  if (status) status.textContent = copy.textStatus(prefs.text);
+  if (openBtn) openBtn.setAttribute("aria-label", a11yPanelOpen() ? copy.close : copy.open);
+  const labels = {
+    "text-up": copy.textUp,
+    "text-down": copy.textDown,
+    contrast: copy.contrast,
+    links: copy.links,
+    motion: copy.motion,
+    reset: copy.reset,
+  };
+  document.querySelectorAll("[data-a11y-action]").forEach((button) => {
+    const key = button.getAttribute("data-a11y-action");
+    if (labels[key]) button.textContent = labels[key];
+  });
+  const down = document.querySelector('[data-a11y-action="text-down"]');
+  const up = document.querySelector('[data-a11y-action="text-up"]');
+  if (down) down.disabled = prefs.text <= A11Y_TEXT_STEPS[0];
+  if (up) up.disabled = prefs.text >= A11Y_TEXT_STEPS[A11Y_TEXT_STEPS.length - 1];
+}
+
+function syncA11yToolbarControls(prefs) {
+  const copy = a11yCopy();
+  const status = document.querySelector("[data-a11y-text-status]");
+  if (status) status.textContent = copy.textStatus(prefs.text);
+  const contrast = document.querySelector('[data-a11y-action="contrast"]');
+  const links = document.querySelector('[data-a11y-action="links"]');
+  const motion = document.querySelector('[data-a11y-action="motion"]');
+  if (contrast) contrast.setAttribute("aria-pressed", String(Boolean(prefs.contrast)));
+  if (links) links.setAttribute("aria-pressed", String(Boolean(prefs.links)));
+  if (motion) motion.setAttribute("aria-pressed", String(Boolean(prefs.motion)));
+  const down = document.querySelector('[data-a11y-action="text-down"]');
+  const up = document.querySelector('[data-a11y-action="text-up"]');
+  if (down) down.disabled = prefs.text <= A11Y_TEXT_STEPS[0];
+  if (up) up.disabled = prefs.text >= A11Y_TEXT_STEPS[A11Y_TEXT_STEPS.length - 1];
+}
+
+function closeA11yPanel(options = {}) {
+  const panel = a11yPanelEl();
+  const openBtn = a11yOpenBtn();
+  if (!panel || panel.hasAttribute("hidden")) return false;
+  panel.setAttribute("hidden", "");
+  if (openBtn) {
+    openBtn.setAttribute("aria-expanded", "false");
+    openBtn.setAttribute("aria-label", a11yCopy().open);
+    if (options.restoreFocus !== false) openBtn.focus();
+  }
+  return true;
+}
+
+function openA11yPanel() {
+  const panel = a11yPanelEl();
+  const openBtn = a11yOpenBtn();
+  if (!panel || !openBtn) return;
+  panel.removeAttribute("hidden");
+  openBtn.setAttribute("aria-expanded", "true");
+  openBtn.setAttribute("aria-label", a11yCopy().close);
+  const first = panel.querySelector("button:not([disabled])") || panel.querySelector("button");
+  requestAnimationFrame(() => {
+    if (first) first.focus();
+  });
+}
+
+function stepA11yText(delta) {
+  const prefs = readA11yPrefs();
+  const index = Math.max(0, Math.min(A11Y_TEXT_STEPS.length - 1, A11Y_TEXT_STEPS.indexOf(prefs.text) + delta));
+  applyA11yPrefs({ ...prefs, text: A11Y_TEXT_STEPS[index] });
+}
+
+function initA11yToolbar() {
+  const widget = document.querySelector("[data-a11y-widget]");
+  const panel = a11yPanelEl();
+  const openBtn = a11yOpenBtn();
+  if (!widget || !panel || !openBtn || widget.dataset.ready === "true") return;
+  widget.dataset.ready = "true";
+  applyA11yPrefs(readA11yPrefs(), false);
+  syncA11yToolbarLanguage();
+
+  openBtn.addEventListener("click", () => {
+    if (a11yPanelOpen()) closeA11yPanel({ restoreFocus: false });
+    else openA11yPanel();
+  });
+
+  panel.addEventListener("click", (event) => {
+    const action = event.target.closest("[data-a11y-action]");
+    if (!action) return;
+    const prefs = readA11yPrefs();
+    const type = action.getAttribute("data-a11y-action");
+    if (type === "text-up") stepA11yText(1);
+    else if (type === "text-down") stepA11yText(-1);
+    else if (type === "contrast") applyA11yPrefs({ ...prefs, contrast: !prefs.contrast });
+    else if (type === "links") applyA11yPrefs({ ...prefs, links: !prefs.links });
+    else if (type === "motion") applyA11yPrefs({ ...prefs, motion: !prefs.motion });
+    else if (type === "reset") applyA11yPrefs(defaultA11yPrefs());
+  });
+
+  document.addEventListener("click", (event) => {
+    if (!a11yPanelOpen()) return;
+    if (event.target.closest("[data-a11y-widget]")) return;
+    closeA11yPanel({ restoreFocus: false });
+  });
+}
+
+initA11yToolbar();
+
