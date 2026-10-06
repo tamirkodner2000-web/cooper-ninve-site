@@ -228,10 +228,10 @@ const pages = {
     sections: "press",
   },
   "/blog": {
-    title: "בלוג | קופר נינוה",
-    description: "מאמרים מקצועיים, תובנות חיתום ועדכונים על שוק הביטוח, לויד׳ס, סיכונים מיוחדים וניהול תיקי ביטוח.",
-    h1: "בלוג",
-    lead: "מאמרים מקצועיים, תובנות חיתום ועדכונים על שוק הביטוח, לויד׳ס, סיכונים מיוחדים וניהול תיקי ביטוח.",
+    title: "מידע מקצועי | קופר נינוה",
+    description: "מאמרים מקצועיים על אחריות מקצועית, חבויות וסיכונים מיוחדים לבעלי מקצוע, עסקים וסוכני ביטוח.",
+    h1: "מידע מקצועי",
+    lead: "מאמרים מקצועיים שמסייעים להבין חשיפות, כיסויים ותהליכי חיתום בתחומי האחריות המקצועית והחבויות.",
     primary: ["יצירת קשר", "/contact-us"],
     hideActions: true,
     sections: "blog",
@@ -1480,7 +1480,9 @@ document.addEventListener("click", (event) => {
   const anchor = event.target.closest("a[href^='/']");
   if (!anchor || anchor.target || event.metaKey || event.ctrlKey || event.shiftKey) return;
   const href = anchor.getAttribute("href");
-  if (!pages[normalizeRoute(href.split("#")[0])]) return;
+  const route = normalizeRoute(href.split("#")[0]);
+  const isBlogRoute = route === "/blog" || /^\/blog\/[a-z0-9-]+$/.test(route);
+  if (!pages[route] && !isBlogRoute) return;
   event.preventDefault();
   history.pushState(null, "", href);
   void render();
@@ -1523,6 +1525,7 @@ function pathFromLocation() {
   }
   if (english && basePath === "/press") return "/";
   if (english && basePath === "/blog") return "/";
+  if (!english && (basePath === "/blog" || /^\/blog\/[a-z0-9-]+$/.test(basePath))) return basePath;
   const landing = landingRoute(basePath) || landingRoute(requestedPathname());
   if (landing) return landing;
   return pages[basePath] ? basePath : "/";
@@ -1566,9 +1569,25 @@ async function render() {
   const standardPagePromise =
     !isEnglish() &&
     !landing &&
+    path !== "/blog" &&
+    !/^\/blog\/[a-z0-9-]+$/.test(path) &&
     window.CooperNinveCMS &&
     typeof window.CooperNinveCMS.fetchStandardPage === "function"
       ? window.CooperNinveCMS.fetchStandardPage({ language: "hebrew", path }).catch(() => null)
+      : Promise.resolve(null);
+  const blogListPromise =
+    !isEnglish() &&
+    path === "/blog" &&
+    window.CooperNinveCMS &&
+    typeof window.CooperNinveCMS.fetchPosts === "function"
+      ? window.CooperNinveCMS.fetchPosts({ language: "hebrew" }).catch(() => null)
+      : Promise.resolve(null);
+  const blogArticlePromise =
+    !isEnglish() &&
+    /^\/blog\/[a-z0-9-]+$/.test(path) &&
+    window.CooperNinveCMS &&
+    typeof window.CooperNinveCMS.fetchPost === "function"
+      ? window.CooperNinveCMS.fetchPost({ language: "hebrew", path }).catch(() => null)
       : Promise.resolve(null);
   const pressPromise =
     !isEnglish() &&
@@ -1594,7 +1613,8 @@ async function render() {
   document.body.classList.toggle("lang-en", isEnglish());
   document.body.classList.toggle("lang-he", !isEnglish());
   document.querySelectorAll(".main-nav a").forEach((a) => {
-    a.classList.toggle("active", normalizeRoute(a.getAttribute("href")) === path);
+    const hrefPath = normalizeRoute(a.getAttribute("href"));
+    a.classList.toggle("active", hrefPath === path || (hrefPath === "/blog" && path.startsWith("/blog/")));
   });
   setMobileNav(false);
 
@@ -1653,6 +1673,39 @@ async function render() {
         setMeta(page, path);
       }
       html = standardTemplate(page, path);
+    }
+  }
+
+  if (!usedLandingCms && html == null && path === "/blog" && !isEnglish()) {
+    const cms = await blogListPromise;
+    if (token !== renderGeneration) return;
+    setMeta(page, path);
+    html = `${hero(page, path)}${blogSections(cms && cms.posts)}`;
+  }
+
+  if (!usedLandingCms && html == null && /^\/blog\/[a-z0-9-]+$/.test(path) && !isEnglish()) {
+    const cms = await blogArticlePromise;
+    if (token !== renderGeneration) return;
+    if (cms) {
+      page = {
+        title: (cms.seo && cms.seo.metaTitle) || cms.title,
+        description: (cms.seo && cms.seo.metaDescription) || cms.excerpt,
+        h1: cms.publicH1 || cms.title,
+        lead: cms.excerpt,
+        hideActions: true,
+      };
+      if (typeof window.CooperNinveCMS.applySeo === "function") {
+        window.CooperNinveCMS.applySeo(cms, page, path, {
+          canonicalPath: publicCanonicalPath,
+          setAlternateLinks,
+        });
+      } else {
+        setMeta(page, path);
+      }
+      html = blogArticleTemplate(cms);
+    } else {
+      setMeta(pages["/blog"], "/blog");
+      html = `${hero(pages["/blog"], "/blog")}${blogSections([])}`;
     }
   }
 
@@ -2727,10 +2780,6 @@ function pressSections() {
   }).join("")}</div></section>`).join("")}</div></section>`;
 }
 
-function blogSections() {
-  return `<section class="section"><div class="container split-band"><div><h2>בלוג מקצועי של קופר נינוה</h2><p>הבלוג המקצועי של קופר נינוה יכלול בהמשך מאמרים, מדריכים ותובנות מקצועיות בתחומי החיתום, הביטוח הבינלאומי, תביעות וניהול סיכונים.</p></div><div><a class="btn btn-primary" href="/contact-us">יצירת קשר</a></div></div></section>`;
-}
-
 function teamSection() {
   return `<section class="section team-section" aria-labelledby="team-title"><div class="container"><div class="center-title"><h2 id="team-title">הכירו את המומחים שלנו</h2></div><div class="team-grid">${teamMembers.map((member) => `<article class="team-card"><div class="team-photo"><img src="${member.image}" alt="${member.name} - ${member.role}" loading="lazy" width="420" height="320"></div><div class="team-copy"><h3>${member.name}</h3><p class="team-role">${member.role}</p></div></article>`).join("")}</div></div></section>`;
 }
@@ -2738,6 +2787,69 @@ function teamSection() {
 function contactSections() {
   return `
     <section class="section"><div class="container"><div class="center-title"><h2>צור קשר עם קופר נינוה</h2><p>השאירו פרטים בסיסיים להגשת סיכון, פנייה כסוכן, בדיקת חשיפה עסקית או פנייה בנושא שירות ותביעות.</p></div><div class="split-band">${form("form_submit_general", ["שם מלא", "טלפון", "אימייל", "חברה / סוכנות", "סוג הפנייה", "תחום חיתום רלוונטי"])}<div><h2>פרטי התקשרות</h2><p>ניתן לפנות אלינו גם ישירות בטלפון או במייל.</p><ul class="feature-list"><li>טלפון: 077-9965453</li><li>אימייל: info@cooper-ninve.com</li><li>כתובת: רח׳ דיזנגוף 111, תל אביב</li></ul></div></div></div></section>`;
+}
+
+function blogSections(posts) {
+  const items = Array.isArray(posts) ? posts : [];
+  if (!items.length) {
+    return `<section class="section"><div class="container"><p class="blog-empty">המאמרים המקצועיים יופיעו כאן לאחר הפרסום.</p></div></section>`;
+  }
+  const cardsHtml = items.map((post) => {
+    const href = `/blog/${post.slug}`;
+    const image = post.featuredImage && post.featuredImage.url
+      ? (window.CooperNinveCMS && typeof window.CooperNinveCMS.resolveCmsUrl === "function"
+          ? window.CooperNinveCMS.resolveCmsUrl(post.featuredImage.url)
+          : post.featuredImage.url)
+      : "";
+    const alt = (post.featuredImage && post.featuredImage.alt) || post.title || "";
+    const category = post.category && post.category.name ? `<p class="blog-card-category">${escapeText(post.category.name)}</p>` : "";
+    const excerpt = post.excerpt ? `<p>${escapeText(post.excerpt)}</p>` : "";
+    const imageHtml = image
+      ? `<div class="blog-card-image"><img src="${escapeText(image)}" alt="${escapeText(alt)}" loading="lazy" width="640" height="360"></div>`
+      : "";
+    return `<a class="blog-card" href="${href}"><article>${imageHtml}${category}<h3>${escapeText(post.title)}</h3>${excerpt}<span class="card-cta">מידע נוסף</span></article></a>`;
+  }).join("");
+  return `<section class="section"><div class="container"><div class="blog-grid">${cardsHtml}</div></div></section>`;
+}
+
+function blogArticleTemplate(post) {
+  const category = post.category && post.category.name ? `<p class="blog-article-category">${escapeText(post.category.name)}</p>` : "";
+  const date = formatHebrewDate(post.publishedDate);
+  const image = post.featuredImage && post.featuredImage.url
+    ? (window.CooperNinveCMS && typeof window.CooperNinveCMS.resolveCmsUrl === "function"
+        ? window.CooperNinveCMS.resolveCmsUrl(post.featuredImage.url)
+        : post.featuredImage.url)
+    : "";
+  const alt = (post.featuredImage && post.featuredImage.alt) || post.title || "";
+  const imageHtml = image
+    ? `<div class="blog-article-image"><img src="${escapeText(image)}" alt="${escapeText(alt)}" width="1200" height="675"></div>`
+    : "";
+  return `
+    <section class="section blog-article-section">
+      <div class="container blog-article">
+        <p class="blog-back"><a href="/blog">חזרה למידע מקצועי</a></p>
+        ${category}
+        <h1>${escapeText(post.publicH1 || post.title)}</h1>
+        ${date ? `<p class="blog-article-date">${escapeText(date)}</p>` : ""}
+        ${imageHtml}
+        <div class="blog-article-body">${post.contentHtml || ""}</div>
+      </div>
+    </section>`;
+}
+
+function escapeText(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+}
+
+function formatHebrewDate(value) {
+  if (!value) return "";
+  const date = new Date(value);
+  if (Number.isNaN(date.getTime())) return "";
+  return date.toLocaleDateString("he-IL", { day: "numeric", month: "long", year: "numeric" });
 }
 
 function knowledgeSections() {

@@ -15,6 +15,7 @@
     "/lp/insurance-agents": true,
   };
   var PRODUCT_PATH = /^\/[a-z0-9-]+-insurance$/;
+  var BLOG_ARTICLE_PATH = /^\/blog\/[a-z0-9-]+$/;
   var STANDARD_PAGE_TYPES = {
     "/about-us": "standard",
     "/business-insurance": "business",
@@ -74,6 +75,15 @@
 
   function isProductPath(path) {
     return PRODUCT_PATH.test(String(path || "")) && !STANDARD_PAGE_TYPES[path];
+  }
+
+  function isBlogArticlePath(path) {
+    return BLOG_ARTICLE_PATH.test(String(path || ""));
+  }
+
+  function blogSlugFromPath(path) {
+    var match = String(path || "").match(/^\/blog\/([a-z0-9-]+)$/);
+    return match ? match[1] : "";
   }
 
   function isPublicSafe(data) {
@@ -425,6 +435,47 @@
     return next;
   }
 
+  function isPostPayload(data, language) {
+    return Boolean(
+      isPublicSafe(data) &&
+        data.pageType === "post" &&
+        typeof data.slug === "string" &&
+        data.slug &&
+        data.language === language &&
+        (String(data.title || "").trim() || String(data.publicH1 || "").trim())
+    );
+  }
+
+  function fetchPosts(options) {
+    var language = options && options.language === "english" ? "english" : "hebrew";
+    var url = cmsBase() + "/api/public/posts?language=" + encodeURIComponent(language);
+    return fetchJson(url).then(function (data) {
+      if (!isPublicSafe(data) || data.language !== language || !Array.isArray(data.posts)) return null;
+      return {
+        language: data.language,
+        posts: data.posts.filter(function (item) {
+          return isPostPayload(item, language);
+        }),
+      };
+    });
+  }
+
+  function fetchPost(options) {
+    var path = options && options.path;
+    var slug = (options && options.slug) || blogSlugFromPath(path);
+    if (!slug) return Promise.resolve(null);
+    var language = options && options.language === "english" ? "english" : "hebrew";
+    var url =
+      cmsBase() +
+      "/api/public/posts?slug=" +
+      encodeURIComponent(slug) +
+      "&language=" +
+      encodeURIComponent(language);
+    return fetchJson(url).then(function (data) {
+      return isPostPayload(data, language) ? data : null;
+    });
+  }
+
   function fetchProduct(options) {
     var path = options && options.path;
     if (!isProductPath(path)) return Promise.resolve(null);
@@ -587,12 +638,15 @@
     fetchLandingPage: fetchLandingPage,
     fetchStandardPage: fetchStandardPage,
     fetchProduct: fetchProduct,
+    fetchPosts: fetchPosts,
+    fetchPost: fetchPost,
     fetchNavigation: fetchNavigation,
     fetchPressMedia: fetchPressMedia,
     mergePressGroups: mergePressGroups,
     fetchSiteSettings: fetchSiteSettings,
     isLandingPath: isHebrewLandingPath,
     isProductPath: isProductPath,
+    isBlogArticlePath: isBlogArticlePath,
     mergeHomepagePage: mergeHomepagePage,
     mergeProductPage: mergeProductPage,
     mergeStandardPage: mergeStandardPage,

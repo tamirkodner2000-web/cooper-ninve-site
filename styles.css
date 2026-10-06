@@ -3943,3 +3943,81 @@ body.nav-open { overflow: hidden; }
   .footer-group-panel { transition: none; }
   .footer-chevron { transition: none; }
 }
+
+.blog-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+}
+.blog-card {
+  display: block;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  color: inherit;
+  text-decoration: none;
+  transition: transform var(--ease), box-shadow var(--ease), border-color var(--ease);
+}
+.blog-card article { padding: 0 0 22px; }
+.blog-card-image img {
+  display: block;
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+}
+.blog-card-category,
+.blog-article-category {
+  display: inline-flex;
+  margin: 18px 22px 0;
+  color: var(--blue-2);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .02em;
+}
+.blog-card h3 {
+  margin: 10px 22px 12px;
+  font-size: 26px;
+  color: var(--navy);
+}
+.blog-card p {
+  margin: 0 22px 18px;
+  color: var(--muted);
+}
+.blog-card .card-cta { margin-inline: 22px; }
+.blog-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(47, 135, 193, .4);
+  box-shadow: var(--shadow-md);
+}
+.blog-empty { color: var(--muted); }
+.blog-article { max-width: 860px; }
+.blog-back { margin-bottom: 18px; }
+.blog-back a { font-weight: 800; color: var(--blue-2); }
+.blog-article h1 {
+  margin: 10px 0 12px;
+  color: var(--navy);
+  font-size: clamp(32px, 4vw, 48px);
+}
+.blog-article-date { color: var(--muted); margin-bottom: 24px; }
+.blog-article-image { margin: 0 0 32px; }
+.blog-article-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+}
+.blog-article-body { font-size: 18px; line-height: 1.8; }
+.blog-article-body h2,
+.blog-article-body h3 { color: var(--navy); margin: 32px 0 12px; }
+.blog-article-body p { margin: 0 0 16px; }
+.blog-article-body ul {
+  margin: 0 0 18px;
+  padding-inline-start: 22px;
+}
+.blog-article-body a { color: var(--blue-2); font-weight: 700; }
+@media (max-width: 800px) {
+  .blog-grid { grid-template-columns: 1fr; }
+  .blog-card-image img { height: 200px; }
+}
