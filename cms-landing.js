@@ -59,6 +59,27 @@
     return '<a class="' + className + '" href="' + esc(href) + '"' + target + trackAttr + ">" + esc(label) + "</a>";
   }
 
+  function fieldKind(label) {
+    var n = String(label || "")
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, " ");
+    if (n.indexOf("email") !== -1 || n.indexOf("אימייל") !== -1 || n.indexOf("e-mail") !== -1 || n === "מייל") return "email";
+    if (n.indexOf("phone") !== -1 || n.indexOf("טלפון") !== -1) return "tel";
+    return "text";
+  }
+
+  function isNameField(label) {
+    var n = String(label || "")
+      .trim()
+      .toLowerCase()
+      .replace(/\s+/g, " ");
+    if (n.indexOf("שם") === -1 && n.indexOf("name") === -1) return false;
+    if (n.indexOf("עסק") !== -1 || n.indexOf("חברה") !== -1 || n.indexOf("company") !== -1 || n.indexOf("business") !== -1 || n.indexOf("market") !== -1) return false;
+    if (n.indexOf("סוכנות") !== -1 && n !== "שם הסוכן") return false;
+    return true;
+  }
+
   function formMarkup(form, trackingEvent) {
     var title = text(form.title);
     var description = text(form.description);
@@ -74,15 +95,22 @@
       .map(function (field) {
         var label = text(field.label);
         var mark = field.required ? " *" : "";
+        var required = Boolean(field.required) || isNameField(label);
+        var reqAttrs = required ? " required aria-required=\"true\"" : "";
+        var type = fieldKind(label);
         return (
           "<label><span>" +
           esc(label + mark) +
           "</span>" +
-          '<input name="' +
+          '<input type="' +
+          type +
+          '" name="' +
           esc(label) +
           '" placeholder="' +
           esc(label) +
-          '"></label>'
+          '"' +
+          reqAttrs +
+          "></label>"
         );
       })
       .join("");
@@ -92,23 +120,23 @@
         '<label class="full"><span>' +
         esc(consentText) +
         "</span>" +
-        '<input type="checkbox" name="consent"></label>';
+        '<input type="checkbox" name="consent" required aria-required="true"></label>';
     }
 
     if (!rows) {
       rows =
-        '<label><span>שם מלא</span><input name="שם מלא" placeholder="שם מלא"></label>' +
-        '<label><span>טלפון</span><input name="טלפון" placeholder="טלפון"></label>' +
-        '<label><span>אימייל</span><input name="אימייל" placeholder="אימייל"></label>' +
+        '<label><span>שם מלא</span><input type="text" name="שם מלא" placeholder="שם מלא" required aria-required="true"></label>' +
+        '<label><span>טלפון</span><input type="tel" name="טלפון" placeholder="טלפון"></label>' +
+        '<label><span>אימייל</span><input type="email" name="אימייל" placeholder="אימייל"></label>' +
         '<label class="full"><span>הודעה</span><textarea name="message" placeholder="כתבו בקצרה את הצורך או הסיכון"></textarea></label>';
     }
 
     return (
       '<form class="form-panel" data-form="' +
       esc(eventName) +
-      '"' +
-      (text(form.routingKey) ? ' data-routing-key="' + esc(text(form.routingKey)) + '"' : '') +
-      '>' +
+      '" novalidate' +
+      (text(form.routingKey) ? ' data-routing-key="' + esc(text(form.routingKey)) + '"' : "") +
+      ">" +
       (title ? "<h2>" + esc(title) + "</h2>" : "") +
       (description ? "<p>" + esc(description) + "</p>" : "") +
       '<div class="form-grid">' +

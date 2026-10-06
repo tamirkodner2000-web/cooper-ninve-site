@@ -2534,11 +2534,11 @@ function englishPartnerInquirySection(marketPartner = false) {
 
 function englishPartnerInquiryForm(marketPartner = false) {
   const fields = ["Full Name", "Phone", "Email", "Company / Market", "Partnership Interest"];
-  return `<form class="form-panel" data-form="form_submit_homepage_lead">
+  return `<form class="form-panel" data-form="form_submit_homepage_lead" novalidate>
     <h2>${marketPartner ? "Start a Conversation" : "Partner inquiry"}</h2>
     <div class="form-grid">
-      ${fields.map((field) => `<label><span>${field}</span><input name="${field}" placeholder="${field}"></label>`).join("")}
-      <label class="full"><span>Message</span><textarea name="message" placeholder="Briefly describe the opportunity, appetite or partnership question"></textarea></label>
+      ${fields.map((field) => formFieldMarkup(field)).join("")}
+      ${formFieldMarkup("Message", { name: "message", multiline: true, placeholder: "Briefly describe the opportunity, appetite or partnership question" })}
     </div>
     <p class="form-note">Details are used only to respond to your inquiry and assess potential fit.</p>
     <button class="btn btn-primary" type="submit" data-track="form_submit_homepage_lead">${marketPartner ? "Send Inquiry" : "Send Partner Inquiry"}</button>
@@ -2571,11 +2571,11 @@ function englishContactTemplate() {
 
 function englishPartnerContactForm() {
   const fields = ["Name", "Company", "Role", "Email", "Phone"];
-  return `<form class="form-panel" data-form="form_submit_general">
+  return `<form class="form-panel" data-form="form_submit_general" novalidate>
     <h2>Partnership / Market Inquiry</h2>
     <div class="form-grid">
-      ${fields.map((field) => `<label><span>${field}</span><input name="${field}" placeholder="${field}"></label>`).join("")}
-      <label class="full"><span>Message</span><textarea name="message" placeholder="Tell us about the partnership opportunity"></textarea></label>
+      ${fields.map((field) => formFieldMarkup(field)).join("")}
+      ${formFieldMarkup("Message", { name: "message", multiline: true, placeholder: "Tell us about the partnership opportunity" })}
     </div>
     <p class="form-note">Details are used only to respond to your inquiry and assess potential fit.</p>
     <button class="btn btn-primary" type="submit" data-track="form_submit_general">Send Partner Inquiry</button>
@@ -2862,12 +2862,12 @@ function businessSections() {
 function aboutSections() {
   if (isEnglish()) {
     return `
-      ${teamSection()}
-      <section class="section about-article-section"><div class="container"><article class="about-article" lang="en" dir="ltr"><h2>About Cooper Ninve</h2><p>Cooper Ninve is one of Israel’s longest-established and leading insurance agencies in the general insurance sector and a subsidiary of Ninve Insurance Agency Ltd., founded in 1973. Cooper Ninve operates as a Coverholder in the Lloyd’s market in Israel and works with leading international insurers and reinsurers, while holding delegated underwriting authority on behalf of Lloyd’s underwriters in London.</p><p>Cooper Ninve works with reinsurers and international insurance markets, providing insurers and insurance agents who work with us with direct access to the global insurance market.</p><p>Local underwriting in Israel offers significant advantages for both insureds and insurance agents, particularly in two key areas: time and cost. Shortening the underwriting process and reducing the number of parties involved can help create a more efficient, accurate and accessible experience.</p><p>We specialize in complex and specialty risks and liability insurance, including Employers’ Liability, Product Liability, Third-Party Liability, Professional Indemnity, Medical Malpractice, Directors &amp; Officers Liability, Money in Transit and additional lines of business. Our focus is on providing solutions in areas where the local market may not always be able to offer a complete solution, while adapting coverage to the evolving insurance needs of each insured.</p><p>Cooper Ninve provides tailored insurance solutions for Israeli companies, including businesses with international operations.</p><p>When dealing with complex projects and risks, our approach begins with a thorough understanding of the client’s operations, risk characteristics and potential exposures. Cooper Ninve aims to provide insurers and insurance agents working with us with professional and personal service, high availability, and ongoing support throughout the underwriting and claims processes through the relevant professional teams.</p></article></div></section>`;
+      <section class="section about-article-section"><div class="container"><article class="about-article" lang="en" dir="ltr"><h2>About Cooper Ninve</h2><p>Cooper Ninve is one of Israel’s longest-established and leading insurance agencies in the general insurance sector and a subsidiary of Ninve Insurance Agency Ltd., founded in 1973. Cooper Ninve operates as a Coverholder in the Lloyd’s market in Israel and works with leading international insurers and reinsurers, while holding delegated underwriting authority on behalf of Lloyd’s underwriters in London.</p><p>Cooper Ninve works with reinsurers and international insurance markets, providing insurers and insurance agents who work with us with direct access to the global insurance market.</p><p>Local underwriting in Israel offers significant advantages for both insureds and insurance agents, particularly in two key areas: time and cost. Shortening the underwriting process and reducing the number of parties involved can help create a more efficient, accurate and accessible experience.</p><p>We specialize in complex and specialty risks and liability insurance, including Employers’ Liability, Product Liability, Third-Party Liability, Professional Indemnity, Medical Malpractice, Directors &amp; Officers Liability, Money in Transit and additional lines of business. Our focus is on providing solutions in areas where the local market may not always be able to offer a complete solution, while adapting coverage to the evolving insurance needs of each insured.</p><p>Cooper Ninve provides tailored insurance solutions for Israeli companies, including businesses with international operations.</p><p>When dealing with complex projects and risks, our approach begins with a thorough understanding of the client’s operations, risk characteristics and potential exposures. Cooper Ninve aims to provide insurers and insurance agents working with us with professional and personal service, high availability, and ongoing support throughout the underwriting and claims processes through the relevant professional teams.</p></article></div></section>
+      ${teamSection()}`;
   }
   return `
-    ${teamSection()}
-    <section class="section about-article-section"><div class="container"><article class="about-article"><h1>אודות קופר נינוה</h1><p>קופר נינוה היא אחת מסוכנויות הביטוח הוותיקות והמובילות בישראל בענף הביטוח הכללי, וחברת בת של נינוה סוכנות לביטוח בע״מ, אשר נוסדה בשנת 1973. קופר נינוה פועלת כ־Coverholder בשוק לויד׳ס בישראל, ועובדת עם חברות ביטוח ומבטחי משנה מהגדולים בעולם, תוך החזקת סמכויות חיתום בשם מבטחי לויד׳ס לונדון.</p><p>קופר נינוה עובדת עם מבטחי משנה ושווקים בינלאומיים, יתרון המאפשר למבוטחים ולסוכנים העובדים עמנו גישה ישירה לעולם הביטוח הבינלאומי.</p><p>המשמעות של ביצוע החיתום בישראל גדולה הן עבור המבוטחים והן עבור הסוכנים, בעיקר בשני היבטים מרכזיים: זמן וכסף. קיצור תהליך החיתום וצמצום מספר הגורמים המטפלים בבקשה עשויים לסייע ביצירת תהליך יעיל, מדויק ונגיש יותר.</p><p>אנו מתמחים בסיכונים מיוחדים ובביטוחי חבויות, לרבות חבות מעבידים, אחריות המוצר, צד שלישי, אחריות מקצועית, רשלנות רפואית, ביטוח דירקטורים ונושאי משרה, כספים בהעברה ותחומים נוספים. הדגש הוא על מתן פתרונות בתחומים שבהם השוק המקומי מתקשה לעיתים לתת מענה מלא, תוך התאמה לצורכי הביטוח המשתנים של המבוטח.</p><p>קופר נינוה מתאימה פתרונות מיוחדים לחברות ישראליות, לרבות חברות ישראליות בעלות פעילות בינלאומית.</p><p>כאשר מדובר בפרויקטים ובסיכונים מורכבים, הדגש הוא על לימוד והבנה של פעילות הלקוח, מאפייני הסיכון והחשיפות האפשריות הנובעות מפעילותו. קופר נינוה שואפת להעניק למבוטחים ולסוכנים העובדים עמה שירות מקצועי ואישי, זמינות גבוהה, וליווי בתהליכי חיתום ותביעות באמצעות הגורמים המקצועיים הרלוונטיים.</p></article></div></section>`;
+    <section class="section about-article-section"><div class="container"><article class="about-article"><h1>אודות קופר נינוה</h1><p>קופר נינוה היא אחת מסוכנויות הביטוח הוותיקות והמובילות בישראל בענף הביטוח הכללי, וחברת בת של נינוה סוכנות לביטוח בע״מ, אשר נוסדה בשנת 1973. קופר נינוה פועלת כ־Coverholder בשוק לויד׳ס בישראל, ועובדת עם חברות ביטוח ומבטחי משנה מהגדולים בעולם, תוך החזקת סמכויות חיתום בשם מבטחי לויד׳ס לונדון.</p><p>קופר נינוה עובדת עם מבטחי משנה ושווקים בינלאומיים, יתרון המאפשר למבוטחים ולסוכנים העובדים עמנו גישה ישירה לעולם הביטוח הבינלאומי.</p><p>המשמעות של ביצוע החיתום בישראל גדולה הן עבור המבוטחים והן עבור הסוכנים, בעיקר בשני היבטים מרכזיים: זמן וכסף. קיצור תהליך החיתום וצמצום מספר הגורמים המטפלים בבקשה עשויים לסייע ביצירת תהליך יעיל, מדויק ונגיש יותר.</p><p>אנו מתמחים בסיכונים מיוחדים ובביטוחי חבויות, לרבות חבות מעבידים, אחריות המוצר, צד שלישי, אחריות מקצועית, רשלנות רפואית, ביטוח דירקטורים ונושאי משרה, כספים בהעברה ותחומים נוספים. הדגש הוא על מתן פתרונות בתחומים שבהם השוק המקומי מתקשה לעיתים לתת מענה מלא, תוך התאמה לצורכי הביטוח המשתנים של המבוטח.</p><p>קופר נינוה מתאימה פתרונות מיוחדים לחברות ישראליות, לרבות חברות ישראליות בעלות פעילות בינלאומית.</p><p>כאשר מדובר בפרויקטים ובסיכונים מורכבים, הדגש הוא על לימוד והבנה של פעילות הלקוח, מאפייני הסיכון והחשיפות האפשריות הנובעות מפעילותו. קופר נינוה שואפת להעניק למבוטחים ולסוכנים העובדים עמה שירות מקצועי ואישי, זמינות גבוהה, וליווי בתהליכי חיתום ותביעות באמצעות הגורמים המקצועיים הרלוונטיים.</p></article></div></section>
+    ${teamSection()}`;
 }
 
 let livePressGroups = pressGroups;
@@ -3116,12 +3116,55 @@ function finalCta(title, text) {
   return `<section class="section section-navy"><div class="container section-header"><div><h2>${title}</h2><p>${text}</p></div><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">${isEnglish() ? "Discuss Partnership" : "לקבלת הצעה לביטוח"}</a></div></section>`;
 }
 
+function normalizeFieldKey(name) {
+  return String(name || "").trim().toLowerCase().replace(/\s+/g, " ");
+}
+
+function fieldControlType(name) {
+  const n = normalizeFieldKey(name);
+  if (n.includes("email") || n.includes("אימייל") || n.includes("e-mail") || n === "מייל") return "email";
+  if (n.includes("phone") || n.includes("טלפון")) return "tel";
+  return "text";
+}
+
+function isNameLikeField(name) {
+  const n = normalizeFieldKey(name);
+  if (!n.includes("שם") && !n.includes("name")) return false;
+  if (n.includes("עסק") || n.includes("חברה") || n.includes("company") || n.includes("business") || n.includes("market")) return false;
+  if (n.includes("סוכנות") && n !== "שם הסוכן") return false;
+  return true;
+}
+
+function isEmailField(name) {
+  const n = normalizeFieldKey(name);
+  return n.includes("email") || n.includes("אימייל") || n.includes("e-mail") || n === "מייל";
+}
+
+function isPhoneField(name) {
+  const n = normalizeFieldKey(name);
+  return n.includes("phone") || n.includes("טלפון");
+}
+
+function formFieldMarkup(label, options = {}) {
+  const name = options.name || label;
+  const required = options.required === true || (options.required !== false && (isNameLikeField(name) || normalizeFieldKey(name) === "consent"));
+  const multiline = Boolean(options.multiline);
+  const type = options.type || fieldControlType(name);
+  const placeholder = options.placeholder || label;
+  const extraClass = options.full || multiline ? " class=\"full\"" : "";
+  const reqAttrs = required ? " required aria-required=\"true\"" : "";
+  const control = multiline
+    ? `<textarea name="${name}" placeholder="${placeholder}"${reqAttrs}></textarea>`
+    : `<input type="${type}" name="${name}" placeholder="${placeholder}"${reqAttrs}>`;
+  return `<label${extraClass}><span>${label}</span>${control}</label>`;
+}
+
 function form(eventName, fields) {
-  return `<form class="form-panel" data-form="${eventName}">
+  return `<form class="form-panel" data-form="${eventName}" novalidate>
     <h2>השאירו פרטים ונחזור אליכם</h2>
     <div class="form-grid">
-      ${fields.map((field) => `<label><span>${field}</span><input name="${field}" placeholder="${field}"></label>`).join("")}
-      <label class="full"><span>הודעה</span><textarea name="message" placeholder="כתבו בקצרה את הצורך או הסיכון"></textarea></label>
+      ${fields.map((field) => formFieldMarkup(field)).join("")}
+      ${formFieldMarkup("הודעה", { name: "message", multiline: true, placeholder: "כתבו בקצרה את הצורך או הסיכון", required: false })}
     </div>
     <p class="form-note">הפרטים ישמשו לצורך חזרה אליכם ובדיקת התאמה בלבד.</p>
     <button class="btn btn-primary" type="submit" data-track="${eventName}">שליחת פנייה</button>
@@ -3152,9 +3195,10 @@ function landingTemplate(page) {
 }
 
 function bindForms() {
-  document.querySelectorAll("form.form-panel").forEach((formEl) => {
+  document.querySelectorAll("form.form-panel").forEach((formEl, formIndex) => {
     if (formEl.dataset.bound === "1" || formEl.hasAttribute("data-preview-form")) return
     formEl.dataset.bound = "1"
+    formEl.setAttribute("novalidate", "")
     if (!formEl.querySelector(`[name="hp_field"]`)) {
       const honey = document.createElement("input")
       honey.type = "text"
@@ -3166,8 +3210,36 @@ function bindForms() {
       formEl.appendChild(honey)
     }
     formEl.dataset.startedAt = String(Date.now())
+    const uid = `form-${formIndex + 1}`
+    const fields = [...formEl.querySelectorAll("input, select, textarea")].filter((el) => el.name && el.name !== "hp_field")
+    fields.forEach((field, fieldIndex) => {
+      if (!field.id) field.id = `${uid}-field-${fieldIndex + 1}`
+      const errorId = `${uid}-error-${fieldIndex + 1}`
+      field.dataset.errorId = errorId
+      if (isNameLikeField(field.name) || field.name === "consent") {
+        field.required = true
+        field.setAttribute("aria-required", "true")
+      }
+      if (isEmailField(field.name)) field.type = "email"
+      if (isPhoneField(field.name)) field.type = "tel"
+      let error = document.getElementById(errorId)
+      if (!error) {
+        error = document.createElement("span")
+        error.className = "field-error"
+        error.id = errorId
+        error.hidden = true
+        field.insertAdjacentElement("afterend", error)
+      }
+      const clear = () => clearFieldError(field)
+      field.addEventListener("input", clear)
+      field.addEventListener("change", clear)
+    })
     const status = document.createElement("p")
     status.className = "form-note form-status"
+    status.id = `${uid}-status`
+    status.setAttribute("role", "status")
+    status.setAttribute("aria-live", "polite")
+    status.setAttribute("aria-atomic", "true")
     status.hidden = true
     formEl.appendChild(status)
     formEl.addEventListener("submit", async (event) => {
@@ -3179,15 +3251,16 @@ function bindForms() {
       const fail = isEnglish() ? "Could not send. Please try again." : "לא ניתן לשלוח את הפנייה. נסו שוב."
       const pending = isEnglish() ? "Sending..." : "שולחים..."
       const success = isEnglish() ? "Inquiry Received" : "הפנייה נקלטה"
-      status.hidden = true
+      setFormStatus(status, "", "status")
+      if (!validateFormFields(formEl, fields)) return
       btn.dataset.sending = "1"
       btn.disabled = true
       btn.textContent = pending
       try {
-        const fields = {}
+        const payloadFields = {}
         new FormData(formEl).forEach((value, key) => {
           if (key === "hp_field") return
-          fields[key] = String(value)
+          payloadFields[key] = String(value)
         })
         const params = new URLSearchParams(location.search)
         const payload = {
@@ -3200,7 +3273,7 @@ function bindForms() {
           consent: formEl.querySelector('[name="consent"]')
             ? Boolean(formEl.querySelector('[name="consent"]').checked)
             : null,
-          fields,
+          fields: payloadFields,
           utm: {
             source: params.get("utm_source") || "",
             medium: params.get("utm_medium") || "",
@@ -3219,6 +3292,7 @@ function bindForms() {
         if (!response.ok || !body.ok) throw new Error("fail")
         btn.textContent = success
         btn.disabled = true
+        setFormStatus(status, success, "status")
         window.dataLayer = window.dataLayer || []
         window.dataLayer.push({
           event: formEl.dataset.form || "form_submit_general",
@@ -3229,9 +3303,114 @@ function bindForms() {
         btn.dataset.sending = ""
         btn.disabled = false
         btn.textContent = original
-        status.hidden = false
-        status.textContent = fail
+        setFormStatus(status, fail, "alert")
       }
     })
   })
+}
+
+function setFormStatus(status, message, mode) {
+  if (!status) return
+  status.setAttribute("role", mode === "alert" ? "alert" : "status")
+  status.setAttribute("aria-live", mode === "alert" ? "assertive" : "polite")
+  status.setAttribute("aria-atomic", "true")
+  if (!message) {
+    status.hidden = true
+    status.textContent = ""
+    return
+  }
+  status.hidden = false
+  status.textContent = message
+}
+
+function fieldErrorEl(field) {
+  const id = field.dataset.errorId
+  return id ? document.getElementById(id) : null
+}
+
+function clearFieldError(field) {
+  field.removeAttribute("aria-invalid")
+  const described = (field.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean)
+  const errorId = field.dataset.errorId
+  if (errorId) field.setAttribute("aria-describedby", described.filter((id) => id !== errorId).join(" "))
+  if (!field.getAttribute("aria-describedby")) field.removeAttribute("aria-describedby")
+  const error = fieldErrorEl(field)
+  if (error) {
+    error.hidden = true
+    error.textContent = ""
+  }
+}
+
+function setFieldError(field, message) {
+  const error = fieldErrorEl(field)
+  const errorId = field.dataset.errorId
+  field.setAttribute("aria-invalid", "true")
+  if (error && errorId) {
+    error.hidden = false
+    error.textContent = message
+    const described = (field.getAttribute("aria-describedby") || "").split(/\s+/).filter(Boolean)
+    if (!described.includes(errorId)) described.push(errorId)
+    field.setAttribute("aria-describedby", described.join(" "))
+  }
+}
+
+function validateFormFields(formEl, fields) {
+  const english = isEnglish()
+  const messages = english
+    ? {
+        required: "This field is required.",
+        email: "Enter a valid email address.",
+        phone: "Enter a valid phone number.",
+        contact: "Enter a phone number or email address.",
+        consent: "This field is required.",
+      }
+    : {
+        required: "יש למלא שדה זה.",
+        email: "יש להזין כתובת אימייל תקינה.",
+        phone: "יש להזין מספר טלפון תקין.",
+        contact: "יש למלא טלפון או אימייל.",
+        consent: "יש למלא שדה זה.",
+      }
+  fields.forEach((field) => clearFieldError(field))
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+  const emailFields = fields.filter((field) => isEmailField(field.name))
+  const phoneFields = fields.filter((field) => isPhoneField(field.name))
+  const emailValue = emailFields.map((field) => field.value.trim()).find(Boolean) || ""
+  const phoneValue = phoneFields.map((field) => field.value.trim()).find(Boolean) || ""
+  const htmlRequired = emailFields.some((field) => field.required) || phoneFields.some((field) => field.required)
+
+  let firstInvalid = null
+  const mark = (field, message) => {
+    if (!field) return
+    setFieldError(field, message)
+    if (!firstInvalid) firstInvalid = field
+  }
+
+  fields.forEach((field) => {
+    if (field.type === "checkbox") {
+      if (field.required && !field.checked) mark(field, messages.consent)
+      return
+    }
+    const value = field.value.trim()
+    if (field.required && !value) mark(field, messages.required)
+  })
+
+  emailFields.forEach((field) => {
+    const value = field.value.trim()
+    if (value && !emailRe.test(value)) mark(field, messages.email)
+  })
+  phoneFields.forEach((field) => {
+    const value = field.value.trim()
+    if (value && value.replace(/[^\d]/g, "").length < 8) mark(field, messages.phone)
+  })
+
+  if (!htmlRequired && (emailFields.length || phoneFields.length) && !emailValue && !phoneValue) {
+    ;(emailFields[0] ? [emailFields[0]] : []).concat(phoneFields[0] ? [phoneFields[0]] : []).forEach((field) => mark(field, messages.contact))
+  }
+
+  if (firstInvalid) {
+    firstInvalid.focus()
+    return false
+  }
+  return true
 }

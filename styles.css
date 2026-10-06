@@ -26,6 +26,8 @@
   --shadow-lg: 0 12px 28px rgba(16, 32, 55, .12), 0 34px 70px rgba(9, 22, 42, .20);
   --shadow-hover: 0 14px 32px rgba(16, 32, 55, .13), 0 30px 64px rgba(9, 22, 42, .20);
   --focus: #8fd0ff;
+  --focus-on-light: #2778AF;
+  --input-border: #7a91a8;
   --font-body: "Heebo", Arial, "Helvetica Neue", sans-serif;
   --font-display: "Montserrat", "Heebo", Arial, sans-serif;
   --ease: 220ms cubic-bezier(.22, 1, .36, 1);
@@ -62,9 +64,19 @@ summary:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  outline: 3px solid var(--focus);
+  outline: 3px solid var(--focus-on-light);
   outline-offset: 3px;
-  box-shadow: 0 0 0 5px rgba(47, 135, 193, .22);
+  box-shadow: 0 0 0 5px rgba(39, 120, 175, .22);
+}
+.site-header :is(a, button):focus-visible,
+.menu-toggle:focus-visible,
+.hero :is(a, button):focus-visible,
+.section-navy :is(a, button):focus-visible,
+.mga-block :is(a, button):focus-visible,
+.site-footer :is(a, button):focus-visible,
+.mobile-sticky a:focus-visible {
+  outline-color: var(--focus);
+  box-shadow: 0 0 0 5px rgba(143, 208, 255, .28);
 }
 button:disabled {
   cursor: not-allowed;
@@ -2382,7 +2394,7 @@ body.lang-en .workflow-card::before { transform-origin: left center; }
 .form-grid .full { grid-column: 1 / -1; }
 input, select, textarea {
   width: 100%;
-  border: 1px solid var(--line-strong);
+  border: 1px solid var(--input-border);
   border-radius: var(--radius-sm);
   padding: 14px 15px;
   background: #fdfefe;
@@ -2391,7 +2403,6 @@ input, select, textarea {
   caret-color: var(--blue-2);
   transition: border-color var(--ease), box-shadow var(--ease), background-color var(--ease);
 }
-input:hover, select:hover, textarea:hover { border-color: var(--blue-2); }
 input:focus, select:focus, textarea:focus {
   border-color: var(--blue);
   background: #fff;
@@ -2405,13 +2416,32 @@ label span {
   font-size: 14px;
   font-weight: 800;
 }
-input:hover, select:hover, textarea:hover { border-color: #9fb5cb; background: #fbfdff; }
+input:hover, select:hover, textarea:hover { border-color: #6e8499; background: #fbfdff; }
 input:focus-visible, select:focus-visible, textarea:focus-visible {
   border-color: var(--blue);
   background: white;
 }
+input[aria-invalid="true"],
+select[aria-invalid="true"],
+textarea[aria-invalid="true"] {
+  border-color: #9b1c1c;
+  background: #fff8f8;
+}
+.field-error {
+  display: block;
+  margin-top: 6px;
+  color: #9b1c1c;
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.field-error[hidden] { display: none; }
 textarea { min-height: 116px; resize: vertical; }
 .form-note { color: var(--muted); font-size: 14px; margin: 10px 0 0; }
+.form-status[role="status"],
+.form-status[role="alert"] { font-weight: 700; }
+.form-status:not([hidden]) { color: var(--navy); }
+.form-status[role="alert"] { color: #9b1c1c; }
 
 .faq { display: grid; gap: 12px; }
 details {
