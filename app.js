@@ -1395,6 +1395,8 @@ function initFooterAccordion(footer) {
   const toggles = footer.querySelectorAll(".footer-group-toggle");
   if (!toggles.length) return;
   toggles.forEach((toggle) => {
+    if (toggle.dataset.bound === "1") return;
+    toggle.dataset.bound = "1";
     toggle.addEventListener("click", () => {
       const group = toggle.closest("[data-footer-group]");
       if (!group) return;
@@ -1433,6 +1435,7 @@ const productMenuRoutes = new Set(productMenuGroups.flatMap((group) => group.lin
 const aboutMenuRoutes = new Set(["/about-us", "/blog", "/press"]);
 
 let chromeCachePromise = null;
+let chromeSnapshot = null;
 
 function loadCmsChrome() {
   if (chromeCachePromise) return chromeCachePromise;
@@ -1440,7 +1443,12 @@ function loadCmsChrome() {
     chromeCachePromise = Promise.resolve(null);
     return chromeCachePromise;
   }
-  chromeCachePromise = window.CooperNinveCMS.fetchChrome().catch(() => null);
+  chromeCachePromise = window.CooperNinveCMS.fetchChrome()
+    .then((chrome) => {
+      chromeSnapshot = chrome;
+      return chrome;
+    })
+    .catch(() => null);
   return chromeCachePromise;
 }
 
@@ -1677,61 +1685,21 @@ function publicCanonicalPath(path) {
   return path;
 }
 
-async function render() {
-  const token = ++renderGeneration;
-  const path = pathFromLocation();
-  const landing = landingRoute(path);
-  let page = landing ? landingPages[landing] : (pages[path] || pages["/"]);
-  const homepagePromise =
-    !isEnglish() &&
-    path === "/" &&
-    !landing &&
-    window.CooperNinveCMS &&
-    typeof window.CooperNinveCMS.fetchHomepage === "function"
-      ? window.CooperNinveCMS.fetchHomepage({ language: "hebrew" }).catch(() => null)
-      : Promise.resolve(null);
-  const standardPagePromise =
-    !isEnglish() &&
-    !landing &&
-    path !== "/blog" &&
-    !/^\/blog\/[a-z0-9-]+$/.test(path) &&
-    window.CooperNinveCMS &&
-    typeof window.CooperNinveCMS.fetchStandardPage === "function"
-      ? window.CooperNinveCMS.fetchStandardPage({ language: "hebrew", path }).catch(() => null)
-      : Promise.resolve(null);
-  const blogListPromise =
-    !isEnglish() &&
-    path === "/blog" &&
-    window.CooperNinveCMS &&
-    typeof window.CooperNinveCMS.fetchPosts === "function"
-      ? window.CooperNinveCMS.fetchPosts({ language: "hebrew" }).catch(() => null)
-      : Promise.resolve(null);
-  const blogArticlePromise =
-    !isEnglish() &&
-    /^\/blog\/[a-z0-9-]+$/.test(path) &&
-    window.CooperNinveCMS &&
-    typeof window.CooperNinveCMS.fetchPost === "function"
-      ? window.CooperNinveCMS.fetchPost({ language: "hebrew", path }).catch(() => null)
-      : Promise.resolve(null);
-  const pressPromise =
-    !isEnglish() &&
-    path === "/press" &&
-    window.CooperNinveCMS &&
-    typeof window.CooperNinveCMS.fetchPressMedia === "function"
-      ? window.CooperNinveCMS.fetchPressMedia().catch(() => null)
-      : Promise.resolve(null);
-  const chrome = await loadCmsChrome();
-  if (token !== renderGeneration) return;
-  livePressGroups = pressGroups;
-  if (path === "/press" && !isEnglish()) {
-    const pressCms = await pressPromise;
-    if (token !== renderGeneration) return;
-    const mapped =
-      pressCms && typeof window.CooperNinveCMS.mergePressGroups === "function"
-        ? window.CooperNinveCMS.mergePressGroups(pressGroups, pressCms)
-        : null;
-    if (mapped) livePressGroups = mapped;
+let lastMainHtml = "";
+
+function applyPageSeo(cms, page, path) {
+  if (cms && window.CooperNinveCMS && typeof window.CooperNinveCMS.applySeo === "function") {
+    window.CooperNinveCMS.applySeo(cms, page, path, {
+      canonicalPath: publicCanonicalPath,
+      setAlternateLinks,
+    });
+    return;
   }
+  setMeta(page, path);
+}
+
+function applyShell(path, chrome, options = {}) {
+  const landing = landingRoute(path);
   renderChrome(path, chrome);
   document.body.classList.toggle("lp", Boolean(landing));
   document.body.classList.toggle("lang-en", isEnglish());
@@ -1740,126 +1708,27 @@ async function render() {
     const hrefPath = normalizeRoute(a.getAttribute("href"));
     a.classList.toggle("active", hrefPath === path || (hrefPath === "/blog" && path.startsWith("/blog/")));
   });
-  setMobileNav(false, { restoreFocus: false });
+  if (options.closeNav !== false) setMobileNav(false, { restoreFocus: false });
+}
 
-  let html;
-  let usedLandingCms = false;
-  if (
-    !isEnglish() &&
-    landing &&
-    window.CooperNinveCMS &&
-    typeof window.CooperNinveCMS.fetchLandingPage === "function"
-  ) {
-    const cms = await window.CooperNinveCMS.fetchLandingPage({ path: landing });
-    if (token !== renderGeneration) return;
-    if (cms && typeof window.CooperNinveCMS.renderLanding === "function") {
-      usedLandingCms = true;
-      if (typeof window.CooperNinveCMS.applySeo === "function") {
-        window.CooperNinveCMS.applySeo(cms, page, path, {
-          canonicalPath: publicCanonicalPath,
-          setAlternateLinks,
-        });
-      } else {
-        setMeta(page, path);
-      }
-      html = window.CooperNinveCMS.renderLanding(cms, { trackingFallback: page.event });
-    }
+function staticMainHtml(page, path, landing) {
+  if (landing) return landingTemplate(page);
+  if (path === "/blog" && !isEnglish()) return `${hero(page, path)}${blogSections([])}`;
+  if (/^\/blog\/[a-z0-9-]+$/.test(path) && !isEnglish()) {
+    return `
+    <section class="section blog-article-section">
+      <div class="container blog-article">
+        <p class="blog-back"><a href="/blog">חזרה למידע מקצועי</a></p>
+        <h1>${escapeText((pages["/blog"] && pages["/blog"].h1) || "מידע מקצועי")}</h1>
+      </div>
+    </section>`;
   }
+  return standardTemplate(page, path);
+}
 
-  if (!usedLandingCms && path === "/" && !isEnglish() && !landing) {
-    const cms = await homepagePromise;
-    if (token !== renderGeneration) return;
-    if (cms && typeof window.CooperNinveCMS.mergeHomepagePage === "function") {
-      page = window.CooperNinveCMS.mergeHomepagePage(page, cms);
-      if (typeof window.CooperNinveCMS.applySeo === "function") {
-        window.CooperNinveCMS.applySeo(cms, page, path, {
-          canonicalPath: publicCanonicalPath,
-          setAlternateLinks,
-        });
-      } else {
-        setMeta(page, path);
-      }
-      html = standardTemplate(page, path);
-    }
-  }
-
-  if (!usedLandingCms && html == null && !landing && path !== "/") {
-    const cms = await standardPagePromise;
-    if (token !== renderGeneration) return;
-    if (cms && typeof window.CooperNinveCMS.mergeStandardPage === "function") {
-      page = window.CooperNinveCMS.mergeStandardPage(page, cms, path);
-      if (typeof window.CooperNinveCMS.applySeo === "function") {
-        window.CooperNinveCMS.applySeo(cms, page, path, {
-          canonicalPath: publicCanonicalPath,
-          setAlternateLinks,
-        });
-      } else {
-        setMeta(page, path);
-      }
-      html = standardTemplate(page, path);
-    }
-  }
-
-  if (!usedLandingCms && html == null && path === "/blog" && !isEnglish()) {
-    const cms = await blogListPromise;
-    if (token !== renderGeneration) return;
-    setMeta(page, path);
-    html = `${hero(page, path)}${blogSections(cms && cms.posts)}`;
-  }
-
-  if (!usedLandingCms && html == null && /^\/blog\/[a-z0-9-]+$/.test(path) && !isEnglish()) {
-    const cms = await blogArticlePromise;
-    if (token !== renderGeneration) return;
-    if (cms) {
-      page = {
-        title: (cms.seo && cms.seo.metaTitle) || cms.title,
-        description: (cms.seo && cms.seo.metaDescription) || cms.excerpt,
-        h1: cms.publicH1 || cms.title,
-        lead: cms.excerpt,
-        hideActions: true,
-      };
-      if (typeof window.CooperNinveCMS.applySeo === "function") {
-        window.CooperNinveCMS.applySeo(cms, page, path, {
-          canonicalPath: publicCanonicalPath,
-          setAlternateLinks,
-        });
-      } else {
-        setMeta(page, path);
-      }
-      html = blogArticleTemplate(cms);
-    } else {
-      setMeta(pages["/blog"], "/blog");
-      html = `${hero(pages["/blog"], "/blog")}${blogSections([])}`;
-    }
-  }
-
-  if (!usedLandingCms && html == null && productPages[path] && window.CooperNinveCMS && typeof window.CooperNinveCMS.fetchProduct === "function") {
-    const cms = await window.CooperNinveCMS.fetchProduct({
-      language: isEnglish() ? "english" : "hebrew",
-      path,
-    });
-    if (token !== renderGeneration) return;
-    if (cms) {
-      const seoFallback = isEnglish() && englishMeta[path] ? Object.assign({}, page, englishMeta[path]) : page;
-      page = window.CooperNinveCMS.mergeProductPage(seoFallback, cms);
-      if (typeof window.CooperNinveCMS.applySeo === "function") {
-        window.CooperNinveCMS.applySeo(cms, page, path, {
-          canonicalPath: publicCanonicalPath,
-          setAlternateLinks,
-        });
-      } else {
-        setMeta(page, path);
-      }
-      html = standardTemplate(page, path);
-    }
-  }
-
-  if (token !== renderGeneration) return;
-  if (html == null) {
-    setMeta(page, path);
-    html = landing ? landingTemplate(page) : standardTemplate(page, path);
-  }
-
+function paintMain(page, html, options = {}) {
+  if (html === lastMainHtml) return false;
+  lastMainHtml = html;
   app.innerHTML = html;
   if (isEnglish()) translateApp();
   renderPartnerLogos(page && page.cmsPartnerLogos);
@@ -1869,7 +1738,167 @@ async function render() {
   initDistributionCounters();
   initHeroParallax();
   initCarousels();
-  window.scrollTo({ top: 0, behavior: "instant" });
+  if (options.resetScroll) window.scrollTo({ top: 0, behavior: "instant" });
+  return true;
+}
+
+async function render() {
+  const token = ++renderGeneration;
+  lastMainHtml = "";
+  const path = pathFromLocation();
+  const landing = landingRoute(path);
+  let page = landing ? landingPages[landing] : (pages[path] || pages["/"]);
+  const cms = window.CooperNinveCMS;
+  const chromePromise = loadCmsChrome();
+  const homepagePromise =
+    !isEnglish() &&
+    path === "/" &&
+    !landing &&
+    cms &&
+    typeof cms.fetchHomepage === "function"
+      ? cms.fetchHomepage({ language: "hebrew" }).catch(() => null)
+      : Promise.resolve(null);
+  const standardPagePromise =
+    !isEnglish() &&
+    !landing &&
+    path !== "/blog" &&
+    !/^\/blog\/[a-z0-9-]+$/.test(path) &&
+    cms &&
+    typeof cms.fetchStandardPage === "function"
+      ? cms.fetchStandardPage({ language: "hebrew", path }).catch(() => null)
+      : Promise.resolve(null);
+  const blogListPromise =
+    !isEnglish() &&
+    path === "/blog" &&
+    cms &&
+    typeof cms.fetchPosts === "function"
+      ? cms.fetchPosts({ language: "hebrew" }).catch(() => null)
+      : Promise.resolve(null);
+  const blogArticlePromise =
+    !isEnglish() &&
+    /^\/blog\/[a-z0-9-]+$/.test(path) &&
+    cms &&
+    typeof cms.fetchPost === "function"
+      ? cms.fetchPost({ language: "hebrew", path }).catch(() => null)
+      : Promise.resolve(null);
+  const pressPromise =
+    !isEnglish() &&
+    path === "/press" &&
+    cms &&
+    typeof cms.fetchPressMedia === "function"
+      ? cms.fetchPressMedia().catch(() => null)
+      : Promise.resolve(null);
+  const landingPromise =
+    !isEnglish() &&
+    landing &&
+    cms &&
+    typeof cms.fetchLandingPage === "function"
+      ? cms.fetchLandingPage({ path: landing }).catch(() => null)
+      : Promise.resolve(null);
+  const productPromise =
+    Boolean(productPages[path]) &&
+    cms &&
+    typeof cms.fetchProduct === "function"
+      ? cms.fetchProduct({
+          language: isEnglish() ? "english" : "hebrew",
+          path,
+        }).catch(() => null)
+      : Promise.resolve(null);
+
+  livePressGroups = pressGroups;
+  applyShell(path, chromeSnapshot);
+  applyPageSeo(null, page, path);
+  paintMain(page, staticMainHtml(page, path, landing), { resetScroll: true });
+  if (token !== renderGeneration) return;
+
+  void chromePromise.then((chrome) => {
+    if (token !== renderGeneration || !chrome) return;
+    applyShell(path, chrome, { closeNav: false });
+  });
+
+  void (async () => {
+    let html = null;
+    let usedLandingCms = false;
+
+    const landingCms = await landingPromise;
+    if (token !== renderGeneration) return;
+    if (landingCms && cms && typeof cms.renderLanding === "function") {
+      usedLandingCms = true;
+      applyPageSeo(landingCms, page, path);
+      html = cms.renderLanding(landingCms, { trackingFallback: page.event });
+    }
+
+    if (!usedLandingCms && path === "/" && !isEnglish() && !landing) {
+      const homeCms = await homepagePromise;
+      if (token !== renderGeneration) return;
+      if (homeCms && cms && typeof cms.mergeHomepagePage === "function") {
+        page = cms.mergeHomepagePage(page, homeCms);
+        applyPageSeo(homeCms, page, path);
+        html = standardTemplate(page, path);
+      }
+    }
+
+    if (!usedLandingCms && html == null && !landing && path !== "/" && path !== "/blog" && !/^\/blog\/[a-z0-9-]+$/.test(path) && !productPages[path]) {
+      const standardCms = await standardPagePromise;
+      if (token !== renderGeneration) return;
+      if (standardCms && cms && typeof cms.mergeStandardPage === "function") {
+        page = cms.mergeStandardPage(page, standardCms, path);
+        applyPageSeo(standardCms, page, path);
+        html = standardTemplate(page, path);
+      }
+    }
+
+    if (!usedLandingCms && html == null && path === "/blog" && !isEnglish()) {
+      const postsCms = await blogListPromise;
+      if (token !== renderGeneration) return;
+      applyPageSeo(null, page, path);
+      html = `${hero(page, path)}${blogSections(postsCms && postsCms.posts)}`;
+    }
+
+    if (!usedLandingCms && html == null && /^\/blog\/[a-z0-9-]+$/.test(path) && !isEnglish()) {
+      const postCms = await blogArticlePromise;
+      if (token !== renderGeneration) return;
+      if (postCms) {
+        page = {
+          title: (postCms.seo && postCms.seo.metaTitle) || postCms.title,
+          description: (postCms.seo && postCms.seo.metaDescription) || postCms.excerpt,
+          h1: postCms.publicH1 || postCms.title,
+          lead: postCms.excerpt,
+          hideActions: true,
+        };
+        applyPageSeo(postCms, page, path);
+        html = blogArticleTemplate(postCms);
+      }
+    }
+
+    if (!usedLandingCms && html == null && productPages[path]) {
+      const productCms = await productPromise;
+      if (token !== renderGeneration) return;
+      if (productCms && cms && typeof cms.mergeProductPage === "function") {
+        const seoFallback = isEnglish() && englishMeta[path] ? Object.assign({}, page, englishMeta[path]) : page;
+        page = cms.mergeProductPage(seoFallback, productCms);
+        applyPageSeo(productCms, page, path);
+        html = standardTemplate(page, path);
+      }
+    }
+
+    if (!usedLandingCms && html == null && path === "/press" && !isEnglish()) {
+      const pressCms = await pressPromise;
+      if (token !== renderGeneration) return;
+      const mapped =
+        pressCms && cms && typeof cms.mergePressGroups === "function"
+          ? cms.mergePressGroups(pressGroups, pressCms)
+          : null;
+      if (mapped) {
+        livePressGroups = mapped;
+        html = standardTemplate(page, path);
+      }
+    }
+
+    if (token !== renderGeneration) return;
+    if (html == null) return;
+    paintMain(page, html, { resetScroll: false });
+  })();
 }
 
 function routeState() {
@@ -2327,6 +2356,8 @@ function initSketchVisuals() {
   if (!sketchBlocks.length) return;
 
   sketchBlocks.forEach(async (block) => {
+    if (block.dataset.sketchBound === "1") return;
+    block.dataset.sketchBound = "1";
     const section = block.closest(".mga-block");
     const src = block.dataset.sketchSrc;
     block.classList.add("is-sketch-enhanced");
