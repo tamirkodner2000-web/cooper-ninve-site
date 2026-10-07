@@ -4132,11 +4132,14 @@ html.a11y-reduce-motion .footer-chevron { transition: none; }
 .blog-article-body h2,
 .blog-article-body h3 { color: var(--navy); margin: 32px 0 12px; }
 .blog-article-body p { margin: 0 0 16px; }
-.blog-article-body ul {
+.blog-article-body ul,
+.blog-article-body ol {
   margin: 0 0 18px;
   padding-inline-start: 22px;
 }
-.blog-article-body a { color: var(--blue-2); font-weight: 700; }
+.blog-article-body a { color: var(--blue-2); font-weight: 700; overflow-wrap: anywhere; }
+.blog-article-body a[href^="tel:"] { overflow-wrap: normal; white-space: nowrap; }
+.legal-article .legal-clause { padding-inline-start: 2.4em; text-indent: -2.4em; }
 @media (max-width: 800px) {
   .blog-grid { grid-template-columns: 1fr; }
   .blog-card-image img { height: 200px; }
