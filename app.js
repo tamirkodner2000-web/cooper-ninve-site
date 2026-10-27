@@ -1436,6 +1436,81 @@ const aboutMenuRoutes = new Set(["/about-us", "/blog", "/press"]);
 
 let chromeCachePromise = null;
 let chromeSnapshot = null;
+const productCatalog = { english: null, hebrew: null };
+const productCatalogPromise = { english: null, hebrew: null };
+
+function isProductCandidatePath(path) {
+  if (!/^\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(path || "")) return false;
+  if (path === "/blog" || path.startsWith("/blog/") || path.startsWith("/lp/")) return false;
+  if (landingPages[path]) return false;
+  if (pages[path] && !productPages[path]) return false;
+  return true;
+}
+
+function loadProductCatalog(language) {
+  const lang = language === "english" ? "english" : "hebrew";
+  if (productCatalogPromise[lang]) return productCatalogPromise[lang];
+  const cms = window.CooperNinveCMS;
+  if (!cms || typeof cms.fetchProductCatalog !== "function") {
+    productCatalogPromise[lang] = Promise.resolve(null);
+    return productCatalogPromise[lang];
+  }
+  productCatalogPromise[lang] = cms
+    .fetchProductCatalog({ language: lang })
+    .then((data) => {
+      productCatalog[lang] = data && Array.isArray(data.products) ? data.products : null;
+      return data;
+    })
+    .catch(() => null);
+  return productCatalogPromise[lang];
+}
+
+function liveProducts() {
+  const lang = isEnglish() ? "english" : "hebrew";
+  const catalog = productCatalog[lang];
+  if (!Array.isArray(catalog)) return products;
+  return catalog.map((item) => {
+    const url = `/${item.slug}`;
+    const fallback = products.find((product) => product.url === url);
+    return {
+      icon: fallback ? fallback.icon : false,
+      text: item.shortDescription || (fallback && fallback.text) || "",
+      title: item.productName,
+      url,
+    };
+  });
+}
+
+function emptyProductPage() {
+  return {
+    coverage: [],
+    description: "",
+    faqs: [],
+    h1: isEnglish() ? "Insurance product" : "מוצר ביטוח",
+    hideActions: true,
+    info: [],
+    lead: "",
+    primary: ["לקבלת הצעה לביטוח", "/contact-us"],
+    secondary: ["עבודה עם סוכני ביטוח", "/insurance-agents"],
+    title: isEnglish() ? "Insurance product" : "מוצר ביטוח",
+    who: [],
+  };
+}
+
+function notFoundPage() {
+  return {
+    description: "",
+    h1: isEnglish() ? "Page not found" : "העמוד לא נמצא",
+    hideActions: true,
+    lead: isEnglish() ? "This page is not available." : "העמוד המבוקש אינו זמין.",
+    title: isEnglish() ? "Page not found | Cooper Ninve" : "העמוד לא נמצא | קופר נינוה",
+  };
+}
+
+function notFoundTemplate() {
+  const page = notFoundPage();
+  return `<section class="section"><div class="container"><div class="center-title"><h1>${escapeText(page.h1)}</h1><p>${escapeText(page.lead)}</p><a class="btn btn-primary" href="${link("/")}">${isEnglish() ? "Home" : "עמוד הבית"}</a></div></div></section>`;
+}
 
 function loadCmsChrome() {
   if (chromeCachePromise) return chromeCachePromise;
@@ -1614,7 +1689,7 @@ document.addEventListener("click", (event) => {
   const href = anchor.getAttribute("href");
   const route = normalizeRoute(href.split("#")[0]);
   const isBlogRoute = route === "/blog" || /^\/blog\/[a-z0-9-]+$/.test(route);
-  if (!pages[route] && !isBlogRoute) return;
+  if (!pages[route] && !isBlogRoute && !isProductCandidatePath(route)) return;
   event.preventDefault();
   history.pushState(null, "", href);
   void render();
@@ -1660,7 +1735,9 @@ function pathFromLocation() {
   if (!english && (basePath === "/blog" || /^\/blog\/[a-z0-9-]+$/.test(basePath))) return basePath;
   const landing = landingRoute(basePath) || landingRoute(requestedPathname());
   if (landing) return landing;
-  return pages[basePath] ? basePath : "/";
+  if (pages[basePath]) return basePath;
+  if (isProductCandidatePath(basePath)) return basePath;
+  return "/";
 }
 
 function link(url) {
@@ -1724,6 +1801,9 @@ function staticMainHtml(page, path, landing) {
       </div>
     </section>`;
   }
+  if (isProductCandidatePath(path) && !productPages[path]) {
+    return `${hero(page, path)}${breadcrumbsHtml(path, page)}${productTemplate(page, path)}`;
+  }
   return standardTemplate(page, path);
 }
 
@@ -1748,9 +1828,11 @@ async function render() {
   lastMainHtml = "";
   const path = pathFromLocation();
   const landing = landingRoute(path);
-  let page = landing ? landingPages[landing] : (pages[path] || pages["/"]);
+  const cmsProductRoute = isProductCandidatePath(path);
+  let page = landing ? landingPages[landing] : (pages[path] || (cmsProductRoute ? emptyProductPage() : pages["/"]));
   const cms = window.CooperNinveCMS;
   const chromePromise = loadCmsChrome();
+  const catalogPromise = loadProductCatalog(isEnglish() ? "english" : "hebrew");
   const homepagePromise =
     !isEnglish() &&
     path === "/" &&
@@ -1764,6 +1846,7 @@ async function render() {
     !landing &&
     path !== "/blog" &&
     !/^\/blog\/[a-z0-9-]+$/.test(path) &&
+    !cmsProductRoute &&
     cms &&
     typeof cms.fetchStandardPage === "function"
       ? cms.fetchStandardPage({ language: "hebrew", path }).catch(() => null)
@@ -1797,7 +1880,7 @@ async function render() {
       ? cms.fetchLandingPage({ path: landing }).catch(() => null)
       : Promise.resolve(null);
   const productPromise =
-    Boolean(productPages[path]) &&
+    cmsProductRoute &&
     cms &&
     typeof cms.fetchProduct === "function"
       ? cms.fetchProduct({
@@ -1821,6 +1904,10 @@ async function render() {
     let html = null;
     let usedLandingCms = false;
 
+    await catalogPromise;
+    if (token !== renderGeneration) return;
+    applyShell(path, chromeSnapshot, { closeNav: false });
+
     const landingCms = await landingPromise;
     if (token !== renderGeneration) return;
     if (landingCms && cms && typeof cms.renderLanding === "function") {
@@ -1839,7 +1926,7 @@ async function render() {
       }
     }
 
-    if (!usedLandingCms && html == null && !landing && path !== "/" && path !== "/blog" && !/^\/blog\/[a-z0-9-]+$/.test(path) && !productPages[path]) {
+    if (!usedLandingCms && html == null && !landing && path !== "/" && path !== "/blog" && !/^\/blog\/[a-z0-9-]+$/.test(path) && !cmsProductRoute) {
       const standardCms = await standardPagePromise;
       if (token !== renderGeneration) return;
       if (standardCms && cms && typeof cms.mergeStandardPage === "function") {
@@ -1869,10 +1956,14 @@ async function render() {
         };
         applyPageSeo(postCms, page, path);
         html = blogArticleTemplate(postCms);
+      } else {
+        page = notFoundPage();
+        applyPageSeo(null, page, path);
+        html = notFoundTemplate();
       }
     }
 
-    if (!usedLandingCms && html == null && productPages[path]) {
+    if (!usedLandingCms && html == null && cmsProductRoute) {
       const productCms = await productPromise;
       if (token !== renderGeneration) return;
       if (productCms && cms && typeof cms.mergeProductPage === "function") {
@@ -1880,7 +1971,15 @@ async function render() {
         page = cms.mergeProductPage(seoFallback, productCms);
         applyPageSeo(productCms, page, path);
         html = standardTemplate(page, path);
+      } else if (!productPages[path]) {
+        page = notFoundPage();
+        applyPageSeo(null, page, path);
+        html = notFoundTemplate();
       }
+    }
+
+    if (!usedLandingCms && html == null && path === "/insurance-solutions") {
+      html = standardTemplate(page, path);
     }
 
     if (!usedLandingCms && html == null && path === "/press" && !isEnglish()) {
@@ -1935,7 +2034,9 @@ function matchingLanguagePath(path, toEnglish) {
   if (toEnglish && normalized === "/israel-market-partner") return englishPrefix;
   if (toEnglish && normalized === "/press") return englishPrefix;
   if (toEnglish && normalized === "/blog") return englishPrefix;
-  return pages[normalized] ? translatedUrl(normalized, toEnglish) : (toEnglish ? englishPrefix : "/");
+  if (pages[normalized]) return translatedUrl(normalized, toEnglish);
+  if (isProductCandidatePath(normalized)) return translatedUrl(normalized, toEnglish);
+  return toEnglish ? englishPrefix : "/";
 }
 
 function setAlternateLinks(path) {
@@ -2033,17 +2134,20 @@ function renderChrome(path, chrome = null) {
   syncA11yToolbarLanguage();
 }
 
-function productMegaMenuHtml(path, cmsGroups = [], triggerLabel = "", triggerHref = "/insurance-solutions") {
-  const active = productMenuRoutes.has(path) ? " active" : "";
+function productMegaMenuHtml(path, _cmsGroups = [], triggerLabel = "", _triggerHref = "/insurance-solutions") {
+  const catalogItems = liveProducts();
+  const catalogLink = isEnglish()
+    ? ["All insurance products", "/insurance-solutions", "View every published insurance product."]
+    : ["כל מוצרי הביטוח", "/insurance-solutions", "מעבר לעמוד המרכז את כלל תחומי הביטוח."];
+  const catalogRoutes = new Set(catalogItems.map((item) => item.url).concat("/insurance-solutions"));
+  const active = catalogRoutes.has(path) || productMenuRoutes.has(path) ? " active" : "";
   const label = triggerLabel || (isEnglish() ? "Underwriting" : "מוצרי ביטוח");
-  const groups = cmsGroups.length
-    ? cmsGroups.map((group) => ({
-        title: group.heading || label,
-        links: group.items
-          .filter((item) => item.label && cmsItemHref(item))
-          .map((item) => [item.label, cmsItemHref(item), item.description || ""]),
-      }))
-    : productMenuGroups;
+  const groups = [{
+    title: label,
+    links: catalogItems
+      .map((item) => [item.title, item.url, item.text || ""])
+      .concat([catalogLink]),
+  }];
   return `<div class="nav-product-menu" data-product-menu>
     <button class="nav-product-trigger${active}" type="button" aria-expanded="false" aria-haspopup="true" aria-controls="product-mega-menu">${label}</button>
     <div class="product-mega-menu" id="product-mega-menu">
@@ -2425,7 +2529,7 @@ function breadcrumbsFor(path, page) {
     ? { href: "/en", label: "Home" }
     : { href: "/", label: "עמוד הבית" };
   const currentLabel = String((page && (page.h1 || page.title)) || "").trim() || path;
-  if (productPages[path]) {
+  if (productPages[path] || isProductCandidatePath(path)) {
     return [
       home,
       { href: link("/insurance-solutions"), label: isEnglish() ? "Insurance Products" : "מוצרי ביטוח" },
@@ -2538,7 +2642,7 @@ function standardTemplate(page, path) {
   if (path === "/insurance-solutions") return `${hero(page, path)}${breadcrumbsHtml(path, page)}${sections(page.sections, path, page)}`;
   if (path === "/about-us") return `${hero(page, path)}${breadcrumbsHtml(path, page)}${sections(page.sections, path, page)}`;
   if (path === "/contact-us") return `${hero(page, path)}${breadcrumbsHtml(path, page)}${sections(page.sections, path, page)}`;
-  if (productPages[path]) return `${hero(page, path)}${breadcrumbsHtml(path, page)}${productTemplate(page, path)}`;
+  if (productPages[path] || isProductCandidatePath(path)) return `${hero(page, path)}${breadcrumbsHtml(path, page)}${productTemplate(page, path)}`;
   return `${hero(page, path)}${breadcrumbsHtml(path, page)}${sections(page.sections, path, page)}`;
 }
 
@@ -2864,7 +2968,7 @@ function cards(items, cols = 3) {
 }
 
 function productCards() {
-  return cards(products.map((product) => ({ ...product, icon: false })), 5);
+  return cards(liveProducts().map((product) => ({ ...product, icon: false })), 5);
 }
 
 function sections(type, path, page) {
@@ -3280,12 +3384,13 @@ function blogSections(posts) {
           : post.featuredImage.url)
       : "";
     const alt = (post.featuredImage && post.featuredImage.alt) || post.title || "";
+    const heading = post.publicH1 || post.title;
     const category = post.category && post.category.name ? `<p class="blog-card-category">${escapeText(post.category.name)}</p>` : "";
     const excerpt = post.excerpt ? `<p>${escapeText(post.excerpt)}</p>` : "";
     const imageHtml = image
       ? `<div class="blog-card-image"><img src="${escapeText(image)}" alt="${escapeText(alt)}" loading="lazy" width="640" height="360"></div>`
       : "";
-    return `<a class="blog-card" href="${href}"${linkNameAttr("מידע נוסף", post.title)}><article>${imageHtml}${category}<h3>${escapeText(post.title)}</h3>${excerpt}<span class="card-cta">מידע נוסף</span></article></a>`;
+    return `<a class="blog-card" href="${href}"${linkNameAttr("מידע נוסף", heading)}><article>${imageHtml}${category}<h3>${escapeText(heading)}</h3>${excerpt}<span class="card-cta">מידע נוסף</span></article></a>`;
   }).join("");
   return `<section class="section"><div class="container"><div class="blog-grid">${cardsHtml}</div></div></section>`;
 }
@@ -3379,9 +3484,9 @@ function productTemplate(page, path) {
       ${Array.isArray(page.faqs) && page.faqs.length ? faqBlock(page.faqs) : ""}`;
   }
   return `
-    <section class="section"><div class="container"><div class="center-title"><h2>למי הסיכון מתאים לבחינה?</h2><p>כל פנייה נבחנת לפי אופי הפעילות, המידע החיתומי, תיאבון הסיכון ותנאי הפוליסה הרלוונטיים.</p></div>${cards(page.who.map((title) => ({ title, icon: "◇", text: "מתאים לבדיקת חיתום בהתאם לאופי הפעילות, היקף הסיכון, המסמכים והאישורים הרלוונטיים." })), 3)}</div></section>
-    <section class="section section-soft"><div class="container split-band"><div><h2>מה יכול להיבחן במסגרת החיתום?</h2><p>הכיסוי המדויק כפוף לתנאי הפוליסה, סמכויות החיתום, אישור השוק הרלוונטי, גבולות אחריות, חריגים, השתתפויות עצמיות והפעילות הספציפית.</p></div><ul class="feature-list">${page.coverage.map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
-    <section class="section"><div class="container split-band"><div><h2>איזה מידע חיתומי נדרש?</h2><p>מידע מלא וברור מאפשר לבחון את הסיכון בצורה מקצועית ולזהות האם קיימת התאמה לתיאבון הסיכון ולשווקים הרלוונטיים.</p><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">לקבלת הצעה לביטוח</a></div><ul class="feature-list">${page.info.map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
+    <section class="section"><div class="container"><div class="center-title"><h2>למי הסיכון מתאים לבחינה?</h2><p>כל פנייה נבחנת לפי אופי הפעילות, המידע החיתומי, תיאבון הסיכון ותנאי הפוליסה הרלוונטיים.</p></div>    ${cards((page.who || []).map((title) => ({ title, icon: "◇", text: "מתאים לבדיקת חיתום בהתאם לאופי הפעילות, היקף הסיכון, המסמכים והאישורים הרלוונטיים." })), 3)}</div></section>
+    <section class="section section-soft"><div class="container split-band"><div><h2>מה יכול להיבחן במסגרת החיתום?</h2><p>הכיסוי המדויק כפוף לתנאי הפוליסה, סמכויות החיתום, אישור השוק הרלוונטי, גבולות אחריות, חריגים, השתתפויות עצמיות והפעילות הספציפית.</p></div><ul class="feature-list">${(page.coverage || []).map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
+    <section class="section"><div class="container split-band"><div><h2>איזה מידע חיתומי נדרש?</h2><p>מידע מלא וברור מאפשר לבחון את הסיכון בצורה מקצועית ולזהות האם קיימת התאמה לתיאבון הסיכון ולשווקים הרלוונטיים.</p><a class="btn btn-primary" href="/contact-us" data-track="click_quote_cta">לקבלת הצעה לביטוח</a></div><ul class="feature-list">${(page.info || []).map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
     <section class="section section-soft"><div class="container split-band"><div><h2>מה משפיע על החלטת החיתום?</h2><p>החלטה חיתומית אינה מבוססת רק על שם המוצר. היא נשענת על פרופיל הסיכון, המסמכים, ניסיון התביעות, דרישות השוק והסמכויות הרלוונטיות.</p></div><ul class="feature-list">${factors.map((x) => `<li>${x}</li>`).join("")}</ul></div></section>
     <section class="section section-navy"><div class="container"><div class="section-header"><div><h2>תמיכה לסוכנים ולעסקים בתהליך החיתום</h2><p>קופר נינוה מסייעת באיסוף מידע, הבנת החשיפה, הכוונה למסמכים נדרשים, בחינת התאמה מול שווקים רלוונטיים והמשך שירות לאורך חיי הפוליסה.</p></div><a class="btn btn-primary" href="/insurance-agents">לקבלת הצעה לביטוח</a></div></div></section>
     ${faqBlock(page.faqs)}
@@ -3394,7 +3499,7 @@ function productDetailList(title, items = []) {
 }
 
 function productSidebar(currentPath) {
-  const links = products.map((item) => {
+  const links = liveProducts().map((item) => {
     const active = item.url === currentPath;
     return active
       ? `<span class="product-side-link is-active" aria-current="page">${item.title}</span>`

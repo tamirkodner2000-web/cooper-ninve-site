@@ -14,13 +14,29 @@
     "/lp/cyber-insurance": true,
     "/lp/insurance-agents": true,
   };
-  var PRODUCT_PATH = /^\/[a-z0-9-]+-insurance$/;
+  var PRODUCT_PATH = /^\/[a-z0-9]+(?:-[a-z0-9]+)*$/;
   var BLOG_ARTICLE_PATH = /^\/blog\/[a-z0-9-]+$/;
   var STANDARD_PAGE_TYPES = {
     "/about-us": "standard",
     "/business-insurance": "business",
     "/claims": "claims",
     "/insurance-agents": "agents",
+  };
+  var BLOCKED_PRODUCT_PATHS = {
+    "/about-us": true,
+    "/accessibility-statement": true,
+    "/blog": true,
+    "/business-insurance": true,
+    "/claims": true,
+    "/contact-us": true,
+    "/disclosure": true,
+    "/insurance-agents": true,
+    "/insurance-solutions": true,
+    "/israel-market-partner": true,
+    "/press": true,
+    "/privacy-policy": true,
+    "/public-complaints": true,
+    "/terms-of-use": true,
   };
   var STANDARD_HERO_PATHS = {
     "/business-insurance": true,
@@ -74,7 +90,10 @@
   }
 
   function isProductPath(path) {
-    return PRODUCT_PATH.test(String(path || "")) && !STANDARD_PAGE_TYPES[path];
+    var raw = String(path || "");
+    if (!PRODUCT_PATH.test(raw) || STANDARD_PAGE_TYPES[raw] || BLOCKED_PRODUCT_PATHS[raw]) return false;
+    if (raw.indexOf("/lp/") === 0 || raw === "/blog" || raw.indexOf("/blog/") === 0) return false;
+    return true;
   }
 
   function isBlogArticlePath(path) {
@@ -494,6 +513,38 @@
     });
   }
 
+  function isProductCatalogPayload(data, language) {
+    return Boolean(
+      isPublicSafe(data) &&
+        data.language === language &&
+        Array.isArray(data.products)
+    );
+  }
+
+  function fetchProductCatalog(options) {
+    var language = options && options.language === "english" ? "english" : "hebrew";
+    var url = cmsBase() + "/api/public/products?language=" + encodeURIComponent(language);
+    return fetchJson(url).then(function (data) {
+      if (!isProductCatalogPayload(data, language)) return null;
+      return {
+        language: data.language,
+        products: data.products.filter(function (item) {
+          return (
+            item &&
+            typeof item === "object" &&
+            typeof item.slug === "string" &&
+            item.slug &&
+            typeof item.productName === "string" &&
+            item.productName.trim() &&
+            item.language === language &&
+            !("status" in item) &&
+            !("reviewStatus" in item)
+          );
+        }),
+      };
+    });
+  }
+
   function ctaPair(cta, fallback, requireEnglish) {
     if (!cta || !String(cta.label || "").trim() || !String(cta.destination || "").trim()) {
       return fallback;
@@ -531,8 +582,8 @@
   }
 
   function mergeProductPage(staticPage, cms) {
-    if (!staticPage) return staticPage;
     if (!cms) return staticPage;
+    staticPage = staticPage || {};
     var seo = cms.seo || {};
     var english = cms.language === "english";
     var h1 = english ? englishOrFallback(cms.productName, staticPage.h1) : String(cms.productName || staticPage.h1 || "").trim();
@@ -638,6 +689,7 @@
     fetchLandingPage: fetchLandingPage,
     fetchStandardPage: fetchStandardPage,
     fetchProduct: fetchProduct,
+    fetchProductCatalog: fetchProductCatalog,
     fetchPosts: fetchPosts,
     fetchPost: fetchPost,
     fetchNavigation: fetchNavigation,
