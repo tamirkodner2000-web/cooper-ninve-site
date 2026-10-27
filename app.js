@@ -1713,11 +1713,12 @@ function applyShell(path, chrome, options = {}) {
 
 function staticMainHtml(page, path, landing) {
   if (landing) return landingTemplate(page);
-  if (path === "/blog" && !isEnglish()) return `${hero(page, path)}${blogSections([])}`;
+  if (path === "/blog" && !isEnglish()) return `${hero(page, path)}${breadcrumbsHtml(path, page)}${blogSections([])}`;
   if (/^\/blog\/[a-z0-9-]+$/.test(path) && !isEnglish()) {
     return `
     <section class="section blog-article-section">
       <div class="container blog-article">
+        ${breadcrumbsHtml(path, page)}
         <p class="blog-back"><a href="/blog">חזרה למידע מקצועי</a></p>
         <h1>${escapeText((pages["/blog"] && pages["/blog"].h1) || "מידע מקצועי")}</h1>
       </div>
@@ -1852,7 +1853,7 @@ async function render() {
       const postsCms = await blogListPromise;
       if (token !== renderGeneration) return;
       applyPageSeo(null, page, path);
-      html = `${hero(page, path)}${blogSections(postsCms && postsCms.posts)}`;
+      html = `${hero(page, path)}${breadcrumbsHtml(path, page)}${blogSections(postsCms && postsCms.posts)}`;
     }
 
     if (!usedLandingCms && html == null && /^\/blog\/[a-z0-9-]+$/.test(path) && !isEnglish()) {
@@ -2418,6 +2419,60 @@ function renderPartnerLogos(logos = partnerLogos) {
     </div>`).join("");
 }
 
+function breadcrumbsFor(path, page) {
+  if (!path || path === "/" || landingRoute(path)) return [];
+  const home = isEnglish()
+    ? { href: "/en", label: "Home" }
+    : { href: "/", label: "עמוד הבית" };
+  const currentLabel = String((page && (page.h1 || page.title)) || "").trim() || path;
+  if (productPages[path]) {
+    return [
+      home,
+      { href: link("/insurance-solutions"), label: isEnglish() ? "Insurance Products" : "מוצרי ביטוח" },
+      { href: link(path), label: currentLabel, current: true },
+    ];
+  }
+  if (path === "/blog" || /^\/blog\//.test(path)) {
+    const blog = { href: "/blog", label: isEnglish() ? "Professional Insights" : "מידע מקצועי" };
+    if (path === "/blog") return [home, { ...blog, current: true, href: blog.href }];
+    return [home, blog, { href: path, label: currentLabel, current: true }];
+  }
+  return [home, { href: link(path), label: currentLabel, current: true }];
+}
+
+function breadcrumbsHtml(path, page) {
+  const items = breadcrumbsFor(path, page);
+  if (items.length < 2) return "";
+  const origin = (typeof location !== "undefined" && location.origin) || "https://www.cooper-ninve.com";
+  const absolute = (href) => {
+    try {
+      return new URL(href, origin).href;
+    } catch {
+      return href;
+    }
+  };
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: items.map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      name: item.label,
+      item: absolute(item.href),
+    })),
+  };
+  const list = items.map((item) => {
+    if (item.current) {
+      return `<li><span aria-current="page">${escapeText(item.label)}</span></li>`;
+    }
+    return `<li><a href="${escapeText(item.href)}">${escapeText(item.label)}</a></li>`;
+  }).join("");
+  return `<nav class="site-breadcrumbs" aria-label="${isEnglish() ? "Breadcrumb" : "ניווט מיקום"}">
+    <ol>${list}</ol>
+    <script type="application/ld+json">${JSON.stringify(jsonLd).replace(/</g, "\\u003c")}</script>
+  </nav>`;
+}
+
 function hero(page, path = "") {
   const isHomeHero = page.sections === "home";
   const isHebrewHomeHero = isHomeHero && !isEnglish();
@@ -2473,18 +2528,18 @@ function hero(page, path = "") {
 
 function standardTemplate(page, path) {
   if (isEnglish() && path === "/") return englishHomeTemplate();
-  if (isEnglish() && path === "/insurance-solutions") return englishUnderwritingLinesTemplate();
-  if (isEnglish() && path === "/insurance-agents") return englishDistributionTemplate();
-  if (isEnglish() && path === "/claims") return englishClaimsOperationsTemplate();
-  if (isEnglish() && path === "/contact-us") return englishContactTemplate();
-  if (path === "/israel-market-partner") return `${internationalPartnerSections()}`;
-  if (path === "/accessibility-statement") return accessibilityStatementTemplate();
-  if (["/privacy-policy", "/terms-of-use", "/disclosure", "/public-complaints"].includes(path)) return `${legalSections(page, path)}`;
-  if (path === "/insurance-solutions") return sections(page.sections, path, page);
-  if (path === "/about-us") return `${sections(page.sections, path, page)}`;
-  if (path === "/contact-us") return sections(page.sections, path, page);
-  if (productPages[path]) return `${hero(page, path)}${productTemplate(page, path)}`;
-  return `${hero(page, path)}${sections(page.sections, path, page)}`;
+  if (isEnglish() && path === "/insurance-solutions") return `${breadcrumbsHtml(path, page)}${englishUnderwritingLinesTemplate()}`;
+  if (isEnglish() && path === "/insurance-agents") return `${breadcrumbsHtml(path, page)}${englishDistributionTemplate()}`;
+  if (isEnglish() && path === "/claims") return `${breadcrumbsHtml(path, page)}${englishClaimsOperationsTemplate()}`;
+  if (isEnglish() && path === "/contact-us") return `${breadcrumbsHtml(path, page)}${englishContactTemplate()}`;
+  if (path === "/israel-market-partner") return `${breadcrumbsHtml(path, page)}${internationalPartnerSections()}`;
+  if (path === "/accessibility-statement") return `${breadcrumbsHtml(path, page)}${accessibilityStatementTemplate()}`;
+  if (["/privacy-policy", "/terms-of-use", "/disclosure", "/public-complaints"].includes(path)) return `${breadcrumbsHtml(path, page)}${legalSections(page, path)}`;
+  if (path === "/insurance-solutions") return `${hero(page, path)}${breadcrumbsHtml(path, page)}${sections(page.sections, path, page)}`;
+  if (path === "/about-us") return `${hero(page, path)}${breadcrumbsHtml(path, page)}${sections(page.sections, path, page)}`;
+  if (path === "/contact-us") return `${hero(page, path)}${breadcrumbsHtml(path, page)}${sections(page.sections, path, page)}`;
+  if (productPages[path]) return `${hero(page, path)}${breadcrumbsHtml(path, page)}${productTemplate(page, path)}`;
+  return `${hero(page, path)}${breadcrumbsHtml(path, page)}${sections(page.sections, path, page)}`;
 }
 
 function englishHomeTemplate() {
@@ -3250,6 +3305,7 @@ function blogArticleTemplate(post) {
   return `
     <section class="section blog-article-section">
       <div class="container blog-article">
+        ${breadcrumbsHtml(`/blog/${post.slug}`, { h1: post.publicH1 || post.title })}
         <p class="blog-back"><a href="/blog">חזרה למידע מקצועי</a></p>
         ${category}
         <h1>${escapeText(post.publicH1 || post.title)}</h1>
