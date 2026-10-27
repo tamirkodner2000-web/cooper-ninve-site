@@ -1437,7 +1437,6 @@ const aboutMenuRoutes = new Set(["/about-us", "/blog", "/press"]);
 let chromeCachePromise = null;
 let chromeSnapshot = null;
 const productCatalog = { english: null, hebrew: null };
-const productCatalogPromise = { english: null, hebrew: null };
 
 function isProductCandidatePath(path) {
   if (!/^\/[a-z0-9]+(?:-[a-z0-9]+)*$/.test(path || "")) return false;
@@ -1449,20 +1448,25 @@ function isProductCandidatePath(path) {
 
 function loadProductCatalog(language) {
   const lang = language === "english" ? "english" : "hebrew";
-  if (productCatalogPromise[lang]) return productCatalogPromise[lang];
   const cms = window.CooperNinveCMS;
   if (!cms || typeof cms.fetchProductCatalog !== "function") {
-    productCatalogPromise[lang] = Promise.resolve(null);
-    return productCatalogPromise[lang];
+    productCatalog[lang] = null;
+    return Promise.resolve(null);
   }
-  productCatalogPromise[lang] = cms
+  return cms
     .fetchProductCatalog({ language: lang })
     .then((data) => {
-      productCatalog[lang] = data && Array.isArray(data.products) ? data.products : null;
-      return data;
+      if (data && Array.isArray(data.products)) {
+        productCatalog[lang] = data.products;
+        return data;
+      }
+      productCatalog[lang] = null;
+      return null;
     })
-    .catch(() => null);
-  return productCatalogPromise[lang];
+    .catch(() => {
+      productCatalog[lang] = null;
+      return null;
+    });
 }
 
 function liveProducts() {

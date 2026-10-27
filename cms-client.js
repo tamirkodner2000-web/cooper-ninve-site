@@ -154,7 +154,7 @@
     );
   }
 
-  function fetchJson(url) {
+  function fetchJson(url, options) {
     var controller = typeof AbortController === "function" ? new AbortController() : null;
     var timer = window.setTimeout(function () {
       if (controller) controller.abort();
@@ -163,6 +163,7 @@
     return fetch(url, {
       method: "GET",
       credentials: "omit",
+      cache: options && options.cache ? options.cache : "default",
       signal: controller ? controller.signal : undefined,
     })
       .then(function (response) {
@@ -524,7 +525,7 @@
   function fetchProductCatalog(options) {
     var language = options && options.language === "english" ? "english" : "hebrew";
     var url = cmsBase() + "/api/public/products?language=" + encodeURIComponent(language);
-    return fetchJson(url).then(function (data) {
+    return fetchJson(url, { cache: "no-store" }).then(function (data) {
       if (!isProductCatalogPayload(data, language)) return null;
       return {
         language: data.language,
